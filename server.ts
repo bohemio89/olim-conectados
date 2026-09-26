@@ -118,10 +118,10 @@ TONO, TÉRMINOS EN HEBREO Y ADAPTACIÓN GEOGRÁFICA:
   4. ⚖️ **Descargo Legal Práctico**: Recordar brevemente que la orientación busca prevenir errores comunes y no sustituye el dictamen legal vinculante de las autoridades ni la consulta médica directa.
 
 CONOCIMIENTO OBLIGATORIO Y REGLAS FUNDAMENTALES:
-1. Directorio Médico y Reseñas:
-   - Médicos que hablan español en Maccabi, Clalit, Meuhedet y Leumit.
-   - Reseñas con estrellas (1 a 5) basadas en hechos comprobables: nivel real de español (nativo vs básico), tiempo real de escucha/contención vs consultas apresuradas, y criterio clínico (si busca alternativas y estudios previos o indica cirugías drásticas a la primera consulta por tendinitis).
-   - Filtro Lashon Hará: No tolerar difamaciones ni insultos personales ("estafador", "inútil", "pelotudo"), sino transformarlos en descripciones objetivas sobre tiempos de espera, claridad y alternativas.
+1. Directorio Médico y Salud:
+   - No inventar nombres de médicos, teléfonos ni direcciones de consultorios particulares.
+   - Ante consultas sobre especialistas, recomendar buscar en la app de la Kupat Jolim del usuario (Maccabi, Clalit, Meuhedet, Leumit) filtrando por idioma español, o en el portal oficial doctors.org.il.
+   - En caso de urgencias o síntomas agudos, derivar incondicionalmente a MADA (101), centro de urgencias barrial (Terem *2884 / Bikur Rofé) o médico de cabecera (Rofé Mishpajá).
 
 2. Urgencias, Hospitales (Miún) y Ambulancias (MADA):
    - ¡Alerta económica de Guardia (Miún)!: El hospital NO es gratis para consultas espontáneas. Ir sin derivación (**hafniá**) genera una factura elevada (**heshbonit** de cientos de shékels) que la Kupá no cubre automáticamente.
@@ -165,53 +165,42 @@ CONOCIMIENTO OBLIGATORIO Y REGLAS FUNDAMENTALES:
 
 9. Descuento de Arnoná y Apoyo de OLEI / Misrad HaAliyah:
    - Descuento de **Arnoná** para Olim en la municipalidad local (**Iriyá**) en el primer año.
-   - **OLEI**: Apoyo presencial voluntario para banco y carné de Kupat Jolim.
+   - **OLEI** (Organización de Inmigrantes Hispanohablantes - olei.org.il): Apoyo presencial voluntario para acompañar al banco y gestionar trámites iniciales y credencial de Kupat Jolim.
    - Proyectistas de Misrad HaAliyah: Asesoramiento personalizado (muchas sedes como Tel Aviv atienden en español).
 
-10. Comunidad, Comercios Latinos y Emprendimientos de Olim Jadashim:
-   - **Emprendimientos de Olim (Vitales para la integración y apoyo mutuo):**
-     * Muchos olim inician cocinando desde sus hogares sin local a la calle (empanadas caseras de carne cortada a cuchillo, masa hojaldrada, tartas, alfajores marplatenses y medialunas por encargo de WhatsApp con 24-48 hs de anticipación) o abren cafeterías temáticas.
-     * **Amapola Café & Pastelería:** En calle **Ibn Gvirol 54**, Tel Aviv. Punto de encuentro emblemático de olim para sentarse a tomar café con leche, comer medialunas de manteca calientes, facturas con crema pastelera o dulce de leche, vigilantes, alfajores de maicena caseros y tortas (chocotorta, rogel).
-     * **Empanadas artesanales sin local (por encargo / WhatsApp):** Emprendimientos como *"Las Criollas de Sofi & Fede"* (Gush Dan / Ramat Gan / Tel Aviv - empanadas cortadas a cuchillo y selladas a mano), *"La Fábrica del Alfajor"* (Netanya y Sharon - cajas de medialunas y alfajores) y *"El Horno del Olé"* (Jerusalén - empanadas y sándwiches de miga kosher).
-     * Locales emblemáticos con atención al público: calle Allenby 94 en Tel Aviv (yerbas, alfajores, tapas), carnicerías con cortes latinos ("La Pampa" en Holon, "El Gaucho del Sur" en Beer Sheva).
-   - Canales y grupos de Facebook/WhatsApp clasificados (empleo, alquileres, ciudades).
+10. Comunidad, Comercios y Compras de Alimentos:
+    - Si el usuario consulta dónde comprar yerba mate o productos importados, orientarlo a buscar en Google Maps o en tiendas de productos naturales ("Batei Teva") y cadenas de supermercados que cuenten con góndola de importación (como Tiv Ta'am), o consultar en grupos de redes sociales de su ciudad. No inventar nombres de comercios ni teléfonos.
 
 11. Sal Klitá y Subsidio de Alquiler (Plazos Exactos):
-   - Sal Klitá: La canasta básica de absorción de Misrad HaAliyah se abona durante los primeros 6 meses (un pago inicial en el aeropuerto o cuenta bancaria y 5 cuotas mensuales consecutivas).
-   - Ayuda de Alquiler (**Siyua bi'Sjirot** [סיוע בשכר דירה]): Comienza automáticamente en el **mes 7 de aliá** y dura exactamente hasta el **mes 30** (24 meses de cobertura total). Se corta de forma definitiva al finalizar el mes 30. Si el usuario consulta por qué dejó de cobrar en ese plazo, recordarle que ese es el motivo de corte legal reglamentario.
+    - Sal Klitá: La canasta básica de absorción de Misrad HaAliyah se abona durante los primeros 6 meses (un pago inicial en el aeropuerto o cuenta bancaria y 5 cuotas mensuales consecutivas).
+    - Ayuda de Alquiler (**Siyua bi'Sjirot** [סיוע בשכר דירה]): Comienza automáticamente en el **mes 7 de aliá** y dura exactamente hasta el **mes 30** (24 meses de cobertura total). Se corta de forma definitiva al finalizar el mes 30. Si el usuario consulta por qué dejó de cobrar en ese plazo, recordarle que ese es el motivo de corte legal reglamentario.
 
 12. Pluriempleo y Retención Impositiva (Teum Mas):
-   - Si el usuario tiene dos o más empleos simultáneos:
-     * Alerta fiscal: Si no realiza el trámite, el segundo empleador está obligado por ley a retener la alícuota máxima de impuesto a las ganancias (**Mas Hajnasá** [מס הכנסה], aproximadamente **47%**).
-     * Trámite obligatorio: Realizar la coordinación fiscal (**Teum Mas** [תיאום מס]) de manera digital a través del portal de **Rashut HaMisim** [רשות המסים], ingresando los números de deducción patronal (**Tik Nikuyim** [תיק ניכויים]) de ambos empleadores para equilibrar las retenciones.
+    - Si el usuario tiene dos o más empleos simultáneos:
+      * Alerta fiscal: Si no realiza el trámite, el segundo empleador está obligado por ley a retener la alícuota máxima de impuesto a las ganancias (**Mas Hajnasá** [מס הכנסה], aproximadamente **47%**).
+      * Trámite obligatorio: Realizar la coordinación fiscal (**Teum Mas** [תיאום מס]) de manera digital a través del portal de **Rashut HaMisim** [רשות המסים], ingresando los números de deducción patronal (**Tik Nikuyim** [תיק ניכויים]) de ambos empleadores para equilibrar las retenciones.
 
 13. Protocolo Laboral en Estado de Guerra (Pikud HaOref):
-   - Directivas de seguridad: Rigen las instrucciones del Comando del Frente Interno (**Pikud HaOref** [פיקוד העורף]). Si se prohíbe la actividad presencial por falta de refugio (**mamad** [ממ"ד] o **miklat** [מקלט]) o por estar en zona de combate declarada, **está terminantemente prohibido por ley despedir al empleado** por no concurrir a su puesto.
-   - Salarios y vacaciones en conflicto prolongado:
-     * El empleador **NO puede descontar días de vacaciones de forma arbitraria** si el empleado no tiene saldo positivo acumulado en su haber.
-     * En emergencias prolongadas, el Estado activa esquemas de compensación económica mediante acuerdos colectivos con **Bituaj Leumi** para reembolsar salarios a empresas paralizadas y proteger los ingresos de los empleados en áreas declaradas de emergencia (**Matzav Meiyujad** [מצב מיוחד בעורף]).
+    - Directivas de seguridad: Rigen las instrucciones del Comando del Frente Interno (**Pikud HaOref** [פיקוד העורף]). Si se prohíbe la actividad presencial por falta de refugio (**mamad** [ממ"ד] o **miklat** [מקלט]) o por estar en zona de combate declarada, **está terminantemente prohibido por ley despedir al empleado** por no concurrir a su puesto.
+    - Salarios y vacaciones en conflicto prolongado:
+      * El empleador **NO puede descontar días de vacaciones de forma arbitraria** si el empleado no tiene saldo positivo acumulado en su haber.
+      * En emergencias prolongadas, el Estado activa esquemas de compensación económica mediante acuerdos colectivos con **Bituaj Leumi** para reembolsar salarios a empresas paralizadas y proteger los ingresos de los empleados en áreas declaradas de emergencia (**Matzav Meiyujad** [מצב מיוחד בעורף]).
 
 14. Pasaporte Israelí (Darkón) vs. Teudat Ma'avar:
-   - Regla del primer año: Como norma general, el olé jadash debe cumplir **un año (12 meses)** de residencia y centro de vida efectivo en el país para tramitar el pasaporte regular (**Darkón** [דרכון]).
-   - Documento provisorio (**Teudat Ma'avar** [תעודת מעבר]): Es el documento de viaje oficial emitido antes del año si el olé necesita viajar al exterior.
-   - **Advertencia crítica de visados:** La Teudat Ma'avar **NO cuenta con los mismos convenios bilaterales de exención de visado** que el Darkón regular; el usuario debe verificar siempre con la embajada o consulado del país de destino si le exigen visa para ingresar con este documento.
+    - Regla del primer año: Como norma general, el olé jadash debe cumplir **un año (12 meses)** de residencia y centro de vida efectivo en el país para tramitar el pasaporte regular (**Darkón** [דרכון]).
+    - Documento provisorio (**Teudat Ma'avar** [תעודת מעבר]): Es el documento de viaje oficial emitido antes del año si el olé necesita viajar al exterior.
+    - **Advertencia crítica de visados:** La Teudat Ma'avar **NO cuenta con los mismos convenios bilaterales de exención de visado** que el Darkón regular; el usuario debe verificar siempre con la embajada o consulado del país de destino si le exigen visa para ingresar con este documento.
 
 15. Transporte Público en Jagim (Fiestas) y Shabat:
-   - Regla de servicio: En las vísperas y días de festividades solemnes (*Rosh Hashaná, Iom Kipur, Pésaj, Shavuot, Sucot*), el transporte público interurbano (trenes de Israel Railways y líneas de colectivos) **cesa sus actividades antes del anochecer y se reanuda tras la salida de las estrellas del día siguiente**, operando con el mismo esquema restrictivo de Shabat.
-   - En días intermedios (**Jol HaMoed** [חול המועד]), los servicios operan con esquemas de horario reducido o especiales.
+    - Regla de servicio: En las vísperas y días de festividades solemnes (*Rosh Hashaná, Iom Kipur, Pésaj, Shavuot, Sucot*), el transporte público interurbano (trenes de Israel Railways y líneas de colectivos) **cesa sus actividades antes del anochecer y se reanuda tras la salida de las estrellas del día siguiente**, operando con el mismo esquema restrictivo de Shabat.
+    - En días intermedios (**Jol HaMoed** [חול המוע德]), los servicios operan con esquemas de horario reducido o especiales.
 
 16. Sistema Electoral y Político (Knéset):
-   - El sufragio en Israel es **optativo (no obligatorio)**.
-   - Sistema de democracia parlamentaria: Se vota a listas partidarias para los 120 escaños de la **Knéset** [כנסת], no directamente a una persona como Primer Ministro. El gobierno se conforma mediante coaliciones que sumen al menos **61 bancas**.
+    - El sufragio en Israel es **optativo (no obligatorio)**.
+    - Sistema de democracia parlamentaria: Se vota a listas partidarias para los 120 escaños de la **Knéset** [כנסת], no directamente a una persona como Primer Ministro. El gobierno se conforma mediante coaliciones que sumen al menos **61 bancas**.
 
-17. Ambiente Nocturno, Fiestas Latinas y Cachengue para Olim:
-   - Salidas nocturnas y vida social: Son fundamentales para la salud emocional, integración y disfrute de los olim jadashim.
-   - **Cachengue Tel Aviv (La Fiesta Latina):** El evento masivo más popular de la comunidad en Tel Aviv (Litzman / Kikar Plumer en el Puerto o Atlanta en Ibn Gvirol 30). Toca cumbia santafesina, cuarteto cordobés, RKT, rock nacional y reggaetón. Venta anticipada en Go-Out. Se sirve Fernet con Coca y asisten cientos de jóvenes y familias jóvenes hispanohablantes.
-   - **La Fiesta Argentina TLV:** Fiestas temáticas regulares con DJs latinos (cumbia, cuarteto, pop latino, hits urbanos) en boliches como Atlanta o Duplex.
-   - **Havana Music Club Tel Aviv (Yigal Alon 126):** El club emblemático de salsa y bachata. Martes, jueves y sábados con clases previas desde nivel inicial seguidas de fiesta social en 2 pistas (salsa cubana y bachata sensual).
-   - **Florentin & Colmado TLV:** Zona sur de Tel Aviv (calles Levinsky y Florentin) con bares urbanos relajados, cócteles, tacos y noches de reggaetón y música en español.
-   - **El Balagán Latin Pop (Haifa Downtown):** Opción clave para olim en el norte de Israel en la zona portuaria de Haifa (HaNamal).
-   - **Reglas prácticas de salida:** Llevar SIEMPRE documento de identidad original físico (Teudat Zehut o pasaporte) ya que no aceptan fotos de DNI en los ingresos; sacar entradas anticipadas en plataformas oficiales para evitar sobreprecios en puerta; y usar buses nocturnos (Kavei Laila) o taxis compartidos durante Shabat.
+17. Salidas, Eventos y Vida Social:
+    - Para eventos culturales, fiestas o actividades comunitarias en español, orientar a consultar plataformas oficiales de venta de entradas y ticketeras (como Go-Out) o buscar en redes sociales. No inventar nombres de boliches, fechas ni teléfonos. Llevar siempre documento físico de identidad (Teudat Zehut o pasaporte) a cualquier salida.
 `;
 
 // Review moderation endpoint (Lashon Hará check)
@@ -452,188 +441,31 @@ function generateRuleBasedResponse(query: string, history?: any[]): string {
 - Recuerda además revisar los descuentos públicos por ley: el **descuento de Arnoná** (hasta 70-90% el primer año en tu municipalidad) y tus puntos de crédito impositivo (**Nekudot Zijui**) en el **Tofes 101**.`;
   }
 
-  // PETAJ TIKVA
-  if (q.includes('petaj tikva') || q.includes('petaj tikvá') || q.includes('petah tikva')) {
-    return `🧉 **Opciones para comprar Yerba Mate y productos latinos en Petaj Tikva:**
-
-Si vives en **Petaj Tikva**, no necesitas viajar a Tel Aviv para conseguir yerba mate:
-
-1. **Supermercados Tiv Ta'am en Petaj Tikva:**
-   - 🛒 **Sucursal:** Gran sucursal en **Zona Industrial Segula** (calle HaYarkon / Ben Tzion Galis).
-   - *Qué tienen:* Góndola de importación con yerbas (*Taragüí, Amanda, Cruz de Malta*), dulce de leche y galletitas. Abierto también en Shabat.
-2. **Shuk Municipal de Petaj Tikva (Shuk HaIroní):**
-   - En las tiendas tradicionales de especias y frutos secos del Shuk encuentras yerba mate por kilo o empaquetada. Pídela como **"Te Mate" (תה מאטה)** o **"Yerba Mate" (ירבה מאטה)**.
-3. **Dietéticas "Teva" en el centro de Petaj Tikva:**
-   - Tiendas en calle HaHaganá y alrededores de Kikar HaMeyasdim.
-4. **Delivery a domicilio en Petaj Tikva:**
-   - Mediante la app **Wolt**, puedes pedir yerba directa de tiendas gourmet y pitzutziot de la zona con entrega en 35 minutos.
-5. **Cercanía con el Tren Ligero (Dankal Línea Roja):**
-   - Desde las estaciones de Petaj Tikva (Beilinson, CBS Petaj Tikva) llegas directamente y sin trasbordos a Tel Aviv en 25 minutos.`;
-  }
-
-  // RISHON LEZION / HOLON / BAT YAM
-  if (q.includes('rishon') || q.includes('holon') || q.includes('bat yam')) {
-    return `🥩 **Opciones en Rishon LeZion, Holon y Bat Yam:**
-
-1. **Carnicería "Cortes Criollos La Pampa" (Holon):**
-   - 📍 **Dirección:** Calle **HaSatat 8**, Zona Industrial Holon.
-   - 🥩 **Especialidad:** Desposte argentino auténtico de vacío entero, asado de tira cortado fino con sierra, entraña limpia y matambre para arrollar. Además tienen yerbas, alfajores y dulce de leche.
-2. **Tiv Ta'am en Rishon LeZion:**
-   - 🛒 Megatienda en **Rishon LeZion West** (zona del cine Cinema City) y en **Rishon Este**.
-3. **Tiendas rusas y de especias en Bat Yam:**
-   - En calle Balfour y Ben Gurion hay tiendas que venden yerbas importadas para la comunidad.`;
-  }
-
-  // Community, Latin stores, Yerba, Meat cuts & Olim Entrepreneurships
+  // Yerba mate, compras y alimentos
   if (
     q.includes('yerba') ||
-    q.includes('allenby') ||
-    q.includes('dulce de leche') ||
+    q.includes('mate') ||
     q.includes('alfajor') ||
-    q.includes('amapola') ||
-    q.includes('cafe') ||
-    q.includes('café') ||
-    q.includes('factura') ||
-    q.includes('medialuna') ||
+    q.includes('dulce de leche') ||
+    q.includes('empanada') ||
     q.includes('carniceria') ||
     q.includes('carnicería') ||
+    q.includes('asado') ||
     q.includes('vacio') ||
     q.includes('vacío') ||
-    q.includes('asado') ||
-    q.includes('entraña') ||
-    q.includes('matambre') ||
+    q.includes('medialuna') ||
     q.includes('comida') ||
     q.includes('comercio') ||
     q.includes('tienda') ||
     q.includes('local') ||
-    q.includes('empanada') ||
     q.includes('emprendimiento') ||
     q.includes('emprendedor')
   ) {
-    // Si pregunta puntualmente por café, medialunas, facturas o Amapola
-    if (q.includes('amapola') || q.includes('cafe') || q.includes('café') || q.includes('factura') || q.includes('medialuna') || q.includes('merienda')) {
-      return `☕ **Amapola Café & Emprendimientos para Merendar y Facturas:**
-
-1. **Amapola Café & Pastelería (Tel Aviv):**
-   - 📍 **Ubicación Exacta:** Calle **Ibn Gvirol 54**, Tel Aviv (frente a la zona de Rabin Square / Kikar Rabin).
-   - 🥐 **La Experiencia:** Fundado por olim argentinos, es el punto de encuentro por excelencia de la comunidad para sentarse a tomar un buen café con leche en barra o mesa, comer **medialunas de manteca recién salidas del horno**, facturas con crema pastelera o dulce de leche, vigilantes, cañoncitos y alfajores de maicena caseros con coco.
-   - 🍰 **Tortas:** Chocotorta, Rogel y Lemon Pie caseros.
-   - 🕒 **Horarios:** Domingo a Jueves de 07:30 a 19:30 / Viernes hasta las 15:00.
-
-2. **Emprendimientos de Facturas y Alfajores sin Local (Por Encargo):**
-   - 📦 **"La Fábrica del Alfajor & Medialunas":** Olim en Netanya y Sharon que preparan cajas de 12 o 24 medialunas de manteca artesanales y alfajores estilo marplatense para el fin de semana. Pedidos por WhatsApp (058-7654321).
-
-💡 *Consejo:* En la pestaña **"Comunidad & Locales"** puedes filtrar por *"Panadería, Café y Facturas"* o *"Emprendimientos de Olim"* para ver los enlaces directos a WhatsApp, Instagram y ubicación en mapa.`;
-    }
-
-    // Si pregunta por empanadas caseras o emprendimientos sin local
-    if ((q.includes('empanada') || q.includes('emprendimiento')) && (q.includes('sin local') || q.includes('casera') || q.includes('encargo') || q.includes('whatsapp') || q.includes('sofi') || q.includes('domicilio'))) {
-      return `🥟 **Emprendimientos de Olim Jadashim: Empanadas Caseras y Comida sin Local (Por Encargo):**
-
-Apoyar a los nuevos inmigrantes que cocinan desde sus casas es una de las tradiciones más lindas y solidarias de nuestra comunidad:
-
-1. **"Las Criollas de Sofi & Fede" (Gush Dan: Tel Aviv, Ramat Gan, Givatayim):**
-   - 👩‍🍳 **Quiénes son:** Pareja de olim de Córdoba y Buenos Aires.
-   - 🥟 **Especialidades:** Empanadas auténticas de carne cortada a cuchillo (suave y picante), vacío al malbec, pollo al verdeo y 4 quesos. Selladas a mano y con masa hojaldrada.
-   - 📲 **Cómo pedir:** No tienen local a la calle. Se piden con 24 a 48 hs de antelación por WhatsApp (**054-9812450**) listas para hornear o congeladas para stock.
-   - 🛵 **Entregas:** Puntos de encuentro en Tel Aviv/Ramat Gan o envíos a domicilio.
-
-2. **"El Horno del Olé" (Jerusalén):**
-   - 🥟 **Quiénes son:** Emprendimiento de olim recientes en Beit HaKerem con supervisión Kosher comunitaria.
-   - 📦 **Qué hacen:** Empanadas clásicas, sándwiches de miga triples para cumpleaños o eventos y packs congelados para estudiantes. Pedidos por WhatsApp (**052-8877112**).
-
-3. **"Buenos Aires Bakery" (Ra'anana / Sharon):**
-   - 📍 Local físico en Klausner 2 (Ra'anana) con delivery de empanadas horneadas y milanesas preparadas.
-
-💡 Consulta todos los contactos en la pestaña **"Comunidad & Locales"** filtrando por *"Emprendimientos de Olim"*.`;
-    }
-    // RAMAT GAN & GUSH DAN NORTE
-    if (q.includes('ramat gan') || q.includes('ramat-gan') || q.includes('givatayim') || q.includes('bnei brak')) {
-      return `🧉 **Opciones para comprar Yerba Mate y productos latinos en Ramat Gan y alrededores:**
-
-Si vives en **Ramat Gan** o **Givatayim**, no necesitas viajar necesariamente al centro de Tel Aviv:
-
-1. **Supermercados Tiv Ta'am (טיב טעם) en Ramat Gan:**
-   - 🛒 **Sucursal céntrica:** Zona Jabotinsky / Bialik.
-   - 🛒 **Sucursal Kenion Ayalon:** En el centro comercial Ayalon (en el límite Ramat Gan / Bnei Brak).
-   - *Qué tienen:* Góndola de importados y sección de té con marcas comunes como *Taragüí, Cruz de Malta, Amanda* y a veces *Playadito*. Abren también en Shabat.
-
-2. **Dietéticas y Tiendas Naturistas ("Teva" - טבע) en Calle Bialik:**
-   - En la arteria comercial de **calle Bialik** (Ramat Gan) hay varias tiendas naturistas y de especias (*Tavlinim* / *Anise* / *Teva Castel*) que comercializan yerba mate como infusión digestiva natural. Pídela como **"Yerba Mate" (ירבה מאטה)** o **"Te Mate" (תה מאטה)**.
-
-3. **Delivery Rápido en Ramat Gan con Wolt:**
-   - Abre la app de **Wolt** y escribe *"Yerba Mate"* o *"Tiv Taam"*: varios kioscos 24hs (*Pitzutziot*) y tiendas de delicatessen de la zona te la llevan a tu puerta en Ramat Gan en menos de 30-40 minutos.
-
-4. **Si buscas marcas específicas rioplatenses (Canarias, Sara, Rosamonte Especial) o cortes criollos (Vacío, Asado de Tira):**
-   - 📍 **Almacén Rioplatense Histórico:** Calle **Allenby 94**, Tel Aviv. Desde Ramat Gan llegas en 15-20 minutos mediante el Tren Ligero (Dankal Línea Roja) o colectivos directos (Líneas 66, 161, 240).
-   - 🥩 **Carnicería La Pampa:** Calle HaSatat 8, Holon (desposte argentino auténtico de vacío, asado y entraña).`;
-    }
-
-    // JERUSALÉN
-    if (q.includes('jerusalen') || q.includes('jerusalén') || q.includes('jerusalem')) {
-      return `🧉 **Opciones para comprar Yerba Mate y productos latinos en Jerusalén:**
-
-1. **Shuk Majané Yehuda (שוק מחנה יהודה):**
-   - En los puestos tradicionales de té, especias y frutos secos (calle Eitz Jaim y calle HaTapuaj) venden yerba mate empaquetada o a granel.
-2. **Supermercados Tiv Ta'am en Jerusalén:**
-   - Sucursal en la zona comercial de **Talpiot** (Derej Beit Lejem / HaUman). Sección internacional con yerbas y dulces importados.
-3. **Dietéticas ("Batei Teva"):**
-   - Tiendas naturistas en el centro de Jerusalén (calle Jaffa y King George).
-4. **Grupos de la Comunidad:**
-   - En Jerusalén hay un grupo muy activo de WhatsApp de Olim Latinos donde suelen organizar compras comunitarias directas de yerba y alfajores.`;
-    }
-
-    // HAIFA Y EL NORTE
-    if (q.includes('haifa') || q.includes('krayot') || q.includes('akko') || q.includes('nahariya')) {
-      return `🧉 **Opciones en Haifa y el Norte:**
-
-1. **Tiv Ta'am en Haifa:**
-   - Sucursales en **Hutzot HaMifratz** y en el centro comercial de **Grand Canyon Haifa**. Gran variedad de productos de importación abiertos los 7 días de la semana.
-2. **Shuk Talpiot (Hadar, Haifa):**
-   - Tiendas rusas y de especias en barrio Hadar suelen tener yerba mate argentina y uruguaya.
-3. **Comunidad Latina de Haifa:**
-   - Revisa la pestaña *"Comunidad"* en nuestra plataforma para unirte al grupo de Facebook de *Latinos en Haifa*, donde avisan de ferias gastronómicas y ventas de empanadas y yerba.`;
-    }
-
-    // NETANYA Y SHARON
-    if (q.includes('netanya') || q.includes('netania') || q.includes('raanana') || q.includes('kfar saba') || q.includes('herzliya')) {
-      return `🧉 **Opciones en Netanya y la zona del Sharon:**
-
-1. **Buenos Aires Bakery (Ra'anana):**
-   - Calle Klausner 2, Ra'anana. Tienen empanadas artesanales, yerba mate, alfajores y facturas con dulce de leche.
-2. **Tiv Ta'am en Netanya:**
-   - Sucursales en la Zona Industrial y Poleg.
-3. **Puestos céntricos en Netanya:**
-   - Alrededores de Kikar HaAtzmaut y calle Herzl cuentan con dietéticas que traen yerba mate para la gran colectividad sudamericana de la ciudad.`;
-    }
-
-    // BEER SHEVA Y EL SUR
-    if (q.includes('beer sheva') || q.includes('beersheva') || q.includes('ashkelon') || q.includes('ashdod')) {
-      return `🥩 **Opciones en Beer Sheva, Ashdod y el Sur:**
-
-1. **Carnicería y Asador "El Gaucho del Sur" (Beer Sheva):**
-   - Calle Derej HeJevron 48, Beer Sheva. Cortes criollos para asado (vacío, tira, matambre) y productos rioplatenses.
-2. **Tiv Ta'am en Beer Sheva (One Plaza / Big) y Ashdod (Star Center):**
-   - Cuentan con góndola de importación con yerbas y dulces.
-3. **Shuk Municipal de Beer Sheva y Ashdod:**
-   - Dietéticas y puestos de frutos secos con yerba mate en paquete.`;
-    }
-
-    // TEL AVIV GENERAL
-    return `🏪 **Locales Latinos y Rioplatenses Emblemáticos en Israel:**
-
-Si buscas yerba mate, dulce de leche, tapas de empanadas o carnes con cortes latinos en Tel Aviv y alrededores:
-
-1. **Almacén Rioplatense Histórico de Calle Allenby (Tel Aviv):**
-   - 📍 **Dirección:** Calle **Allenby 94**, Tel Aviv (frente al histórico Pasaje).
-   - 🧉 **Qué venden:** Gran variedad de yerba mate (*Playadito, Taragüi, Canarias, Sara, Rosamonte, Mañanita*), dulce de leche colonial y repostero, alfajores (*Havanna, Guaymallén, Capitán del Espacio, Cachafaz*), tapas de empanadas criollas y hojaldradas, mates de calabaza y bombillas.
-   - 🕒 **Horarios:** Domingo a Jueves de 09:30 a 19:30 / Viernes hasta las 14:30.
-
-2. **Carnicerías con Cortes Latinos (Vacío, Asado de Tira, Entraña):**
-   - 🥩 **"Cortes Criollos La Pampa" (Holon / Tel Aviv):** Calle HaSatat 8, Holon (a 10 minutos de Tel Aviv). Desposte y corte tradicional de vacío entero, asado de tira cortado fino con sierra, entraña limpia y matambre para arrollar.
-   - 🥩 **Puestos en Shuk HaCarmel (Tel Aviv):** Entrada por Simtat HaCarmel. Encuentras productos de Colombia, Perú, México y Argentina (Harina P.A.N., frijoles, plátanos y yerbas).
-
-💡 *Consejo:* En la pestaña **"Comunidad & Locales"** de esta plataforma tienes las direcciones exactas, teléfonos y enlaces a los grupos de WhatsApp y Facebook de Olim donde se avisan ofertas y stock semanal.`;
+    return `🧉 **Productos Latinos y Rioplatenses en Israel:**
+No tengo un listado de comercios particulares o direcciones confirmado en mi base para esa zona. Para conseguir yerba mate, dulces, tapas de empanadas o productos importados:
+1. **Tiendas naturistas y dietéticas ("Batei Teva" [בתי טבע]):** En la mayoría de las ciudades, las tiendas de especias y dietéticas suelen comercializar yerba mate como infusión digestiva.
+2. **Supermercados con sección internacional:** Cadenas como Tiv Ta'am suelen contar con góndolas de productos importados de Sudamérica.
+3. **Comunidad y Google Maps:** Podés buscar en Google Maps o consultar en grupos de redes sociales de Olim de tu localidad.`;
   }
 
   // Rental prices inquiry (Example 4)
@@ -667,64 +499,15 @@ Si buscas yerba mate, dulce de leche, tapas de empanadas o carnes con cortes lat
     q.includes('ginecologo') ||
     q.includes('ginecólogo')
   ) {
-    if (q.includes('jerusalen') || q.includes('jerusalén') || q.includes('jerusalem')) {
-      return `🩺 **Médicos que hablan español en Jerusalén:**
-- **Dr. Daniel Zylbersztejn (Pediatría - Rofé Yeladim):**
-  * Kupot: Clalit y Meuhedet.
-  * Ubicación: Kanfei Nesharim 22, Givat Shaul, Jerusalén. Tel: 02-6598811.
-  * Nivel de español: Fluido. Excelente contención a familias de nuevos inmigrantes.
+    return `🩺 **Médicos y Profesionales de Salud que Hablan Español:**
+No tengo un médico particular precargado en mi lista para esa especialidad o zona geográfica.
 
-💡 *Consejo:* Puedes consultar la pestaña **"Médicos en Español"** de esta plataforma y filtrar por la ciudad de **Jerusalén** para ver horarios y teléfono directo.
-⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
-    }
-    if (q.includes('netanya') || q.includes('netania')) {
-      return `🩺 **Profesionales que hablan español en Netanya y Sharon:**
-- **Lic. Claudia Finkelstein (Psicología Clínica y Adaptación de Olim):**
-  * Kupot: Maccabi, Meuhedet y Privado.
-  * Ubicación: Herzl 45, Piso 3, Netanya. Tel: 09-8621144.
-  * Nivel de español: Nativo. Atención de duelo migratorio y adaptación cultural.
-- **Dra. Verónica Goldman (Ginecología y Obstetricia en Ra'anana / Sharon):**
-  * Kupot: Maccabi y Clalit.
-  * Ubicación: Ahuza 120, Ra'anana. Tel: 09-7745500. Nivel Nativo.
+Para encontrar un profesional verificado:
+1. **App oficial de tu Kupat Jolim:** En las aplicaciones y portales de **Maccabi** (*3555), **Clalit** (*2700), **Meuhedet** (*3833) o **Leumit** (*507), podés filtrar la búsqueda de médicos por idioma ("Español / ספרדית") y ciudad.
+2. **Directorio Nacional:** Podés consultar en **doctors.org.il**.
+3. **Pestaña de Médicos en Olim Conectados:** Podés revisar la pestaña **"Médicos en Español"** en el menú de esta plataforma para ver recomendaciones cargadas directamente por otros miembros de la comunidad.
 
-💡 *Consejo:* En la pestaña **"Médicos en Español"** puedes filtrar por Netanya o Sharon.
-⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
-    }
-    if (q.includes('haifa') || q.includes('krayot')) {
-      return `🩺 **Médicos que hablan español en Haifa y el Norte:**
-- **Dr. Marcos Lifschitz (Medicina Ocupacional y Laboral - Rofé Taasukatí):**
-  * Kupot: Clalit, Leumit, Maccabi.
-  * Ubicación: HeJalutz 12, Hadar, Haifa. Tel: 04-8673322.
-  * Nivel de español: Fluido. Clave para emitir dictámenes de capacidad laboral para Bituaj Leumi.
-
-💡 Revisa la pestaña **"Médicos en Español"** para filtrar todos los profesionales del Norte.
-⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
-    }
-    if (q.includes('ramat gan') || q.includes('ramat-gan') || q.includes('tel aviv') || q.includes('tlv')) {
-      return `🩺 **Médicos que hablan español en Ramat Gan y Tel Aviv:**
-- **Dr. Alejandro Berman (Médico de Familia - Rofé Mishpajá):**
-  * Kupot: Maccabi y Privado.
-  * Ubicación: Dizengoff 101, Piso 2, Tel Aviv (Snif Maccabi). Tel: 03-5248900.
-  * Nivel de español: Nativo.
-- **Dra. Gabriela Schvartzman (Traumatología y Ortopedia):**
-  * Kupot: Maccabi y Clalit.
-  * Ubicación: Jabotinsky 33, Merkaz Refuati, Ramat Gan / Tel Aviv. Tel: 03-6112200.
-  * Nivel de español: Nativo. Enfoque conservador antes de indicar cirugías por tendinitis.
-
-💡 Revisa la pestaña **"Médicos en Español"** para ver todas las especialidades y filtrar por tu Kupá.
-⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
-    }
-    return `🩺 **Directorio de Médicos que Hablan Español:**
-En nuestra plataforma contamos con un directorio confirmado con datos de contacto:
-- **Médicos de Familia:** Tel Aviv (Dr. Berman), Ashdod (Dr. Wainstein).
-- **Traumatología y Miembro Superior:** Ramat Gan (Dra. Schvartzman), Beer Sheva (Dr. Alaluf).
-- **Pediatría:** Jerusalén (Dr. Zylbersztejn).
-- **Medicina Ocupacional (Rofé Taasukatí):** Haifa (Dr. Lifschitz).
-- **Ginecología:** Ra'anana / Sharon (Dra. Goldman).
-- **Psicología Clínica:** Netanya (Lic. Finkelstein).
-
-Ve a la pestaña **"Médicos en Español"** en el menú superior para filtrar por tu ciudad y tu Kupá (Maccabi, Clalit, Meuhedet, Leumit).
-⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
+⚠️ *Ante síntomas agudos o emergencias, acudí a tu médico de cabecera (Rofé Mishpajá), a un centro de urgencias barrial (Terem *2884 / Bikur Rofé) o llamá a MADA (101).*`;
   }
 
   // Urgencias hospitalarias y guardia (Miún / MADA)
