@@ -1,0 +1,7 @@
+{
+  "name": "Olim Conectados",
+  "description": "Plataforma integral para olim jadashim hispanohablantes en Israel: directorio de médicos en español, guía de salud y Bituaj Leumi, trámites, simuladores y asistente inteligente.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
