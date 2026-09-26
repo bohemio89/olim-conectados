@@ -1,16 +1,12 @@
 import React from 'react';
 import { 
   Bot, 
-  AlertTriangle, 
   Menu, 
-  Search, 
-  Compass,
-  Sparkles,
-  TrendingUp,
-  PanelLeftOpen,
-  PanelLeftClose
+  Compass
 } from 'lucide-react';
 import { ALL_NAV_ITEMS } from './Sidebar';
+import { GlobalSearchBar } from './GlobalSearchBar';
+import { EmergencyButton } from './EmergencyButton';
 
 interface TopbarProps {
   activeTab: string;
@@ -20,8 +16,16 @@ interface TopbarProps {
   onItemClick: (tabId: string) => void;
   isCollapsed: boolean;
   onToggleCollapse: () => void;
+  onSendQueryToChat?: (query: string) => void;
 }
 
+/**
+ * Topbar rediseñado conforme a las pautas de UX:
+ * 1. Menos carga visual: logo, nombre del sitio, buscador persistente en lenguaje natural, y botón hamburguesa en mobile.
+ * 2. Unificación del botón de emergencia (EmergencyButton 101).
+ * 3. Eliminación de redundancia de texto "Asistente IA" (solo ícono + label conciso).
+ * 4. El banner fijo invasivo de alerta se trasladó al feed normal de contenido como Card destacada.
+ */
 export const Topbar: React.FC<TopbarProps> = ({
   activeTab,
   setActiveTab,
@@ -30,15 +34,14 @@ export const Topbar: React.FC<TopbarProps> = ({
   onItemClick,
   isCollapsed,
   onToggleCollapse,
+  onSendQueryToChat,
 }) => {
-  // Select the top 4 most used/relevant items based on user clicks
+  // Select top 3 relevant navigation items for desktop quick pills
   const topRelevant = [...ALL_NAV_ITEMS].sort((a, b) => {
     const countA = clickCounts[a.id] || 0;
     const countB = clickCounts[b.id] || 0;
     return countB - countA;
-  }).slice(0, 4);
-
-  const currentItem = ALL_NAV_ITEMS.find((it) => it.id === activeTab) || ALL_NAV_ITEMS[0];
+  }).slice(0, 3);
 
   const handleQuickClick = (id: string) => {
     setActiveTab(id);
@@ -47,74 +50,61 @@ export const Topbar: React.FC<TopbarProps> = ({
 
   return (
     <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-200">
-      {/* Top micro announcement */}
-      <div className="bg-slate-900 text-slate-300 text-[11px] py-1 px-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="bg-blue-600/30 text-blue-300 px-1.5 py-0.2 rounded font-semibold text-[10px]">
-            🇮🇱 Olim Conectados
-          </span>
-          <span className="hidden sm:inline">
-            Guía comunitaria de salud, trámites y vida en Israel
-          </span>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-amber-300 font-medium hidden md:inline">
-            ⚠️ Alerta Miún: Exigí siempre Hafniá previa
-          </span>
-          <button
-            onClick={() => handleQuickClick('emergency')}
-            className="text-white hover:text-amber-200 font-semibold underline text-[11px]"
-          >
-            MADA 101
-          </button>
-        </div>
-      </div>
-
-      {/* Main Topbar Row */}
-      <div className="px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
-        {/* Left: Desktop Collapse Button (=) + Mobile trigger + Current active section title */}
-        <div className="flex items-center gap-3">
-          {/* Desktop Toggle Menu Button (=) */}
-          <button
-            onClick={onToggleCollapse}
-            className="hidden lg:flex items-center justify-center p-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-blue-50 border border-gray-200 transition shadow-2xs"
-            title={isCollapsed ? 'Expandir menú (abrir)' : 'Contraer menú (cerrar)'}
-            aria-label="Abrir y cerrar menú lateral"
-          >
-            <Menu className="w-5 h-5 text-gray-700" />
-          </button>
-
-          {/* Mobile Menu Button */}
+      <div className="px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 sm:gap-4">
+        {/* Left: Mobile Burger + Logo Brand Identity */}
+        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          {/* Mobile Menu Trigger */}
           <button
             onClick={onOpenMobileSidebar}
-            className="lg:hidden p-2 -ml-2 rounded-xl text-gray-600 hover:bg-gray-100"
-            aria-label="Abrir menú"
+            className="lg:hidden p-2 -ml-1 text-gray-700 hover:bg-gray-100 rounded-xl transition"
+            aria-label="Abrir menú de opciones"
           >
-            <Menu className="w-5 h-5" />
+            <Menu className="w-5 h-5 text-gray-800" />
           </button>
 
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-sm sm:text-base font-bold text-gray-900 leading-tight">
-                {currentItem.label}
-              </h1>
-              <span className="text-[10px] text-gray-400 hidden sm:inline">
-                · {currentItem.category}
+          {/* Brand Logo & Name */}
+          <button
+            onClick={() => handleQuickClick('assistant')}
+            className="flex items-center gap-2 text-left group focus:outline-none"
+          >
+            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs group-hover:bg-blue-700 transition">
+              <Compass className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="font-bold text-sm sm:text-base tracking-tight text-gray-900 group-hover:text-blue-600 transition">
+                  Olim Conectados
+                </span>
+                <span className="text-[10px] font-extrabold bg-blue-50 text-blue-700 px-1.5 py-0.2 rounded border border-blue-200 hidden xs:inline">
+                  עולים
+                </span>
+              </div>
+              <span className="text-[10px] text-gray-500 hidden sm:block">
+                Guía Comunitaria y Derechos en Israel
               </span>
             </div>
-            <p className="text-[11px] text-gray-500 hidden md:block line-clamp-1">
-              {currentItem.description}
-            </p>
-          </div>
+          </button>
         </div>
 
-        {/* Center / Right: Dynamic "Temas más usados / Relevantes" pills */}
-        <div className="flex items-center gap-2">
-          <div className="hidden sm:flex items-center gap-1.5 bg-gray-50 p-1 rounded-xl border border-gray-200 text-xs">
-            <span className="px-2 text-[10px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-              <TrendingUp className="w-3 h-3 text-blue-600" />
-              Destacados:
-            </span>
+        {/* Center: Persistent Natural Language Search Bar (Item B UX) */}
+        <div className="flex-1 max-w-md mx-1 sm:mx-3">
+          <GlobalSearchBar
+            onNavigateToTab={(tabId) => {
+              setActiveTab(tabId);
+              onItemClick(tabId);
+            }}
+            onSendToChat={(query) => {
+              if (onSendQueryToChat) {
+                onSendQueryToChat(query);
+              }
+            }}
+          />
+        </div>
+
+        {/* Right: Quick Pills (Desktop) + Unified Emergency Button */}
+        <div className="flex items-center gap-2 shrink-0">
+          {/* Desktop quick tabs */}
+          <div className="hidden xl:flex items-center gap-1 bg-gray-50 p-1 rounded-xl border border-gray-200 text-xs">
             {topRelevant.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -135,15 +125,11 @@ export const Topbar: React.FC<TopbarProps> = ({
             })}
           </div>
 
-          {/* Quick SOS button */}
-          <button
+          {/* Unified Emergency Button across the site (Punto 3 UX) */}
+          <EmergencyButton
+            variant="compact"
             onClick={() => handleQuickClick('emergency')}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition shrink-0"
-          >
-            <AlertTriangle className="w-3.5 h-3.5 text-rose-600" />
-            <span className="hidden sm:inline">Guardia SOS</span>
-            <span className="sm:hidden">SOS</span>
-          </button>
+          />
         </div>
       </div>
     </header>

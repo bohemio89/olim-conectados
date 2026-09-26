@@ -18,8 +18,10 @@ import {
   Compass,
   PanelLeftClose,
   PanelLeftOpen,
-  PartyPopper
+  PartyPopper,
+  CheckSquare
 } from 'lucide-react';
+import { EmergencyButton } from './EmergencyButton';
 
 export interface NavItemConfig {
   id: string;
@@ -84,6 +86,15 @@ export const ALL_NAV_ITEMS: NavItemConfig[] = [
     icon: ShieldAlert,
     category: 'Derechos & Trámites',
     description: 'Sal Klitá, subsidio de alquiler (meses 7-30), Teum Mas y Pikud HaOref'
+  },
+  {
+    id: 'checklist',
+    label: 'Mi Checklist de Oleh',
+    shortLabel: 'Checklist Oleh',
+    icon: CheckSquare,
+    category: 'Derechos & Trámites',
+    badge: 'Nuevo',
+    description: 'Guía secuencial paso a paso con seguimiento de trámites y progreso guardado'
   },
   {
     id: 'bituaj',
@@ -306,7 +317,7 @@ export const Sidebar: React.FC<SidebarLayoutProps> = ({
                           }`} />
                           
                           {!isCollapsed && (
-                            <span className="truncate">{item.label}</span>
+                            <span className="leading-snug break-words hyphens-auto">{item.label}</span>
                           )}
                         </div>
 
@@ -334,34 +345,23 @@ export const Sidebar: React.FC<SidebarLayoutProps> = ({
           })}
         </div>
 
-        {/* Bottom Fast Emergency Box */}
+        {/* Bottom Fast Emergency Box - Unified Component */}
         <div className="p-3 border-t border-gray-100 bg-gray-50/50 shrink-0">
           {!isCollapsed ? (
-            <div className="bg-rose-50 border border-rose-200 rounded-xl p-2.5 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-rose-600 text-white flex items-center justify-center font-bold text-xs">
-                  101
-                </div>
-                <div className="text-[11px]">
-                  <strong className="text-rose-900 block leading-tight">Urgencias MADA</strong>
-                  <span className="text-rose-700">Ambulancias</span>
-                </div>
-              </div>
-              <a 
-                href="tel:101"
-                className="text-xs font-bold text-rose-700 bg-white border border-rose-200 px-2 py-1 rounded-lg hover:bg-rose-100 transition"
-              >
-                Llamar
-              </a>
+            <div className="space-y-1">
+              <EmergencyButton
+                variant="solid"
+                onClick={() => handleSelect('emergency')}
+                className="w-full"
+                showSubtext={true}
+              />
             </div>
           ) : (
-            <a
-              href="tel:101"
-              title="Llamar Urgencias MADA 101"
-              className="w-10 h-10 mx-auto rounded-xl bg-rose-600 text-white flex items-center justify-center font-bold text-xs shadow-xs hover:bg-rose-700 transition"
-            >
-              101
-            </a>
+            <EmergencyButton
+              variant="compact"
+              onClick={() => handleSelect('emergency')}
+              className="w-full"
+            />
           )}
         </div>
       </aside>

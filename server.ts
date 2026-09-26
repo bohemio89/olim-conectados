@@ -240,6 +240,19 @@ Responde ÚNICAMENTE en JSON con esta estructura exacta:
   });
 });
 
+// Anonymous chat feedback endpoint (Punto F UX)
+const chatFeedbackStore: Array<{ messageId: string; type: 'up' | 'down'; timestamp: string }> = [];
+
+app.post('/api/chat-feedback', (req: Request, res: Response) => {
+  const { messageId, type, timestamp } = req.body;
+  if (messageId && (type === 'up' || type === 'down')) {
+    chatFeedbackStore.push({ messageId, type, timestamp: timestamp || new Date().toISOString() });
+    res.json({ success: true, count: chatFeedbackStore.length });
+    return;
+  }
+  res.status(400).json({ error: 'Parámetros de feedback inválidos' });
+});
+
 // Chatbot endpoint
 app.post('/api/chat', async (req: Request, res: Response) => {
   const { messages, userQuery } = req.body;

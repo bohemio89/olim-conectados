@@ -11,6 +11,8 @@ import { BureaucracyGuide } from './components/BureaucracyGuide';
 import { CrisisCivilGuide } from './components/CrisisCivilGuide';
 import { CommunityHub } from './components/CommunityHub';
 import { NightlifeGuide } from './components/NightlifeGuide';
+import { OlehChecklist } from './components/OlehChecklist';
+import { EmergencyButton } from './components/EmergencyButton';
 import { INITIAL_DOCTORS, COMMUNITY_STORES, COMMUNITY_GROUPS, NIGHTLIFE_VENUES } from './data/mockData';
 import { Doctor, DoctorReview } from './types';
 import { 
@@ -35,6 +37,7 @@ const INITIAL_CLICK_COUNTS: Record<string, number> = {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('assistant');
+  const [pendingChatQuery, setPendingChatQuery] = useState<string>('');
   const [doctorsList, setDoctorsList] = useState<Doctor[]>(INITIAL_DOCTORS);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
@@ -126,12 +129,33 @@ export default function App() {
           onItemClick={handleTabClick}
           isCollapsed={isSidebarCollapsed}
           onToggleCollapse={handleToggleCollapse}
+          onSendQueryToChat={(q) => {
+            setPendingChatQuery(q);
+            setActiveTab('assistant');
+            handleTabClick('assistant');
+          }}
         />
 
         {/* Main Content Viewport */}
         <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          {activeTab === 'assistant' && <AssistantChat />}
+          {activeTab === 'assistant' && (
+            <AssistantChat 
+              initialQuery={pendingChatQuery} 
+              onNavigateToTab={(tabId) => {
+                setActiveTab(tabId);
+                handleTabClick(tabId);
+              }}
+            />
+          )}
           {activeTab === 'crisis-civil' && <CrisisCivilGuide />}
+          {activeTab === 'checklist' && (
+            <OlehChecklist
+              onNavigateToTab={(tabId) => {
+                setActiveTab(tabId);
+                handleTabClick(tabId);
+              }}
+            />
+          )}
           {activeTab === 'doctors' && (
             <DoctorsDirectory doctors={doctorsList} onAddReview={handleAddReview} />
           )}
@@ -165,23 +189,20 @@ export default function App() {
             <span>Ver Menú</span>
           </button>
 
-          <button
+          <EmergencyButton
+            variant="compact"
             onClick={() => {
               setActiveTab('emergency');
               handleTabClick('emergency');
             }}
-            className="flex items-center gap-1.5 font-bold text-rose-700 bg-rose-50 px-3 py-1.5 rounded-lg border border-rose-200"
-          >
-            <AlertTriangle className="w-3.5 h-3.5" />
-            <span>Miún SOS</span>
-          </button>
+          />
 
           <button
             onClick={() => {
               setActiveTab('assistant');
               handleTabClick('assistant');
             }}
-            className="flex items-center gap-1.5 font-bold text-blue-700 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-200"
+            className="flex items-center gap-1.5 font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200"
           >
             <Bot className="w-3.5 h-3.5" />
             <span>Asistente IA</span>
