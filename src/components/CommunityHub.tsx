@@ -12,16 +12,18 @@ import {
   MessageSquare,
   Beef,
   Coffee,
-  CheckCircle2
+  CheckCircle2,
+  PartyPopper
 } from 'lucide-react';
 import { CommunityStore, CommunityGroup } from '../types';
 
 interface CommunityHubProps {
   stores: CommunityStore[];
   groups: CommunityGroup[];
+  onNavigateToNightlife?: () => void;
 }
 
-export const CommunityHub: React.FC<CommunityHubProps> = ({ stores, groups }) => {
+export const CommunityHub: React.FC<CommunityHubProps> = ({ stores, groups, onNavigateToNightlife }) => {
   const [activeTab, setActiveTab] = useState<'stores' | 'groups'>('stores');
   const [storeFilter, setStoreFilter] = useState<string>('Todas');
   const [groupCategoryFilter, setGroupCategoryFilter] = useState<string>('Todas');
@@ -66,7 +68,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores, groups }) =>
 
       {/* Switcher Navigation */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 rounded-2xl border border-gray-200 shadow-xs">
-        <div className="flex space-x-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setActiveTab('stores')}
             className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${
@@ -90,6 +92,16 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores, groups }) =>
             <Users className="w-4 h-4" />
             <span>Grupos de WhatsApp y Facebook ({groups.length})</span>
           </button>
+
+          {onNavigateToNightlife && (
+            <button
+              onClick={onNavigateToNightlife}
+              className="flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200 transition"
+            >
+              <PartyPopper className="w-4 h-4 text-purple-600" />
+              <span>Vida Nocturna & Fiestas</span>
+            </button>
+          )}
         </div>
 
         {/* Search */}

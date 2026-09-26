@@ -10,7 +10,8 @@ import { DriverLicenseWizard } from './components/DriverLicenseWizard';
 import { BureaucracyGuide } from './components/BureaucracyGuide';
 import { CrisisCivilGuide } from './components/CrisisCivilGuide';
 import { CommunityHub } from './components/CommunityHub';
-import { INITIAL_DOCTORS, COMMUNITY_STORES, COMMUNITY_GROUPS } from './data/mockData';
+import { NightlifeGuide } from './components/NightlifeGuide';
+import { INITIAL_DOCTORS, COMMUNITY_STORES, COMMUNITY_GROUPS, NIGHTLIFE_VENUES } from './data/mockData';
 import { Doctor, DoctorReview } from './types';
 import { 
   HeartHandshake, 
@@ -23,6 +24,7 @@ const INITIAL_CLICK_COUNTS: Record<string, number> = {
   assistant: 18,
   doctors: 14,
   community: 12,
+  nightlife: 11,
   emergency: 10,
   'crisis-civil': 7,
   bituaj: 6,
@@ -139,7 +141,17 @@ export default function App() {
           {activeTab === 'license' && <DriverLicenseWizard />}
           {activeTab === 'bureaucracy' && <BureaucracyGuide />}
           {activeTab === 'community' && (
-            <CommunityHub stores={COMMUNITY_STORES} groups={COMMUNITY_GROUPS} />
+            <CommunityHub 
+              stores={COMMUNITY_STORES} 
+              groups={COMMUNITY_GROUPS} 
+              onNavigateToNightlife={() => {
+                setActiveTab('nightlife');
+                handleTabClick('nightlife');
+              }}
+            />
+          )}
+          {activeTab === 'nightlife' && (
+            <NightlifeGuide venues={NIGHTLIFE_VENUES} />
           )}
         </main>
 

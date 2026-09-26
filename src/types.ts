@@ -63,6 +63,24 @@ export interface CommunityGroup {
   link: string;
 }
 
+export interface NightlifeVenue {
+  id: string;
+  name: string;
+  category: 'Fiesta & Baile Latino' | 'Boliche & Club Latino' | 'Bar & After Office' | 'Salsa & Bachata Social';
+  city: string;
+  address: string;
+  musicStyles: string[];
+  schedule: string;
+  atmosphere: string;
+  description: string;
+  highlights: string[];
+  priceRange?: string; // e.g. "₪50 - ₪80" o "Entrada libre"
+  instagramOrWeb?: string;
+  phoneOrTickets?: string;
+  ticketLink?: string;
+  isPopularWithOlim?: boolean;
+}
+
 export interface ChatMessage {
   id: string;
   role: 'user' | 'assistant';

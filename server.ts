@@ -135,6 +135,15 @@ CONOCIMIENTO OBLIGATORIO Y REGLAS FUNDAMENTALES:
 16. Sistema Electoral y Político (Knéset):
    - El sufragio en Israel es **optativo (no obligatorio)**.
    - Sistema de democracia parlamentaria: Se vota a listas partidarias para los 120 escaños de la **Knéset** [כנסת], no directamente a una persona como Primer Ministro. El gobierno se conforma mediante coaliciones que sumen al menos **61 bancas**.
+
+17. Ambiente Nocturno, Fiestas Latinas y Cachengue para Olim:
+   - Salidas nocturnas y vida social: Son fundamentales para la salud emocional, integración y disfrute de los olim jadashim.
+   - **Cachengue Tel Aviv (La Fiesta Latina):** El evento masivo más popular de la comunidad en Tel Aviv (Litzman / Kikar Plumer en el Puerto o Atlanta en Ibn Gvirol 30). Toca cumbia santafesina, cuarteto cordobés, RKT, rock nacional y reggaetón. Venta anticipada en Go-Out. Se sirve Fernet con Coca y asisten cientos de jóvenes y familias jóvenes hispanohablantes.
+   - **La Fiesta Argentina TLV:** Fiestas temáticas regulares con DJs latinos (cumbia, cuarteto, pop latino, hits urbanos) en boliches como Atlanta o Duplex.
+   - **Havana Music Club Tel Aviv (Yigal Alon 126):** El club emblemático de salsa y bachata. Martes, jueves y sábados con clases previas desde nivel inicial seguidas de fiesta social en 2 pistas (salsa cubana y bachata sensual).
+   - **Florentin & Colmado TLV:** Zona sur de Tel Aviv (calles Levinsky y Florentin) con bares urbanos relajados, cócteles, tacos y noches de reggaetón y música en español.
+   - **El Balagán Latin Pop (Haifa Downtown):** Opción clave para olim en el norte de Israel en la zona portuaria de Haifa (HaNamal).
+   - **Reglas prácticas de salida:** Llevar SIEMPRE documento de identidad original físico (Teudat Zehut o pasaporte) ya que no aceptan fotos de DNI en los ingresos; sacar entradas anticipadas en plataformas oficiales para evitar sobreprecios en puerta; y usar buses nocturnos (Kavei Laila) o taxis compartidos durante Shabat.
 `;
 
 // Review moderation endpoint (Lashon Hará check)

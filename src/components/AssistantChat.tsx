@@ -59,6 +59,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
     '🥩 ¿Dónde compro yerba mate y cortes criollos como vacío o entraña?',
     '☕ ¿Dónde puedo tomar un café con medialunas o facturas (Amapola)?',
     '🥟 ¿Qué emprendimientos de Olim venden empanadas caseras por encargo?',
+    '🎉 ¿Qué opciones de vida nocturna, fiestas latinas y salidas con música en español hay para Olim (La Fiesta Argentina, Cachengue)?',
   ];
 
   const handleSendMessage = async (textToSend?: string) => {

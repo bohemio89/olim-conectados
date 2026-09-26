@@ -1,4 +1,4 @@
-import { Doctor, CommunityStore, CommunityGroup } from '../types';
+import { Doctor, CommunityStore, CommunityGroup, NightlifeVenue } from '../types';
 
 export const INITIAL_DOCTORS: Doctor[] = [
   {
@@ -2690,3 +2690,173 @@ export const COMMUNITY_GROUPS: CommunityGroup[] = [
     link: 'https://chat.whatsapp.com/olim-jerusalem-es',
   },
 ];
+
+export const NIGHTLIFE_VENUES: NightlifeVenue[] = [
+  {
+    id: 'night-1',
+    name: 'Cachengue Tel Aviv (La Fiesta Latina)',
+    category: 'Fiesta & Baile Latino',
+    city: 'Tel Aviv',
+    address: 'Litzman / Kikar Plumer (Puerto de Tel Aviv) & Atlanta Club (Ibn Gabirol 30)',
+    musicStyles: ['Cumbia Santafesina', 'Cuarteto Cordobés', 'RKT', 'Reggaetón Clásico y Moderno', 'Rock Nacional Argentino'],
+    schedule: 'Ediciones especiales los jueves/viernes y vísperas de feriado (23:30 a 05:30)',
+    atmosphere: 'La fiesta argentina y latina por excelencia para olim y jóvenes en Tel Aviv. Fernet con coca en jarra, banderas albicelestes, cánticos y baile hasta el amanecer.',
+    description: 'El evento masivo insignia de la comunidad hispanohablante en Israel. Reúne a cientos de olim jadashim de Argentina, Uruguay, Colombia, México, Chile, Venezuela y más países para cantar y bailar temas que te transportan a casa.',
+    highlights: [
+      'Fernet Branca clásico servido al estilo argentino',
+      'Set de cumbia, pop latino, cuarteto y clásicos del rock nacional',
+      'Público mayoritariamente hispanohablante de 20 a 38 años',
+      'Venta anticipada de entradas con descuento en Go-Out'
+    ],
+    priceRange: '₪50 - ₪85 (según preventa)',
+    instagramOrWeb: '@cachenguetelaviv',
+    phoneOrTickets: '054-9988771',
+    ticketLink: 'https://go-out.co/event/cachenguetelaviv',
+    isPopularWithOlim: true,
+  },
+  {
+    id: 'night-2',
+    name: 'La Fiesta Argentina TLV',
+    category: 'Fiesta & Baile Latino',
+    city: 'Tel Aviv',
+    address: 'Ibn Gvirol 30 / Atlanta TLV / Duplex Club',
+    musicStyles: ['Cumbia Argentina', 'Cuarteto', 'Reggaetón', 'Trap Latino', 'Pop Latino'],
+    schedule: 'Fines de semana seleccionados (Apertura 23:45)',
+    atmosphere: 'Ambiente festivo, alegre y descontracturado. El punto de reencuentro de amigos de la aliá y nuevas amistades recién llegadas al país.',
+    description: 'Fiesta temática producida por organizadores latinos con DJs residentes que conocen exactamente lo que el olé quiere escuchar: desde Los Palmeras y Rodrigo hasta Bizarrap, Duki y Bad Bunny.',
+    highlights: [
+      'DJs latinos en vivo con tandas de cuarteto cordobés y cumbia',
+      'Promociones de tragos en barra (Fernet, Gin, Cerveza)',
+      'Espacio cerrado con gran pista de baile y sector lounge exterior',
+      'Requisito de ingreso: documento físico o Teudat Zehut / Pasaporte'
+    ],
+    priceRange: '₪60 - ₪90',
+    instagramOrWeb: '@lafiestaargentinatlv',
+    ticketLink: 'https://go-out.co',
+    isPopularWithOlim: true,
+  },
+  {
+    id: 'night-3',
+    name: 'Havana Music Club Tel Aviv',
+    category: 'Salsa & Bachata Social',
+    city: 'Tel Aviv',
+    address: 'Yigal Alon 126, Tel Aviv (cerca de estación HaShalom)',
+    musicStyles: ['Salsa Cubana', 'Salsa Brava', 'Bachata Sensual y Dominicana', 'Reggaetón', 'Kizomba'],
+    schedule: 'Martes, Jueves y Sábados desde las 21:00 (Clases de 21:00 a 22:30, Fiesta Social de 22:30 a 03:00)',
+    atmosphere: 'El templo histórico del baile latino en Israel. Enorme piso de parquet profesional, dos grandes salas con música simultánea (Sala Salsa y Sala Bachata) y ambiente multicultural cálido.',
+    description: 'Institución de referencia para los amantes del ritmo latino. Se dictan clases multinivel antes de la fiesta (ideales para principiantes o para conocer gente), seguidas de la fiesta social donde asisten tanto latinos nativos como israelíes apasionados por la cultura hispana.',
+    highlights: [
+      'Clases incluidas con la entrada desde nivel cero hasta avanzado',
+      '2 pistas simultáneas: Pista 1 Salsa Cubana / Pista 2 Bachata Sensual',
+      'Estacionamiento cercano y acceso directo en tren (estación HaShalom)',
+      'Excelente lugar para romper el hielo y hacer amigos sin importar el idioma'
+    ],
+    priceRange: '₪60 - ₪70 (incluye clase + fiesta)',
+    instagramOrWeb: '@havanaclub_tlv',
+    phoneOrTickets: '03-5626260',
+    ticketLink: 'https://havanaclub.co.il',
+    isPopularWithOlim: true,
+  },
+  {
+    id: 'night-4',
+    name: 'Salsa Club TLV & Noches Latinas',
+    category: 'Salsa & Bachata Social',
+    city: 'Tel Aviv',
+    address: 'Carlebach 29 / Menajen Begin, Tel Aviv',
+    musicStyles: ['Salsa Cubana', 'Salsa Puertorriqueña / L.A.', 'Bachata', 'Merengue', 'Dembow'],
+    schedule: 'Jueves y Sábados a partir de las 21:15',
+    atmosphere: 'Club íntimo y enérgico, perfecto para socializar, tomar mojitos y bailar ritmos caribeños hasta la madrugada.',
+    description: 'Espacio reconocido con noches latinas temáticas. Los jueves congregan a numerosos estudiantes, olim e instructores latinos para veladas de salsa dura, timba cubana y bachata.',
+    highlights: [
+      'Clase previa para principiantes sin necesidad de concurrir en pareja',
+      'Mojitos artesanales y cervezas en barra',
+      'DJs invitados con música latina clásica y caribeña auténtica'
+    ],
+    priceRange: '₪50 - ₪65',
+    instagramOrWeb: '@salsaclubtlv',
+    isPopularWithOlim: true,
+  },
+  {
+    id: 'night-5',
+    name: 'Colmado TLV & Noches de Reggaetón en Florentin',
+    category: 'Bar & After Office',
+    city: 'Tel Aviv',
+    address: 'Barrio Florentin / Levinsky, Tel Aviv',
+    musicStyles: ['Reggaetón Old School & Nuevo', 'Dembow Dominicano', 'Cumbia', 'Baile Funk', 'Pop Latino'],
+    schedule: 'Miércoles a Sábados desde las 20:00 hasta tarde',
+    atmosphere: 'Vibra urbana alternativa, mesas en la vereda estilo bar de barrio latino, cócteles frescos, micheladas y música en español para cantar con amigos.',
+    description: 'Un punto de encuentro habitual para los residentes y olim de la zona sur de Tel Aviv (Florentin, Yafo, Neve Tzedek). Organizan fiestas callejeras ("street parties") y fines de semana con tandas completas de música en español.',
+    highlights: [
+      'Tacos, empanadas y picoteo latino para acompañar tragos',
+      'Micheladas, margaritas y cerveza helada',
+      'Sin código de vestimenta estricto, ambiente relajado y juvenil',
+      'Entrada libre la mayoría de los días (eventos especiales con cupo limitado)'
+    ],
+    priceRange: 'Entrada libre / Consumo en barra',
+    instagramOrWeb: '@colmadotlv',
+    isPopularWithOlim: true,
+  },
+  {
+    id: 'night-6',
+    name: 'Noche Latina en Duplex Club',
+    category: 'Boliche & Club Latino',
+    city: 'Tel Aviv',
+    address: 'HaShah 10, Tel Aviv (cerca de Florentin)',
+    musicStyles: ['Reggaetón', 'Trap Latino', 'Dembow', 'Electro-Latino', 'Mainstream Hits'],
+    schedule: 'Viernes y vísperas de Jag (23:30 - 05:30)',
+    atmosphere: 'Gran complejo de discoteca de 3 pisos con terraza abierta en el techo (rooftop). Un piso completo dedicado a música urbana en español.',
+    description: 'El Duplex es un multiespacio de baile emblemático de Tel Aviv. En sus noches de fiesta latina, el segundo piso y la terraza vibran con reggaetón de todas las épocas (Daddy Yankee, Don Omar, Feid, Karol G, Bad Bunny).',
+    highlights: [
+      '3 pistas de baile con diferentes estilos de música simultáneos',
+      'Rooftop al aire libre con sector para fumadores y charlas',
+      'Sonido e iluminación de discoteca internacional',
+      'Ubicación estratégica a pasos de Florentin'
+    ],
+    priceRange: '₪50 - ₪80',
+    instagramOrWeb: '@duplextlv',
+    phoneOrTickets: '03-6816560',
+    ticketLink: 'https://duplexclub.co.il',
+    isPopularWithOlim: true,
+  },
+  {
+    id: 'night-7',
+    name: 'El Balagán Latin Pop & Fiesta Latina Haifa',
+    category: 'Boliche & Club Latino',
+    city: 'Haifa',
+    address: 'HaNamal St (Zona Puerto / Downtown Haifa)',
+    musicStyles: ['Reggaetón', 'Cumbia', 'Salsa', 'Pop Latino', 'Éxitos en Español'],
+    schedule: 'Jueves seleccionados y vísperas de feriado (22:30 a 04:30)',
+    atmosphere: 'La fiesta latina que reúne a los olim de Haifa, Krayot y el norte de Israel, evitando que tengan que viajar hasta Tel Aviv para salir a bailar en español.',
+    description: 'Iniciativa que surgió para descentralizar la movida nocturna y ofrecer una opción vibrante de baile y diversión para la activa colectividad hispanohablante de Haifa y sus alrededores en la zona portuaria del Downtown.',
+    highlights: [
+      'Excelente ubicación a metros de la estación de tren Haifa Merkaz HaShmoná',
+      'Ambiente súper cercano entre olim del norte',
+      'Música variada en español: desde cumbia hasta los últimos hits de reggaetón',
+      'Precios de tragos y entradas más accesibles'
+    ],
+    priceRange: '₪40 - ₪65',
+    instagramOrWeb: '@latinpartyhaifa',
+    phoneOrTickets: '04-8622110',
+    isPopularWithOlim: true,
+  },
+  {
+    id: 'night-8',
+    name: 'Tango & Milonga Porteña en Tel Aviv',
+    category: 'Bar & After Office',
+    city: 'Tel Aviv',
+    address: 'Beit Danny / Simja Holzberg 1, Tel Aviv & locales de danza en Centro',
+    musicStyles: ['Tango Clásico', 'Milonga', 'Vals Criollo', 'Tango Nuevo'],
+    schedule: 'Miércoles y Domingos desde las 20:30',
+    atmosphere: 'Ambiente bohemio y respetuoso con músicos y bailarines aficionados y profesionales. Ideal para olim que aman el tango y la cultura tradicional del Río de la Plata.',
+    description: 'Milongas sociales en Tel Aviv donde la comunidad argentina y uruguaya se reúne a bailar, escuchar tangos de orquestas legendarias (Troilo, D\'Arienzo, Pugliese, Piazzolla) y compartir charlas y empanadas.',
+    highlights: [
+      'Clase de tango y técnica previa para principiantes',
+      'Música seleccionada por musicalizadores (TDJs) con amplia trayectoria',
+      'Público de todas las edades con amor por la cultura rioplatense'
+    ],
+    priceRange: '₪50 - ₪60',
+    instagramOrWeb: '@tangotelaviv',
+    isPopularWithOlim: false,
+  }
+];
+

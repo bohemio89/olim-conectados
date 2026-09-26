@@ -17,7 +17,8 @@ import {
   X,
   Compass,
   PanelLeftClose,
-  PanelLeftOpen
+  PanelLeftOpen,
+  PartyPopper
 } from 'lucide-react';
 
 export interface NavItemConfig {
@@ -65,8 +66,16 @@ export const ALL_NAV_ITEMS: NavItemConfig[] = [
     shortLabel: 'Comunidad & Locales',
     icon: ShoppingBag,
     category: 'Comunidad & Emprendimientos',
-    badge: 'Nuevo',
     description: 'Amapola café (Ibn Gvirol 54), yerbas, cortes criollos, empanadas caseras y grupos'
+  },
+  {
+    id: 'nightlife',
+    label: 'Vida Nocturna',
+    shortLabel: 'Vida Nocturna',
+    icon: PartyPopper,
+    category: 'Comunidad & Emprendimientos',
+    badge: 'Nuevo',
+    description: 'Fiestas latinas, La Fiesta Argentina, Cachengue, Havana Club, boliches y bares con música en español'
   },
   {
     id: 'crisis-civil',
