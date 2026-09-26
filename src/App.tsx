@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Sidebar } from './components/Sidebar';
 import { Topbar } from './components/Topbar';
 import { AssistantChat } from './components/AssistantChat';
@@ -263,6 +264,7 @@ export default function App() {
           </div>
         </footer>
       </div>
+      <Analytics />
     </div>
   );
 }
