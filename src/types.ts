@@ -1,4 +1,4 @@
-export type KupaName = 'Maccabi' | 'Clalit' | 'Meuhedet' | 'Leumit' | 'Privado';
+export type KupaName = 'Maccabi' | 'Clalit' | 'Meuhedet' | 'Leumit' | 'Privado' | 'No estoy seguro';
 
 export type SpanishLevel = 'Nativo' | 'Fluido' | 'Básico';
 
@@ -6,10 +6,10 @@ export interface DoctorReview {
   id: string;
   author: string;
   date: string;
-  rating: number; // 1 to 5
-  spanishFluencyRating: number; // 1 to 5
-  listeningTimeRating: number; // 1 to 5
-  conservativeApproachRating: number; // 1 to 5: prioritizes non-invasive diagnostics before surgery
+  rating?: number; // 1 to 5
+  spanishFluencyRating?: number; // 1 to 5
+  listeningTimeRating?: number; // 1 to 5
+  conservativeApproachRating?: number; // 1 to 5: prioritizes non-invasive diagnostics before surgery
   comment: string;
   isVerifiedOle?: boolean;
 }
@@ -18,17 +18,20 @@ export interface Doctor {
   id: string;
   name: string;
   specialty: string;
-  kupot: KupaName[];
+  kupot: (KupaName | string)[];
   city: string;
-  address: string;
-  phone: string;
-  spanishLevel: SpanishLevel;
-  rating: number;
-  reviewsCount: number;
-  consultationFocus: string;
-  receptionHours: string;
-  acceptsNewPatients: boolean;
+  address?: string;
+  phone?: string;
+  spanishLevel?: SpanishLevel;
+  rating?: number;
+  reviewsCount?: number;
+  consultationFocus?: string;
+  receptionHours?: string;
+  acceptsNewPatients?: boolean;
   reviews: DoctorReview[];
+  isCommunityAdded?: boolean;
+  uploadedAt?: string;
+  experienceComment?: string;
 }
 
 export interface CommunityStore {
@@ -55,7 +58,7 @@ export interface CommunityStore {
 export interface CommunityGroup {
   id: string;
   title: string;
-  platform: 'WhatsApp' | 'Facebook';
+  platform: 'WhatsApp' | 'Facebook' | 'Web & Sedes Nacionales' | 'Web' | 'Telegram';
   category: 'Búsqueda de Empleo' | 'Alquileres y Vivienda' | 'Trámites y Burocracia' | 'Comunidades por Ciudad';
   cityOrScope: string;
   membersCount: string;

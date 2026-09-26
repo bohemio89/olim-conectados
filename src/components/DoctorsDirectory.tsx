@@ -4,7 +4,6 @@ import {
   MapPin, 
   Phone, 
   Clock, 
-  Star, 
   ShieldCheck, 
   MessageSquare, 
   Plus, 
@@ -12,34 +11,44 @@ import {
   CheckCircle2, 
   Filter, 
   Languages, 
-  HeartHandshake, 
-  Activity,
+  Users,
+  Stethoscope,
   Sparkles,
-  Stethoscope
+  Info
 } from 'lucide-react';
-import { Doctor, KupaName, SpanishLevel } from '../types';
+import { Doctor, KupaName, DoctorReview } from '../types';
 
 interface DoctorsDirectoryProps {
   doctors: Doctor[];
-  onAddReview: (doctorId: string, review: any) => void;
+  onAddReview: (doctorId: string, review: DoctorReview) => void;
+  onAddDoctor: (newDoctor: Doctor) => void;
 }
 
-export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onAddReview }) => {
+const AVAILABLE_KUPOT = ['Maccabi', 'Clalit', 'Meuhedet', 'Leumit', 'Privado', 'No estoy seguro'];
+
+export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ 
+  doctors, 
+  onAddReview,
+  onAddDoctor 
+}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedKupa, setSelectedKupa] = useState<string>('Todas');
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>('Todas');
   const [selectedCity, setSelectedCity] = useState<string>('Todas');
-  const [minRating, setMinRating] = useState<number>(0);
 
-  // Review Modal State
+  // Modal State
+  const [modalMode, setModalMode] = useState<'addDoctor' | 'addReview' | null>(null);
   const [selectedDoctorForReview, setSelectedDoctorForReview] = useState<Doctor | null>(null);
+
+  // Form Fields for New Doctor
+  const [doctorName, setDoctorName] = useState('');
+  const [doctorSpecialty, setDoctorSpecialty] = useState('');
+  const [doctorCity, setDoctorCity] = useState('');
+  const [doctorPhone, setDoctorPhone] = useState('');
+  const [selectedKupot, setSelectedKupot] = useState<string[]>([]);
   const [authorName, setAuthorName] = useState('');
-  const [reviewRating, setReviewRating] = useState(5);
-  const [spanishRating, setSpanishRating] = useState(5);
-  const [listeningRating, setListeningRating] = useState(5);
-  const [conservativeRating, setConservativeRating] = useState(5);
   const [commentText, setCommentText] = useState('');
-  
+
   // Moderation state
   const [isCheckingModeration, setIsCheckingModeration] = useState(false);
   const [moderationFeedback, setModerationFeedback] = useState<{
@@ -48,17 +57,17 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
     reason: string;
     suggestedRewrite?: string;
   } | null>(null);
-  const [reviewSubmittedSuccess, setReviewSubmittedSuccess] = useState(false);
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
-  // Extract unique filters sorted alphabetically
+  // Extract unique filters
   const cities = [
     'Todas',
-    ...Array.from(new Set(doctors.map((d) => d.city))).sort((a, b) => a.localeCompare(b, 'es'))
+    ...Array.from(new Set(doctors.map((d) => d.city).filter(Boolean))).sort((a, b) => a.localeCompare(b, 'es'))
   ];
 
   const specialties = [
     'Todas',
-    ...Array.from(new Set(doctors.map((d) => d.specialty))).sort((a, b) => a.localeCompare(b, 'es'))
+    ...Array.from(new Set(doctors.map((d) => d.specialty).filter(Boolean))).sort((a, b) => a.localeCompare(b, 'es'))
   ];
 
   // Filtering
@@ -67,7 +76,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
     const matchesSearch =
       doc.name.toLowerCase().includes(term) ||
       doc.specialty.toLowerCase().includes(term) ||
-      doc.address.toLowerCase().includes(term) ||
+      (doc.address && doc.address.toLowerCase().includes(term)) ||
       doc.city.toLowerCase().includes(term) ||
       doc.kupot.some((k) => k.toLowerCase().includes(term));
 
@@ -79,13 +88,63 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
 
     const matchesCity = selectedCity === 'Todas' || doc.city === selectedCity;
 
-    const matchesRating = minRating === 0 || (doc.reviewsCount > 0 && doc.rating >= minRating);
-
-    return matchesSearch && matchesKupa && matchesSpecialty && matchesCity && matchesRating;
+    return matchesSearch && matchesKupa && matchesSpecialty && matchesCity;
   });
 
-  const handleTestOrSubmitReview = async (submitDirectly: boolean = false) => {
+  const handleKupaToggle = (kupa: string) => {
+    if (kupa === 'No estoy seguro') {
+      if (selectedKupot.includes('No estoy seguro')) {
+        setSelectedKupot([]);
+      } else {
+        setSelectedKupot(['No estoy seguro']);
+      }
+      return;
+    }
+
+    const filteredWithoutUnsure = selectedKupot.filter((k) => k !== 'No estoy seguro');
+    if (filteredWithoutUnsure.includes(kupa)) {
+      setSelectedKupot(filteredWithoutUnsure.filter((k) => k !== kupa));
+    } else {
+      setSelectedKupot([...filteredWithoutUnsure, kupa]);
+    }
+  };
+
+  const openAddDoctorModal = () => {
+    setModalMode('addDoctor');
+    setSelectedDoctorForReview(null);
+    setDoctorName('');
+    setDoctorSpecialty('');
+    setDoctorCity('');
+    setDoctorPhone('');
+    setSelectedKupot([]);
+    setAuthorName('');
+    setCommentText('');
+    setModerationFeedback(null);
+    setSubmissionSuccess(false);
+  };
+
+  const openAddReviewModal = (doc: Doctor) => {
+    setModalMode('addReview');
+    setSelectedDoctorForReview(doc);
+    setAuthorName('');
+    setCommentText('');
+    setModerationFeedback(null);
+    setSubmissionSuccess(false);
+  };
+
+  const closeModal = () => {
+    setModalMode(null);
+    setSelectedDoctorForReview(null);
+    setModerationFeedback(null);
+    setSubmissionSuccess(false);
+  };
+
+  const handleTestOrSubmit = async (submitDirectly: boolean = false) => {
     if (!commentText.trim()) return;
+    if (modalMode === 'addDoctor' && (!doctorName.trim() || !doctorSpecialty.trim() || !doctorCity.trim())) {
+      alert('Por favor completa al menos el nombre, especialidad y ciudad del médico.');
+      return;
+    }
 
     setIsCheckingModeration(true);
     setModerationFeedback(null);
@@ -96,8 +155,8 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           reviewText: commentText,
-          doctorName: selectedDoctorForReview?.name,
-          specialty: selectedDoctorForReview?.specialty,
+          doctorName: modalMode === 'addDoctor' ? doctorName : selectedDoctorForReview?.name,
+          specialty: modalMode === 'addDoctor' ? doctorSpecialty : selectedDoctorForReview?.specialty,
         }),
       });
 
@@ -116,7 +175,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
           isAllowed: false,
           flagged: true,
           reason: 'Detectamos descalificaciones personales o agravios contrarios a la ley de difamación (Lashon Hará).',
-          suggestedRewrite: 'Durante la consulta considero que la atención fue apresurada y no se explicaron suficientes opciones previas antes de plantear tratamientos invasivos.',
+          suggestedRewrite: 'Durante la consulta considero que la atención fue apresurada y no se explicaron suficientes opciones previas antes de plantear tratamientos.',
         });
       } else {
         if (submitDirectly) {
@@ -125,7 +184,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
           setModerationFeedback({
             isAllowed: true,
             flagged: false,
-            reason: 'Reseña aprobada: se enfoca en hechos objetivos de la consulta.',
+            reason: 'Comentario aprobado: se enfoca en hechos objetivos de la consulta.',
           });
         }
       }
@@ -135,29 +194,47 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
   };
 
   const completeSubmission = (text: string) => {
-    if (!selectedDoctorForReview) return;
+    const todayStr = new Date().toLocaleDateString('es-ES');
 
-    const newReview = {
-      id: `rev-${Date.now()}`,
-      author: authorName.trim() || 'Olé Anónimo',
-      date: new Date().toLocaleDateString('es-ES'),
-      rating: reviewRating,
-      spanishFluencyRating: spanishRating,
-      listeningTimeRating: listeningRating,
-      conservativeApproachRating: conservativeRating,
-      comment: text,
-      isVerifiedOle: true,
-    };
+    if (modalMode === 'addDoctor') {
+      const newDoctorEntry: Doctor = {
+        id: `doc-${Date.now()}`,
+        name: doctorName.trim(),
+        specialty: doctorSpecialty.trim(),
+        city: doctorCity.trim(),
+        phone: doctorPhone.trim() || 'No especificado (consultar en la Kupá)',
+        kupot: selectedKupot.length > 0 ? selectedKupot : ['No estoy seguro'],
+        reviews: [
+          {
+            id: `rev-${Date.now()}`,
+            author: authorName.trim() || 'Olé de la comunidad',
+            date: todayStr,
+            comment: text.trim(),
+            isVerifiedOle: true,
+          },
+        ],
+        reviewsCount: 1,
+        isCommunityAdded: true,
+        uploadedAt: todayStr,
+      };
 
-    onAddReview(selectedDoctorForReview.id, newReview);
-    setReviewSubmittedSuccess(true);
+      onAddDoctor(newDoctorEntry);
+      setSubmissionSuccess(true);
+    } else if (modalMode === 'addReview' && selectedDoctorForReview) {
+      const newReview: DoctorReview = {
+        id: `rev-${Date.now()}`,
+        author: authorName.trim() || 'Olé de la comunidad',
+        date: todayStr,
+        comment: text.trim(),
+        isVerifiedOle: true,
+      };
+
+      onAddReview(selectedDoctorForReview.id, newReview);
+      setSubmissionSuccess(true);
+    }
 
     setTimeout(() => {
-      setSelectedDoctorForReview(null);
-      setCommentText('');
-      setAuthorName('');
-      setModerationFeedback(null);
-      setReviewSubmittedSuccess(false);
+      closeModal();
     }, 1800);
   };
 
@@ -174,33 +251,32 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
 
   return (
     <div className="space-y-6">
-      {/* Header Banner */}
+      {/* Header Banner - Transparent and Honest */}
       <div className="bg-gradient-to-br from-blue-700 via-indigo-800 to-blue-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
         <div className="absolute right-0 top-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="relative z-10 max-w-3xl">
           <div className="inline-flex items-center gap-2 bg-blue-500/30 border border-blue-400/40 text-blue-200 text-xs px-3 py-1 rounded-full font-medium mb-3">
-            <Languages className="w-3.5 h-3.5" />
-            <span>Directorio Médico Oficial Bilingüe en Israel · 140+ Profesionales Verificados</span>
+            <Users className="w-3.5 h-3.5" />
+            <span>Directorio Colaborativo de la Comunidad</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Médicos que Hablan Español en tu Kupat Jolim
+            Médicos y Profesionales de Salud que Hablan Español
           </h1>
           <p className="mt-2 text-sm sm:text-base text-blue-100/90 leading-relaxed">
-            Directorio exhaustivo con más de 140 especialistas cotejados con los padrones de <strong>Maccabi</strong>, <strong>Clalit</strong>, <strong>Meuhedet</strong> y <strong>Leumit</strong> en más de 20 ciudades de todo Israel.
+            Este directorio se construye exclusivamente con aportes y recomendaciones reales de la comunidad de Olim. Actualmente no hay médicos pre-cargados por el sitio. Si fuiste atendido por un profesional que hable español, podés sumarlo para ayudar a otros inmigrantes.
           </p>
 
-          <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-blue-200">
-            <span className="flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-md">
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <button
+              onClick={openAddDoctorModal}
+              className="bg-white text-blue-900 hover:bg-blue-50 font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-md flex items-center gap-2 transition"
+            >
+              <Plus className="w-4 h-4 text-blue-700" />
+              <span>Recomendar o Agregar un Médico</span>
+            </button>
+            <span className="text-xs text-blue-200 flex items-center gap-1.5 bg-blue-950/40 px-3 py-2 rounded-xl border border-blue-400/20">
               <ShieldCheck className="w-4 h-4 text-emerald-300" />
-              140+ Médicos Activos en Israel
-            </span>
-            <span className="flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-md">
-              <Activity className="w-4 h-4 text-amber-300" />
-              22+ Ciudades & 18 Especialidades
-            </span>
-            <span className="flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-md">
-              <Sparkles className="w-4 h-4 text-blue-300" />
-              Cotejado con Kupot Jolim y Piedra Libre
+              Moderación ética sin difamaciones (Lashon Hará)
             </span>
           </div>
         </div>
@@ -213,7 +289,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
             <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Buscar por nombre, especialidad, ciudad o calle..."
+              placeholder="Buscar por nombre, especialidad o ciudad..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-800 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
@@ -232,6 +308,8 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
               <option value="Clalit">Clalit (כללית)</option>
               <option value="Meuhedet">Meuhedet (מאוחדת)</option>
               <option value="Leumit">Leumit (לאומית)</option>
+              <option value="Privado">Privado</option>
+              <option value="No estoy seguro">No estoy seguro</option>
             </select>
 
             {/* City Selector */}
@@ -262,24 +340,13 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
           </div>
         </div>
 
-        {/* Quick Tags */}
-        <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-gray-100 text-xs">
-          <span className="text-gray-400 font-medium mr-1 flex items-center gap-1">
-            <Filter className="w-3 h-3" /> Filtro rápido:
-          </span>
-          {['Maccabi', 'Clalit', 'Traumatología', 'Médico de Familia', 'Tel Aviv', 'Jerusalén', 'Netanya'].map((tag) => (
-            <button
-              key={tag}
-              onClick={() => {
-                if (['Maccabi', 'Clalit'].includes(tag)) setSelectedKupa(tag);
-                else if (['Tel Aviv', 'Jerusalén', 'Netanya'].includes(tag)) setSelectedCity(tag);
-                else setSelectedSpecialty(tag);
-              }}
-              className="px-2.5 py-1 bg-gray-100 hover:bg-blue-50 hover:text-blue-700 text-gray-600 rounded-md transition text-[11px]"
-            >
-              {tag}
-            </button>
-          ))}
+        {/* Quick Actions */}
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-100 text-xs">
+          <div className="flex items-center gap-1.5 text-gray-500">
+            <Info className="w-3.5 h-3.5 text-blue-500" />
+            <span>Mostrando <strong>{filteredDoctors.length}</strong> {filteredDoctors.length === 1 ? 'médico cargado' : 'médicos cargados'}</span>
+          </div>
+
           {(selectedKupa !== 'Todas' || selectedCity !== 'Todas' || selectedSpecialty !== 'Todas' || searchTerm) && (
             <button
               onClick={() => {
@@ -288,7 +355,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
                 setSelectedSpecialty('Todas');
                 setSearchTerm('');
               }}
-              className="text-xs text-rose-600 font-semibold ml-2 hover:underline"
+              className="text-xs text-rose-600 font-semibold hover:underline"
             >
               Limpiar filtros
             </button>
@@ -296,195 +363,171 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
         </div>
       </div>
 
-      {/* Results Count & Notice */}
-      <div className="flex items-center justify-between text-xs text-gray-500 px-1">
-        <span>Mostrando <strong>{filteredDoctors.length}</strong> médicos con atención en español</span>
-        <span className="text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded font-medium">
-          💡 Evaluaciones basadas en hechos clínicos y escucha activa
-        </span>
-      </div>
-
       {/* Doctors Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {filteredDoctors.map((doc) => (
-          <div
-            key={doc.id}
-            className="bg-white rounded-2xl border border-gray-200 hover:border-blue-300 transition-all shadow-xs hover:shadow-md p-5 flex flex-col justify-between"
-          >
-            <div>
-              {/* Header: Name, Specialty & Rating */}
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h2 className="text-lg font-bold text-gray-900">{doc.name}</h2>
-                    <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
-                        doc.spanishLevel === 'Nativo'
-                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                          : 'bg-blue-50 text-blue-700 border-blue-200'
-                      }`}
-                    >
-                      Español {doc.spanishLevel}
+      {filteredDoctors.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {filteredDoctors.map((doc) => (
+            <div
+              key={doc.id}
+              className="bg-white rounded-2xl border border-gray-200 hover:border-blue-300 transition-all shadow-xs hover:shadow-md p-5 flex flex-col justify-between"
+            >
+              <div>
+                {/* Community Badge & Upload Date */}
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+                    <Users className="w-3 h-3 text-amber-600" />
+                    Cargado por la comunidad — no verificado por el sitio
+                  </span>
+                  {doc.uploadedAt && (
+                    <span className="text-[10px] text-gray-400">
+                      {doc.uploadedAt}
                     </span>
-                  </div>
+                  )}
+                </div>
+
+                {/* Doctor Name & Specialty */}
+                <div className="mt-1">
+                  <h2 className="text-lg font-bold text-gray-900">{doc.name}</h2>
                   <p className="text-xs font-semibold text-blue-700 mt-0.5">{doc.specialty}</p>
                 </div>
 
-                {doc.reviewsCount > 0 ? (
-                  <div className="flex items-center gap-1 bg-amber-50 border border-amber-200 px-2 py-1 rounded-lg shrink-0">
-                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
-                    <span className="text-xs font-bold text-amber-900">{doc.rating.toFixed(1)}</span>
-                    <span className="text-[10px] text-amber-700">({doc.reviewsCount})</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-1 bg-gray-50 border border-gray-200 px-2 py-1 rounded-lg shrink-0 text-gray-500 text-[11px]">
-                    <span>Sin reseñas aún</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Kupot Badges */}
-              <div className="flex flex-wrap gap-1.5 mt-3">
-                {doc.kupot.map((k) => (
-                  <span
-                    key={k}
-                    className="text-[11px] font-medium bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md border border-gray-200"
-                  >
-                    {k}
-                  </span>
-                ))}
-                {doc.acceptsNewPatients && (
-                  <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200 flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3" /> Acepta nuevos pacientes
-                  </span>
-                )}
-              </div>
-
-              {/* Focus and Clinical Ethos */}
-              <p className="text-xs text-gray-600 mt-3 leading-relaxed bg-blue-50/50 p-2.5 rounded-lg border border-blue-100/60">
-                <strong>Enfoque clínico:</strong> {doc.consultationFocus}
-              </p>
-
-              {/* Details: Address, Hours, Phone */}
-              <div className="mt-3 space-y-1.5 text-xs text-gray-600">
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                  <span>{doc.address.includes(doc.city) ? doc.address : `${doc.address} (${doc.city})`}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                  <span>{doc.receptionHours}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                  <span className="font-mono">{doc.phone}</span>
-                </div>
-              </div>
-
-              {/* Clinical Criteria Highlights - Only render if there are real reviews */}
-              {doc.reviews.length > 0 ? (
-                <div className="mt-4 pt-3 border-t border-gray-100 grid grid-cols-3 gap-2 text-center">
-                  <div className="bg-gray-50 rounded-lg p-1.5">
-                    <p className="text-[10px] text-gray-500 font-medium">Español Real</p>
-                    <p className="text-xs font-bold text-gray-800 flex items-center justify-center gap-0.5">
-                      <Star className="w-3 h-3 fill-amber-400 text-amber-500" />
-                      {doc.reviews[0].spanishFluencyRating}.0
-                    </p>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-1.5">
-                    <p className="text-[10px] text-gray-500 font-medium">Tiempo Escucha</p>
-                    <p className="text-xs font-bold text-gray-800 flex items-center justify-center gap-0.5">
-                      <Star className="w-3 h-3 fill-amber-400 text-amber-500" />
-                      {doc.reviews[0].listeningTimeRating}.0
-                    </p>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-1.5">
-                    <p className="text-[10px] text-gray-500 font-medium">Estudios Previos</p>
-                    <p className="text-xs font-bold text-emerald-700 flex items-center justify-center gap-0.5">
-                      <Star className="w-3 h-3 fill-emerald-500 text-emerald-600" />
-                      {doc.reviews[0].conservativeApproachRating}.0
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-400 py-1">
-                  <span>¿Fuiste atendido por este médico?</span>
-                  <span className="font-medium text-blue-600">Sé el primero en calificarlo</span>
-                </div>
-              )}
-
-              {/* Verified Olim Reviews Snapshot */}
-              {doc.reviews.length > 0 && (
-                <div className="mt-3 space-y-2">
-                  <div className="text-[11px] font-semibold text-gray-500 flex items-center gap-1">
-                    <MessageSquare className="w-3 h-3 text-blue-500" />
-                    Reseñas verificadas de la comunidad ({doc.reviews.length}):
-                  </div>
-                  {doc.reviews.slice(0, 1).map((rev) => (
-                    <div
-                      key={rev.id}
-                      className="bg-amber-50/40 border border-amber-200/60 rounded-lg p-2.5 text-xs"
+                {/* Kupot Badges */}
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {doc.kupot.map((k) => (
+                    <span
+                      key={k}
+                      className="text-[11px] font-medium bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md border border-gray-200"
                     >
-                      <div className="flex items-center justify-between text-[11px] font-medium text-gray-700 mb-1">
-                        <span className="font-semibold">{rev.author}</span>
-                        <span className="text-gray-400">{rev.date}</span>
-                      </div>
-                      <p className="text-gray-600 italic">"{rev.comment}"</p>
-                    </div>
+                      {k === 'No estoy seguro' ? 'Kupá: No confirmada' : k}
+                    </span>
                   ))}
                 </div>
-              )}
+
+                {/* Location & Phone */}
+                <div className="mt-3 space-y-1.5 text-xs text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                    <span>{doc.city}</span>
+                  </div>
+                  {doc.phone && doc.phone !== 'No especificado (consultar en la Kupá)' && (
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                      <span className="font-mono">{doc.phone}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Community Comments / Reviews */}
+                {doc.reviews && doc.reviews.length > 0 && (
+                  <div className="mt-4 pt-3 border-t border-gray-100 space-y-2">
+                    <div className="text-[11px] font-semibold text-gray-500 flex items-center gap-1">
+                      <MessageSquare className="w-3 h-3 text-blue-500" />
+                      Experiencia de la comunidad:
+                    </div>
+                    {doc.reviews.map((rev) => (
+                      <div
+                        key={rev.id}
+                        className="bg-slate-50 border border-gray-200 rounded-lg p-2.5 text-xs"
+                      >
+                        <div className="flex items-center justify-between text-[11px] font-medium text-gray-700 mb-1">
+                          <span className="font-semibold">{rev.author}</span>
+                          <span className="text-gray-400">{rev.date}</span>
+                        </div>
+                        <p className="text-gray-600 italic">"{rev.comment}"</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Card Action & Disclaimer */}
+              <div className="mt-5 pt-3 border-t border-gray-100">
+                <div className="flex items-center justify-between gap-3">
+                  {doc.phone && doc.phone !== 'No especificado (consultar en la Kupá)' ? (
+                    <a
+                      href={`tel:${doc.phone.replace(/[^0-9]/g, '')}`}
+                      className="text-xs font-semibold text-gray-700 hover:text-blue-600 flex items-center gap-1.5 transition"
+                    >
+                      <Phone className="w-3.5 h-3.5" /> Llamar
+                    </a>
+                  ) : (
+                    <span className="text-[11px] text-gray-400">Verificar en la app de la Kupá</span>
+                  )}
+
+                  <button
+                    onClick={() => openAddReviewModal(doc)}
+                    className="text-xs font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition"
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Sumar Comentario
+                  </button>
+                </div>
+                <p className="text-[10px] text-gray-400 mt-2">
+                  ⚠️ Esta información proviene de aportes de la comunidad — confirmá los datos antes de sacar turno.
+                </p>
+              </div>
             </div>
-
-            {/* Card Action */}
-            <div className="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between gap-3">
-              <a
-                href={`tel:${doc.phone.replace(/[^0-9]/g, '')}`}
-                className="text-xs font-semibold text-gray-700 hover:text-blue-600 flex items-center gap-1.5 transition"
-              >
-                <Phone className="w-3.5 h-3.5" /> Llamar Snif
-              </a>
-
-              <button
-                onClick={() => setSelectedDoctorForReview(doc)}
-                className="text-xs font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition"
-              >
-                <Plus className="w-3.5 h-3.5" /> Dejar Reseña Factual
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {filteredDoctors.length === 0 && (
-        <div className="text-center py-12 bg-white rounded-2xl border border-gray-200 p-8">
-          <Stethoscope className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-          <h3 className="text-base font-bold text-gray-800">No encontramos médicos con esos filtros</h3>
-          <p className="text-xs text-gray-500 mt-1">
-            Intenta quitando el filtro de ciudad o seleccionando "Todas las Kupot".
+          ))}
+        </div>
+      ) : (
+        /* Empty State */
+        <div className="text-center py-12 bg-white rounded-2xl border border-gray-200 p-8 max-w-2xl mx-auto shadow-xs">
+          <Stethoscope className="w-14 h-14 text-blue-400 mx-auto mb-3" />
+          <h3 className="text-lg font-bold text-gray-900">
+            {doctors.length === 0 
+              ? 'Aún no hay médicos cargados en el directorio' 
+              : 'No encontramos médicos con los filtros seleccionados'}
+          </h3>
+          <p className="text-xs sm:text-sm text-gray-600 mt-2 max-w-lg mx-auto leading-relaxed">
+            Este directorio se construye de forma colaborativa exclusivamente con aportes de los propios Olim. Si te atendiste con un médico o profesional de la salud que habla español en Israel, podés ser el primero en agregarlo.
           </p>
+
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <button
+              onClick={openAddDoctorModal}
+              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-2 transition"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Agregar o Recomendar un Médico</span>
+            </button>
+            {doctors.length > 0 && (
+              <button
+                onClick={() => {
+                  setSelectedKupa('Todas');
+                  setSelectedCity('Todas');
+                  setSelectedSpecialty('Todas');
+                  setSearchTerm('');
+                }}
+                className="w-full sm:w-auto px-4 py-2.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition"
+              >
+                Limpiar Filtros
+              </button>
+            )}
+          </div>
         </div>
       )}
 
-      {/* Review Modal with Lashon Hará Antidifamation Scanner */}
-      {selectedDoctorForReview && (
+      {/* Unified Modal: Add Doctor / Add Review with Lashon Hará Antidifamation Scanner */}
+      {modalMode && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-gray-100 my-8">
             <div className="flex items-start justify-between border-b border-gray-100 pb-3">
               <div>
                 <span className="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">
-                  Calificación Responsable
+                  {modalMode === 'addDoctor' ? 'Aporte Comunitario' : 'Experiencia de la Comunidad'}
                 </span>
                 <h3 className="text-lg font-bold text-gray-900 mt-1">
-                  Reseña para {selectedDoctorForReview.name}
+                  {modalMode === 'addDoctor'
+                    ? 'Recomendar un Médico que Habla Español'
+                    : `Agregar comentario para ${selectedDoctorForReview?.name}`}
                 </h3>
-                <p className="text-xs text-gray-500">{selectedDoctorForReview.specialty} · {selectedDoctorForReview.city}</p>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  {modalMode === 'addDoctor'
+                    ? 'Completá los datos reales del profesional para que otros Olim puedan encontrarlo.'
+                    : `${selectedDoctorForReview?.specialty} · ${selectedDoctorForReview?.city}`}
+                </p>
               </div>
               <button
-                onClick={() => {
-                  setSelectedDoctorForReview(null);
-                  setModerationFeedback(null);
-                }}
+                onClick={closeModal}
                 className="text-gray-400 hover:text-gray-600 text-sm font-bold p-1"
               >
                 ✕
@@ -495,23 +538,106 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
             <div className="mt-3 bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 space-y-1">
               <div className="flex items-center gap-1.5 font-bold text-amber-950">
                 <ShieldCheck className="w-4 h-4 text-amber-700" />
-                <span>Normas de la Comunidad y Ley de Difamación (Lashon Hará):</span>
+                <span>Normas de Convivencia y Moderación (Lashon Hará):</span>
               </div>
               <p className="text-[11px] leading-relaxed">
-                Para cuidar a la comunidad de problemas legales, <strong>no se admiten insultos personales</strong> ("estafador", "inútil", "pelotudo"). Califica en base a hechos objetivos:
+                Para cuidar a la comunidad, <strong>no se admiten insultos personales ni descalificaciones</strong>. Describí hechos concretos de tu experiencia: claridad en español, tiempo de escucha y predisposición.
               </p>
-              <ul className="list-disc pl-4 text-[11px] space-y-0.5 text-amber-900">
-                <li>¿El profesional domina español nativo o solo vocabulario básico?</li>
-                <li>¿Dedicó tiempo real a escucharte o te despachó en minutos?</li>
-                <li>¿Propuso estudios previos antes de indicar medidas invasivas/cirugía?</li>
-              </ul>
             </div>
 
-            {/* Form */}
-            <div className="mt-4 space-y-4">
+            {/* Form Fields */}
+            <div className="mt-4 space-y-3.5">
+              {modalMode === 'addDoctor' && (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        Nombre Completo del Médico <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Ej: Dr. Alejandro Cohen"
+                        value={doctorName}
+                        onChange={(e) => setDoctorName(e.target.value)}
+                        className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        Especialidad <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Ej: Médico de Familia, Pediatría..."
+                        value={doctorSpecialty}
+                        onChange={(e) => setDoctorSpecialty(e.target.value)}
+                        className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        Ciudad / Localidad <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Ej: Tel Aviv, Ramat Gan, Netanya..."
+                        value={doctorCity}
+                        onChange={(e) => setDoctorCity(e.target.value)}
+                        className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        Teléfono de Contacto o Snif (Opcional)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Ej: 03-1234567 o teléfono de la clínica"
+                        value={doctorPhone}
+                        onChange={(e) => setDoctorPhone(e.target.value)}
+                        className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">
+                      Kupot que Acepta (Marcá las que conozcas o seleccioná "No estoy seguro")
+                    </label>
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {AVAILABLE_KUPOT.map((k) => {
+                        const isSelected = selectedKupot.includes(k);
+                        return (
+                          <button
+                            key={k}
+                            type="button"
+                            onClick={() => handleKupaToggle(k)}
+                            className={`px-3 py-1 text-xs rounded-lg border transition ${
+                              isSelected
+                                ? 'bg-blue-600 text-white border-blue-600 font-bold'
+                                : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
+                            }`}
+                          >
+                            {k}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              )}
+
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Tu Nombre o Apodo (como Olé)
+                  Tu Nombre o Apodo (como Olé - Opcional)
                 </label>
                 <input
                   type="text"
@@ -522,70 +648,18 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
                 />
               </div>
 
-              {/* Specific Star Metrics */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-700 mb-1">
-                    Dominio Real de Español
-                  </label>
-                  <select
-                    value={spanishRating}
-                    onChange={(e) => setSpanishRating(Number(e.target.value))}
-                    className="w-full text-xs bg-white border border-gray-200 rounded-md p-1.5"
-                  >
-                    <option value={5}>⭐⭐⭐⭐⭐ 5 - Fluido/Nativo completo</option>
-                    <option value={4}>⭐⭐⭐⭐ 4 - Muy buen español</option>
-                    <option value={3}>⭐⭐⭐ 3 - Comprensible pero limitado</option>
-                    <option value={2}>⭐⭐ 2 - Solo palabras sueltas</option>
-                    <option value={1}>⭐ 1 - Casi no entiende español</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-700 mb-1">
-                    Tiempo de Escucha y Contención
-                  </label>
-                  <select
-                    value={listeningRating}
-                    onChange={(e) => setListeningRating(Number(e.target.value))}
-                    className="w-full text-xs bg-white border border-gray-200 rounded-md p-1.5"
-                  >
-                    <option value={5}>⭐⭐⭐⭐⭐ 5 - Escucha con calma y paciencia</option>
-                    <option value={4}>⭐⭐⭐⭐ 4 - Buen tiempo de consulta</option>
-                    <option value={3}>⭐⭐⭐ 3 - Normal</option>
-                    <option value={2}>⭐⭐ 2 - Rápido / Apresurado</option>
-                    <option value={1}>⭐ 1 - Te despacha en 2 minutos</option>
-                  </select>
-                </div>
-
-                <div className="sm:col-span-2">
-                  <label className="block text-[11px] font-semibold text-gray-700 mb-1">
-                    Criterio Clínico y Estudios Previos (No Invasivo)
-                  </label>
-                  <select
-                    value={conservativeRating}
-                    onChange={(e) => setConservativeRating(Number(e.target.value))}
-                    className="w-full text-xs bg-white border border-gray-200 rounded-md p-1.5"
-                  >
-                    <option value={5}>⭐⭐⭐⭐⭐ 5 - Explora alternativas y estudios antes de cirugías</option>
-                    <option value={4}>⭐⭐⭐⭐ 4 - Buen criterio diagnóstico</option>
-                    <option value={3}>⭐⭐⭐ 3 - Neutro</option>
-                    <option value={1}>⭐ 1 - Salta a cirugía o medicación invasiva de inmediato</option>
-                  </select>
-                </div>
-              </div>
-
               {/* Comment text area */}
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Tu Experiencia Factual
+                  Comentario Libre de tu Experiencia <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   rows={3}
-                  placeholder="Detalla tu consulta: tiempo de atención, claridad de las explicaciones médicas y si te ofreció alternativas de diagnóstico..."
+                  placeholder="Contá cómo fue la atención, el nivel de español y si te resultó útil para tu consulta..."
                   value={commentText}
                   onChange={(e) => setCommentText(e.target.value)}
                   className="w-full text-xs p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                  required
                 />
               </div>
 
@@ -602,7 +676,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
                     {moderationFeedback.isAllowed && !moderationFeedback.flagged ? (
                       <>
                         <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                        <span>Reseña Aprobada por el Filtro Lashon Hará</span>
+                        <span>Comentario Aprobado por el Filtro Lashon Hará</span>
                       </>
                     ) : (
                       <>
@@ -617,7 +691,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
                     <div className="mt-2.5 pt-2 border-t border-rose-200/60 bg-white/70 p-2 rounded-lg">
                       <p className="text-[10px] font-bold text-gray-700 flex items-center gap-1">
                         <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-                        Versión Factual Sugerida por el Asistente:
+                        Versión Factual Sugerida:
                       </p>
                       <p className="text-[11px] text-gray-800 italic mt-1">
                         "{moderationFeedback.suggestedRewrite}"
@@ -633,10 +707,14 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
                 </div>
               )}
 
-              {reviewSubmittedSuccess && (
+              {submissionSuccess && (
                 <div className="p-3 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-xl text-xs font-semibold flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                  <span>¡Reseña publicada con éxito! Gracias por ayudar a otros olim.</span>
+                  <span>
+                    {modalMode === 'addDoctor' 
+                      ? '¡Médico agregado al directorio con éxito! Gracias por sumar tu recomendación.' 
+                      : '¡Comentario publicado con éxito!'}
+                  </span>
                 </div>
               )}
             </div>
@@ -645,21 +723,18 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
             <div className="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between gap-3">
               <button
                 type="button"
-                onClick={() => handleTestOrSubmitReview(false)}
+                onClick={() => handleTestOrSubmit(false)}
                 disabled={!commentText.trim() || isCheckingModeration}
                 className="text-xs font-semibold text-gray-600 hover:text-blue-700 flex items-center gap-1 disabled:opacity-50"
               >
                 <ShieldCheck className="w-4 h-4 text-blue-500" />
-                {isCheckingModeration ? 'Verificando...' : 'Verificar Filtro Lashon Hará'}
+                {isCheckingModeration ? 'Verificando...' : 'Verificar Filtro'}
               </button>
 
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => {
-                    setSelectedDoctorForReview(null);
-                    setModerationFeedback(null);
-                  }}
+                  onClick={closeModal}
                   className="px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition"
                 >
                   Cancelar
@@ -667,11 +742,11 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ doctors, onA
 
                 <button
                   type="button"
-                  onClick={() => handleTestOrSubmitReview(true)}
+                  onClick={() => handleTestOrSubmit(true)}
                   disabled={!commentText.trim() || isCheckingModeration}
                   className="px-4 py-1.5 text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 rounded-lg shadow-xs transition disabled:opacity-50"
                 >
-                  Publicar Reseña
+                  {modalMode === 'addDoctor' ? 'Publicar Médico' : 'Publicar Comentario'}
                 </button>
               </div>
             </div>

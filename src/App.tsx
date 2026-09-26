@@ -24,22 +24,30 @@ import {
 } from 'lucide-react';
 
 const INITIAL_CLICK_COUNTS: Record<string, number> = {
-  assistant: 18,
-  doctors: 14,
-  community: 12,
-  nightlife: 11,
-  emergency: 10,
-  'crisis-civil': 7,
-  bituaj: 6,
-  'sick-leave': 5,
-  license: 4,
-  bureaucracy: 3,
+  assistant: 0,
+  doctors: 0,
+  community: 0,
+  nightlife: 0,
+  emergency: 0,
+  'crisis-civil': 0,
+  bituaj: 0,
+  'sick-leave': 0,
+  license: 0,
+  bureaucracy: 0,
+  checklist: 0,
 };
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('assistant');
   const [pendingChatQuery, setPendingChatQuery] = useState<string>('');
-  const [doctorsList, setDoctorsList] = useState<Doctor[]>(INITIAL_DOCTORS);
+  const [doctorsList, setDoctorsList] = useState<Doctor[]>(() => {
+    try {
+      const saved = localStorage.getItem('olim_community_doctors');
+      return saved ? JSON.parse(saved) : INITIAL_DOCTORS;
+    } catch {
+      return INITIAL_DOCTORS;
+    }
+  });
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
     try {
@@ -82,23 +90,34 @@ export default function App() {
     });
   };
 
+  const handleAddDoctor = (newDoc: Doctor) => {
+    setDoctorsList((prev) => {
+      const updated = [newDoc, ...prev];
+      try {
+        localStorage.setItem('olim_community_doctors', JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+  };
+
   const handleAddReview = (doctorId: string, newReview: DoctorReview) => {
-    setDoctorsList((prev) =>
-      prev.map((doc) => {
+    setDoctorsList((prev) => {
+      const updated = prev.map((doc) => {
         if (doc.id === doctorId) {
-          const updatedReviews = [newReview, ...doc.reviews];
-          const newAvgRating =
-            updatedReviews.reduce((sum, r) => sum + r.rating, 0) / updatedReviews.length;
+          const updatedReviews = [newReview, ...(doc.reviews || [])];
           return {
             ...doc,
             reviews: updatedReviews,
-            reviewsCount: doc.reviewsCount + 1,
-            rating: Math.round(newAvgRating * 10) / 10,
+            reviewsCount: (doc.reviewsCount || 0) + 1,
           };
         }
         return doc;
-      })
-    );
+      });
+      try {
+        localStorage.setItem('olim_community_doctors', JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
   };
 
   return (
@@ -158,7 +177,11 @@ export default function App() {
             />
           )}
           {activeTab === 'doctors' && (
-            <DoctorsDirectory doctors={doctorsList} onAddReview={handleAddReview} />
+            <DoctorsDirectory 
+              doctors={doctorsList} 
+              onAddReview={handleAddReview}
+              onAddDoctor={handleAddDoctor}
+            />
           )}
           {activeTab === 'emergency' && <EmergencyGuide />}
           {activeTab === 'bituaj' && <BituajLeumiGuide />}

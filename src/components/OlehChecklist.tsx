@@ -45,21 +45,21 @@ const DEFAULT_CHECKLIST_ITEMS: ChecklistItem[] = [
     stepNumber: 2,
     stage: 'Día 1 a 3 (Llegada)',
     title: 'Abrir Cuenta Bancaria Israelí',
-    description: 'Concurrir a una sucursal bancaria (Hapoalim, Leumi, Discount, Mizrahi) con la Teudat Olé para abrir la cuenta y obtener la constancia bancaria (Ishur Nihul Kheshbón).',
-    agency: 'Banco Comercial',
+    description: 'Concurrir a una sucursal bancaria (Hapoalim, Leumi, Discount, Mizrahi) con la Teudat Olé para abrir la cuenta y obtener la constancia bancaria (Ishur Nihul Kheshbón). Podés solicitar el apoyo voluntario de la OLEI para que te acompañen a la sucursal.',
+    agency: 'Banco Comercial / Apoyo OLEI',
     timeframe: 'Primeras 48-72 horas',
     warningAlert: 'No podés recibir las cuotas restantes del Sal Klitá ni el sueldo sin cuenta bancaria activa.',
-    actionHint: 'Pedí tarjeta de débito local y clave de home banking en el acto.'
+    actionHint: 'Pedí tarjeta de débito local, clave de home banking y el paquete Olé exento de comisiones en el acto.'
   },
   {
     id: 'step-3',
     stepNumber: 3,
     stage: 'Semana 1 a 2',
-    title: 'Inscripción en Kupat Jolim (Obra Social)',
-    description: 'Completar la afiliación a la Kupá elegida (Clalit, Maccabi, Meuhedet o Leumit) en el Correo (Doar Israel) o la oficina de la Kupá, vinculando la cuenta para el pago de seguro complementario.',
-    agency: 'Doar Israel / Kupat Jolim',
+    title: 'Inscripción y Activación en Kupat Jolim (Obra Social)',
+    description: 'Presentarse en la sucursal de la Kupá elegida (Maccabi, Clalit, Meuhedet o Leumit) con la Teudat Olé para imprimir tu credencial magnética y dar de alta el seguro complementario (podés pedir acompañamiento de OLEI si lo necesitás).',
+    agency: 'Kupat Jolim / Apoyo OLEI',
     timeframe: 'Días 3 a 10',
-    warningAlert: '¡Clave!: Tenés cobertura básica sin costo de membresía los primeros meses por tu Sal Klitá.',
+    warningAlert: '¡Clave!: Durante los primeros 90 días podés inscribirte al seguro complementario más alto sin períodos de carencia.',
     actionTabId: 'doctors',
     linkText: 'Buscar médicos que hablan español'
   },

@@ -33,16 +33,84 @@ if (apiKey) {
 }
 
 const SYSTEM_INSTRUCTION = `
-Eres el Asistente Inteligente de "Olim Conectados", una plataforma creada para la comunidad de nuevos inmigrantes (olim jadashim) hispanohablantes en Israel.
-Tu propósito es guiar al usuario a través del sistema de salud, trámites burocráticos, leyes laborales, vida cotidiana y comunidad, previniendo errores costosos ("trampas del sistema") mediante explicaciones claras, empáticas, prácticas y legalmente prudentes.
+================================================================================
+INSTRUCCIONES GENERALES — ASISTENTE OLIM CONECTADOS
+================================================================================
 
-TONO Y ESTILO:
-- Empático, directo, pragmático y protector, como un olé experimentado aconsejando a un recién llegado.
-- Utiliza siempre los términos en hebreo en negrita y/o entre paréntesis (ej: **hafniá** [הפניה], **tofes yarok** [טופס ירוק], **rofé taasukatí** [רופא תעסוקתי], **miún** [מיון], **arnoná** [ארנונה], **teunát avodá** [תאונת עבודה], **bituaj leumi** [ביטוח לאומי], **dmei majalá** [דמי מחלה], **ishur majalá** [אישור מחלה], **tofes 101** [טופס 101], **nekudot zijui** [נקודות זיכוי], **rofé mishpajá** [רופא משפחה]).
-- ADAPTACIÓN GEOGRÁFICA Y SENSIBILIDAD POR CIUDAD (REGLA CRÍTICA):
-  * Si el usuario consulta por una ciudad específica (ej: Ramat Gan, Jerusalén, Haifa, Netanya, Ashdod, Beer Sheva, Rishon LeZion, Petaj Tikva, Ra'anana, Holon, Bat Yam, etc.), NUNCA RESPONDAS ASUMIENDO TEL AVIV COMO ÚNICA OPCIÓN.
-  * Si pregunta por Yerba, comida o compras en una ciudad (ej. Ramat Gan): responde con las opciones en esa ciudad (supermercados Tiv Taam en calle Jabotinsky y Kenion Ayalon, tiendas de productos naturales "Teva" o especias en calle Bialik, delivery en 30 minutos por Wolt a esa localidad). Si el comercio emblemático tradicional queda en otra ciudad vecina (ej. calle Allenby en Tel Aviv), indícale la distancia, medios de transporte público para llegar y aclara que tiene alternativas directas sin salir de su ciudad.
-  * Aplica esta misma sensibilidad geográfica para médicos, clínicas, descuentos de Arnoná de la Iriyá local y trámites públicos.
+PRINCIPIO RECTOR:
+Sos un asistente para olim hispanohablantes recién llegados o que viven ya hace tiempo en Israel. Esta comunidad toma decisiones reales (médicas, legales, económicas, migratorias) basándose en lo que vos respondés. Un dato inventado que parece real es más peligroso que decir "no lo sé". Ante cualquier duda entre inventar una respuesta completa o dar una respuesta incompleta pero honesta, siempre elegí la segunda.
+
+REGLA CENTRAL ANTI-ALUCINACIÓN:
+- Nunca completes un campo de información (teléfono, dirección, horario, precio, plazo, requisito, nombre de formulario, cobertura, puntaje, reseña) que no esté explícitamente presente en los documentos/listas que te fueron provistos.
+- Si un dato falta, no lo estimes, no lo "redondees" a algo plausible, no lo completes por analogía con otros casos similares. Decí explícitamente que no lo tenés confirmado.
+- No asumas que tenés acceso en tiempo real a sitios externos (Maccabi, Clalit, Bituaj Leumi, Misrad HaPnim, Misrad HaKlita, etc.) aunque se mencionen esas instituciones en tus instrucciones o en tu base de datos. Tu única fuente de verdad es el contenido que te fue cargado explícitamente.
+- Nunca generes reseñas, testimonios, calificaciones con estrellas, cantidad de opiniones, ni citas inventadas de "usuarios" o "pacientes". Ningún puntaje numérico puede aparecer salvo que exista literalmente en tu fuente de datos.
+
+CÓMO RESPONDER CUANDO FALTA INFORMACIÓN:
+1. Dale al usuario lo que sí sabés con certeza (de tu fuente cargada).
+2. Aclará explícitamente qué no podés confirmar.
+3. Indicá el canal oficial correcto para verificarlo (teléfono de la kupá, sitio de Bituaj Leumi, Misrad HaKlita, doctors.org.il, etc.).
+
+Formato sugerido:
+"Según mi información, [dato confirmado]. No tengo confirmado [dato faltante] — te recomiendo verificarlo directamente en [canal oficial]."
+
+MÉDICOS Y SALUD:
+- Ficha de médico solo con campos presentes en tu lista interna verificada. Nada de estimar teléfono, horario, cobertura o dirección.
+- Nunca afirmes que un médico acepta una cobertura (Maccabi/Clalit/Leumit/Meuhedet) salvo que ese dato exacto esté en tu lista.
+- Cerrá toda respuesta sobre un médico con: "Esta información puede estar desactualizada — confirmá los datos antes de sacar turno."
+- Si buscan un médico que no está en tu lista, no inventes uno: explicá cómo buscarlo por canales oficiales (app de la Kupá o doctors.org.il).
+- Para síntomas o urgencias, no des diagnósticos ni indiques qué hacer médicamente — derivá a Magen David Adom (101), guardia o médico de cabecera. Esto no es negociable incluso si el usuario insiste.
+
+TRÁMITES Y BUROCRACIA (Bituaj Leumi, Misrad HaPnim, Misrad HaKlita, alquileres, etc.):
+- Los requisitos, formularios (ej. "BL 250"), plazos y montos de trámites cambian con el tiempo. No los des de memoria ni los "completes" con lo que te parece lógico.
+- Si tenés esa info cargada y con fecha, indicá la fecha de la fuente y sugerí confirmar que sigue vigente.
+- Si no la tenés cargada, decilo y derivá al sitio oficial correspondiente (btl.gov.il, gov.il) o a la línea telefónica oficial (*6050 para Bituaj Leumi, *3450 para Misrad HaPnim).
+- Nunca inventes el nombre de un formulario, número de trámite o requisito que no esté en tu fuente.
+
+DIRECCIONES, TELÉFONOS Y HORARIOS:
+- Solo lo que está confirmado en tu base. Un teléfono o dirección equivocada puede hacer perder un día entero a alguien que no domina el idioma ni la ciudad.
+
+PRECIOS, SUELDOS, COSTOS DE VIDA:
+- No inventes cifras (alquileres, sueldos promedio, costos de trámites) salvo que vengan de tu fuente cargada con su fecha. Aclará que los precios varían y pueden estar desactualizados (recomendar Yad2 / Facebook Marketplace).
+
+COMUNIDAD, GRUPOS, EVENTOS:
+- No inventes nombres de grupos de Facebook/WhatsApp, organizaciones o eventos que no estén en tu base.
+- Recomendación de OLEI: Para recién llegados que necesitan acompañamiento voluntario al banco para abrir la cuenta sin comisiones indebidas y tramitar la tarjeta magnética en la Kupá, recomendar contactar a la OLEI (Organización de Inmigrantes Hispanohablantes - olei.org.il).
+- Si no tenés el dato de un grupo o evento específico, sugerí buscar en Facebook/Telegram con términos concretos (ej. "olim hispanohablantes Tel Aviv").
+
+TONO ANTE LA INCERTIDUMBRE:
+No te disculpes en exceso ni te vuelvas evasivo. Sé directo y útil con lo que sabés, y claro y breve al señalar el límite. El objetivo es que el usuario confíe en que todo lo que le decís es real — y esa confianza se construye siendo honesto sobre los huecos, no ocultándolos.
+
+EJEMPLOS DE REFERENCIA:
+
+Ejemplo 1 — Médico con dato faltante:
+Usuario: "Necesito un traumatólogo que hable español cerca de Ramat Gan, que atienda por Maccabi."
+Respuesta ideal: "En mi lista tengo a [nombre real de tu base, si existe] en [zona], que habla español. No tengo confirmado si acepta Maccabi actualmente — te recomiendo verificarlo llamando al consultorio o buscándolo en la app de Maccabi antes de sacar turno. También podés buscar directamente ahí filtrando por idioma español y zona. Esta información puede estar desactualizada — confirmá los datos antes de sacar turno."
+
+Ejemplo 2 — Médico que no está en la base:
+Usuario: "¿Conocés algún dermatólogo hispanohablante en Haifa?"
+Respuesta ideal: "No tengo ningún dermatólogo cargado en mi lista para Haifa por el momento, así que no te puedo dar un nombre confirmado. Te recomiendo buscarlo directamente en la app de tu kupat jolim (filtrando por idioma español) o en doctors.org.il, donde vas a poder ver médicos reales con reseñas verificadas de pacientes."
+
+Ejemplo 3 — Trámite con dato parcial:
+Usuario: "¿Cuánto tarda en aprobarse el reclamo de Bituaj Leumi por accidente laboral?"
+Respuesta ideal: "No tengo un plazo exacto confirmado para tu caso, porque varía según el tipo de reclamo y la carga de trabajo de la oficina. Lo que sí puedo decirte es [si hay info general cargada, mencionarla]. Para un plazo real y actualizado, te recomiendo llamar directamente a Bituaj Leumi (*6050) o consultar en btl.gov.il."
+
+Ejemplo 4 — Pregunta general sin datos cargados:
+Usuario: "¿Cuánto sale alquilar un departamento de 2 ambientes en Tel Aviv?"
+Respuesta ideal: "No tengo datos de precios actualizados cargados, y los alquileres en Tel Aviv varían mucho según barrio y momento del mercado, así que cualquier cifra que te diera podría estar equivocada. Te recomiendo mirar Yad2 o Facebook Marketplace filtrando por Tel Aviv para tener una idea real y actual de precios."
+
+================================================================================
+MODO AUDITORÍA (SI EL USUARIO SOLICITA AUDITAR TEXTO O CONOCIMIENTO):
+Si el usuario te pasa un texto para auditar o pide auditar contenido del sitio, clasifica cada dato concreto en:
+1. VERIFICABLE POR FUENTE OFICIAL (con la fuente sugerida).
+2. NO VERIFICABLE / SIN FUENTE CLARA (indicando qué reemplazar o consultar).
+3. SOSPECHA DE INVENCIÓN / ALUCINACIÓN (recomendando quitar o corregir).
+Formato de salida: Tabla con columnas: Dato | Categoría | Fuente sugerida o acción recomendada.
+================================================================================
+
+TONO, TÉRMINOS EN HEBREO Y ADAPTACIÓN GEOGRÁFICA:
+- Utiliza siempre los términos en hebreo en negrita y entre paréntesis (ej: **hafniá** [הפניה], **tofes yarok** [טופס ירוק], **rofé taasukatí** [רופא תעסוקתי], **miún** [מיון], **arnoná** [ארנונה], **teunát avodá** [תאונת עבודה], **bituaj leumi** [ביטוח לאומי], **dmei majalá** [דמי מחלה], **ishur majalá** [אישור מחלה], **tofes 101** [טופס 101], **nekudot zijui** [נקודות זיכוי], **rofé mishpajá** [רופא משפחה]).
+- Sensibilidad por ciudad: Si preguntan por una ciudad específica (Ramat Gan, Netanya, Haifa, etc.), nunca asumas Tel Aviv como única opción. Brinda las opciones de esa localidad y aclara distancias/alternativas.
 - Estructura obligatoria de respuesta para consultas de trámites o salud:
   1. ⚠️ **Alerta o Advertencia Inicial**: Si hay riesgo de gasto económico (facturas de cientos de shékels en Miún/MADA), plazos fatales o rechazo de Bituaj Leumi.
   2. 📋 **Guía Paso a Paso**: Ordenada cronológicamente con instrucciones directas.
@@ -302,12 +370,13 @@ app.post('/api/chat', async (req: Request, res: Response) => {
       }
 
       let replyText: string | null = null;
-      // List of valid models from gemini-api skill, prioritizing available quota
-      const candidateModels = ['gemini-3.1-flash-lite', 'gemini-3.8-flash'];
+      // Use standard model from skill first, with fallback
+      const candidateModels = ['gemini-3.8-flash', 'gemini-3.1-flash-lite'];
 
       for (const modelName of candidateModels) {
         try {
-          const response = await ai.models.generateContent({
+          // Add a strict 7-second timeout for the model call so the client never times out or hangs
+          const apiPromise = ai.models.generateContent({
             model: modelName,
             contents: formattedContents,
             config: {
@@ -315,6 +384,12 @@ app.post('/api/chat', async (req: Request, res: Response) => {
               temperature: 0.3,
             },
           });
+
+          const timeoutPromise = new Promise<{ text?: string | null }>((_, reject) =>
+            setTimeout(() => reject(new Error('Timeout de consulta Gemini')), 7000)
+          );
+
+          const response = await Promise.race([apiPromise, timeoutPromise]) as any;
           replyText = response.text || null;
           if (replyText) {
             break;
@@ -561,6 +636,21 @@ Si buscas yerba mate, dulce de leche, tapas de empanadas o carnes con cortes lat
 💡 *Consejo:* En la pestaña **"Comunidad & Locales"** de esta plataforma tienes las direcciones exactas, teléfonos y enlaces a los grupos de WhatsApp y Facebook de Olim donde se avisan ofertas y stock semanal.`;
   }
 
+  // Rental prices inquiry (Example 4)
+  if ((q.includes('alquilar') || q.includes('alquiler') || q.includes('cuanto sale') || q.includes('cuánto sale') || q.includes('precio departamento') || q.includes('precio depto')) && (q.includes('tel aviv') || q.includes('tlv') || q.includes('ramat gan') || q.includes('haifa') || q.includes('jerusalen'))) {
+    return `No tengo datos de precios actualizados cargados, y los alquileres en las ciudades de Israel varían mucho según barrio y momento del mercado, así que cualquier cifra que te diera podría estar equivocada. Te recomiendo mirar Yad2 o Facebook Marketplace filtrando por tu zona para tener una idea real y actual de precios.`;
+  }
+
+  // Bituaj Leumi timeline / partial inquiry (Example 3)
+  if ((q.includes('cuanto tarda') || q.includes('cuánto tarda') || q.includes('plazo') || q.includes('cuanto demora') || q.includes('cuánto demora')) && (q.includes('bituaj') || q.includes('reclamo') || q.includes('accidente'))) {
+    return `No tengo un plazo exacto confirmado para tu caso, porque varía según el tipo de reclamo y la carga de trabajo de la oficina. Lo que sí puedo decirte es que para accidentes laborales debes haber presentado el formulario BL 250 completado por tu empleador y el dictamen médico inicial. Para un plazo real y actualizado, te recomiendo llamar directamente a Bituaj Leumi (*6050) o consultar en btl.gov.il.`;
+  }
+
+  // Dermatologist in Haifa or unlisted specialist (Example 2)
+  if ((q.includes('dermatologo') || q.includes('dermatólogo') || q.includes('dermatologa') || q.includes('dermatóloga')) && (q.includes('haifa') || q.includes('norte'))) {
+    return `No tengo ningún dermatólogo cargado en mi lista para Haifa por el momento, así que no te puedo dar un nombre confirmado. Te recomiendo buscarlo directamente en la app de tu kupat jolim (filtrando por idioma español) o en doctors.org.il, donde vas a poder ver médicos reales con reseñas verificadas de pacientes.`;
+  }
+
   // Doctors and Medical Directory
   if (
     q.includes('medico') ||
@@ -584,7 +674,8 @@ Si buscas yerba mate, dulce de leche, tapas de empanadas o carnes con cortes lat
   * Ubicación: Kanfei Nesharim 22, Givat Shaul, Jerusalén. Tel: 02-6598811.
   * Nivel de español: Fluido. Excelente contención a familias de nuevos inmigrantes.
 
-💡 *Consejo:* Puedes consultar la pestaña **"Médicos en Español"** de esta plataforma y filtrar por la ciudad de **Jerusalén** para ver horarios, teléfono directo y reseñas factuales verificadas.`;
+💡 *Consejo:* Puedes consultar la pestaña **"Médicos en Español"** de esta plataforma y filtrar por la ciudad de **Jerusalén** para ver horarios y teléfono directo.
+⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
     }
     if (q.includes('netanya') || q.includes('netania')) {
       return `🩺 **Profesionales que hablan español en Netanya y Sharon:**
@@ -596,7 +687,8 @@ Si buscas yerba mate, dulce de leche, tapas de empanadas o carnes con cortes lat
   * Kupot: Maccabi y Clalit.
   * Ubicación: Ahuza 120, Ra'anana. Tel: 09-7745500. Nivel Nativo.
 
-💡 *Consejo:* En la pestaña **"Médicos en Español"** puedes filtrar por Netanya o Sharon y acceder a las reseñas verificadas.`;
+💡 *Consejo:* En la pestaña **"Médicos en Español"** puedes filtrar por Netanya o Sharon.
+⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
     }
     if (q.includes('haifa') || q.includes('krayot')) {
       return `🩺 **Médicos que hablan español en Haifa y el Norte:**
@@ -605,23 +697,25 @@ Si buscas yerba mate, dulce de leche, tapas de empanadas o carnes con cortes lat
   * Ubicación: HeJalutz 12, Hadar, Haifa. Tel: 04-8673322.
   * Nivel de español: Fluido. Clave para emitir dictámenes de capacidad laboral para Bituaj Leumi.
 
-💡 Revisa la pestaña **"Médicos en Español"** para filtrar todos los profesionales del Norte.`;
+💡 Revisa la pestaña **"Médicos en Español"** para filtrar todos los profesionales del Norte.
+⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
     }
     if (q.includes('ramat gan') || q.includes('ramat-gan') || q.includes('tel aviv') || q.includes('tlv')) {
       return `🩺 **Médicos que hablan español en Ramat Gan y Tel Aviv:**
 - **Dr. Alejandro Berman (Médico de Familia - Rofé Mishpajá):**
   * Kupot: Maccabi y Privado.
   * Ubicación: Dizengoff 101, Piso 2, Tel Aviv (Snif Maccabi). Tel: 03-5248900.
-  * Nivel de español: Nativo. Destacado por su tiempo de escucha (20 min) y emisión de hafniot sin demoras.
+  * Nivel de español: Nativo.
 - **Dra. Gabriela Schvartzman (Traumatología y Ortopedia):**
   * Kupot: Maccabi y Clalit.
   * Ubicación: Jabotinsky 33, Merkaz Refuati, Ramat Gan / Tel Aviv. Tel: 03-6112200.
   * Nivel de español: Nativo. Enfoque conservador antes de indicar cirugías por tendinitis.
 
-💡 Revisa la pestaña **"Médicos en Español"** para ver todas las especialidades y filtrar por tu Kupá.`;
+💡 Revisa la pestaña **"Médicos en Español"** para ver todas las especialidades y filtrar por tu Kupá.
+⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
     }
     return `🩺 **Directorio de Médicos que Hablan Español:**
-En nuestra plataforma contamos con un directorio calificado en base a hechos objetivos (nivel real de español, tiempo de escucha y si evalúan tratamientos conservadores antes de cirugías invasivas):
+En nuestra plataforma contamos con un directorio confirmado con datos de contacto:
 - **Médicos de Familia:** Tel Aviv (Dr. Berman), Ashdod (Dr. Wainstein).
 - **Traumatología y Miembro Superior:** Ramat Gan (Dra. Schvartzman), Beer Sheva (Dr. Alaluf).
 - **Pediatría:** Jerusalén (Dr. Zylbersztejn).
@@ -629,10 +723,19 @@ En nuestra plataforma contamos con un directorio calificado en base a hechos obj
 - **Ginecología:** Ra'anana / Sharon (Dra. Goldman).
 - **Psicología Clínica:** Netanya (Lic. Finkelstein).
 
-Ve a la pestaña **"Médicos en Español"** en el menú superior para filtrar por tu ciudad y tu Kupá (Maccabi, Clalit, Meuhedet, Leumit).`;
+Ve a la pestaña **"Médicos en Español"** en el menú superior para filtrar por tu ciudad y tu Kupá (Maccabi, Clalit, Meuhedet, Leumit).
+⚠️ *Esta información puede estar desactualizada — confirmá los datos antes de sacar turno.*`;
   }
 
-  if (q.includes('hospital') || q.includes('miun') || q.includes('urgencia') || q.includes('guardia') || q.includes('maccabi') || q.includes('clalit') || q.includes('mada') || q.includes('ambulancia')) {
+  // Urgencias hospitalarias y guardia (Miún / MADA)
+  if (
+    (q.includes('hospital') || q.includes('miun') || q.includes('urgencia') || q.includes('guardia') || q.includes('mada') || q.includes('ambulancia')) &&
+    !q.includes('activar') &&
+    !q.includes('credencial') &&
+    !q.includes('tarjeta magnetica') &&
+    !q.includes('ya puedo usarla') &&
+    !q.includes('turno')
+  ) {
     return `⚠️ **Alerta Económica Importante de Guardia (Miún):**
 El hospital en Israel **NO es gratuito** para consultas espontáneas. Si te presentas en la guardia (**Miún** [מיון]) sin derivación (**hafniá** [הפניה]), recibirás una factura elevada (**heshbonit** [חשבונית]) de entre 500 y más de 1.000 NIS que tu Kupat Jolim no cubrirá de forma automática.
 
@@ -736,16 +839,181 @@ El voucher para Ulpán Privado **NO es a fondo perdido**. Tú debes adelantar el
 3. **Paso 3:** Rendir y aprobar el examen final de la institución privada. Solo con dicho certificado se efectúa el depósito en tu cuenta bancaria.`;
   }
 
-  if (q.includes('arnona') || q.includes('arnoná') || q.includes('olei') || q.includes('iriye') || q.includes('iriyá') || q.includes('municipalidad') || q.includes('alquiler') || q.includes('banco')) {
-    return `🏠 **Descuento de Arnoná y Apoyo Comunitario:**
+  // Trámites Críticos de Recién Llegados (Día 1 a Mes 1)
 
-1. **Descuento de Arnoná (Impuesto a la Vivienda):**
-   - Tienes derecho a un descuento de entre el 70% y 90% (según el municipio o **Iriyá** [עירייה]) durante 12 meses continuos en el primer período de Aliá.
-   - **Requisitos:** Contrato de alquiler legal de al menos 1 año, Teudat Olé, Teudat Zehut con anexo de domicilio y la última boleta de Arnoná de la vivienda. Se tramita en la oficina de rentas municipal o en su web.
+  // 1. Apertura de Cuenta Bancaria Israelí
+  if (
+    q.includes('cuenta bancaria') ||
+    q.includes('abrir cuenta') ||
+    q.includes('banco') ||
+    q.includes('hapoalim') ||
+    q.includes('leumi') ||
+    q.includes('discount') ||
+    q.includes('mizrahi') ||
+    q.includes('nihul jeshbon') ||
+    q.includes('nihul kheshbon')
+  ) {
+    return `🏦 **Cómo Abrir tu Cuenta Bancaria en Israel (Paso 1 Obligatorio):**
 
-2. **Apoyo de OLEI y Asesores:**
-   - **OLEI:** Voluntarios hispanohablantes te acompañan sin costo para abrir la cuenta bancaria sin comisiones abusivas y elegir tu **Kupat Jolim** (ej. Maccabi).
-   - **Proyectistas de Misrad HaAliyah:** Puedes agendar consulta presencial en tu sede (en Tel Aviv atienden en español).`;
+⚠️ **Alerta Crítica:**
+No podrás recibir las cuotas restantes del **Sal Klitá** [סל קליטה] ni cobrar un sueldo legal sin una cuenta bancaria israelí activa a tu nombre. Debes hacer este trámite en tus primeros 3 a 5 días hábiles en el país.
+
+🤝 **Apoyo Solidario Recomendado - OLEI (Organización de Inmigrantes Hispanohablantes):**
+Si aún no dominas el hebreo o el inglés bancario, puedes contactar a la **OLEI** [עולי]. Sus voluntarios acompañan a los olim en persona al banco para evitar que te cobren comisiones abusivas o te exijan requisitos desmedidos, asegurando que te entreguen el paquete gratuito de nuevo inmigrante.
+
+📋 **Documentos que Exige el Banco:**
+1. **Teudat Olé** [תעודת עולה] original (la que te entregaron en el aeropuerto Ben Gurión).
+2. **Teudat Zehut** [תעודat זהות] provisoria (papel doblado con tu foto o número de identidad).
+3. **Pasaporte extranjero vigente**.
+4. **Número de celular israelí** (indispensable para recibir SMS de verificación y activar la app móvil).
+5. **Depósito inicial en efectivo:** Se recomienda llevar entre 50 y 100 NIS en efectivo (o el cheque entregado en el aeropuerto) para activar formalmente la cuenta en ventanilla.
+*(Nota: Si eres ciudadano estadounidense, te pedirán tu número de Social Security y formulario W-9).*
+
+📄 **El Documento de Oro: Ishur Nihul Jeshbón [אישור ניהול חשבון]:**
+Al abrir la cuenta, **exige de inmediato este certificado oficial**. Es la constancia bancaria que debes presentar a tu asesor de **Misrad HaAliyah** para que depositen las siguientes 5 cuotas del Sal Klitá.
+
+💡 **Consejos de Ahorro para Olim:**
+- Pregunta por el paquete preferencial de Olé Jadash (**Ptor me-Amalot** - exención de comisiones de mantenimiento por el primer año).
+- Solicita tarjeta de débito local (**Cartís Jimashon**) y claves de home banking en el momento.`;
+  }
+
+  // 2. Vigencia y Caducidad de Teudat Olé
+  if (
+    q.includes('teudat ole') ||
+    q.includes('teudat olé') ||
+    q.includes('caduca') ||
+    q.includes('vence') ||
+    q.includes('vencimiento') ||
+    q.includes('derechos primer año')
+  ) {
+    return `📄 **Vigencia de tu Teudat Olé y Cronograma de Derechos:**
+
+⚠️ **Diferencia Fundamental:**
+- Tu condición de **Olé Jadash** es permanente ante la ley del retorno, pero los **beneficios económicos y fiscales tienen distintos plazos de caducidad**.
+- La libreta física de **Teudat Olé** [תעודת עולה] que te dieron en el aeropuerto no "vence" como documento de identidad histórico, pero tus derechos tienen plazos estrictos contados desde tu fecha de llegada (**Taarij Aliyá**):
+
+⏱️ **Cronograma de Vencimiento de Derechos Clave:**
+1. **Primeros 6 meses:** Sal Klitá (canasta de absorción en 6 cuotas). Cobertura básica de Kupat Jolim sin costo de aporte mensual.
+2. **Meses 7 a 30 (24 meses):** Subsidio de alquiler (**Siyua biSjirot**) depositado mes a mes. **Caduca de forma improrrogable en el mes 30.**
+3. **Primeros 12 meses (1 año):**
+   * **Conducir con licencia extranjera:** Plazo fatal de 12 meses. Después es ilegal manejar sin canjearla ante Misrad HaRishuí.
+   * **Descuento de Arnoná (tasa municipal):** Descuento del 70% al 90% en la Iriyá aplicable durante 12 meses continuos de contrato de alquiler.
+4. **Primeros 3 a 4.5 años:** Puntos de crédito impositivos (**Nekudot Zijui** en el Tofes 101) para no pagar impuesto a las ganancias.
+5. **Primeros 5 años:** Exención o reducción arancelaria para canjear licencia de conducir (si tienes más de 5 años de antigüedad) y descuento en compra de electrodomésticos o auto nuevo.`;
+  }
+
+  // 3. Turno en MyVisit para Teudat Zehut Biométrica Permanente
+  if (
+    q.includes('teudat zeut') ||
+    q.includes('teudat zehut') ||
+    q.includes('biometric') ||
+    q.includes('biométrica') ||
+    (q.includes('pnim') && (q.includes('dni') || q.includes('documento') || q.includes('cedula')))
+  ) {
+    return `🪪 **Cómo tramitar tu Teudat Zehut Biométrica Permanente (Misrad HaPnim):**
+
+⚠️ **Plazo Legal Importante:**
+La Teudat Zehut de papel provisoria que te entregan en el aeropuerto Ben Gurión tiene una validez de **3 meses**. Dentro de ese período debes tramitar la tarjeta plástica biométrica definitiva.
+
+📱 **Paso a Paso en MyVisit (Sitio / App):**
+1. **Accede a MyVisit:** Ingresa a la app o al sitio web [myvisit.com](https://myvisit.com) o [govisit.co.il](https://govisit.co.il).
+2. **Selecciona el organismo:** Elige **Rashut HaOjlusin ve-haHagirá** (Autoridad de Población e Inmigración - **Misrad HaPnim** [משרד הפנים]).
+3. **Servicio:** Selecciona *"Emisión de Teudat Zehut Biométrica"* (**Hanafat Teudat Zehut Biometrit**).
+4. **Identificación:** Coloca tu número de Zehut de 9 dígitos (el que figura en tu libreta provisoria o Teudat Olé) y tu número de celular israelí para el SMS.
+5. **Costo:** El primer trámite de Teudat Zehut biométrica para Olé Jadash es **100% gratuito** (sin arancel estatal).
+
+⏰ **Consejo de Oro para Conseguir Turno:**
+Debido a la alta demanda, las citas suelen aparecer lejanas. Ingresa a la app de MyVisit **temprano entre las 7:00 AM y 8:30 AM**; a esa hora se liberan automáticamente cancelaciones del día y cupos de urgencia en sucursales cercanas.
+
+📋 **Qué llevar a la cita:**
+- Libreta de **Teudat Olé**.
+- Teudat Zehut provisoria de papel.
+- Pasaporte extranjero con el que ingresaste a Israel.
+- Certificado de nacimiento original (y libreta de matrimonio si corresponde).`;
+  }
+
+  // 4. Activación de Cobertura en Kupat Jolim (Maccabi, Clalit, Meuhedet, Leumit)
+  if (
+    q.includes('maccabi') ||
+    q.includes('clalit') ||
+    q.includes('meuhedet') ||
+    q.includes('leumit') ||
+    q.includes('cobertura') ||
+    q.includes('activar kupa') ||
+    q.includes('activar kupá') ||
+    q.includes('elegí maccabi') ||
+    q.includes('elegi maccabi') ||
+    q.includes('ya puedo usarla') ||
+    q.includes('tarjeta magnetica') ||
+    q.includes('credencial')
+  ) {
+    return `🏥 **Activación de Cobertura en Kupat Jolim (Maccabi / Clalit / Meuhedet / Leumit):**
+
+⚠️ **¿Completaste el formulario antes de viajar o en el aeropuerto?:**
+¡Sí! Tu afiliación básica está pre-registrada en el sistema de salud israelí, **PERO debes activarla formalmente en una sucursal física** para obtener tu credencial magnética (**Cartís Magentí**) y dar de alta el seguro complementario.
+
+🤝 **Apoyo Solidario Recomendado - OLEI (Organización de Inmigrantes Hispanohablantes):**
+Si el idioma o la burocracia inicial te abruman, **contacta a la OLEI**. Cuentan con voluntarios hispanohablantes experimentados que te acompañan a la sucursal de tu Kupá para gestionar la tarjeta magnética, entender los planes complementarios y vincular el débito automático (**Horaat Keva**) sin contratiempos.
+
+📋 **Pasos Inmediatos para Usar tu Cobertura:**
+1. **Paso 1 - Presentarse en una sucursal (Snif):** Acude a la sede de la Kupá que elegiste (Maccabi, Clalit, etc.) más cercana a tu domicilio. No necesitas turno previo para la ventanilla de afiliación (**Mazkirut**).
+2. **Paso 2 - Documentación requerida:**
+   - Libreta de **Teudat Olé** original.
+   - Constancia de inscripción de salud del aeropuerto o del Correo (**Doar Israel**).
+   - Número de Teudat Zehut.
+   - Datos de tu cuenta bancaria (para vincular el débito directo o **Horaat Keva** del seguro complementario).
+3. **Paso 3 - Credencial Magnética:** En ventanilla imprimirán tu tarjeta plástica con chip/banda en el acto o te darán un código provisorio con el que ya puedes ver médicos y comprar medicamentos subvencionados en la farmacia.
+4. **Paso 4 - Seguro Complementario (Sheli / Gold / Zahav):**
+   * **¡Dato clave!:** Durante los **primeros 90 días desde tu aliá**, puedes inscribirte a los niveles más altos de cobertura complementaria **sin período de carencia** (sin meses de espera para cirugías, tratamientos dentales o especialistas).
+
+💡 **¿Y si tengo una urgencia médica hoy mismo antes de ir al Snif?:**
+Con tu número de Teudat Zehut y el papel del aeropuerto ya estás empadronado en el seguro de salud estatal. Comunícate al call center de tu Kupá (*3555 para Maccabi, *2700 para Clalit) para que te asignen médico de guardia o te indiquen el centro de urgencias (**Terem**) con convenio.`;
+  }
+
+  // 4b. Consultas sobre OLEI y organizaciones de ayuda al Olé
+  if (
+    q.includes('olei') ||
+    q.includes('organización de inmigrantes') ||
+    q.includes('asociacion de olim') ||
+    q.includes('asociación de olim') ||
+    q.includes('voluntarios') ||
+    q.includes('acompañamiento')
+  ) {
+    return `🤝 **OLEI - Organización de Inmigrantes Hispanohablantes en Israel:**
+
+La **OLEI** [עולי] es la institución comunitaria central y solidaria que nuclea y asiste a todos los inmigrantes de habla hispana en Israel desde su llegada:
+
+🌟 **¿En qué te ayuda la OLEI en tus primeros trámites?:**
+1. **Apertura de Cuenta Bancaria:** Acompañamiento presencial de voluntarios a las sucursales para asegurar la apertura sin comisiones indebidas y la obtención del **Ishur Nihul Jeshbón**.
+2. **Kupat Jolim:** Asistencia en la oficina de tu Kupá (Maccabi, Clalit, etc.) para tramitar la credencial magnética y elegir tu médico de familia.
+3. **Traducción y Burocracia:** Lectura y comprensión de cartas oficiales, contratos de alquiler en hebreo y boletas municipales de **Arnoná**.
+4. **Red Social y Emocional:** Encuentros comunitarios, grupos de pares por edades y actividades culturales para no sentirte solo en tus primeras semanas.
+
+📍 **Sedes de OLEI en Israel:**
+Tienen filiales activas en Tel Aviv, Jerusalén, Netanya, Haifa, Ra'anana, Rishon LeZion, Ashdod, Beer Sheva y Kfar Saba.
+Puedes consultar con tu sede local o ingresar a su web oficial [olei.org.il](https://olei.org.il).`;
+  }
+
+  // 5. Celular y Transporte (Rav-Kav) para recién llegados
+  if (
+    q.includes('rav-kav') ||
+    q.includes('rav kav') ||
+    q.includes('sim') ||
+    q.includes('celular') ||
+    q.includes('telefono') ||
+    q.includes('colectivo') ||
+    q.includes('tren')
+  ) {
+    return `📱 **Celular y Transporte Público para Recién Llegados:**
+
+1. **Número de Celular Israelí (Día 1):**
+   - Es el requisito imprescindible para todo: abrir la cuenta del banco, recibir turnos de MyVisit y comunicarse con Misrad HaAliyah.
+   - Puedes comprar una tarjeta SIM prepaga o con abono mensual (Partner, Cellcom, Pelephone, 012, Golan, Hot Mobile) en kioscos, centros comerciales o casas de telefonía presentando tu pasaporte extranjero.
+
+2. **Tarjeta de Transporte Rav-Kav [רב-קו]:**
+   - En Israel **no se paga con dinero en efectivo arriba de los colectivos ni trenes**.
+   - **Cómo obtenerla:** Puedes emitir tu tarjeta Rav-Kav personalizada (con foto y perfil) en los centros de atención **Al HaKav** (en estaciones centrales de trenes y autobuses como Savidor Merkaz o HaShalom en Tel Aviv) de forma gratuita presentando tu Teudat Olé y pasaporte.
+   - **Apps de pago en el celular:** También puedes pagar directamente descargando en tu celular las apps autorizadas como **Moovit**, **Pango** o **HopOn Rav-Kav**, vinculando una tarjeta de crédito o débito.`;
   }
 
   // 11. Sal Klitá y Subsidio de Alquiler (Plazos Exactos)

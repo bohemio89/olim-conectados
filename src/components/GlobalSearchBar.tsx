@@ -111,6 +111,38 @@ const STATIC_SEARCH_INDEX: SearchResultItem[] = [
 
   // Preguntas para el Asistente IA (consultas en lenguaje natural)
   {
+    id: 'q-banco-abrir',
+    title: '¿Cómo hago para abrir mi cuenta bancaria con la Teudat Olé provisoria?',
+    type: 'question',
+    tabId: 'assistant',
+    queryToChat: '¿Cómo hago para abrir mi cuenta bancaria con la Teudat Olé provisoria?',
+    description: 'Documentos requeridos, Ishur Nihul Jeshbón y exención de comisiones para Olim.'
+  },
+  {
+    id: 'q-teudat-ole-vence',
+    title: '¿Cuándo caduca mi Teudat Olé y qué derechos tengo durante el primer año?',
+    type: 'question',
+    tabId: 'assistant',
+    queryToChat: '¿Cuándo caduca mi Teudat Olé y qué derechos tengo durante el primer año?',
+    description: 'Cronograma oficial de Sal Klitá, subsidio de alquiler, licencia y Arnoná.'
+  },
+  {
+    id: 'q-kupa-activar',
+    title: 'Elegí Maccabi (o Clalit) en el trámite de Aliá: ¿Cómo activo mi cobertura?',
+    type: 'question',
+    tabId: 'assistant',
+    queryToChat: 'Elegí Maccabi en el trámite de Aliá, ¿ya puedo usarla y cómo activo mi tarjeta magnética?',
+    description: 'Activación en Snif, credencial magnética y seguro complementario sin carencia (primeros 90 días).'
+  },
+  {
+    id: 'q-teudat-zeut-myvisit',
+    title: '¿Dónde y cómo saco turno en MyVisit para el Teudat Zehut biométrico?',
+    type: 'question',
+    tabId: 'assistant',
+    queryToChat: '¿Dónde y cómo saco turno en MyVisit para tramitar el Teudat Zehut biométrico permanente?',
+    description: 'Paso a paso en Misrad HaPnim y truco de horarios de 7:00 AM para turnos rápidos.'
+  },
+  {
     id: 'q-miun-fiebre',
     title: '¿Puedo ir al Miún si tengo fiebre de noche sin pagar multa?',
     type: 'question',
