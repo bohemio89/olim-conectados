@@ -39,114 +39,121 @@ const CATEGORIZED_PROMPTS: CategorizedPrompt[] = [
     id: 'p-kupa-activar',
     category: 'salud',
     stage: ['general', 'recien_llegado'],
-    text: '🏥 Elegí Maccabi (o Clalit) en el trámite de Aliá: ¿Cómo activo mi cobertura y credencial magnética?',
+    text: '¿Cómo activo mi cobertura y credencial magnética en Maccabi o Clalit?',
     badge: 'Kupat Jolim'
   },
   {
     id: 'p-1',
     category: 'salud',
     stage: ['general', 'emergencia', 'recien_llegado'],
-    text: '🚨 ¿Puedo ir directo al Miún si tengo fiebre de noche sin pagar multa?',
+    text: '¿Puedo ir directo al Miún de noche sin pagar factura de guardia?',
     badge: 'Urgente'
   },
   {
     id: 'p-4',
     category: 'salud',
     stage: ['general', 'recien_llegado'],
-    text: '🩺 ¿Cómo pido turno con médico de familia que hable español en mi Kupá?',
+    text: '¿Cómo pido turno con un médico que hable español en mi Kupá?',
     badge: 'Médico'
   },
   {
     id: 'p-2',
     category: 'salud',
     stage: ['general', 'emergencia', 'tramite'],
-    text: '💼 Tengo tendinitis en la muñeca por mi trabajo: ¿Qué hago con Bituaj Leumi?',
+    text: 'Tengo tendinitis o dolor por mi trabajo: ¿Qué hago con Bituaj Leumi y el BL 250?',
     badge: 'Accidente Laboral'
   },
   {
     id: 'p-3',
     category: 'salud',
     stage: ['general', 'tramite'],
-    text: '🧮 Me dieron 5 días de reposo por enfermedad: ¿Cuánto me descuentan?',
+    text: 'Me dieron días de reposo médico: ¿Cómo se calculan y cuánto descuentan?',
     badge: 'Días Majalá'
   },
 
   // 📋 Trámites y Derechos de Recién Llegados & Absorción
   {
+    id: 'p-negocio',
+    category: 'tramites',
+    stage: ['general', 'recien_llegado', 'tramite'],
+    text: '¿Cómo funciona el asesoramiento oficial gratuito para abrir un negocio (*2994 y Maalot)?',
+    badge: 'Plan de Negocio'
+  },
+  {
     id: 'p-olei-ayuda',
     category: 'tramites',
     stage: ['general', 'recien_llegado'],
-    text: '🤝 ¿Cómo me ayuda la OLEI para acompañarme al banco y trámites de Kupat Jolim?',
+    text: '¿Cómo me ayuda la OLEI para acompañarme al banco y trámites de Kupat Jolim?',
     badge: 'Apoyo OLEI'
   },
   {
     id: 'p-banco-ole',
     category: 'tramites',
     stage: ['general', 'recien_llegado'],
-    text: '🏦 ¿Cómo hago para abrir mi cuenta bancaria con la Teudat Olé provisoria?',
+    text: '¿Cómo abro mi cuenta bancaria con la Teudat Olé provisoria?',
     badge: 'Banco'
   },
   {
     id: 'p-teudat-ole-vence',
     category: 'tramites',
     stage: ['general', 'recien_llegado'],
-    text: '📄 ¿Cuándo caduca mi Teudat Olé y qué derechos tengo durante el primer año?',
+    text: '¿Qué vigencia y plazos tienen los beneficios de la Teudat Olé?',
     badge: 'Teudat Olé'
   },
   {
     id: 'p-teudat-zehut-myvisit',
     category: 'tramites',
     stage: ['general', 'recien_llegado'],
-    text: '🪪 ¿Dónde y cómo saco turno en MyVisit para tramitar el Teudat Zehut biométrico permanente?',
+    text: '¿Dónde y cómo saco turno en MyVisit para el Teudat Zehut biométrico?',
     badge: 'Teudat Zehut'
   },
   {
     id: 'p-sal-klita-banco',
     category: 'tramites',
     stage: ['general', 'recien_llegado'],
-    text: '💵 ¿Cómo informo al Misrad HaAliyah mi cuenta para cobrar las siguientes cuotas del Sal Klitá?',
+    text: '¿Cómo informo al Misrad HaAliyah mi cuenta para cobrar las cuotas del Sal Klitá?',
     badge: 'Sal Klitá'
   },
   {
     id: 'p-8',
     category: 'tramites',
     stage: ['general', 'recien_llegado'],
-    text: '🚗 ¿Cómo canjeo mi licencia de conducir extranjera si tiene más de 5 años?',
+    text: '¿Cómo canjeo mi licencia de conducir extranjera de más de 5 años?',
     badge: 'Licencia'
   },
   {
     id: 'p-7',
     category: 'tramites',
     stage: ['general', 'tramite'],
-    text: '📑 ¿Cómo lleno el Tofes 101 para que no me retengan Mas Hajnasá?',
+    text: '¿Cómo lleno el Tofes 101 para que no me retengan Mas Hajnasá de más?',
     badge: 'Empleo'
   },
   {
     id: 'p-5',
     category: 'tramites',
     stage: ['general', 'tramite'],
-    text: '💰 ¿Por qué dejé de cobrar la ayuda de alquiler en el mes 30?',
-    badge: 'Subsidio'
+    text: '¿Por qué se corta la ayuda de alquiler del Ministerio en el mes 30?',
+    badge: 'Subsidio Alquiler'
   },
   {
     id: 'p-6',
     category: 'tramites',
     stage: ['general', 'tramite'],
-    text: '📑 Tengo 2 trabajos: ¿Cómo hago el Teum Mas para que no me retengan el 47%?',
+    text: 'Tengo 2 trabajos simultáneos: ¿Cómo hago el Teum Mas para evitar el 47%?',
     badge: 'Impuestos'
   },
   {
     id: 'p-10',
     category: 'tramites',
     stage: ['general', 'tramite'],
-    text: '🎓 Terminé el Ulpán estatal: ¿Cómo funciona el voucher de 5.200 NIS para Ulpán privado avanzado?',
-    badge: 'Ulpán Avanzado'
+    text: 'Terminé el Ulpán estatal: ¿Cómo funciona el voucher de 5.200 NIS para Ulpán privado?',
+    badge: 'Ulpán Privado'
   },
   {
     id: 'p-11',
     category: 'tramites',
     stage: ['general', 'tramite'],
-    text: '🛡️ ¿Me pueden despedir o descontar vacaciones por alarma de Pikud HaOref?',
+    text: '¿Me pueden despedir o descontar vacaciones por directivas de Pikud HaOref?',
     badge: 'Emergencia Civil'
   },
 
@@ -155,36 +162,15 @@ const CATEGORIZED_PROMPTS: CategorizedPrompt[] = [
     id: 'p-sim-telefono',
     category: 'vida',
     stage: ['general', 'recien_llegado'],
-    text: '📱 ¿Cómo consigo número de celular israelí y tarjeta Rav-Kav para transporte público?',
+    text: '¿Cómo consigo número de celular israelí y tarjeta Rav-Kav de transporte?',
     badge: 'Llegada'
   },
   {
     id: 'p-12',
     category: 'vida',
     stage: ['general', 'recien_llegado'],
-    text: '🥩 ¿Dónde compro yerba mate y cortes criollos como vacío o entraña?',
-    badge: 'Comercio'
-  },
-  {
-    id: 'p-13',
-    category: 'vida',
-    stage: ['general', 'recien_llegado'],
-    text: '☕ ¿Dónde puedo tomar un café con medialunas o facturas (Amapola)?',
-    badge: 'Café & Panadería'
-  },
-  {
-    id: 'p-14',
-    category: 'vida',
-    stage: ['general', 'recien_llegado'],
-    text: '🥟 ¿Qué emprendimientos de Olim venden empanadas caseras por encargo?',
-    badge: 'Emprendimientos'
-  },
-  {
-    id: 'p-15',
-    category: 'vida',
-    stage: ['general'],
-    text: '🎉 ¿Qué opciones de vida nocturna y fiestas latinas hay para Olim (La Fiesta Argentina, Cachengue)?',
-    badge: 'Noche'
+    text: '¿Dónde se puede comprar yerba mate y productos importados en Israel?',
+    badge: 'Compras'
   },
 ];
 
@@ -276,8 +262,9 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
   };
 
   const handleSendMessage = async (textToSend?: string) => {
-    const query = textToSend || inputQuery;
-    if (!query.trim() || isLoading) return;
+    const rawQuery = textToSend !== undefined ? textToSend : inputQuery;
+    const query = (typeof rawQuery === 'string' ? rawQuery : '').trim();
+    if (!query || isLoading) return;
 
     const userMessage: ChatMessage = {
       id: `usr-${Date.now()}`,
@@ -286,104 +273,183 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
+    // Sanitize conversation history: only valid user and assistant turns, excluding error banners
+    const sanitizedHistory = messages
+      .filter((m) => m && typeof m.content === 'string' && m.content.trim() && !m.id?.startsWith('err-') && m.id !== 'welcome')
+      .map((m) => ({
+        id: m.id,
+        role: m.role === 'assistant' ? 'assistant' : 'user',
+        content: m.content.trim(),
+      }));
+
     setMessages((prev) => [...prev, userMessage]);
     setInputQuery('');
     setIsLoading(true);
 
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userQuery: query,
-          userStage,
-          messages: [...messages, userMessage],
-        }),
-      });
+    const payload = {
+      userQuery: query,
+      userStage,
+      messages: [...sanitizedHistory, { role: 'user', content: query }],
+    };
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    let responseData: { text?: string } | null = null;
+    let lastError: any = null;
+
+    // Retry mechanism: 2 attempts with backoff before falling back
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 28000);
+
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          const errBody = await response.text().catch(() => '');
+          throw new Error(`HTTP ${response.status} (${response.statusText}): ${errBody.slice(0, 150)}`);
+        }
+
+        const data = await response.json();
+        responseData = data;
+        break; // Success!
+      } catch (err: any) {
+        lastError = err;
+        console.warn(`[AssistantChat] Intento ${attempt}/2 fallido:`, {
+          error: err?.message || String(err),
+          status: err?.status,
+          queryPreview: query.slice(0, 100),
+          attempt,
+          timestamp: new Date().toISOString(),
+        });
+
+        if (attempt === 1) {
+          // Wait 1000ms before second attempt
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
       }
+    }
 
-      const data = await response.json();
+    if (responseData && responseData.text) {
       const assistantMessage: ChatMessage = {
         id: `asst-${Date.now()}`,
         role: 'assistant',
-        content: data.text || 'Disculpa, no pude procesar la consulta en este momento.',
+        content: responseData.text,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-
       setMessages((prev) => [...prev, assistantMessage]);
-    } catch (error) {
-      console.error('Error al consultar chat:', error);
-      
-      // Smart client-side fallback if the network/server connection has any transient glitch
-      let contextualFallback = '';
-      const qLower = query.toLowerCase();
+      setIsLoading(false);
+      return;
+    }
 
-      if (qLower.includes('olei') || qLower.includes('voluntario') || qLower.includes('ayuda al ole')) {
-        contextualFallback = `🤝 **Apoyo de la OLEI para tus Primeros Trámites:**
+    // If both attempts failed, log comprehensive diagnostics and provide helpful verified fallback
+    console.error('[AssistantChat] Error definitivo al consultar endpoint /api/chat:', {
+      error: lastError?.message || String(lastError),
+      name: lastError?.name,
+      payloadSent: {
+        queryLength: query.length,
+        queryPreview: query.slice(0, 120),
+        historyCount: sanitizedHistory.length,
+        stage: userStage,
+      },
+      timestamp: new Date().toISOString(),
+    });
+
+    // Smart client-side fallback if the network/server connection has any transient glitch
+    let contextualFallback = '';
+    const qLower = query.toLowerCase();
+
+    if (qLower.includes('olei') || qLower.includes('voluntario') || qLower.includes('ayuda al ole')) {
+      contextualFallback = `🤝 **Apoyo de la OLEI para tus Primeros Trámites:**
 - **Acompañamiento presencial:** Los voluntarios de la **OLEI** [עולי] te asisten y acompañan en persona para abrir la cuenta bancaria sin comisiones abusivas y para tramitar la credencial magnética en la sede de tu Kupat Jolim (Maccabi, Clalit, etc.).
 - **Burocracia y contratos:** Ayuda gratuita para traducir cartas oficiales en hebreo y entender contratos de alquiler o tasas de Arnoná.
 - **Sedes:** Cuentan con filiales en Tel Aviv, Jerusalén, Netanya, Haifa y ciudades principales. Web oficial: olei.org.il.`;
-      } else if (qLower.includes('banco') || qLower.includes('cuenta bancaria')) {
-        contextualFallback = `🏦 **Apertura de Cuenta Bancaria con Teudat Olé provisoria:**
+    } else if (
+      qLower.includes('negocio') || 
+      qLower.includes('yazamut') || 
+      qLower.includes('maalot') || 
+      qLower.includes('2994') ||
+      qLower.includes('emprender')
+    ) {
+      contextualFallback = `💼 **Centro de Información Económico-Empresarial y Centros Maalot:**
+Para abrir o desarrollar un negocio en Israel, el Ministerio de Aliyá y Absorción (**Misrad HaAliyah veHaKlitá**) ofrece un servicio oficial y gratuito a través de la División de Emprendimiento Empresarial (**Agaf Yazamut Iskit**):
+
+📞 **Línea Telefónica Directa:** **\*2994** (Atención en varios idiomas, incluido español).
+
+👥 **¿Quiénes pueden usarlo?:**
+- **Nuevos Olim:** hasta 10 años desde el estatus de oleh, mayores de 21 años.
+- **Residentes retornados:** vivieron al menos 5 años seguidos fuera de Israel y no pasaron más de 2 años desde que recuperaron su estatus.
+
+📋 **Servicios Oficiales Gratuitos:**
+1. **Evaluación de viabilidad** de tu proyecto o idea comercial.
+2. **Información impositiva** y orientación sobre regímenes tributarios en Israel.
+3. **Ayuda para tramitar préstamos** a través de fondos de financiamiento específicos.
+4. **Acompañamiento empresarial y talleres.**
+5. **Centros Maalot (מרכזי מעלו״ת):** Red de ~155 asesores de negocios multilingües homologados para el armado del modelo y plan de negocio (incluido startups). Podés solicitar turno por formulario online en gov.il o llamando directamente al centro de tu zona de residencia.
+
+⚠️ *Aclaración: Este es un servicio oficial y gratuito del Ministerio de Aliyá y Absorción, no de terceros. Los requisitos y contactos pueden cambiar — verificar vigencia en gov.il.*`;
+    } else if (qLower.includes('banco') || qLower.includes('cuenta bancaria')) {
+      contextualFallback = `🏦 **Apertura de Cuenta Bancaria con Teudat Olé provisoria:**
 - **Obligatorio para cobrar el Sal Klitá:** Acude a una sucursal con tu Teudat Olé original, Teudat Zehut provisoria, pasaporte extranjero y número de celular israelí.
 - **Documento clave:** Exige el **Ishur Nihul Jeshbón** [אישור ניהול חשבון] (certificado de titularidad) para entregarlo a tu asesor de Misrad HaAliyah.
 - **Beneficio Olé:** Pide la exención de comisiones de mantenimiento (**Ptor me-Amalot**) por el primer año.`;
-      } else if (qLower.includes('teudat ole') || qLower.includes('teudat olé') || qLower.includes('caduca') || qLower.includes('vence')) {
-        contextualFallback = `📄 **Vigencia de Teudat Olé y Derechos:**
+    } else if (qLower.includes('teudat ole') || qLower.includes('teudat olé') || qLower.includes('caduca') || qLower.includes('vence')) {
+      contextualFallback = `📄 **Vigencia de Teudat Olé y Derechos:**
 - Tu condición de Olé es permanente, pero los beneficios tienen plazos:
   * **Sal Klitá:** Meses 1 a 6 (canasta básica).
   * **Subsidio de alquiler:** Meses 7 a 30 (finaliza exactamente en el mes 30).
   * **Licencia de conducir:** Puedes manejar con registro extranjero solo los **primeros 12 meses**.
   * **Descuento de Arnoná:** 70% a 90% en la municipalidad durante 12 meses de contrato.`;
-      } else if (qLower.includes('maccabi') || qLower.includes('clalit') || qLower.includes('cobertura') || qLower.includes('activar')) {
-        contextualFallback = `🏥 **Activación de Cobertura en Kupat Jolim (Maccabi / Clalit):**
+    } else if (qLower.includes('maccabi') || qLower.includes('clalit') || qLower.includes('cobertura') || qLower.includes('activar')) {
+      contextualFallback = `🏥 **Activación de Cobertura en Kupat Jolim (Maccabi / Clalit):**
 - **Tu registro está hecho**, pero debes activar la credencial en cualquier sede (**Snif**) llevando tu Teudat Olé, el comprobante del aeropuerto y cuenta bancaria para el débito (**Horaat Keva**).
 - **Importante:** Durante los **primeros 90 días** puedes adherirte al seguro complementario más alto **sin períodos de espera (carencia)**.
 - **Urgencia inmediata:** Ya estás cubierto con tu número de Zehut; puedes llamar al *3555 (Maccabi) o *2700 (Clalit) las 24 horas.`;
-      } else if (qLower.includes('myvisit') || qLower.includes('teudat zeut') || qLower.includes('teudat zehut')) {
-        contextualFallback = `🪪 **Turno en MyVisit para Teudat Zehut Biométrica:**
+    } else if (qLower.includes('myvisit') || qLower.includes('teudat zeut') || qLower.includes('teudat zehut')) {
+      contextualFallback = `🪪 **Turno en MyVisit para Teudat Zehut Biométrica:**
 - La Teudat Zehut de papel del aeropuerto vence a los **3 meses**; debes tramitar la biométrica en **Misrad HaPnim** (es 100% gratuita).
 - **Truco de turno:** Entra a la app/sitio de MyVisit entre las **7:00 AM y 8:30 AM** para capturar cancelaciones del día o cupos de esa misma semana.`;
-      } else if (qLower.includes('ulpan') || qLower.includes('ulpán') || qLower.includes('voucher') || qLower.includes('5.200') || qLower.includes('5200')) {
-        contextualFallback = `🎓 **Cómo funciona el Voucher de 5.200 NIS para Ulpán Privado:**
+    } else if (qLower.includes('ulpan') || qLower.includes('ulpán') || qLower.includes('voucher') || qLower.includes('5.200') || qLower.includes('5200')) {
+      contextualFallback = `🎓 **Cómo funciona el Voucher de 5.200 NIS para Ulpán Privado:**
 - **Reintegro, no fondo perdido:** Tú abonas el curso y el **Misrad HaAliyah** te devuelve el dinero únicamente tras completar los requisitos.
 - **Requisito indispensable:** Debes tener **mínimo 80% de asistencia** y aprobar el examen final. Si abandonas el curso, pierdes el dinero adelantado.
 - **Confirmación previa:** Antes de pagar la matrícula, confirma en tu oficina local de Misrad HaAliyah que el instituto privado esté homologado en el sistema de vouchers.`;
-      } else if (qLower.includes('medico') || qLower.includes('médico') || qLower.includes('kupa') || qLower.includes('kupá') || qLower.includes('turno')) {
-        contextualFallback = `🩺 **Turnos con Médicos que Hablan Español:**
+    } else if (qLower.includes('medico') || qLower.includes('médico') || qLower.includes('kupa') || qLower.includes('kupá') || qLower.includes('turno')) {
+      contextualFallback = `🩺 **Turnos con Médicos que Hablan Español:**
 - Puedes consultar el directorio completo en la pestaña **"Médicos en Español"** de esta plataforma y filtrar por tu ciudad y Kupá (Maccabi, Clalit, Meuhedet, Leumit).
 - Para agendar en la app de tu Kupá, puedes buscar a los médicos verificados por su nombre en hebreo indicado en nuestras fichas.`;
-      } else if (qLower.includes('miun') || qLower.includes('guardia') || qLower.includes('hospital') || qLower.includes('fiebre')) {
-        contextualFallback = `🚨 **Alerta de Guardia (Miún) y Fiebre:**
+    } else if (qLower.includes('miun') || qLower.includes('guardia') || qLower.includes('hospital') || qLower.includes('fiebre')) {
+      contextualFallback = `🚨 **Alerta de Guardia (Miún) y Fiebre:**
 - **No vayas directo:** Salvo riesgo de vida o internación directa, ir al hospital sin derivación (**hafniá**) genera una factura (**heshbonit**) de cientos de shékels.
 - **Paso 1:** Consulta la telemedicina de tu Kupá o acude a un centro de urgencia intermedia (**Terem** o **Bikur Rofé**), donde el copago es mínimo y pueden emitirte la derivación oficial.`;
-      } else if (qLower.includes('tendinitis') || qLower.includes('bl 250') || qLower.includes('accidente')) {
-        contextualFallback = `💼 **Accidentes Laborales y Tendinitis:**
+    } else if (qLower.includes('tendinitis') || qLower.includes('bl 250') || qLower.includes('accidente')) {
+      contextualFallback = `💼 **Accidentes Laborales y Tendinitis:**
 - Solicita de inmediato el formulario **BL 250** a tu empleador.
 - En tu primera atención médica, exige que escriban expresamente que el dolor se produjo realizando tareas del trabajo ("**be-avodá**").
 - Pide turno con el Médico Ocupacional (**Rofé Taasukatí**) para el dictamen oficial de incapacidad para **Bituaj Leumi**.`;
-      } else {
-        contextualFallback = `⚠️ Hubo un inconveniente momentáneo de conexión con el servidor.
+    } else {
+      contextualFallback = `⚠️ Hubo un inconveniente momentáneo de conexión con el servidor.
 
 **Recordatorio clave:**
 - Para trámites de salud, solicita siempre derivación (**hafniá**) antes de ir al hospital (**Miún**) para evitar facturas de cientos de shékels.
 - Para accidentes laborales o dolor ocupacional, pide el formulario **BL 250** al empleador e indica la causa laboral ("be-avodá") al médico de la Kupá.
+- Para plan de negocio y asesoramiento a emprendedores, comunícate con el Centro del Ministerio al **\*2994**.
 - Puedes intentar enviar tu consulta nuevamente en unos segundos.`;
-      }
-
-      const errorMessage: ChatMessage = {
-        id: `err-${Date.now()}`,
-        role: 'assistant',
-        content: contextualFallback,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
     }
+
+    const errorMessage: ChatMessage = {
+      id: `err-${Date.now()}`,
+      role: 'assistant',
+      content: contextualFallback,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    };
+    setMessages((prev) => [...prev, errorMessage]);
+    setIsLoading(false);
   };
 
   const handleCopyMessage = (id: string, text: string) => {

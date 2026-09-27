@@ -320,9 +320,9 @@ app.post('/api/chat-feedback', (req: Request, res: Response) => {
 
 // Chatbot endpoint
 app.post('/api/chat', async (req: Request, res: Response) => {
-  const { messages, userQuery } = req.body;
+  const { messages, userQuery, userStage } = req.body;
 
-  const currentQuery = userQuery || (messages && messages.length > 0 ? messages[messages.length - 1].content : '');
+  const currentQuery = (userQuery || (messages && messages.length > 0 ? messages[messages.length - 1].content : '') || '').trim();
 
   if (!currentQuery) {
     res.status(400).json({ error: 'La consulta no puede estar vacía' });
@@ -336,7 +336,13 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 
       if (Array.isArray(messages)) {
         for (const m of messages) {
-          if (!m.content || typeof m.content !== 'string') continue;
+          if (!m || typeof m.content !== 'string') continue;
+          const trimmed = m.content.trim();
+          if (!trimmed) continue;
+          
+          // Filter out error messages or transient notices
+          if (m.id && typeof m.id === 'string' && m.id.startsWith('err-')) continue;
+
           const role = m.role === 'assistant' || m.role === 'model' ? 'model' : 'user';
 
           // In Gemini API, the first turn in contents MUST be 'user'
@@ -346,11 +352,11 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 
           // If the last added message has the same role, combine them to maintain strict alternation
           if (formattedContents.length > 0 && formattedContents[formattedContents.length - 1].role === role) {
-            formattedContents[formattedContents.length - 1].parts[0].text += `\n${m.content}`;
+            formattedContents[formattedContents.length - 1].parts[0].text += `\n${trimmed}`;
           } else {
             formattedContents.push({
               role,
-              parts: [{ text: m.content }],
+              parts: [{ text: trimmed }],
             });
           }
         }
@@ -367,32 +373,52 @@ app.post('/api/chat', async (req: Request, res: Response) => {
       }
 
       let replyText: string | null = null;
-      // Use standard model from skill first, with fallback
-      const candidateModels = ['gemini-3.8-flash', 'gemini-3.1-flash-lite'];
+      // Stable production models from @google/genai specification
+      const candidateModels = ['gemini-2.5-flash', 'gemini-2.5-pro'];
 
       for (const modelName of candidateModels) {
-        try {
-          // Add a strict 7-second timeout for the model call so the client never times out or hangs
-          const apiPromise = ai.models.generateContent({
-            model: modelName,
-            contents: formattedContents,
-            config: {
-              systemInstruction: SYSTEM_INSTRUCTION,
-              temperature: 0.3,
-            },
-          });
+        for (let attempt = 1; attempt <= 2; attempt++) {
+          try {
+            const apiPromise = ai.models.generateContent({
+              model: modelName,
+              contents: formattedContents,
+              config: {
+                systemInstruction: SYSTEM_INSTRUCTION,
+                temperature: 0.25,
+              },
+            });
 
-          const timeoutPromise = new Promise<{ text?: string | null }>((_, reject) =>
-            setTimeout(() => reject(new Error('Timeout de consulta Gemini')), 7000)
-          );
+            // 25 seconds timeout for resilience against latency spikes
+            const timeoutPromise = new Promise<{ text?: string | null }>((_, reject) =>
+              setTimeout(() => reject(new Error(`Timeout de consulta Gemini (${modelName}) después de 25s`)), 25000)
+            );
 
-          const response = await Promise.race([apiPromise, timeoutPromise]) as any;
-          replyText = response.text || null;
-          if (replyText) {
-            break;
+            const response = await Promise.race([apiPromise, timeoutPromise]) as any;
+            replyText = response?.text || null;
+            if (replyText) {
+              break;
+            }
+          } catch (apiErr: any) {
+            console.error('Gemini API Error Diagnostics:', {
+              model: modelName,
+              attempt,
+              statusCode: apiErr?.status || apiErr?.statusCode || 'N/A',
+              code: apiErr?.code || 'N/A',
+              message: apiErr?.message || String(apiErr),
+              queryPreview: currentQuery.slice(0, 120),
+              historyLength: formattedContents.length,
+              timestamp: new Date().toISOString(),
+            });
+
+            if (attempt === 1) {
+              // Exponential backoff before retry (1000ms)
+              await new Promise((r) => setTimeout(r, 1000));
+            }
           }
-        } catch (apiErr: any) {
-          console.warn(`Model ${modelName} error (${apiErr?.status || 'status'}):`, apiErr?.message?.slice(0, 100) || apiErr);
+        }
+
+        if (replyText) {
+          break;
         }
       }
 
@@ -400,14 +426,16 @@ app.post('/api/chat', async (req: Request, res: Response) => {
         res.json({ text: replyText });
         return;
       }
-    } catch (error) {
-      console.error('Error in Gemini generateContent:', error);
-      // Fallback to knowledge-guided answer
+    } catch (error: any) {
+      console.error('General Error in Gemini chat processing:', {
+        error: error?.message || error,
+        stack: error?.stack,
+        query: currentQuery,
+      });
     }
   }
 
-  // Rule-based fallback if Gemini API is temporarily offline or quota reached
-  // Pass both the current query AND the conversation history so context is never lost
+  // Knowledge-guided rule-based fallback if Gemini is offline or rate limited
   const fallbackAnswer = generateRuleBasedResponse(currentQuery, messages);
   res.json({ text: fallbackAnswer });
 });
