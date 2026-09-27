@@ -26,89 +26,175 @@ import { EmergencyButton } from './EmergencyButton';
 
 export type UserStage = 'general' | 'recien_llegado' | 'emergencia' | 'tramite';
 
-function getMessageSourceBadge(content: string): { text: string; isOfficial: boolean } | null {
-  const c = content.toLowerCase();
+function getMessageSingleSourceBadge(msg: ChatMessage): { text: string; isOfficial: boolean } | null {
+  // If user message, welcome initial card, or connection error -> NO source badge
+  if (!msg || msg.role === 'user' || msg.id === 'welcome' || msg.id === 'welcome-reset' || msg.id?.startsWith('err-')) {
+    return null;
+  }
 
-  // Commercial, food, products, everyday life keywords
-  const isCommunityOrFood =
-    c.includes('yerba') ||
-    c.includes('harina p.a.n') ||
-    c.includes('harina pan') ||
-    c.includes('arepa') ||
-    c.includes('dulce de leche') ||
-    c.includes('alfajor') ||
-    c.includes('levanda') ||
-    c.includes('allenby') ||
-    c.includes('bialik') ||
-    c.includes('shuk') ||
-    c.includes('comercio') ||
-    c.includes('compras') ||
-    c.includes('tienda') ||
-    c.includes('productos latinos') ||
-    c.includes('productos del cono sur') ||
-    c.includes('panlatino') ||
-    c.includes('tiv taam') ||
-    c.includes("tiv ta'am") ||
-    c.includes('keshet teamim') ||
-    c.includes('boliche') ||
-    c.includes('rav-kav') ||
-    c.includes('sim ') ||
-    c.includes('celular') ||
-    c.includes('vida nocturna');
+  const c = (msg.content || '').toLowerCase();
 
-  // Official procedures, health, and government keywords
-  const isOfficial =
-    c.includes('sal klitá') ||
-    c.includes('sal klita') ||
-    c.includes('bituaj leumi') ||
-    c.includes('misrad') ||
+  // If connection error / fallback notice -> NO badge
+  if (
+    c.includes('inconveniente momentáneo de conexión') ||
+    c.includes('no pude procesar la consulta') ||
+    c.includes('intenta enviar tu consulta nuevamente')
+  ) {
+    return null;
+  }
+
+  // 1. Salud, Médicos, Kupá, Miún, MADA, Urgencias -> "Fuente: Kupot Jolim"
+  if (
     c.includes('kupa') ||
     c.includes('kupá') ||
+    c.includes('kupot') ||
     c.includes('maccabi') ||
     c.includes('clalit') ||
     c.includes('meuhedet') ||
     c.includes('leumit') ||
+    c.includes('médico') ||
+    c.includes('medico') ||
     c.includes('miún') ||
     c.includes('miun') ||
-    c.includes('mada') ||
-    c.includes('bl 250') ||
-    c.includes('tofes 101') ||
-    c.includes('tofes yarok') ||
-    c.includes('teudat zehut') ||
-    c.includes('teudat olé') ||
-    c.includes('darkón') ||
-    c.includes('darkon') ||
-    c.includes("teudat ma'avar") ||
-    c.includes('arnoná') ||
-    c.includes('arnona') ||
-    c.includes('ulpán') ||
-    c.includes('ulpan') ||
     c.includes('hafniá') ||
     c.includes('hafnia') ||
-    c.includes('dmei majalá') ||
-    c.includes('teum mas') ||
-    c.includes('pikud haoref') ||
-    c.includes('*2994') ||
-    c.includes('maalot') ||
-    c.includes('olei');
-
-  if (isCommunityOrFood && !isOfficial) {
+    c.includes('terem') ||
+    c.includes('bikur rofé') ||
+    c.includes('bikur rofe') ||
+    c.includes('mada') ||
+    c.includes('ambulancia') ||
+    c.includes('hospital') ||
+    c.includes('doctors.org.il') ||
+    c.includes('rofé mishpajá') ||
+    c.includes('rofe mishpaja')
+  ) {
     return {
-      text: 'Fuente: Aporte Comunitario / Guía Local',
-      isOfficial: false,
-    };
-  }
-
-  if (isOfficial) {
-    return {
-      text: 'Fuente: Misrad HaAliyah · Kupot Jolim · Bituaj Leumi',
+      text: 'Fuente: Kupot Jolim',
       isOfficial: true,
     };
   }
 
-  // Fallback for general queries
+  // 2. Bituaj Leumi, Subsidios laborales, Discapacidad, Accidentes (BL 250), Reposo médico -> "Fuente: Bituaj Leumi"
+  if (
+    c.includes('bituaj leumi') ||
+    c.includes('bituaj') ||
+    c.includes('bl 250') ||
+    c.includes('dmei majalá') ||
+    c.includes('dmei majala') ||
+    c.includes('dmei pgiá') ||
+    c.includes('dmei pgia') ||
+    c.includes('btl.gov.il') ||
+    c.includes('*6050') ||
+    c.includes('accidente laboral') ||
+    c.includes('tendinitis') ||
+    c.includes('rofé taasukatí') ||
+    c.includes('rofe taasukati') ||
+    c.includes('incapacidad laboral')
+  ) {
+    return {
+      text: 'Fuente: Bituaj Leumi',
+      isOfficial: true,
+    };
+  }
+
+  // 3. DNI, Teudat Zehut, Pasaporte (Darkón), Visas, Teudat Ma'avar -> "Fuente: Misrad HaPnim"
+  if (
+    c.includes('misrad hapnim') ||
+    c.includes('misrad ha-pnim') ||
+    c.includes('teudat zehut') ||
+    c.includes('teudat zeut') ||
+    c.includes('darkón') ||
+    c.includes('darkon') ||
+    c.includes("teudat ma'avar") ||
+    c.includes('teudat maavar') ||
+    c.includes('biométrica') ||
+    c.includes('biometrica') ||
+    c.includes('*3450')
+  ) {
+    return {
+      text: 'Fuente: Misrad HaPnim',
+      isOfficial: true,
+    };
+  }
+
+  // 4. Transporte, Rav-Kav, Licencia de Conducir, Misrad HaRishuí -> "Fuente: Ministerio de Transporte"
+  if (
+    c.includes('licencia') ||
+    c.includes('conducir') ||
+    c.includes('rishayón') ||
+    c.includes('rishayon') ||
+    c.includes('rishui') ||
+    c.includes('rishuí') ||
+    c.includes('tofes yarok') ||
+    c.includes('rav-kav') ||
+    c.includes('rav kav') ||
+    c.includes('transporte público') ||
+    c.includes('israel railways')
+  ) {
+    return {
+      text: 'Fuente: Ministerio de Transporte',
+      isOfficial: true,
+    };
+  }
+
+  // 5. Sal Klitá, Ulpán, Aliyá, Ayuda alquiler, Plan de Negocio (*2994) -> "Fuente: Misrad HaAliyah"
+  if (
+    c.includes('sal klitá') ||
+    c.includes('sal klita') ||
+    c.includes('misrad haaliyah') ||
+    c.includes('misrad haklita') ||
+    c.includes('misrad ha-aliyah') ||
+    c.includes('teudat olé') ||
+    c.includes('teudat ole') ||
+    c.includes('ulpán') ||
+    c.includes('ulpan') ||
+    c.includes("siyua bi'sjirot") ||
+    c.includes('ayuda de alquiler') ||
+    c.includes('subsidio de alquiler') ||
+    c.includes('*2994') ||
+    c.includes('maalot') ||
+    c.includes('מעלות') ||
+    c.includes('yazamut') ||
+    c.includes('arnoná') ||
+    c.includes('arnona')
+  ) {
+    return {
+      text: 'Fuente: Misrad HaAliyah',
+      isOfficial: true,
+    };
+  }
+
+  // 6. Comercios, vida cotidiana, yerba, compras, gastronomía -> "Fuente: Comunidad / Guía Local"
+  if (
+    c.includes('yerba') ||
+    c.includes('mate') ||
+    c.includes('harina pan') ||
+    c.includes('harina p.a.n') ||
+    c.includes('arepa') ||
+    c.includes('dulce de leche') ||
+    c.includes('alfajor') ||
+    c.includes('comercio') ||
+    c.includes('tienda') ||
+    c.includes('levanda') ||
+    c.includes('allenby') ||
+    c.includes('bialik') ||
+    c.includes('shuk') ||
+    c.includes('tiv taam') ||
+    c.includes("tiv ta'am") ||
+    c.includes('keshet teamim') ||
+    c.includes('boliche') ||
+    c.includes('comida') ||
+    c.includes('empanada')
+  ) {
+    return {
+      text: 'Fuente: Comunidad / Guía Local',
+      isOfficial: false,
+    };
+  }
+
+  // 7. General community / default
   return {
-    text: 'Fuente: Aporte Comunitario / Guía Local',
+    text: 'Fuente: Comunidad / Guía Local',
     isOfficial: false,
   };
 }
@@ -874,9 +960,9 @@ Para abrir o desarrollar un negocio en Israel, el Ministerio de Aliyá y Absorci
                     {msg.content}
                   </div>
 
-                  {/* Indicador de fuente contextual condicional */}
-                  {!isUser && msg.id !== 'welcome' && (() => {
-                    const badge = getMessageSourceBadge(msg.content);
+                  {/* Indicador de fuente contextual condicional (Fuente única y exclusiva) */}
+                  {!isUser && (() => {
+                    const badge = getMessageSingleSourceBadge(msg);
                     if (!badge) return null;
                     const isOfficial = badge.isOfficial;
                     return (
