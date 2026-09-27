@@ -13,6 +13,7 @@ import { CrisisCivilGuide } from './components/CrisisCivilGuide';
 import { CommunityHub } from './components/CommunityHub';
 import { NightlifeGuide } from './components/NightlifeGuide';
 import { OlehChecklist } from './components/OlehChecklist';
+import { BusinessPlanGuide } from './components/BusinessPlanGuide';
 import { EmergencyButton } from './components/EmergencyButton';
 import { INITIAL_DOCTORS, COMMUNITY_STORES, COMMUNITY_GROUPS, NIGHTLIFE_VENUES } from './data/mockData';
 import { Doctor, DoctorReview } from './types';
@@ -28,6 +29,7 @@ const INITIAL_CLICK_COUNTS: Record<string, number> = {
   doctors: 0,
   community: 0,
   nightlife: 0,
+  'business-plan': 0,
   emergency: 0,
   'crisis-civil': 0,
   bituaj: 0,
@@ -168,6 +170,7 @@ export default function App() {
             />
           )}
           {activeTab === 'crisis-civil' && <CrisisCivilGuide />}
+          {activeTab === 'business-plan' && <BusinessPlanGuide />}
           {activeTab === 'checklist' && (
             <OlehChecklist
               onNavigateToTab={(tabId) => {

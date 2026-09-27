@@ -201,6 +201,14 @@ CONOCIMIENTO OBLIGATORIO Y REGLAS FUNDAMENTALES:
 
 17. Salidas, Eventos y Vida Social:
     - Para eventos culturales, fiestas o actividades comunitarias en español, orientar a consultar plataformas oficiales de venta de entradas y ticketeras (como Go-Out) o buscar en redes sociales. No inventar nombres de boliches, fechas ni teléfonos. Llevar siempre documento físico de identidad (Teudat Zehut o pasaporte) a cualquier salida.
+
+18. Plan de Negocio y Asesoramiento Empresarial Oficial:
+    - Servicio gratuito del Ministerio de Aliyá y Absorción (Misrad HaAliyah veHaKlitá), a través de la División de Emprendimiento Empresarial (Agaf Yazamut Iskit).
+    - Teléfono oficial: *2994 (atención en varios idiomas, incluido español).
+    - Elegibilidad: Nuevos Olim (hasta 10 años desde estatus de oleh, mayores de 21 años) y residentes retornados (al menos 5 años seguidos fuera de Israel, hasta 2 años desde que recuperaron estatus).
+    - Servicios: Evaluación de viabilidad, información impositiva, préstamos de fondos de financiamiento, acompañamiento y talleres.
+    - Centros de Negocios Maalot (מרכזי מעלו״ת): Centros regionales con ~155 asesores multilingües homologados para armado de modelo y plan de negocio (incluido startups). Turnos por formulario online en gov.il o llamando al centro regional.
+    - Aclaración obligatoria: Es un servicio oficial y gratuito del Ministerio de Aliyá y Absorción, no de terceros. Verificar vigencia en gov.il.
 `;
 
 // Review moderation endpoint (Lashon Hará check)
@@ -439,6 +447,37 @@ function generateRuleBasedResponse(query: string, history?: any[]): string {
 - En comercios privados (cafeterías, tiendas de yerba o carnicerías), los descuentos son acuerdos de fidelidad o promociones temporales anunciadas en sus redes sociales.
 - En supermercados grandes (como Tiv Ta'am, Shufersal o Victory), afiliarse al club de clientes (**Mo'adon Lakojot**) es gratuito y da descuentos inmediatos en góndola.
 - Recuerda además revisar los descuentos públicos por ley: el **descuento de Arnoná** (hasta 70-90% el primer año en tu municipalidad) y tus puntos de crédito impositivo (**Nekudot Zijui**) en el **Tofes 101**.`;
+  }
+
+  // Plan de Negocio y Emprendimiento
+  if (
+    q.includes('plan de negocio') ||
+    q.includes('abrir negocio') ||
+    q.includes('crear negocio') ||
+    q.includes('emprender') ||
+    q.includes('yazamut') ||
+    q.includes('maalot') ||
+    q.includes('מעלות') ||
+    q.includes('2994') ||
+    (q.includes('negocio') && (q.includes('asesor') || q.includes('prestamo') || q.includes('préstamo') || q.includes('ayuda') || q.includes('fondos')))
+  ) {
+    return `💼 **Centro de Información Económico-Empresarial y Centros Maalot:**
+Para abrir o desarrollar un negocio en Israel, el Ministerio de Aliyá y Absorción (**Misrad HaAliyah veHaKlitá**) ofrece un servicio oficial y gratuito a través de la División de Emprendimiento Empresarial (**Agaf Yazamut Iskit**):
+
+📞 **Línea Telefónica Directa:** **\*2994** (Atención en varios idiomas, incluido español).
+
+👥 **¿Quiénes pueden usarlo?:**
+- **Nuevos Olim:** hasta 10 años desde el estatus de oleh, mayores de 21 años.
+- **Residentes retornados:** vivieron al menos 5 años seguidos fuera de Israel y no pasaron más de 2 años desde que recuperaron su estatus.
+
+📋 **Servicios Oficiales Gratuitos:**
+1. **Evaluación de viabilidad** de tu proyecto o idea comercial.
+2. **Información impositiva** y orientación sobre regímenes tributarios en Israel.
+3. **Ayuda para tramitar préstamos** a través de fondos de financiamiento específicos.
+4. **Acompañamiento empresarial y talleres.**
+5. **Centros Maalot (מרכזי מעלו״ת):** Red de ~155 asesores de negocios multilingües homologados para el armado del modelo y plan de negocio (incluido startups). Podés solicitar turno por formulario online en gov.il o llamando directamente al centro de tu zona de residencia.
+
+⚠️ *Aclaración: Este es un servicio oficial y gratuito del Ministerio de Aliyá y Absorción, no de terceros. Los requisitos y contactos pueden cambiar — verificar vigencia en gov.il.*`;
   }
 
   // Yerba mate, compras y alimentos

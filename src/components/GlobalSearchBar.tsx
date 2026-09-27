@@ -45,11 +45,19 @@ const STATIC_SEARCH_INDEX: SearchResultItem[] = [
     icon: CheckSquare
   },
   {
+    id: 's-business-plan',
+    title: 'Plan de Negocio y Asesoramiento Empresarial (*2994 y Centros Maalot)',
+    type: 'guide',
+    tabId: 'business-plan',
+    description: 'Servicio oficial y gratuito de Misrad HaAliyah (Agaf Yazamut Iskit) y centros Maalot para nuevos olim y residentes retornados.',
+    icon: Briefcase
+  },
+  {
     id: 's-doctores',
-    title: 'Médicos que hablan español en Israel (Maccabi, Clalit, Meuhedet, Leumit)',
+    title: 'Médicos que hablan español en Israel (Directorio Colaborativo)',
     type: 'guide',
     tabId: 'doctors',
-    description: 'Directorio de más de 140 especialistas cotejados con filtros por ciudad y Kupá.',
+    description: 'Directorio comunitario de profesionales de la salud con atención en español.',
     icon: Stethoscope
   },
   {

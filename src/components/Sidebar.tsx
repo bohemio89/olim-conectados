@@ -64,11 +64,11 @@ export const ALL_NAV_ITEMS: NavItemConfig[] = [
   },
   {
     id: 'community',
-    label: 'Comunidad & Emprendimientos',
-    shortLabel: 'Comunidad & Locales',
+    label: 'Comunidad & Redes',
+    shortLabel: 'Comunidad',
     icon: ShoppingBag,
     category: 'Comunidad & Emprendimientos',
-    description: 'Amapola café (Ibn Gvirol 54), yerbas, cortes criollos, empanadas caseras y grupos'
+    description: 'Puntos de encuentro y grupos colaborativos de Olim'
   },
   {
     id: 'nightlife',
@@ -76,8 +76,16 @@ export const ALL_NAV_ITEMS: NavItemConfig[] = [
     shortLabel: 'Vida Nocturna',
     icon: PartyPopper,
     category: 'Comunidad & Emprendimientos',
-    badge: 'Nuevo',
-    description: 'Fiestas latinas, La Fiesta Argentina, Cachengue, Havana Club, boliches y bares con música en español'
+    description: 'Encuentros, música en español y actividades sociales para Olim'
+  },
+  {
+    id: 'business-plan',
+    label: 'Plan de Negocio',
+    shortLabel: 'Plan de Negocio',
+    icon: Briefcase,
+    category: 'Derechos & Trámites',
+    badge: 'Oficial',
+    description: 'Asesoramiento gratuito del Ministerio (*2994) y Centros Maalot para abrir un negocio'
   },
   {
     id: 'crisis-civil',
