@@ -37,6 +37,8 @@ function getMessageSingleSourceBadge(msg: ChatMessage): { text: string; isOffici
   // If connection error / fallback notice -> NO badge
   if (
     c.includes('inconveniente momentáneo de conexión') ||
+    c.includes('interrupción momentánea de conexión') ||
+    c.includes('ocurrió una interrupción') ||
     c.includes('no pude procesar la consulta') ||
     c.includes('intenta enviar tu consulta nuevamente')
   ) {
@@ -435,10 +437,14 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
     }).catch(() => {});
   };
 
+  const lastUserQueryRef = useRef<string>('');
+
   const handleSendMessage = async (textToSend?: string) => {
     const rawQuery = textToSend !== undefined ? textToSend : inputQuery;
     const query = (typeof rawQuery === 'string' ? rawQuery : '').trim();
     if (!query || isLoading) return;
+
+    lastUserQueryRef.current = query;
 
     const userMessage: ChatMessage = {
       id: `usr-${Date.now()}`,
@@ -469,11 +475,11 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
     let responseData: { text?: string } | null = null;
     let lastError: any = null;
 
-    // Retry mechanism: 2 attempts with backoff before falling back
+    // Retry mechanism: 2 attempts with silent 1.5s backoff before displaying error
     for (let attempt = 1; attempt <= 2; attempt++) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 28000);
+        const timeoutId = setTimeout(() => controller.abort(), 25000);
 
         const response = await fetch('/api/chat', {
           method: 'POST',
@@ -503,8 +509,8 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
         });
 
         if (attempt === 1) {
-          // Wait 1000ms before second attempt
-          await new Promise((resolve) => setTimeout(resolve, 1000));
+          // Silent 1.5s backoff before second attempt
+          await new Promise((resolve) => setTimeout(resolve, 1500));
         }
       }
     }
@@ -521,7 +527,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
       return;
     }
 
-    // If both attempts failed, log comprehensive diagnostics and provide helpful verified fallback
+    // If both attempts failed, log comprehensive diagnostics and show clean retry error notice
     console.error('[AssistantChat] Error definitivo al consultar endpoint /api/chat:', {
       error: lastError?.message || String(lastError),
       name: lastError?.name,
@@ -534,141 +540,12 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
       timestamp: new Date().toISOString(),
     });
 
-    // Smart client-side fallback if the network/server connection has any transient glitch
-    let contextualFallback = '';
-    const qLower = query.toLowerCase();
-
-    // Specific location checks (Punctual answers without whole list dump)
-    if (
-      qLower.includes('bialik') || 
-      (qLower.includes('ramat gan') && (qLower.includes('yerba') || qLower.includes('direccion') || qLower.includes('dirección') || qLower.includes('donde') || qLower.includes('dónde')))
-    ) {
-      contextualFallback = `Sobre la calle comercial **Bialik** en **Ramat Gan** hay varios comercios y tiendas naturistas/dietéticas (*Batei Teva*) que suelen comercializar yerba mate y productos de importación.
-
-Sin embargo, no cuento con la numeración o altura exacta de la calle confirmada en mi base de datos. Te sugiero recorrer la zona comercial de Bialik o consultar en grupos de WhatsApp de Olim de Ramat Gan para saber cuál tiene stock fresco en este momento.`;
-    } else if (qLower.includes('allenby')) {
-      contextualFallback = `En **Tel Aviv**, el punto confirmado en la zona de Allenby es el local de productos argentinos/latinos ubicado en **Allenby 37** (yerba mate, dulce de leche, alfajores, golosinas y tapas de empanadas).
-
-*Pauta útil:* Conviene verificar horarios antes de ir, en especial en vísperas de Shabat o festividades.`;
-    } else if (qLower.includes('levanda') || qLower.includes('la tienda')) {
-      contextualFallback = `En **Tel Aviv**, el local referente de comida y productos panlatinos es **"La Tienda - Comida Latina"**, ubicado en **Levanda 13**. Allí cuentan con Harina P.A.N., frijoles/caraotas, salsas mexicanas, tortillas de maíz, pulpas de fruta, panela/papelón y quesos típicos.`;
-    } else if (qLower.includes('carmel') || qLower.includes('karmel')) {
-      contextualFallback = `En el **Shuk HaCarmel** de Tel Aviv puedes conseguir frutas tropicales (plátano macho), cilantro fresco, chiles secos/frescos y especias variadas.
-
-⚠️ *Aclaración:* El Shuk HaCarmel **no es un punto de referencia para yerba mate ni alfajores**; para esos productos conviene acudir a locales especializados como Allenby 37 o Levanda 13 en Tel Aviv.`;
-    } else if (qLower.includes('olei') || qLower.includes('voluntario') || qLower.includes('ayuda al ole')) {
-      contextualFallback = `🤝 **Apoyo de la OLEI para tus Primeros Trámites:**
-- **Acompañamiento presencial:** Los voluntarios de la **OLEI** [עולי] te asisten y acompañan en persona para abrir la cuenta bancaria sin comisiones abusivas y para tramitar la credencial magnética en la sede de tu Kupat Jolim (Maccabi, Clalit, etc.).
-- **Burocracia y contratos:** Ayuda gratuita para traducir cartas oficiales en hebreo y entender contratos de alquiler o tasas de Arnoná.
-- **Sedes:** Cuentan con filiales en Tel Aviv, Jerusalén, Netanya, Haifa y ciudades principales. Web oficial: olei.org.il.`;
-    } else if (
-      qLower.includes('negocio') || 
-      qLower.includes('yazamut') || 
-      qLower.includes('maalot') || 
-      qLower.includes('2994') ||
-      qLower.includes('emprender')
-    ) {
-      contextualFallback = `💼 **Centro de Información Económico-Empresarial y Centros Maalot:**
-Para abrir o desarrollar un negocio en Israel, el Ministerio de Aliyá y Absorción (**Misrad HaAliyah veHaKlitá**) ofrece un servicio oficial y gratuito a través de la División de Emprendimiento Empresarial (**Agaf Yazamut Iskit**):
-
-📞 **Línea Telefónica Directa:** **\*2994** (Atención en varios idiomas, incluido español).
-
-👥 **¿Quiénes pueden usarlo?:**
-- **Nuevos Olim:** hasta 10 años desde el estatus de oleh, mayores de 21 años.
-- **Residentes retornados:** vivieron al menos 5 años seguidos fuera de Israel y no pasaron más de 2 años desde que recuperaron su estatus.
-
-📋 **Servicios Oficiales Gratuitos:**
-1. **Evaluación de viabilidad** de tu proyecto o idea comercial.
-2. **Información impositiva** y orientación sobre regímenes tributarios en Israel.
-3. **Ayuda para tramitar préstamos** a través de fondos de financiamiento específicos.
-4. **Acompañamiento empresarial y talleres.**
-5. **Centros Maalot (מרכזי מעלו״ת):** Red de ~155 asesores de negocios multilingües homologados para el armado del modelo y plan de negocio (incluido startups). Podés solicitar turno por formulario online en gov.il o llamando directamente al centro de tu zona de residencia.
-
-⚠️ *Aclaración: Este es un servicio oficial y gratuito del Ministerio de Aliyá y Absorción, no de terceros. Los requisitos y contactos pueden cambiar — verificar vigencia en gov.il.*`;
-    } else if (qLower.includes('banco') || qLower.includes('cuenta bancaria')) {
-      contextualFallback = `🏦 **Apertura de Cuenta Bancaria con Teudat Olé provisoria:**
-- **Obligatorio para cobrar el Sal Klitá:** Acude a una sucursal con tu Teudat Olé original, Teudat Zehut provisoria, pasaporte extranjero y número de celular israelí.
-- **Documento clave:** Exige el **Ishur Nihul Jeshbón** [אישור ניהול חשבון] (certificado de titularidad) para entregarlo a tu asesor de Misrad HaAliyah.
-- **Beneficio Olé:** Pide la exención de comisiones de mantenimiento (**Ptor me-Amalot**) por el primer año.`;
-    } else if (qLower.includes('teudat ole') || qLower.includes('teudat olé') || qLower.includes('caduca') || qLower.includes('vence')) {
-      contextualFallback = `📄 **Vigencia de Teudat Olé y Derechos:**
-- Tu condición de Olé es permanente, pero los beneficios tienen plazos:
-  * **Sal Klitá:** Meses 1 a 6 (canasta básica).
-  * **Subsidio de alquiler:** Meses 7 a 30 (finaliza exactamente en el mes 30).
-  * **Licencia de conducir:** Puedes manejar con registro extranjero solo los **primeros 12 meses**.
-  * **Descuento de Arnoná:** 70% a 90% en la municipalidad durante 12 meses de contrato.`;
-    } else if (qLower.includes('maccabi') || qLower.includes('clalit') || qLower.includes('cobertura') || qLower.includes('activar')) {
-      contextualFallback = `🏥 **Activación de Cobertura en Kupat Jolim (Maccabi / Clalit):**
-- **Tu registro está hecho**, pero debes activar la credencial en cualquier sede (**Snif**) llevando tu Teudat Olé, el comprobante del aeropuerto y cuenta bancaria para el débito (**Horaat Keva**).
-- **Importante:** Durante los **primeros 90 días** puedes adherirte al seguro complementario más alto **sin períodos de espera (carencia)**.
-- **Urgencia inmediata:** Ya estás cubierto con tu número de Zehut; puedes llamar al *3555 (Maccabi) o *2700 (Clalit) las 24 horas.`;
-    } else if (qLower.includes('myvisit') || qLower.includes('teudat zeut') || qLower.includes('teudat zehut')) {
-      contextualFallback = `🪪 **Turno en MyVisit para Teudat Zehut Biométrica:**
-- La Teudat Zehut de papel del aeropuerto vence a los **3 meses**; debes tramitar la biométrica en **Misrad HaPnim** (es 100% gratuita).
-- **Truco de turno:** Entra a la app/sitio de MyVisit entre las **7:00 AM y 8:30 AM** para capturar cancelaciones del día o cupos de esa misma semana.`;
-    } else if (qLower.includes('ulpan') || qLower.includes('ulpán') || qLower.includes('voucher') || qLower.includes('5.200') || qLower.includes('5200')) {
-      contextualFallback = `🎓 **Cómo funciona el Voucher de 5.200 NIS para Ulpán Privado:**
-- **Reintegro, no fondo perdido:** Tú abonas el curso y el **Misrad HaAliyah** te devuelve el dinero únicamente tras completar los requisitos.
-- **Requisito indispensable:** Debes tener **mínimo 80% de asistencia** y aprobar el examen final. Si abandonas el curso, pierdes el dinero adelantado.
-- **Confirmación previa:** Antes de pagar la matrícula, confirma en tu oficina local de Misrad HaAliyah que el instituto privado esté homologado en el sistema de vouchers.`;
-    } else if (qLower.includes('medico') || qLower.includes('médico') || qLower.includes('kupa') || qLower.includes('kupá') || qLower.includes('turno')) {
-      contextualFallback = `🩺 **Turnos con Médicos que Hablan Español:**
-- Puedes consultar el directorio completo en la pestaña **"Médicos en Español"** de esta plataforma y filtrar por tu ciudad y Kupá (Maccabi, Clalit, Meuhedet, Leumit).
-- Para agendar en la app de tu Kupá, puedes buscar a los médicos verificados por su nombre en hebreo indicado en nuestras fichas.`;
-    } else if (qLower.includes('miun') || qLower.includes('guardia') || qLower.includes('hospital') || qLower.includes('fiebre')) {
-      contextualFallback = `🚨 **Alerta de Guardia (Miún) y Fiebre:**
-- **No vayas directo:** Salvo riesgo de vida o internación directa, ir al hospital sin derivación (**hafniá**) genera una factura (**heshbonit**) de cientos de shékels.
-- **Paso 1:** Consulta la telemedicina de tu Kupá o acude a un centro de urgencia intermedia (**Terem** o **Bikur Rofé**), donde el copago es mínimo y pueden emitirte la derivación oficial.`;
-    } else if (
-      qLower.includes('harina pan') ||
-      qLower.includes('arepa') ||
-      qLower.includes('platano') ||
-      qLower.includes('plátano') ||
-      qLower.includes('frijol') ||
-      qLower.includes('caraota') ||
-      qLower.includes('colombia') ||
-      qLower.includes('venezuela') ||
-      qLower.includes('mexico') ||
-      qLower.includes('méxico')
-    ) {
-      contextualFallback = `🥑 **Productos Panlatinos, Andinos y Caribeños en Israel:**
-- **Local referente en Tel Aviv:** "La Tienda - Comida Latina" en **Levanda 13** (Harina P.A.N., frijoles, salsas mexicanas, tortillas de maíz, pulpas de fruta, panela y quesos típicos).
-- **Frutas tropicales y chiles:** Shuk HaCarmel en Tel Aviv (plátano macho, cilantro, chiles secos/frescos).
-- **Cadenas nacionales:** Tiv Ta'am y Keshet Teamim cuentan con góndola internacional fija.
-- **Envíos y comunidad:** Tiendas online con despacho a todo el país y grupos comunitarios de WhatsApp/Facebook de Olim para ferias y compras conjuntas.`;
-    } else if (
-      qLower.includes('yerba') ||
-      qLower.includes('mate') ||
-      qLower.includes('alfajor') ||
-      qLower.includes('dulce de leche') ||
-      qLower.includes('argentina') ||
-      qLower.includes('uruguay')
-    ) {
-      contextualFallback = `🧉 **Productos del Cono Sur y Rioplatenses en Israel:**
-- **Tel Aviv:** Local de productos argentinos/latinos en **Allenby 37** (yerba mate, dulce de leche, alfajores, golosinas y tapas) y "La Tienda" en **Levanda 13**.
-- **Ramat Gan:** Comercios y dietéticas sobre la calle comercial **Bialik**.
-- **Cadenas nacionales (Todo Israel):** Tiv Ta'am y Keshet Teamim en sus secciones internacionales.
-- *(Aclaración: Shuk HaCarmel es ideal para frutas tropicales y especias, pero no se recomienda para yerba ni alfajores).*
-- **Envíos:** Tiendas online con despacho a domicilio a todo el país y grupos comunitarios de WhatsApp/Facebook.`;
-    } else if (qLower.includes('tendinitis') || qLower.includes('bl 250') || qLower.includes('accidente')) {
-      contextualFallback = `💼 **Accidentes Laborales y Tendinitis:**
-- Solicita de inmediato el formulario **BL 250** a tu empleador.
-- En tu primera atención médica, exige que escriban expresamente que el dolor se produjo realizando tareas del trabajo ("**be-avodá**").
-- Pide turno con el Médico Ocupacional (**Rofé Taasukatí**) para el dictamen oficial de incapacidad para **Bituaj Leumi**.`;
-    } else {
-      contextualFallback = `⚠️ Hubo un inconveniente momentáneo de conexión con el servidor.
-
-**Recordatorio clave:**
-- Para trámites de salud, solicita siempre derivación (**hafniá**) antes de ir al hospital (**Miún**) para evitar facturas de cientos de shékels.
-- Para accidentes laborales o dolor ocupacional, pide el formulario **BL 250** al empleador e indica la causa laboral ("be-avodá") al médico de la Kupá.
-- Para plan de negocio y asesoramiento a emprendedores, comunícate con el Centro del Ministerio al **\*2994**.
-- Puedes intentar enviar tu consulta nuevamente en unos segundos.`;
-    }
+    const cleanErrorMessage = `⚠️ Ocurrió una interrupción momentánea de conexión al consultar el asistente. Por favor, vuelve a enviar tu pregunta en unos segundos.`;
 
     const errorMessage: ChatMessage = {
       id: `err-${Date.now()}`,
       role: 'assistant',
-      content: contextualFallback,
+      content: cleanErrorMessage,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
     setMessages((prev) => [...prev, errorMessage]);
@@ -959,6 +836,20 @@ Para abrir o desarrollar un negocio en Israel, el Ministerio de Aliyá y Absorci
                   <div className="whitespace-pre-wrap font-sans text-xs sm:text-base leading-relaxed">
                     {msg.content}
                   </div>
+
+                  {/* Botón de acción rápida para reintentar si el mensaje es de error de conexión */}
+                  {msg.id?.startsWith('err-') && lastUserQueryRef.current && (
+                    <div className="pt-1">
+                      <button
+                        onClick={() => handleSendMessage(lastUserQueryRef.current)}
+                        disabled={isLoading}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-blue-700 bg-blue-100/90 hover:bg-blue-200 border border-blue-300 rounded-lg transition shadow-2xs disabled:opacity-50"
+                      >
+                        <RotateCcw className="w-3.5 h-3.5" />
+                        Reintentar consulta
+                      </button>
+                    </div>
+                  )}
 
                   {/* Indicador de fuente contextual condicional (Fuente única y exclusiva) */}
                   {!isUser && (() => {
