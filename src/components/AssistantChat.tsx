@@ -427,6 +427,37 @@ Para abrir o desarrollar un negocio en Israel, el Ministerio de Aliyá y Absorci
       contextualFallback = `🚨 **Alerta de Guardia (Miún) y Fiebre:**
 - **No vayas directo:** Salvo riesgo de vida o internación directa, ir al hospital sin derivación (**hafniá**) genera una factura (**heshbonit**) de cientos de shékels.
 - **Paso 1:** Consulta la telemedicina de tu Kupá o acude a un centro de urgencia intermedia (**Terem** o **Bikur Rofé**), donde el copago es mínimo y pueden emitirte la derivación oficial.`;
+    } else if (
+      qLower.includes('harina pan') ||
+      qLower.includes('arepa') ||
+      qLower.includes('platano') ||
+      qLower.includes('plátano') ||
+      qLower.includes('frijol') ||
+      qLower.includes('caraota') ||
+      qLower.includes('colombia') ||
+      qLower.includes('venezuela') ||
+      qLower.includes('mexico') ||
+      qLower.includes('méxico')
+    ) {
+      contextualFallback = `🥑 **Productos Panlatinos, Andinos y Caribeños en Israel:**
+- **Local referente en Tel Aviv:** "La Tienda - Comida Latina" en **Levanda 13** (Harina P.A.N., frijoles, salsas mexicanas, tortillas de maíz, pulpas de fruta, panela y quesos típicos).
+- **Frutas tropicales y chiles:** Shuk HaCarmel en Tel Aviv (plátano macho, cilantro, chiles secos/frescos).
+- **Cadenas nacionales:** Tiv Ta'am y Keshet Teamim cuentan con góndola internacional fija.
+- **Envíos y comunidad:** Tiendas online con despacho a todo el país y grupos comunitarios de WhatsApp/Facebook de Olim para ferias y compras conjuntas.`;
+    } else if (
+      qLower.includes('yerba') ||
+      qLower.includes('mate') ||
+      qLower.includes('alfajor') ||
+      qLower.includes('dulce de leche') ||
+      qLower.includes('argentina') ||
+      qLower.includes('uruguay')
+    ) {
+      contextualFallback = `🧉 **Productos del Cono Sur y Rioplatenses en Israel:**
+- **Tel Aviv:** Local de productos argentinos/latinos en **Allenby 37** (yerba mate, dulce de leche, alfajores, golosinas y tapas) y "La Tienda" en **Levanda 13**.
+- **Ramat Gan:** Comercios y dietéticas sobre la calle comercial **Bialik**.
+- **Cadenas nacionales (Todo Israel):** Tiv Ta'am y Keshet Teamim en sus secciones internacionales.
+- *(Aclaración: Shuk HaCarmel es ideal para frutas tropicales y especias, pero no se recomienda para yerba ni alfajores).*
+- **Envíos:** Tiendas online con despacho a domicilio a todo el país y grupos comunitarios de WhatsApp/Facebook.`;
     } else if (qLower.includes('tendinitis') || qLower.includes('bl 250') || qLower.includes('accidente')) {
       contextualFallback = `💼 **Accidentes Laborales y Tendinitis:**
 - Solicita de inmediato el formulario **BL 250** a tu empleador.
