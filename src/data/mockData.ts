@@ -1948,6 +1948,22 @@ export const INITIAL_DOCTORS: Doctor[] = [
     acceptsNewPatients: false,
     reviews: [],
   },
+  {
+    id: 'doc-122',
+    name: 'Dr. Brant Armando',
+    specialty: 'Medicina Familiar, Interna y General (especialista en Geriatría)',
+    kupot: ['Maccabi'],
+    city: 'Tel Aviv - Yafo',
+    address: "Sha'ul HaMelech 8, Tel Aviv - Yafo (Edificio Amot HaMishpat / Migdal Psagot, piso -1)",
+    phone: '03-5562454 (turnos: *3555)',
+    spanishLevel: 'Fluido',
+    rating: 0,
+    reviewsCount: 0,
+    consultationFocus: 'VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il) el 27/09/2026. Habla hebreo, espanol e ingles. Sin costo de copago para socios de Maccabi.',
+    receptionHours: "Dom 9:00-13:15, Lun 15:30-20:00, Mar 15:30-20:00 (segun cartilla oficial de Maccabi, verificar vigencia)",
+    acceptsNewPatients: true,
+    reviews: [],
+  },
 ];
 
 export const COMMUNITY_STORES: CommunityStore[] = [
