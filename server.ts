@@ -39,6 +39,16 @@ ROL Y MISIÓN — ASISTENTE OLIM CONECTADOS
 Sos el asistente virtual de "Olim Conectados", una plataforma comunitaria de orientación, acompañamiento e información para Olim Jadashim en Israel. Tu propósito es orientar con claridad, empatía, practicidad y absoluta fidelidad a los hechos.
 
 ================================================================================
+REGLA CRÍTICA DE RESPUESTA PUNTUAL Y CONVERSACIONAL (NO VOLCAR GUÍAS)
+================================================================================
+- Responde de manera conversacional, empática, directa y enfocada ÚNICAMENTE a lo que se te pregunta.
+- PROHIBIDO hacer un volcado estático de toda la guía o repetir categorías completas si no fueron solicitadas.
+- Si el usuario pregunta por un comercio, calle o altura puntual (ej. "¿En Bialik, tenés la dirección para comprar yerba?"):
+  * Responde específicamente sobre ese punto: confirma que sobre la calle comercial Bialik (en Ramat Gan) hay comercios y dietéticas que traen yerba mate y productos de importación, pero admite con honestidad que no cuentas con la numeración o altura exacta de la calle en tu base de datos.
+  * NO listes Tel Aviv, Levanda, Allenby, Shuk HaCarmel ni envíos a menos que el usuario pida alternativas o haga una pregunta general/amplia.
+- Si el usuario pregunta por un trámite específico (ej. "¿Cuánto dura el Sal Klitá?"), responde únicamente ese dato concreto (6 meses) y cómo se cobra, sin agregar toda la información de Bituaj Leumi o licencias de conducir.
+
+================================================================================
 DIRECTIVAS CRÍTICAS DE VERACIDAD (TOLERANCIA CERO A LA INVENCIÓN)
 ================================================================================
 1. CERO ALUCINACIÓN Y CERO SUPOSICIÓN:
@@ -130,7 +140,7 @@ TONO Y ESTILO
 ================================================================================
 - Empático, claro y accesible para un recién llegado.
 - Español neutro / rioplatense comprensible para toda la comunidad hispanohablante.
-- Estructura limpia: viñetas breves y pasos ordenados.
+- Estructura limpia: viñetas breves y pasos ordenados cuando amerite, o párrafo directo si la pregunta es puntual.
 - Términos en hebreo en negrita y entre paréntesis cuando sea pertinente (ej: **hafniá** [הפניה], **tofes 101** [טופס 101], **bituaj leumi** [ביטוח לאומי]).
 `;
 
@@ -375,21 +385,31 @@ function generateRuleBasedResponse(query: string, history?: any[]): string {
 
   // Follow-up on Ramat Gan Bialik discounts or specific store question
   if (
-    (q.includes('bialik') || q.includes('descuento') || q.includes('argentino') || q.includes('es así') || q.includes('precio')) &&
-    (q.includes('ramat gan') || previousContext.includes('ramat gan') || previousContext.includes('bialik'))
+    q.includes('bialik') ||
+    (q.includes('ramat gan') && (q.includes('yerba') || q.includes('direccion') || q.includes('dirección') || q.includes('donde') || q.includes('dónde')))
   ) {
-    return `🧉 **Sobre compras y descuentos en Calle Bialik (Ramat Gan):**
+    return `Sobre la calle comercial **Bialik** en **Ramat Gan** hay varios comercios y tiendas naturistas/dietéticas (*Batei Teva*) que suelen comercializar yerba mate y productos de importación.
 
-1. **¿Existe un "descuento oficial para argentinos"?:**
-   - **No existe un descuento formal por nacionalidad o pasaporte.** En Israel los comercios no aplican legalmente descuentos por origen nacional.
-   - **Lo que sí ocurre:** Varias de las tiendas naturistas (**"Teva"**) y de especias de calle Bialik o cercanías son atendidas por personal que conoce a la comunidad latina y compra yerba en cantidad. Si compras por bulto o eres cliente regular, muchas veces redondean el precio o te avisan de ofertas de stock fresco.
+Sin embargo, no cuento con la numeración o altura exacta de la calle confirmada en mi base de datos. Te sugiero recorrer los comercios de la zona comercial de Bialik o consultar en grupos de WhatsApp de Olim de Ramat Gan para saber cuál tiene stock fresco en este momento.`;
+  }
 
-2. **Consejo de ahorro real para Olim:**
-   - Si compras paquete individual en tiendas físicas, el valor suele rondar los 35 - 45 NIS.
-   - Para pagar el mejor precio por kilo (22 - 28 NIS por paquete), conviene comprar **packs de 5 o 10 paquetes** en sitios especializados como *Mate Israel* o en grupos comunitarios de WhatsApp de Olim donde se organizan pedidos conjuntos directo de importador.
+  // Specific query for Allenby
+  if (q.includes('allenby')) {
+    return `En **Tel Aviv**, el punto confirmado en la zona de Allenby es el local de productos argentinos/latinos ubicado en **Allenby 37** (yerba mate, dulce de leche, alfajores, golosinas y tapas de empanadas).
 
-3. **Alternativa inmediata en Ramat Gan:**
-   - La sucursal de **Tiv Ta'am** en zona Jabotinsky / Kenion Ayalon suele tener promociones de 2x1 o descuentos con tarjeta del club (*Mo'adon*) en infusiones y tés internacionales.`;
+*Pauta útil:* Conviene verificar horarios antes de ir, en especial en vísperas de Shabat o festividades.`;
+  }
+
+  // Specific query for Levanda / La Tienda
+  if (q.includes('levanda') || q.includes('la tienda')) {
+    return `En **Tel Aviv**, el local referente de comida y productos panlatinos es **"La Tienda - Comida Latina"**, ubicado en **Levanda 13**. Allí cuentan con Harina P.A.N., frijoles/caraotas, salsas mexicanas, tortillas de maíz, pulpas de fruta, panela/papelón y quesos típicos.`;
+  }
+
+  // Specific query for Shuk HaCarmel
+  if (q.includes('carmel') || q.includes('karmel')) {
+    return `En el **Shuk HaCarmel** de Tel Aviv puedes conseguir frutas tropicales (plátano macho), cilantro fresco, chiles secos/frescos y especias variadas.
+
+⚠️ *Aclaración:* El Shuk HaCarmel **no es un punto de referencia para yerba mate ni alfajores**; para esos productos conviene acudir a locales especializados como Allenby 37 o Levanda 13 en Tel Aviv.`;
   }
 
   // Follow-up for general discount / card / coupons

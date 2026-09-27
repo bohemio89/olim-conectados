@@ -18,12 +18,100 @@ import {
   ShieldCheck,
   Building2,
   Clock,
-  ArrowRight
+  ArrowRight,
+  Users
 } from 'lucide-react';
 import { ChatMessage } from '../types';
 import { EmergencyButton } from './EmergencyButton';
 
 export type UserStage = 'general' | 'recien_llegado' | 'emergencia' | 'tramite';
+
+function getMessageSourceBadge(content: string): { text: string; isOfficial: boolean } | null {
+  const c = content.toLowerCase();
+
+  // Commercial, food, products, everyday life keywords
+  const isCommunityOrFood =
+    c.includes('yerba') ||
+    c.includes('harina p.a.n') ||
+    c.includes('harina pan') ||
+    c.includes('arepa') ||
+    c.includes('dulce de leche') ||
+    c.includes('alfajor') ||
+    c.includes('levanda') ||
+    c.includes('allenby') ||
+    c.includes('bialik') ||
+    c.includes('shuk') ||
+    c.includes('comercio') ||
+    c.includes('compras') ||
+    c.includes('tienda') ||
+    c.includes('productos latinos') ||
+    c.includes('productos del cono sur') ||
+    c.includes('panlatino') ||
+    c.includes('tiv taam') ||
+    c.includes("tiv ta'am") ||
+    c.includes('keshet teamim') ||
+    c.includes('boliche') ||
+    c.includes('rav-kav') ||
+    c.includes('sim ') ||
+    c.includes('celular') ||
+    c.includes('vida nocturna');
+
+  // Official procedures, health, and government keywords
+  const isOfficial =
+    c.includes('sal klitá') ||
+    c.includes('sal klita') ||
+    c.includes('bituaj leumi') ||
+    c.includes('misrad') ||
+    c.includes('kupa') ||
+    c.includes('kupá') ||
+    c.includes('maccabi') ||
+    c.includes('clalit') ||
+    c.includes('meuhedet') ||
+    c.includes('leumit') ||
+    c.includes('miún') ||
+    c.includes('miun') ||
+    c.includes('mada') ||
+    c.includes('bl 250') ||
+    c.includes('tofes 101') ||
+    c.includes('tofes yarok') ||
+    c.includes('teudat zehut') ||
+    c.includes('teudat olé') ||
+    c.includes('darkón') ||
+    c.includes('darkon') ||
+    c.includes("teudat ma'avar") ||
+    c.includes('arnoná') ||
+    c.includes('arnona') ||
+    c.includes('ulpán') ||
+    c.includes('ulpan') ||
+    c.includes('hafniá') ||
+    c.includes('hafnia') ||
+    c.includes('dmei majalá') ||
+    c.includes('teum mas') ||
+    c.includes('pikud haoref') ||
+    c.includes('*2994') ||
+    c.includes('maalot') ||
+    c.includes('olei');
+
+  if (isCommunityOrFood && !isOfficial) {
+    return {
+      text: 'Fuente: Aporte Comunitario / Guía Local',
+      isOfficial: false,
+    };
+  }
+
+  if (isOfficial) {
+    return {
+      text: 'Fuente: Misrad HaAliyah · Kupot Jolim · Bituaj Leumi',
+      isOfficial: true,
+    };
+  }
+
+  // Fallback for general queries
+  return {
+    text: 'Fuente: Aporte Comunitario / Guía Local',
+    isOfficial: false,
+  };
+}
 
 interface CategorizedPrompt {
   id: string;
@@ -364,7 +452,25 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
     let contextualFallback = '';
     const qLower = query.toLowerCase();
 
-    if (qLower.includes('olei') || qLower.includes('voluntario') || qLower.includes('ayuda al ole')) {
+    // Specific location checks (Punctual answers without whole list dump)
+    if (
+      qLower.includes('bialik') || 
+      (qLower.includes('ramat gan') && (qLower.includes('yerba') || qLower.includes('direccion') || qLower.includes('dirección') || qLower.includes('donde') || qLower.includes('dónde')))
+    ) {
+      contextualFallback = `Sobre la calle comercial **Bialik** en **Ramat Gan** hay varios comercios y tiendas naturistas/dietéticas (*Batei Teva*) que suelen comercializar yerba mate y productos de importación.
+
+Sin embargo, no cuento con la numeración o altura exacta de la calle confirmada en mi base de datos. Te sugiero recorrer la zona comercial de Bialik o consultar en grupos de WhatsApp de Olim de Ramat Gan para saber cuál tiene stock fresco en este momento.`;
+    } else if (qLower.includes('allenby')) {
+      contextualFallback = `En **Tel Aviv**, el punto confirmado en la zona de Allenby es el local de productos argentinos/latinos ubicado en **Allenby 37** (yerba mate, dulce de leche, alfajores, golosinas y tapas de empanadas).
+
+*Pauta útil:* Conviene verificar horarios antes de ir, en especial en vísperas de Shabat o festividades.`;
+    } else if (qLower.includes('levanda') || qLower.includes('la tienda')) {
+      contextualFallback = `En **Tel Aviv**, el local referente de comida y productos panlatinos es **"La Tienda - Comida Latina"**, ubicado en **Levanda 13**. Allí cuentan con Harina P.A.N., frijoles/caraotas, salsas mexicanas, tortillas de maíz, pulpas de fruta, panela/papelón y quesos típicos.`;
+    } else if (qLower.includes('carmel') || qLower.includes('karmel')) {
+      contextualFallback = `En el **Shuk HaCarmel** de Tel Aviv puedes conseguir frutas tropicales (plátano macho), cilantro fresco, chiles secos/frescos y especias variadas.
+
+⚠️ *Aclaración:* El Shuk HaCarmel **no es un punto de referencia para yerba mate ni alfajores**; para esos productos conviene acudir a locales especializados como Allenby 37 o Levanda 13 en Tel Aviv.`;
+    } else if (qLower.includes('olei') || qLower.includes('voluntario') || qLower.includes('ayuda al ole')) {
       contextualFallback = `🤝 **Apoyo de la OLEI para tus Primeros Trámites:**
 - **Acompañamiento presencial:** Los voluntarios de la **OLEI** [עולי] te asisten y acompañan en persona para abrir la cuenta bancaria sin comisiones abusivas y para tramitar la credencial magnética en la sede de tu Kupat Jolim (Maccabi, Clalit, etc.).
 - **Burocracia y contratos:** Ayuda gratuita para traducir cartas oficiales en hebreo y entender contratos de alquiler o tasas de Arnoná.
@@ -768,16 +874,31 @@ Para abrir o desarrollar un negocio en Israel, el Ministerio de Aliyá y Absorci
                     {msg.content}
                   </div>
 
-                  {/* Punto C UX: Indicador de fuente y actualización */}
-                  {!isUser && msg.id !== 'welcome' && (
-                    <div className="bg-white/80 border border-gray-200/80 rounded-lg p-2 text-[11px] text-gray-500 flex items-center justify-between">
-                      <span className="flex items-center gap-1">
-                        <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-                        Fuente: Misrad HaAliyah · Kupot Jolim · Bituaj Leumi
-                      </span>
-                      <span className="text-gray-400">Actualizado: 2026</span>
-                    </div>
-                  )}
+                  {/* Indicador de fuente contextual condicional */}
+                  {!isUser && msg.id !== 'welcome' && (() => {
+                    const badge = getMessageSourceBadge(msg.content);
+                    if (!badge) return null;
+                    const isOfficial = badge.isOfficial;
+                    return (
+                      <div
+                        className={`rounded-lg p-2 text-[11px] flex items-center justify-between border ${
+                          isOfficial
+                            ? 'bg-blue-50/80 border-blue-200/80 text-blue-900'
+                            : 'bg-amber-50/80 border-amber-200/80 text-amber-900'
+                        }`}
+                      >
+                        <span className="flex items-center gap-1.5 font-medium">
+                          {isOfficial ? (
+                            <ShieldCheck className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                          ) : (
+                            <Users className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                          )}
+                          {badge.text}
+                        </span>
+                        <span className="text-gray-400 text-[10px] hidden xs:inline">Actualizado: 2026</span>
+                      </div>
+                    );
+                  })()}
 
                   {/* Footer of message: Timestamp + Copy + Punto F UX: Feedback (Up/Down) */}
                   <div
