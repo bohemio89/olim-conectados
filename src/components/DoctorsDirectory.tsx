@@ -59,6 +59,32 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
   } | null>(null);
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
+  const getDoctorBadge = (consultationFocus?: string) => {
+    const focus = (consultationFocus || '').trim();
+    if (focus.toUpperCase().startsWith('VERIFICADO')) {
+      return {
+        text: '✓ Verificado en cartilla oficial',
+        className: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+        icon: CheckCircle2,
+        iconClass: 'text-emerald-600',
+      };
+    }
+    if (focus.toLowerCase().includes('piedra libre')) {
+      return {
+        text: 'Fuente: directorio comunitario (Piedra Libre) — no verificado por el sitio',
+        className: 'bg-blue-50 text-blue-800 border-blue-200',
+        icon: Info,
+        iconClass: 'text-blue-600',
+      };
+    }
+    return {
+      text: 'Cargado por la comunidad — no verificado por el sitio',
+      className: 'bg-amber-50 text-amber-800 border-amber-200',
+      icon: Users,
+      iconClass: 'text-amber-600',
+    };
+  };
+
   // Extract unique filters
   const cities = [
     'Todas',
@@ -366,24 +392,28 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
       {/* Doctors Grid */}
       {filteredDoctors.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {filteredDoctors.map((doc) => (
-            <div
-              key={doc.id}
-              className="bg-white rounded-2xl border border-gray-200 hover:border-blue-300 transition-all shadow-xs hover:shadow-md p-5 flex flex-col justify-between"
-            >
-              <div>
-                {/* Community Badge & Upload Date */}
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
-                    <Users className="w-3 h-3 text-amber-600" />
-                    Cargado por la comunidad — no verificado por el sitio
-                  </span>
-                  {doc.uploadedAt && (
-                    <span className="text-[10px] text-gray-400">
-                      {doc.uploadedAt}
+          {filteredDoctors.map((doc) => {
+            const badge = getDoctorBadge(doc.consultationFocus);
+            const BadgeIcon = badge.icon;
+
+            return (
+              <div
+                key={doc.id}
+                className="bg-white rounded-2xl border border-gray-200 hover:border-blue-300 transition-all shadow-xs hover:shadow-md p-5 flex flex-col justify-between"
+              >
+                <div>
+                  {/* Origin Badge & Upload Date */}
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md border flex items-center gap-1.5 ${badge.className}`}>
+                      <BadgeIcon className={`w-3.5 h-3.5 ${badge.iconClass}`} />
+                      <span>{badge.text}</span>
                     </span>
-                  )}
-                </div>
+                    {doc.uploadedAt && (
+                      <span className="text-[10px] text-gray-400 shrink-0">
+                        {doc.uploadedAt}
+                      </span>
+                    )}
+                  </div>
 
                 {/* Doctor Name & Specialty */}
                 <div className="mt-1">
@@ -466,7 +496,8 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 </p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       ) : (
         /* Empty State */
