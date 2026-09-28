@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Search, 
   MapPin, 
@@ -27,14 +27,53 @@ interface DoctorsDirectoryProps {
 const AVAILABLE_KUPOT = ['Maccabi', 'Clalit', 'Meuhedet', 'Leumit', 'Privado', 'No estoy seguro'];
 
 export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ 
-  doctors, 
+  doctors: initialDoctors, 
   onAddReview,
   onAddDoctor 
 }) => {
+  const [cloudDoctors, setCloudDoctors] = useState<Doctor[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedKupa, setSelectedKupa] = useState<string>('Todas');
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>('Todas');
   const [selectedCity, setSelectedCity] = useState<string>('Todas');
+
+  // Sincronización inicial desde la base de datos en la nube (Supabase)
+  useEffect(() => {
+    const fetchCloudDoctors = async () => {
+      try {
+        const res = await fetch('/api/doctors');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data)) {
+            // Mapear el formato de la base de datos al tipo Doctor del frontend
+            const formatted: Doctor[] = data.map((item: any) => ({
+              id: item.id,
+              name: item.name,
+              specialty: item.specialty,
+              city: item.city,
+              phone: item.phone || 'No especificado (consultar en la Kupá)',
+              kupot: [item.kupa || 'No estoy seguro'],
+              reviews: Array.isArray(item.comments) ? item.comments : [],
+              reviewsCount: Array.isArray(item.comments) ? item.comments.length : 0,
+              isCommunityAdded: true,
+              uploadedAt: item.created_at ? new Date(item.created_at).toLocaleDateString('es-ES') : 'Reciente'
+            }));
+            setCloudDoctors(formatted);
+          }
+        }
+      } catch (err) {
+        console.warn('Error cargando médicos desde la nube:', err);
+      }
+    };
+
+    fetchCloudDoctors();
+  }, []);
+
+  // Fusión sin duplicados: Médicos base + Médicos sincronizados en la nube
+  const allDoctors: Doctor[] = [
+    ...cloudDoctors,
+    ...initialDoctors.filter((doc) => !cloudDoctors.some((cDoc) => cDoc.id === doc.id || cDoc.name.toLowerCase() === doc.name.toLowerCase()))
+  ];
 
   // Modal State
   const [modalMode, setModalMode] = useState<'addDoctor' | 'addReview' | null>(null);
@@ -88,16 +127,16 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
   // Extract unique filters
   const cities = [
     'Todas',
-    ...Array.from(new Set(doctors.map((d) => d.city).filter(Boolean))).sort((a, b) => a.localeCompare(b, 'es'))
+    ...Array.from(new Set(allDoctors.map((d) => d.city).filter(Boolean))).sort((a, b) => a.localeCompare(b, 'es'))
   ];
 
   const specialties = [
     'Todas',
-    ...Array.from(new Set(doctors.map((d) => d.specialty).filter(Boolean))).sort((a, b) => a.localeCompare(b, 'es'))
+    ...Array.from(new Set(allDoctors.map((d) => d.specialty).filter(Boolean))).sort((a, b) => a.localeCompare(b, 'es'))
   ];
 
   // Filtering
-  const filteredDoctors = doctors.filter((doc) => {
+  const filteredDoctors = allDoctors.filter((doc) => {
     const term = searchTerm.toLowerCase();
     const matchesSearch =
       doc.name.toLowerCase().includes(term) ||
@@ -194,7 +233,6 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
       }
     } catch (err) {
       console.error('Error al moderar reseña:', err);
-      // Client-side fallback check
       const forbidden = /estafador|inútil|pelotudo|boludo|hijo de|chanta|garca/i.test(commentText);
       if (forbidden) {
         setModerationFeedback({
@@ -219,10 +257,18 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
     }
   };
 
-  const completeSubmission = (text: string) => {
+  const completeSubmission = async (text: string) => {
     const todayStr = new Date().toLocaleDateString('es-ES');
 
     if (modalMode === 'addDoctor') {
+      const newReview: DoctorReview = {
+        id: `rev-${Date.now()}`,
+        author: authorName.trim() || 'Olé de la comunidad',
+        date: todayStr,
+        comment: text.trim(),
+        isVerifiedOle: true,
+      };
+
       const newDoctorEntry: Doctor = {
         id: `doc-${Date.now()}`,
         name: doctorName.trim(),
@@ -230,20 +276,41 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         city: doctorCity.trim(),
         phone: doctorPhone.trim() || 'No especificado (consultar en la Kupá)',
         kupot: selectedKupot.length > 0 ? selectedKupot : ['No estoy seguro'],
-        reviews: [
-          {
-            id: `rev-${Date.now()}`,
-            author: authorName.trim() || 'Olé de la comunidad',
-            date: todayStr,
-            comment: text.trim(),
-            isVerifiedOle: true,
-          },
-        ],
+        reviews: [newReview],
         reviewsCount: 1,
         isCommunityAdded: true,
         uploadedAt: todayStr,
       };
 
+      // 1. Guardar en Supabase en tiempo real a través de /api/doctors
+      try {
+        await fetch('/api/doctors', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: newDoctorEntry.id,
+            name: newDoctorEntry.name,
+            specialty: newDoctorEntry.specialty,
+            kupa: selectedKupot.join(', ') || 'No estoy seguro',
+            city: newDoctorEntry.city,
+            phone: newDoctorEntry.phone,
+            source: 'Comunidad',
+            verified: false,
+            comments: [
+              {
+                author: newReview.author,
+                date: newReview.date,
+                text: newReview.comment
+              }
+            ]
+          }),
+        });
+      } catch (err) {
+        console.error('Error persistiendo en Supabase:', err);
+      }
+
+      // Actualizar estado local inmediato
+      setCloudDoctors((prev) => [newDoctorEntry, ...prev]);
       onAddDoctor(newDoctorEntry);
       setSubmissionSuccess(true);
     } else if (modalMode === 'addReview' && selectedDoctorForReview) {
@@ -277,7 +344,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Header Banner - Transparent and Honest */}
+      {/* Header Banner */}
       <div className="bg-gradient-to-br from-blue-700 via-indigo-800 to-blue-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
         <div className="absolute right-0 top-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="relative z-10 max-w-3xl">
@@ -402,7 +469,6 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 className="bg-white rounded-2xl border border-gray-200 hover:border-blue-300 transition-all shadow-xs hover:shadow-md p-5 flex flex-col justify-between"
               >
                 <div>
-                  {/* Origin Badge & Upload Date */}
                   <div className="flex items-center justify-between gap-2 mb-2">
                     <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-md border flex items-center gap-1.5 ${badge.className}`}>
                       <BadgeIcon className={`w-3.5 h-3.5 ${badge.iconClass}`} />
@@ -415,96 +481,90 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                     )}
                   </div>
 
-                {/* Doctor Name & Specialty */}
-                <div className="mt-1">
-                  <h2 className="text-lg font-bold text-gray-900">{doc.name}</h2>
-                  <p className="text-xs font-semibold text-blue-700 mt-0.5">{doc.specialty}</p>
-                </div>
-
-                {/* Kupot Badges */}
-                <div className="flex flex-wrap gap-1.5 mt-3">
-                  {doc.kupot.map((k) => (
-                    <span
-                      key={k}
-                      className="text-[11px] font-medium bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md border border-gray-200"
-                    >
-                      {k === 'No estoy seguro' ? 'Kupá: No confirmada' : k}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Location & Phone */}
-                <div className="mt-3 space-y-1.5 text-xs text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                    <span>{doc.city}</span>
+                  <div className="mt-1">
+                    <h2 className="text-lg font-bold text-gray-900">{doc.name}</h2>
+                    <p className="text-xs font-semibold text-blue-700 mt-0.5">{doc.specialty}</p>
                   </div>
-                  {doc.phone && doc.phone !== 'No especificado (consultar en la Kupá)' && (
-                    <div className="flex items-center gap-2">
-                      <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                      <span className="font-mono">{doc.phone}</span>
-                    </div>
-                  )}
-                </div>
 
-                {/* Community Comments / Reviews */}
-                {doc.reviews && doc.reviews.length > 0 && (
-                  <div className="mt-4 pt-3 border-t border-gray-100 space-y-2">
-                    <div className="text-[11px] font-semibold text-gray-500 flex items-center gap-1">
-                      <MessageSquare className="w-3 h-3 text-blue-500" />
-                      Experiencia de la comunidad:
-                    </div>
-                    {doc.reviews.map((rev) => (
-                      <div
-                        key={rev.id}
-                        className="bg-slate-50 border border-gray-200 rounded-lg p-2.5 text-xs"
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {doc.kupot.map((k) => (
+                      <span
+                        key={k}
+                        className="text-[11px] font-medium bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md border border-gray-200"
                       >
-                        <div className="flex items-center justify-between text-[11px] font-medium text-gray-700 mb-1">
-                          <span className="font-semibold">{rev.author}</span>
-                          <span className="text-gray-400">{rev.date}</span>
-                        </div>
-                        <p className="text-gray-600 italic">"{rev.comment}"</p>
-                      </div>
+                        {k === 'No estoy seguro' ? 'Kupá: No confirmada' : k}
+                      </span>
                     ))}
                   </div>
-                )}
-              </div>
 
-              {/* Card Action & Disclaimer */}
-              <div className="mt-5 pt-3 border-t border-gray-100">
-                <div className="flex items-center justify-between gap-3">
-                  {doc.phone && doc.phone !== 'No especificado (consultar en la Kupá)' ? (
-                    <a
-                      href={`tel:${doc.phone.replace(/[^0-9]/g, '')}`}
-                      className="text-xs font-semibold text-gray-700 hover:text-blue-600 flex items-center gap-1.5 transition"
-                    >
-                      <Phone className="w-3.5 h-3.5" /> Llamar
-                    </a>
-                  ) : (
-                    <span className="text-[11px] text-gray-400">Verificar en la app de la Kupá</span>
+                  <div className="mt-3 space-y-1.5 text-xs text-gray-600">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                      <span>{doc.city}</span>
+                    </div>
+                    {doc.phone && doc.phone !== 'No especificado (consultar en la Kupá)' && (
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                        <span className="font-mono">{doc.phone}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {doc.reviews && doc.reviews.length > 0 && (
+                    <div className="mt-4 pt-3 border-t border-gray-100 space-y-2">
+                      <div className="text-[11px] font-semibold text-gray-500 flex items-center gap-1">
+                        <MessageSquare className="w-3 h-3 text-blue-500" />
+                        Experiencia de la comunidad:
+                      </div>
+                      {doc.reviews.map((rev) => (
+                        <div
+                          key={rev.id}
+                          className="bg-slate-50 border border-gray-200 rounded-lg p-2.5 text-xs"
+                        >
+                          <div className="flex items-center justify-between text-[11px] font-medium text-gray-700 mb-1">
+                            <span className="font-semibold">{rev.author}</span>
+                            <span className="text-gray-400">{rev.date}</span>
+                          </div>
+                          <p className="text-gray-600 italic">"{rev.comment}"</p>
+                        </div>
+                      ))}
+                    </div>
                   )}
-
-                  <button
-                    onClick={() => openAddReviewModal(doc)}
-                    className="text-xs font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition"
-                  >
-                    <Plus className="w-3.5 h-3.5" /> Sumar Comentario
-                  </button>
                 </div>
-                <p className="text-[10px] text-gray-400 mt-2">
-                  ⚠️ Esta información proviene de aportes de la comunidad — confirmá los datos antes de sacar turno.
-                </p>
+
+                <div className="mt-5 pt-3 border-t border-gray-100">
+                  <div className="flex items-center justify-between gap-3">
+                    {doc.phone && doc.phone !== 'No especificado (consultar en la Kupá)' ? (
+                      <a
+                        href={`tel:${doc.phone.replace(/[^0-9]/g, '')}`}
+                        className="text-xs font-semibold text-gray-700 hover:text-blue-600 flex items-center gap-1.5 transition"
+                      >
+                        <Phone className="w-3.5 h-3.5" /> Llamar
+                      </a>
+                    ) : (
+                      <span className="text-[11px] text-gray-400">Verificar en la app de la Kupá</span>
+                    )}
+
+                    <button
+                      onClick={() => openAddReviewModal(doc)}
+                      className="text-xs font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition"
+                    >
+                      <Plus className="w-3.5 h-3.5" /> Sumar Comentario
+                    </button>
+                  </div>
+                  <p className="text-[10px] text-gray-400 mt-2">
+                    ⚠️ Esta información proviene de aportes de la comunidad — confirmá los datos antes de sacar turno.
+                  </p>
+                </div>
               </div>
-            </div>
             );
           })}
         </div>
       ) : (
-        /* Empty State */
         <div className="text-center py-12 bg-white rounded-2xl border border-gray-200 p-8 max-w-2xl mx-auto shadow-xs">
           <Stethoscope className="w-14 h-14 text-blue-400 mx-auto mb-3" />
           <h3 className="text-lg font-bold text-gray-900">
-            {doctors.length === 0 
+            {allDoctors.length === 0 
               ? 'Aún no hay médicos cargados en el directorio' 
               : 'No encontramos médicos con los filtros seleccionados'}
           </h3>
@@ -520,7 +580,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               <Plus className="w-4 h-4" />
               <span>Agregar o Recomendar un Médico</span>
             </button>
-            {doctors.length > 0 && (
+            {allDoctors.length > 0 && (
               <button
                 onClick={() => {
                   setSelectedKupa('Todas');
@@ -537,7 +597,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         </div>
       )}
 
-      {/* Unified Modal: Add Doctor / Add Review with Lashon Hará Antidifamation Scanner */}
+      {/* Unified Modal */}
       {modalMode && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-gray-100 my-8">
@@ -565,7 +625,6 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               </button>
             </div>
 
-            {/* Warning on Lashon Hará & Fact-Based Review Rules */}
             <div className="mt-3 bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 space-y-1">
               <div className="flex items-center gap-1.5 font-bold text-amber-950">
                 <ShieldCheck className="w-4 h-4 text-amber-700" />
@@ -576,7 +635,6 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               </p>
             </div>
 
-            {/* Form Fields */}
             <div className="mt-4 space-y-3.5">
               {modalMode === 'addDoctor' && (
                 <>
@@ -587,7 +645,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                       </label>
                       <input
                         type="text"
-                        placeholder="Ej: Dr. Alejandro Cohen"
+                        placeholder="Ej: Dra. Jacqueline Terdjman"
                         value={doctorName}
                         onChange={(e) => setDoctorName(e.target.value)}
                         className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
@@ -601,7 +659,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                       </label>
                       <input
                         type="text"
-                        placeholder="Ej: Médico de Familia, Pediatría..."
+                        placeholder="Ej: Dentista, Pediatría..."
                         value={doctorSpecialty}
                         onChange={(e) => setDoctorSpecialty(e.target.value)}
                         className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
@@ -631,7 +689,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                       </label>
                       <input
                         type="text"
-                        placeholder="Ej: 03-1234567 o teléfono de la clínica"
+                        placeholder="Ej: 0559360936"
                         value={doctorPhone}
                         onChange={(e) => setDoctorPhone(e.target.value)}
                         className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
@@ -672,14 +730,13 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 </label>
                 <input
                   type="text"
-                  placeholder="Ej: Marcelo S. (Olé de Argentina)"
+                  placeholder="Ej: Joni"
                   value={authorName}
                   onChange={(e) => setAuthorName(e.target.value)}
                   className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
                 />
               </div>
 
-              {/* Comment text area */}
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-1">
                   Comentario Libre de tu Experiencia <span className="text-rose-500">*</span>
@@ -694,7 +751,6 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 />
               </div>
 
-              {/* Real-time Moderation Feedback Card */}
               {moderationFeedback && (
                 <div
                   className={`p-3.5 rounded-xl border text-xs ${
@@ -743,14 +799,13 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                   <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                   <span>
                     {modalMode === 'addDoctor' 
-                      ? '¡Médico agregado al directorio con éxito! Gracias por sumar tu recomendación.' 
+                      ? '¡Médico agregado al directorio con éxito! Guardado en la base de datos central.' 
                       : '¡Comentario publicado con éxito!'}
                   </span>
                 </div>
               )}
             </div>
 
-            {/* Actions */}
             <div className="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between gap-3">
               <button
                 type="button"
