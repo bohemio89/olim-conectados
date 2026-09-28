@@ -1,6 +1,13 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+export default async function handler(req: any, res: any) {
+  // Configuración de cabeceras CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método no permitido' });
   }
@@ -16,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // 1. Cuenta bancaria para Sal Klitá
   if (q.includes('sal klit') || (q.includes('cuenta') && (q.includes('banco') || q.includes('abrir') || q.includes('informo') || q.includes('teudat ole')))) {
-    return res.json({
+    return res.status(200).json({
       text: `🏦 **Cómo Abrir tu Cuenta Bancaria e Informar al Misrad HaAliyah:**
 
 1. **Abrir la cuenta en el banco:** Acude con tu libreta de Teudat Olé, Teudat Zehut provisoria de papel y tu pasaporte extranjero.
@@ -30,7 +37,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // 2. Canje de licencia de conducir (>5 años)
   if (q.includes('licencia') && (q.includes('canje') || q.includes('canjeo') || q.includes('5 años') || q.includes('extranjera'))) {
-    return res.json({
+    return res.status(200).json({
       text: `🚗 **Canje de Licencia de Conducir Extranjera (>5 años de antigüedad):**
 
 Si tu licencia extranjera tiene más de 5 años de antigüedad comprobada y estás dentro de tus primeros años de Aliá:
@@ -46,7 +53,7 @@ Si tu licencia extranjera tiene más de 5 años de antigüedad comprobada y est�
 
   // 3. Tofes 101 y Mas Hajnasá
   if (q.includes('101') || (q.includes('mas hajnas') && q.includes('reteng'))) {
-    return res.json({
+    return res.status(200).json({
       text: `📑 **Cómo completar el Tofes 101 para evitar retenciones de más (Mas Hajnasá):**
 
 1. **Cuándo se llena:** Al ingresar a cualquier trabajo en Israel o en el mes de enero de cada nuevo año fiscal.
@@ -60,7 +67,7 @@ Si tu licencia extranjera tiene más de 5 años de antigüedad comprobada y est�
 
   // 4. Corte de ayuda de alquiler en mes 30
   if (q.includes('mes 30') || (q.includes('alquiler') && (q.includes('corta') || q.includes('termina') || q.includes('finaliza')))) {
-    return res.json({
+    return res.status(200).json({
       text: `🏠 **¿Por qué se corta la ayuda de alquiler en el mes 30?:**
 
 - **Límite legal del Ministerio de Aliá:** La ayuda automática de alquiler (**Siyua bi'Sjirot**) otorgada por **Misrad HaAliyah** tiene una duración reglamentaria máxima de **24 meses continuos** (comienza automáticamente en el mes 7 y finaliza de manera estricta en el mes 30).
@@ -71,7 +78,7 @@ Si tu licencia extranjera tiene más de 5 años de antigüedad comprobada y est�
 
   // 5. Dos trabajos simultáneos y Teum Mas (47%)
   if (q.includes('teum mas') || q.includes('47%') || q.includes('2 trabajos') || q.includes('dos trabajos')) {
-    return res.json({
+    return res.status(200).json({
       text: `⚠️ **Dos trabajos simultáneos: Cómo hacer el Teum Mas y evitar el 47%:**
 
 Por normativa fiscal en Israel, si tienes más de un empleo y no presentas una coordinación impositiva, el empleador secundario está obligado a retener la tasa máxima legal (aproximadamente el 47%).
@@ -86,7 +93,7 @@ Por normativa fiscal en Israel, si tienes más de un empleo y no presentas una c
 
   // 6. Pikud HaOref y directivas laborales
   if (q.includes('pikud') || (q.includes('despedir') && q.includes('vacaciones')) || q.includes('haoref')) {
-    return res.json({
+    return res.status(200).json({
       text: `🛡️ **Directivas de Pikud HaOref y Derechos Laborales:**
 
 1. **Prohibición estricta de despido:**
@@ -100,7 +107,7 @@ Por normativa fiscal en Israel, si tienes más de un empleo y no presentas una c
 
   // 7. Número de celular y tarjeta Rav-Kav
   if ((q.includes('celular') || q.includes('telefono')) && (q.includes('rav-kav') || q.includes('rav kav') || q.includes('transporte'))) {
-    return res.json({
+    return res.status(200).json({
       text: `📱 **Cómo obtener número de celular y tarjeta Rav-Kav:**
 
 📲 **1. Celular israelí:**
@@ -117,7 +124,7 @@ Por normativa fiscal en Israel, si tienes más de un empleo y no presentas una c
 
   // 8. Urgencias y Miún
   if (q.includes('miun') || q.includes('miún') || q.includes('hospital') || q.includes('guardia')) {
-    return res.json({
+    return res.status(200).json({
       text: `⚠️ **Alerta Económica Importante de Guardia (Miún):**
 El hospital en Israel **NO es gratuito** para consultas espontáneas. Si te presentas en la guardia (**Miún**) sin derivación previa (**hafniá**), recibirás una factura de cientos de shékels.
 
@@ -127,8 +134,7 @@ El hospital en Israel **NO es gratuito** para consultas espontáneas. Si te pres
     });
   }
 
-  // Respuesta general de respaldo
-  return res.json({
+  return res.status(200).json({
     text: `Para consultas puntuales sobre trámites oficiales de Aliyah (Sal Klitá, licencias, Tofes 101, Bituaj Leumi o Pikud HaOref), por favor especifica el trámite para brindarte el paso a paso detallado.`
   });
 }
