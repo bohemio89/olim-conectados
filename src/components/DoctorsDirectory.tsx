@@ -53,7 +53,15 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               city: item.city,
               phone: item.phone || 'No especificado (consultar en la Kupá)',
               kupot: [item.kupa || 'No estoy seguro'],
-              reviews: Array.isArray(item.comments) ? item.comments : [],
+              reviews: Array.isArray(item.comments)
+                ? item.comments.map((c: any, idx: number) => ({
+                    id: c.id || `rev-${idx}-${Date.now()}`,
+                    author: c.author || 'Olé de la comunidad',
+                    date: c.date || 'Reciente',
+                    comment: c.comment || c.text || '',
+                    isVerifiedOle: c.isVerifiedOle ?? true,
+                  }))
+                : [],
               reviewsCount: Array.isArray(item.comments) ? item.comments.length : 0,
               isCommunityAdded: true,
               uploadedAt: item.created_at ? new Date(item.created_at).toLocaleDateString('es-ES') : 'Reciente'
@@ -282,7 +290,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         uploadedAt: todayStr,
       };
 
-      // 1. Guardar en Supabase en tiempo real a través de /api/doctors
+      // Guardar en Supabase en tiempo real a través de /api/doctors
       try {
         await fetch('/api/doctors', {
           method: 'POST',
@@ -300,6 +308,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               {
                 author: newReview.author,
                 date: newReview.date,
+                comment: newReview.comment,
                 text: newReview.comment
               }
             ]
@@ -309,7 +318,6 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         console.error('Error persistiendo en Supabase:', err);
       }
 
-      // Actualizar estado local inmediato
       setCloudDoctors((prev) => [newDoctorEntry, ...prev]);
       onAddDoctor(newDoctorEntry);
       setSubmissionSuccess(true);
