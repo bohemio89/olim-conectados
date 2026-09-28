@@ -15,191 +15,12 @@ import {
   Stethoscope,
   FileText,
   Coffee,
-  ShieldCheck,
-  Building2,
-  Clock,
-  ArrowRight,
-  Users
+  Clock
 } from 'lucide-react';
 import { ChatMessage } from '../types';
 import { EmergencyButton } from './EmergencyButton';
 
 export type UserStage = 'general' | 'recien_llegado' | 'emergencia' | 'tramite';
-
-function getMessageSingleSourceBadge(msg: ChatMessage): { text: string; isOfficial: boolean } | null {
-  // If user message, welcome initial card, or connection error -> NO source badge
-  if (!msg || msg.role === 'user' || msg.id === 'welcome' || msg.id === 'welcome-reset' || msg.id?.startsWith('err-')) {
-    return null;
-  }
-
-  const c = (msg.content || '').toLowerCase();
-
-  // If connection error / fallback notice -> NO badge
-  if (
-    c.includes('inconveniente momentáneo de conexión') ||
-    c.includes('interrupción momentánea de conexión') ||
-    c.includes('ocurrió una interrupción') ||
-    c.includes('no pude procesar la consulta') ||
-    c.includes('intenta enviar tu consulta nuevamente')
-  ) {
-    return null;
-  }
-
-  // 1. Salud, Médicos, Kupá, Miún, MADA, Urgencias -> "Fuente: Kupot Jolim"
-  if (
-    c.includes('kupa') ||
-    c.includes('kupá') ||
-    c.includes('kupot') ||
-    c.includes('maccabi') ||
-    c.includes('clalit') ||
-    c.includes('meuhedet') ||
-    c.includes('leumit') ||
-    c.includes('médico') ||
-    c.includes('medico') ||
-    c.includes('miún') ||
-    c.includes('miun') ||
-    c.includes('hafniá') ||
-    c.includes('hafnia') ||
-    c.includes('terem') ||
-    c.includes('bikur rofé') ||
-    c.includes('bikur rofe') ||
-    c.includes('mada') ||
-    c.includes('ambulancia') ||
-    c.includes('hospital') ||
-    c.includes('doctors.org.il') ||
-    c.includes('rofé mishpajá') ||
-    c.includes('rofe mishpaja')
-  ) {
-    return {
-      text: 'Fuente: Kupot Jolim',
-      isOfficial: true,
-    };
-  }
-
-  // 2. Bituaj Leumi, Subsidios laborales, Discapacidad, Accidentes (BL 250), Reposo médico -> "Fuente: Bituaj Leumi"
-  if (
-    c.includes('bituaj leumi') ||
-    c.includes('bituaj') ||
-    c.includes('bl 250') ||
-    c.includes('dmei majalá') ||
-    c.includes('dmei majala') ||
-    c.includes('dmei pgiá') ||
-    c.includes('dmei pgia') ||
-    c.includes('btl.gov.il') ||
-    c.includes('*6050') ||
-    c.includes('accidente laboral') ||
-    c.includes('tendinitis') ||
-    c.includes('rofé taasukatí') ||
-    c.includes('rofe taasukati') ||
-    c.includes('incapacidad laboral')
-  ) {
-    return {
-      text: 'Fuente: Bituaj Leumi',
-      isOfficial: true,
-    };
-  }
-
-  // 3. DNI, Teudat Zehut, Pasaporte (Darkón), Visas, Teudat Ma'avar -> "Fuente: Misrad HaPnim"
-  if (
-    c.includes('misrad hapnim') ||
-    c.includes('misrad ha-pnim') ||
-    c.includes('teudat zehut') ||
-    c.includes('teudat zeut') ||
-    c.includes('darkón') ||
-    c.includes('darkon') ||
-    c.includes("teudat ma'avar") ||
-    c.includes('teudat maavar') ||
-    c.includes('biométrica') ||
-    c.includes('biometrica') ||
-    c.includes('*3450')
-  ) {
-    return {
-      text: 'Fuente: Misrad HaPnim',
-      isOfficial: true,
-    };
-  }
-
-  // 4. Transporte, Rav-Kav, Licencia de Conducir, Misrad HaRishuí -> "Fuente: Ministerio de Transporte"
-  if (
-    c.includes('licencia') ||
-    c.includes('conducir') ||
-    c.includes('rishayón') ||
-    c.includes('rishayon') ||
-    c.includes('rishui') ||
-    c.includes('rishuí') ||
-    c.includes('tofes yarok') ||
-    c.includes('rav-kav') ||
-    c.includes('rav kav') ||
-    c.includes('transporte público') ||
-    c.includes('israel railways')
-  ) {
-    return {
-      text: 'Fuente: Ministerio de Transporte',
-      isOfficial: true,
-    };
-  }
-
-  // 5. Sal Klitá, Ulpán, Aliyá, Ayuda alquiler, Plan de Negocio (*2994) -> "Fuente: Misrad HaAliyah"
-  if (
-    c.includes('sal klitá') ||
-    c.includes('sal klita') ||
-    c.includes('misrad haaliyah') ||
-    c.includes('misrad haklita') ||
-    c.includes('misrad ha-aliyah') ||
-    c.includes('teudat olé') ||
-    c.includes('teudat ole') ||
-    c.includes('ulpán') ||
-    c.includes('ulpan') ||
-    c.includes("siyua bi'sjirot") ||
-    c.includes('ayuda de alquiler') ||
-    c.includes('subsidio de alquiler') ||
-    c.includes('*2994') ||
-    c.includes('maalot') ||
-    c.includes('מעלות') ||
-    c.includes('yazamut') ||
-    c.includes('arnoná') ||
-    c.includes('arnona')
-  ) {
-    return {
-      text: 'Fuente: Misrad HaAliyah',
-      isOfficial: true,
-    };
-  }
-
-  // 6. Comercios, vida cotidiana, yerba, compras, gastronomía -> "Fuente: Comunidad / Guía Local"
-  if (
-    c.includes('yerba') ||
-    c.includes('mate') ||
-    c.includes('harina pan') ||
-    c.includes('harina p.a.n') ||
-    c.includes('arepa') ||
-    c.includes('dulce de leche') ||
-    c.includes('alfajor') ||
-    c.includes('comercio') ||
-    c.includes('tienda') ||
-    c.includes('levanda') ||
-    c.includes('allenby') ||
-    c.includes('bialik') ||
-    c.includes('shuk') ||
-    c.includes('tiv taam') ||
-    c.includes("tiv ta'am") ||
-    c.includes('keshet teamim') ||
-    c.includes('boliche') ||
-    c.includes('comida') ||
-    c.includes('empanada')
-  ) {
-    return {
-      text: 'Fuente: Comunidad / Guía Local',
-      isOfficial: false,
-    };
-  }
-
-  // 7. General community / default
-  return {
-    text: 'Fuente: Comunidad / Guía Local',
-    isOfficial: false,
-  };
-}
 
 interface CategorizedPrompt {
   id: string;
@@ -374,10 +195,10 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
   const [isLoading, setIsLoading] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  // User Stage selector (Punto A UX: "Arquitectura por momento del usuario")
+  // User Stage selector
   const [userStage, setUserStage] = useState<UserStage>('general');
 
-  // Feedback store: messageId -> 'up' | 'down' (Punto F UX)
+  // Feedback store: messageId -> 'up' | 'down'
   const [feedbackState, setFeedbackState] = useState<Record<string, 'up' | 'down'>>(() => {
     try {
       const saved = localStorage.getItem('olim_chat_feedback');
@@ -387,7 +208,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
     }
   });
 
-  // Onboarding modal dismiss state (Punto 7 UX)
+  // Onboarding modal dismiss state
   const [showOnboarding, setShowOnboarding] = useState<boolean>(() => {
     try {
       return !localStorage.getItem('olim_onboarding_dismissed');
@@ -429,7 +250,6 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
       return updated;
     });
 
-    // Send anonymous telemetry to backend if available
     fetch('/api/chat-feedback', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -453,7 +273,6 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
-    // Sanitize conversation history: only valid user and assistant turns, excluding error banners
     const sanitizedHistory = messages
       .filter((m) => m && typeof m.content === 'string' && m.content.trim() && !m.id?.startsWith('err-') && m.id !== 'welcome')
       .map((m) => ({
@@ -497,7 +316,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
 
         const data = await response.json();
         responseData = data;
-        break; // Success!
+        break;
       } catch (err: any) {
         lastError = err;
         console.warn(`[AssistantChat] Intento ${attempt}/2 fallido:`, {
@@ -509,7 +328,6 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
         });
 
         if (attempt === 1) {
-          // Silent 1.5s backoff before second attempt
           await new Promise((resolve) => setTimeout(resolve, 1500));
         }
       }
@@ -527,7 +345,6 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
       return;
     }
 
-    // If both attempts failed, log comprehensive diagnostics and show clean retry error notice
     console.error('[AssistantChat] Error definitivo al consultar endpoint /api/chat:', {
       error: lastError?.message || String(lastError),
       name: lastError?.name,
@@ -569,7 +386,6 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
     ]);
   };
 
-  // Filter chips based on User Stage (Punto A UX)
   const availablePrompts = CATEGORIZED_PROMPTS.filter((p) => {
     if (userStage === 'general') return true;
     return p.stage.includes(userStage);
@@ -581,7 +397,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
 
   return (
     <div className="space-y-5 max-w-5xl mx-auto">
-      {/* Punto 1 UX: Card destacada de Alerta Miún en el feed normal (no fija invasiva en el header) */}
+      {/* Alerta Miún */}
       <div className="bg-amber-50 border border-amber-300/80 rounded-2xl p-4 sm:p-5 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-start gap-3">
           <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-900 flex items-center justify-center shrink-0 mt-0.5">
@@ -619,7 +435,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
         </div>
       </div>
 
-      {/* Punto 7 UX: Onboarding Dismissable Banner (aparece solo primera vez) */}
+      {/* Onboarding Banner */}
       {showOnboarding && (
         <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 border border-blue-200 rounded-2xl p-4 sm:p-5 relative shadow-xs">
           <button
@@ -654,7 +470,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
         </div>
       )}
 
-      {/* Header card: Punto 2 UX — Título completo reservado para este bloque */}
+      {/* Header card */}
       <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-xs flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20 shrink-0">
@@ -683,7 +499,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
         </button>
       </div>
 
-      {/* Punto A UX: Selector por Momento del Usuario (Recién llegué / Emergencia / Trámite en curso / Info general) */}
+      {/* Selector por Momento del Usuario */}
       <div className="bg-white rounded-2xl border border-gray-200 p-3 sm:p-4 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
           <span className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
@@ -714,7 +530,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
         </div>
       </div>
 
-      {/* Punto 4 UX & Punto 8 Responsive: Chips de preguntas categorizados en 3 grupos con acentos y 1 columna en mobile */}
+      {/* Chips de preguntas frecuentes */}
       <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 shadow-xs space-y-4">
         <div className="flex items-center justify-between border-b border-gray-100 pb-2">
           <span className="text-xs sm:text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
@@ -832,12 +648,12 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
                       : 'bg-gray-50 text-gray-900 border border-gray-200 rounded-tl-none space-y-3'
                   }`}
                 >
-                  {/* Assistant response rendering (Punto E UX: párrafos legibles con buena altura de línea) */}
+                  {/* Assistant response rendering */}
                   <div className="whitespace-pre-wrap font-sans text-xs sm:text-base leading-relaxed">
                     {msg.content}
                   </div>
 
-                  {/* Botón de acción rápida para reintentar si el mensaje es de error de conexión */}
+                  {/* Botón de reintento en caso de error */}
                   {msg.id?.startsWith('err-') && lastUserQueryRef.current && (
                     <div className="pt-1">
                       <button
@@ -851,33 +667,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
                     </div>
                   )}
 
-                  {/* Indicador de fuente contextual condicional (Fuente única y exclusiva) */}
-                  {!isUser && (() => {
-                    const badge = getMessageSingleSourceBadge(msg);
-                    if (!badge) return null;
-                    const isOfficial = badge.isOfficial;
-                    return (
-                      <div
-                        className={`rounded-lg p-2 text-[11px] flex items-center justify-between border ${
-                          isOfficial
-                            ? 'bg-blue-50/80 border-blue-200/80 text-blue-900'
-                            : 'bg-amber-50/80 border-amber-200/80 text-amber-900'
-                        }`}
-                      >
-                        <span className="flex items-center gap-1.5 font-medium">
-                          {isOfficial ? (
-                            <ShieldCheck className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                          ) : (
-                            <Users className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                          )}
-                          {badge.text}
-                        </span>
-                        <span className="text-gray-400 text-[10px] hidden xs:inline">Actualizado: 2026</span>
-                      </div>
-                    );
-                  })()}
-
-                  {/* Footer of message: Timestamp + Copy + Punto F UX: Feedback (Up/Down) */}
+                  {/* Footer of message: Timestamp + Copy + Feedback */}
                   <div
                     className={`flex items-center justify-between text-[11px] pt-1 border-t ${
                       isUser ? 'border-blue-500/50 text-blue-200' : 'border-gray-200 text-gray-500'
@@ -887,7 +677,6 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
 
                     {!isUser && (
                       <div className="flex items-center gap-3">
-                        {/* Punto F UX: Feedback pulgar arriba / pulgar abajo */}
                         <div className="flex items-center gap-1 bg-gray-100/80 px-2 py-0.5 rounded-lg border border-gray-200">
                           <span className="text-[10px] text-gray-400 mr-1">¿Útil?</span>
                           <button
@@ -951,7 +740,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input Bar & Punto 5 UX: Visible Disclaimer */}
+        {/* Input Bar & Disclaimer */}
         <div className="p-3 sm:p-4 border-t border-gray-200 bg-gray-50/50 rounded-b-2xl space-y-2">
           <form
             onSubmit={(e) => {
@@ -978,7 +767,6 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
             </button>
           </form>
 
-          {/* Punto 5 UX: Disclaimer fijo y visible con icono de info sutil */}
           <div className="flex items-center justify-center gap-1.5 text-[11px] text-gray-500 text-center pt-0.5">
             <Info className="w-3.5 h-3.5 text-gray-400 shrink-0" />
             <span>
