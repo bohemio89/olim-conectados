@@ -24,6 +24,35 @@ import {
   Compass
 } from 'lucide-react';
 
+// Mapeo entre identificador interno de pestaña y ruta de la URL
+const TAB_TO_PATH: Record<string, string> = {
+  assistant: '/',
+  doctors: '/medicos-en-espanol',
+  community: '/comunidad',
+  nightlife: '/vida-nocturna',
+  'business-plan': '/plan-de-negocio',
+  emergency: '/emergencias',
+  'crisis-civil': '/crisis-civil',
+  bituaj: '/bituaj-leumi',
+  'sick-leave': '/calculadora-dias-enfermedad',
+  license: '/licencia-de-conducir',
+  bureaucracy: '/tramites-y-burocracia',
+  checklist: '/checklist-aliyah',
+};
+
+const PATH_TO_TAB: Record<string, string> = Object.entries(TAB_TO_PATH).reduce(
+  (acc, [tab, path]) => {
+    acc[path] = tab;
+    return acc;
+  },
+  {} as Record<string, string>
+);
+
+const getTabFromPath = (pathname: string): string => {
+  const cleanPath = pathname.replace(/\/$/, '') || '/';
+  return PATH_TO_TAB[cleanPath] || 'assistant';
+};
+
 const INITIAL_CLICK_COUNTS: Record<string, number> = {
   assistant: 0,
   doctors: 0,
@@ -40,7 +69,14 @@ const INITIAL_CLICK_COUNTS: Record<string, number> = {
 };
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<string>('assistant');
+  // Inicializa la pestaña según la ruta actual en la barra de direcciones
+  const [activeTab, setActiveTabState] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return getTabFromPath(window.location.pathname);
+    }
+    return 'assistant';
+  });
+
   const [pendingChatQuery, setPendingChatQuery] = useState<string>('');
   const [doctorsList, setDoctorsList] = useState<Doctor[]>(() => {
     try {
@@ -59,6 +95,26 @@ export default function App() {
       return false;
     }
   });
+
+  // Cambia la pestaña activa y sincroniza la URL con pushState
+  const navigateToTab = (tabId: string) => {
+    setActiveTabState(tabId);
+    const targetPath = TAB_TO_PATH[tabId] || '/';
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ tabId }, '', targetPath);
+    }
+  };
+
+  // Maneja la navegación con los botones Atrás / Adelante del navegador
+  useEffect(() => {
+    const handlePopState = () => {
+      const matchedTab = getTabFromPath(window.location.pathname);
+      setActiveTabState(matchedTab);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const handleToggleCollapse = () => {
     setIsSidebarCollapsed((prev) => {
@@ -80,6 +136,7 @@ export default function App() {
   });
 
   const handleTabClick = (tabId: string) => {
+    navigateToTab(tabId);
     setClickCounts((prev) => {
       const updated = {
         ...prev,
@@ -127,7 +184,7 @@ export default function App() {
       {/* Permanent Left Sidebar on Desktop / Drawer on Mobile */}
       <Sidebar
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={navigateToTab}
         clickCounts={clickCounts}
         onItemClick={handleTabClick}
         isOpenMobile={isMobileSidebarOpen}
@@ -136,16 +193,16 @@ export default function App() {
         setIsCollapsed={setIsSidebarCollapsed}
       />
 
-      {/* Main Content Wrapper (offset by sidebar width on lg: 5rem / 20 when collapsed, 18rem / 72 when expanded) */}
+      {/* Main Content Wrapper */}
       <div 
         className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${
           isSidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'
         }`}
       >
-        {/* Simplified Header with Dynamic Top-Clicked Pills & Collapse (=) Toggle */}
+        {/* Topbar Header */}
         <Topbar
           activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          setActiveTab={navigateToTab}
           onOpenMobileSidebar={() => setIsMobileSidebarOpen(true)}
           clickCounts={clickCounts}
           onItemClick={handleTabClick}
@@ -153,7 +210,7 @@ export default function App() {
           onToggleCollapse={handleToggleCollapse}
           onSendQueryToChat={(q) => {
             setPendingChatQuery(q);
-            setActiveTab('assistant');
+            navigateToTab('assistant');
             handleTabClick('assistant');
           }}
         />
@@ -164,7 +221,7 @@ export default function App() {
             <AssistantChat 
               initialQuery={pendingChatQuery} 
               onNavigateToTab={(tabId) => {
-                setActiveTab(tabId);
+                navigateToTab(tabId);
                 handleTabClick(tabId);
               }}
             />
@@ -174,7 +231,7 @@ export default function App() {
           {activeTab === 'checklist' && (
             <OlehChecklist
               onNavigateToTab={(tabId) => {
-                setActiveTab(tabId);
+                navigateToTab(tabId);
                 handleTabClick(tabId);
               }}
             />
@@ -196,7 +253,7 @@ export default function App() {
               stores={COMMUNITY_STORES} 
               groups={COMMUNITY_GROUPS} 
               onNavigateToNightlife={() => {
-                setActiveTab('nightlife');
+                navigateToTab('nightlife');
                 handleTabClick('nightlife');
               }}
             />
@@ -219,14 +276,14 @@ export default function App() {
           <EmergencyButton
             variant="compact"
             onClick={() => {
-              setActiveTab('emergency');
+              navigateToTab('emergency');
               handleTabClick('emergency');
             }}
           />
 
           <button
             onClick={() => {
-              setActiveTab('assistant');
+              navigateToTab('assistant');
               handleTabClick('assistant');
             }}
             className="flex items-center gap-1.5 font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200"
