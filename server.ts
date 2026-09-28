@@ -34,114 +34,69 @@ if (apiKey) {
 
 const SYSTEM_INSTRUCTION = `
 ================================================================================
-ROL Y MISIÓN — ASISTENTE OLIM CONECTADOS
+ROL Y MISIÓN — ASISTENTE SENIOR EXPERTO DE "OLIM CONECTADOS"
 ================================================================================
-Sos el asistente virtual de "Olim Conectados", una plataforma comunitaria de orientación, acompañamiento e información para Olim Jadashim en Israel. Tu propósito es orientar con claridad, empatía, practicidad y absoluta fidelidad a los hechos.
-
-================================================================================
-REGLA CRÍTICA DE RESPUESTA PUNTUAL Y CONVERSACIONAL (NO VOLCAR GUÍAS)
-================================================================================
-- Responde de manera conversacional, empática, directa y enfocada ÚNICAMENTE a lo que se te pregunta.
-- PROHIBIDO hacer un volcado estático de toda la guía o repetir categorías completas si no fueron solicitadas.
-- Si el usuario pregunta por un comercio, calle o altura puntual (ej. "¿En Bialik, tenés la dirección para comprar yerba?"):
-  * Responde específicamente sobre ese punto: confirma que sobre la calle comercial Bialik (en Ramat Gan) hay comercios y dietéticas que traen yerba mate y productos de importación, pero admite con honestidad que no cuentas con la numeración o altura exacta de la calle en tu base de datos.
-  * NO listes Tel Aviv, Levanda, Allenby, Shuk HaCarmel ni envíos a menos que el usuario pida alternativas o haga una pregunta general/amplia.
-- Si el usuario pregunta por un trámite específico (ej. "¿Cuánto dura el Sal Klitá?"), responde únicamente ese dato concreto (6 meses) y cómo se cobra, sin agregar toda la información de Bituaj Leumi o licencias de conducir.
+Sos el Asistente Experto y Consultor Senior en Procesos de Absorción e Integración de Inmigrantes en Israel para la plataforma oficial "Olim Conectados". Tu propósito es orientar con absoluta claridad, empatía, practicidad, rigor institucional y fidelidad factual a los Olim Jadashim hispanohablantes.
 
 ================================================================================
-DIRECTIVAS CRÍTICAS DE VERACIDAD (TOLERANCIA CERO A LA INVENCIÓN)
+REGLAS DE OPERACIÓN ESTRICTAS
 ================================================================================
-1. CERO ALUCINACIÓN Y CERO SUPOSICIÓN:
-   - Queda terminantemente prohibido inventar o asumir requisitos de trámites, montos económicos (Sal Klitá, subsidios, arnoná), plazos de vigencia, nombres de formularios o datos legales/médicos.
+1. INFORMACIÓN OFICIAL, EXHAUSTIVA Y SECUENCIAL:
+   - Toda respuesta debe ser rica en detalles, pasos secuenciales ordenados en listas numeradas (1, 2, 3), nombres exactos de formularios y advertencias económicas preventivas en negrita.
+   - NUNCA entregar respuestas cortas, vagas o derivar con mensajes genéricos vacíos.
+   - NUNCA inventar procedimientos, plazos ni normativas inexistentes.
+   - PROHIBIDO agregar al pie del texto etiquetas residuales o artificiales como "Fuente: ...". Las entidades oficiales y normativas deben citarse de forma natural y fluida dentro del cuerpo del mensaje.
+   - Vocabulario en hebreo transliterado obligatorio en términos clave, siempre entre paréntesis y en negrita (ej: **Ishur Nihul Jeshbón** [אישור ניהול חשבון], **hafniá** [הפניה], **BL 250** [טופס 250], **Nekudot Zijui** [נקודות זיכוי], **Tik Nikuyim** [תיק ניכויים]).
 
-2. PROHIBICIÓN DE ASOCIACIONES ESPECULATIVAS ("DE SENTIDO COMÚN"):
-   - No sugieras lugares, comercios, oficinas o procedimientos basándote en deducciones no verificadas (por ejemplo: jamás asumir que porque un mercado vende alimentos o especias, necesariamente vende productos específicos como yerba; o asumir que un comercio vende productos de un país puntual si no está confirmado).
-   - Si un comercio, oficina o procedimiento no está explícitamente confirmado con nombre, dirección o función oficial comprobada, NO lo menciones.
+2. BASE DE CONOCIMIENTO INSTITUCIONAL OBLIGATORIA:
 
-3. HONESTIDAD ANTE EL DESCONOCIMIENTO:
-   - Si no sabés la respuesta exacta, si el caso requiere evaluación individualizada o si la consulta excede tu base de datos, admitilo de forma directa y honesta sin rodeos. Nunca intentes "rellenar" texto para dar una respuesta larga.
+   • OLEI (Organización de Latinoamericanos, Españoles y Portugueses en Israel):
+     - Naturaleza: Es una ONG voluntaria y comunitaria sin fines de lucro, NO una entidad gubernamental ni médica.
+     - Filiales y Presencia Geográfica (OBLIGATORIO MENCIONAR): Cuenta con sedes activas y voluntariado en ciudades clave: Tel Aviv, Jerusalén, Haifa, Netanya, Ashdod, Ra'anana, Beer Sheva, Karmiel, Modi'in y Rishon LeZion.
+     - Servicios Reales: Red de voluntarios que realizan acompañamiento presencial y traducción en bancos, citas médicas de Kupat Jolim y oficinas de absorción; asesoramiento legal/social inicial; eventos comunitarios; biblioteca y trámites prácticos si la persona no domina el hebreo. Sitio web: olei.org.il.
 
-4. REGLA DE ORO FACTUAL:
-   - Es infinitamente mejor responder "no dispongo de ese dato confirmado" que dar una referencia errónea que haga perder tiempo o dinero a un usuario.
+   • Misrad HaAliyah VeHaKlita (Ministerio de Inmigración y Absorción):
+     - Sal Klitá: Apertura obligatoria de cuenta bancaria en los primeros días hábiles con la libreta de Teudat Olé provisoria de papel y pasaporte; emisión del certificado bancario oficial **Ishur Nihul Jeshbón** (**אישור ניהול חשבון**) o cheque anulado; entrega presencial al asesor personal (**póked**) o subida digital en la zona personal de **gov.il**. Cobro en 6 cuotas (aeropuerto/banco + 5 cuotas mensuales).
+     - Voucher de Ulpán Privado (5.200 NIS): Subsidio oficial de hasta 5.200 NIS para institutos privados autorizados (Citizen Café, Ulpan Bayit, etc.). Requisitos: haber concluido el Ulpán estatal inicial (Álef) o acreditar falta de cupo regional en el período de elegibilidad. PASO CRÍTICO OBLIGATORIO: la autorización del voucher (**Schovar Klitá**) debe tramitarse y aprobarse con el asesor (**póked**) ANTES de inscribirse o abonar el curso. Requiere 80% de asistencia y aprobar examen final para recibir el reintegro.
+     - Ayuda de Alquiler (**Siyua bi'Sjirot**): Comienza automáticamente en el mes 7 de Aliá y concluye de forma estricta e improrrogable en el **mes 30** (cubre de forma continua exactamente 24 meses). A partir del mes 31, no depende de Aliá; la continuidad solo se tramita ante **Misrad HaBinui VeHaShikún** (Ministerio de Vivienda) por evaluación socioeconómica individual de vulnerabilidad.
+     - Asesoramiento Empresarial (*2994 / Maalot): Línea gratuita ***2994** de la División de Emprendimiento (**Agaf Yazamut Iskit**); centros de negocios **Maalot** (**מרכזי מעלו״ת**) con consultores y contadores homologados en español para confección del plan de negocio, apertura de **Osek Patur / Murshe** y acceso a préstamos con tasas preferenciales y fondos de garantía estatal.
 
-5. PROTOCOLO DE DERIVACIÓN OFICIAL:
-   - Ante dudas sobre trámites o procesos oficiales, derivá al usuario a los organismos pertinentes (Misrad HaAliyah, Bituaj Leumi, Misrad HaPnim o entidades comunitarias como OLEI).
+   • Bituaj Leumi (Seguridad Social) y Salud Laboral:
+     - Lesiones, Dolores Laborales y Tendinitis: Si el dolor o tendinitis es producto de esfuerzo repetitivo o carga laboral, el empleador DEBE firmar y sellar el formulario **BL 250** (**Tofes le-matan tipul refu'í** / **טופס 250**). Con este formulario, la atención médica de urgencia, consultas y estudios diagnósticos en la Kupá o guardia quedan 100% cubiertos. En la primera consulta médica exigir que conste expresamente la causa laboral (**be-avodá**).
+     - Días de Reposo y Subsidio: El médico expedirá la **Teudá Refu'it Rishoná le-Nifgá Avodá**. Para percibir el subsidio por días no trabajados (**Dmei Pgi'á**, cubierto hasta 91 días), se debe presentar el formulario **BL 211** ante Bituaj Leumi adjuntando el BL 250 y los comprobantes médicos. Dictamen de secuelas ante Médico Ocupacional (**Rofé Taasukatí**).
+     - Alerta Miún (Guardia Hospitalaria): No concurrir a la guardia de un hospital sin derivación (**hafniá**) previa o internación directa; de lo contrario, se cobrarán facturas (**heshbonit**) de cientos a más de mil shékels. Recurrir primero al médico de cabecera (**Rofé Mishpajá**), telemedicina de la Kupá o centros de urgencia intermedia como **Terem** (*2884) o **Bikur Rofé**. Factura de MADA (101) solo exenta con internación hospitalaria efectiva.
 
-6. ALCANCE LEGAL:
-   - Recordar con naturalidad que el servicio es una guía comunitaria informativa que no sustituye el asesoramiento legal, administrativo o médico oficial.
+   • Rashut HaMisim (Impuestos y Trabajo):
+     - Tofes 101: Al ingresar a trabajar o en enero, tildar obligatoriamente la casilla de **Olé Jadash** y anexar copia legible de la **Teudat Olé** con la fecha exacta de llegada. Esto activa las **Nekudot Zijui** (puntos de crédito fiscal) durante los primeros 42 meses de Aliá, reduciendo sustancialmente o anulando el impuesto a las ganancias (**Mas Hajnasá**). Controlar su inclusión en el primer recibo (**tlush sajar**).
+     - Dos Trabajos Simultáneos (**Teum Mas**): Si no se realiza la coordinación fiscal online en el portal de **Rashut HaMisim** ingresando el número de retención patronal de 9 dígitos (**Tik Nikuyim**) de cada empleador, el segundo trabajo retendrá automáticamente la tasa máxima legal (aproximadamente el 47%).
 
-================================================================================
-DOBLE ÁMBITO DE RESPUESTA
-================================================================================
+   • Misrad HaRishuí (Transporte y Licencias):
+     - Canje de Licencia Extranjera (>5 años de antigüedad): Exención total de examen práctico de manejo y examen teórico. Pasos: Formulario digital **Tofes Yarok** en la web de transporte, examen de vista (**Bedikat Einaim**) en óptica autorizada, reserva de turno por **MyVisit** y presentación física original de la licencia extranjera vigente, Teudat Zehut y Teudat Olé. (Permitido manejar con registro extranjero durante los primeros 12 meses de Aliá).
+     - Rav-Kav y Telefonía: Transporte público sin dinero en efectivo; emisión de tarjeta personalizada **Rav-Kav** en terminales **Al HaKav** (estaciones centrales de tren y aeropuerto) o pago vía aplicaciones móviles (**Moovit**, **HopOn**, **Rav-Kav Online**). Contratación prioritaria de línea móvil israelí en las primeras 24-48 horas.
 
---------------------------------------------------------------------------------
-1. TRÁMITES OFICIALES, DERECHOS Y SALUD (RIGOR MÁXIMO)
---------------------------------------------------------------------------------
-- Temas: Sal Klitá, Bituaj Leumi, Misrad HaAliyah, Misrad HaPnim, Kupot Jolim, guardia hospitalaria (Miún), visas, licencias de conducir, exenciones impositivas.
-- Criterio: Máxima precisión. Jamás inventar requisitos, montos ni plazos. Si no hay certeza absoluta, admitirlo con transparencia y derivar al canal oficial correspondiente (gov.il, Bituaj Leumi, etc.).
+   • Pikud HaOref (Comando del Frente Interno) y Emergencias:
+     - Derechos laborales: Prohibición absoluta de despido por ausencia motivada en instrucciones oficiales de seguridad de **Pikud HaOref**, falta de refugio reglamentario (**Mamad/Miklat**) accesible en el lugar de trabajo o necesidad de cuidar a hijos menores por suspensión escolar. Prohibición patronal de descontar días dejando saldo negativo de vacaciones sin consentimiento previo expreso del trabajador.
 
-Base de Datos Oficial Verificada:
-- Salud y Urgencias:
-  * Guardia (Miún [מיון]): No ir sin derivación (hafniá [הפניה]) o internación directa para evitar facturas (heshbonit) de cientos de shékels.
-  * Centros intermedios: Terem (*2884) o Bikur Rofé antes de acudir a guardia hospitalaria.
-  * MADA: Teléfono 101. Factura solo exenta con internación efectiva o urgencia vital tipificada por la Kupá.
-  * Kupot Jolim centrales: Maccabi (*3555), Clalit (*2700), Meuhedet (*3833), Leumit (*507). Directorio nacional: doctors.org.il.
-  * Para síntomas o urgencias: Jamás dar diagnósticos médicos, derivar a MADA (101), guardia o médico de cabecera (Rofé Mishpajá).
-- Bituaj Leumi (*6050 / btl.gov.il):
-  * Accidentes laborales y tendinitis: Formulario BL 250 (Tofes Dmei Pgiá) completado por empleador. En primera atención médica exigir que conste causa laboral ("be-avodá"). Dictamen de incapacidad ante Médico Ocupacional (Rofé Taasukatí).
-  * Días de reposo (Dmei Majalá): Día 1 (0%), Días 2 y 3 (50%), Día 4+ (100%). Requiere saldo positivo en días acumulados (1.5 días/mes trabajado) en el recibo (tlush sajar).
-- Trámites de Absorción y Empleo:
-  * Sal Klitá: Canasta básica durante los primeros 6 meses (aeropuerto + 5 cuotas bancarias).
-  * Ayuda de Alquiler (Siyua bi'Sjirot): Comienza en el mes 7 de aliá y dura exactamente hasta el mes 30 (corte definitivo reglamentario).
-  * Empleo e Impuestos: Marcar Olé Jadash en Tofes 101 para puntos de crédito (Nekudot Zijui). Dos empleos: coordinación obligatoria (Teum Mas en Rashut HaMisim) para evitar retención del ~47%.
-  * Licencia de Conducir (Misrad HaRishuí): Manejar con registro extranjero los primeros 12 meses. Canje directo durante 5 años si tiene más de 5 años de antigüedad previa (Tofes Yarok + examen de vista en óptica + turno).
-  * Citas Oficiales: MyVisit para Misrad HaPnim (*3450) y Misrad HaRishuí (revisar 7:00 a 8:30 AM).
-  * Teudat Zehut: Documento de papel vence a los 3 meses; tramitar biométrica gratuita en Misrad HaPnim.
-  * Pasaporte (Darkón): Requiere 1 año (12 meses) de residencia y centro de vida efectivo. Antes del año se emite documento de viaje provisorio (Teudat Ma'avar) que requiere verificar requisitos de visado según país de destino.
-  * Ulpán estatal y vouchers: Voucher de aprox. 5.200 NIS para instituto privado exige asistencia mínima del 80% y aprobar examen final (es reintegro, no fondo perdido).
-  * Descuento de Arnoná: En la municipalidad (Iriyá) durante el primer año.
-  * Acompañamiento inicial: OLEI (Organización de Inmigrantes Hispanohablantes - olei.org.il).
-  * Plan de Negocio y Emprendimiento Oficial: Ministerio de Aliyá y Absorción (Misrad HaAliyah veHaKlitá / Agaf Yazamut Iskit). Teléfono gratuito: *2994. Centros de negocios Maalot (מרכזי מעלו״ת) con ~155 asesores multilingües homologados para viabilidad, modelo, plan de negocio y trámites de financiamiento (turnos en gov.il).
-  * Pikud HaOref: En emergencias de seguridad rigen directivas del Comando del Frente Interno. Prohibido por ley despedir al trabajador por ausencia justificada por falta de refugio (mamad/miklat) o zona declarada.
+   • Kupot Jolim / Médicos en español:
+     - Filtro por idioma (**Español / ספרדית**) en portales y aplicaciones oficiales de **Maccabi** (*3555), **Clalit** (*2700), **Meuhedet** (*3833) o **Leumit** (*507); solicitud de traductor en central telefónica (*"Efshar meturgeman be-sfaradit?"*); derivación por médico de cabecera; directorio nacional **doctors.org.il**.
 
---------------------------------------------------------------------------------
-2. VIDA COTIDIANA, COMUNIDAD Y PRODUCTOS LATINOAMERICANOS (TODO ISRAEL)
---------------------------------------------------------------------------------
-- Audiencia: Olim de toda América Latina e Iberoamérica (Argentina, Uruguay, Colombia, Venezuela, México, Perú, Chile, etc.).
-- Categorías de productos:
-  * Panlatinos / Andinos / Caribeños / Mexicanos: Harina P.A.N. (arepas), plátano macho, frijoles/porotos negros, ajíes, salsas mexicanas, tortillas de maíz, pulpas de fruta, panela/papelón, quesos típicos.
-  * Cono Sur: Yerba mate, dulce de leche, alfajores, tapas de empanadas, cortes de carne estilo sudamericano, golosinas tradicionales.
-- Criterio: Brindar orientación amigable y práctica sobre comercios físicos, ferias y opciones online con entrega en todo el país, basándose únicamente en puntos confirmados.
+   • Vida Cotidiana y Productos Latinoamericanos (Todo Israel):
+     - Tel Aviv: Local de productos argentinos/latinos en **Allenby 37** (yerba mate, dulce de leche, alfajores, tapas); referente panlatino **"La Tienda - Comida Latina"** en **Levanda 13** (Harina P.A.N., frijoles/caraotas, tortillas de maíz, pulpas de fruta, panela, quesos típicos). **Shuk HaCarmel** exclusivamente para frutas tropicales y especias (NO yerba ni alfajores). **Shuk Levinsky** para frutos secos y especias a granel.
+     - Ramat Gan: Dietéticas y comercios sobre la calle comercial **Bialik** (yerba mate y productos de importación; admitir con total honestidad que no se cuenta con la numeración de altura exacta de la calle en la base de datos).
+     - Todo Israel: Supermercados con góndola internacional fija (**Tiv Ta'am** y **Keshet Teamim**) y envíos a todo el país vía tiendas online especializadas y grupos comunitarios de Olim.
 
-Puntos y comercios de referencia confirmados:
-- Tel Aviv:
-  * "La Tienda - Comida Latina": Local referente en Levanda 13 (amplia variedad de productos panlatinos de Colombia, Venezuela, México, etc.).
-  * Zona Allenby: Local de productos argentinos/latinos en Allenby 37 (yerba mate, dulce de leche, alfajores, golosinas).
-  * Shuk HaCarmel: Exclusivamente para frutas tropicales (plátano macho), cilantro, chiles frescos/secos y especias (NO recomendar para yerba mate ni alfajores).
-  * Shuk Levinsky (Florentin): Tiendas de frutos secos y especias a granel.
-- Ramat Gan:
-  * Comercios y dietéticas sobre la calle comercial Bialik (yerba y productos de importación).
-- Cadenas nacionales con góndola fija de importación (Todo Israel):
-  * Cadenas como Tiv Taam y Keshet Teamim en sus distintas sucursales cuentan con sección internacional donde suele haber stock regular de yerba mate, Harina P.A.N. y productos importados.
-- Envíos a todo el país (Kibutzim, Moshavim y cualquier ciudad):
-  * Tiendas online especializadas (La Tienda, importadores comunitarios directos) con servicio de despacho a domicilio.
-  * Redes comunitarias: Recomendar grupos locales de WhatsApp y Facebook de Olim ("Latinos en Israel", "Argentinos en Israel", "Colombianos en Israel", etc.) para datos actualizados de ferias o compras colectivas.
-- Pauta comercial:
-  * Indicar que los precios, el stock y los horarios (en especial vísperas de Shabat y festividades/jaguim) pueden variar y conviene chequear antes de concurrir.
+3. ENFOQUE CONVERSACIONAL Y RESPUESTA PUNTUAL:
+   - Responde de manera conversacional, directa y enfocada ÚNICAMENTE a lo que se te pregunta.
+   - Si el usuario pregunta por una dirección o altura puntual (ej. "¿En Bialik, tenés la dirección para comprar yerba?"), contesta específicamente sobre ese punto: confirma que sobre la calle Bialik (en Ramat Gan) hay comercios y dietéticas que traen yerba, pero admite con total honestidad que no cuentas con la numeración catastral exacta de la calle en tu base de datos confirmada. NO listes Tel Aviv, Shuk HaCarmel o envíos a menos que el usuario pida alternativas o la pregunta sea amplia.
+   - PROHIBIDO volcar el contexto completo si no fue solicitado expresamente.
 
 ================================================================================
-MODELO DE RESPUESTA EN CASO DE DUDA O FALTA DE DATOS
+FORMATO DE SALIDA EXIGIDO
 ================================================================================
-Si no disponés del dato preciso, respondé con esta estructura:
-"No cuento con la información oficial o confirmada sobre este trámite o comercio en particular. Para evitar darte un dato impreciso o desactualizado, te sugiero corroborarlo directamente con [Nombre de la entidad oficial o grupos comunitarios] o consultar con un coordinador oficial."
-
-================================================================================
-TONO Y ESTILO
-================================================================================
-- Empático, claro y accesible para un recién llegado.
-- Español neutro / rioplatense comprensible para toda la comunidad hispanohablante.
-- Estructura limpia: viñetas breves y pasos ordenados cuando amerite, o párrafo directo si la pregunta es puntual.
-- Términos en hebreo en negrita y entre paréntesis cuando sea pertinente (ej: **hafniá** [הפניה], **tofes 101** [טופס 101], **bituaj leumi** [ביטוח לאומי]).
+- Estructura limpia y ejecutiva con títulos temáticos claros y emoticonos sobrios.
+- Pasos cronológicos ordenados en listas numeradas (1, 2, 3).
+- Advertencias preventivas y términos en hebreo transliterado en negrita.
+- Tono empático, asertivo, riguroso y libre de especulaciones.
 `;
 
 // Review moderation endpoint (Lashon Hará check)
@@ -203,7 +158,7 @@ Responde ÚNICAMENTE en JSON con esta estructura exacta:
 }`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-3.8-flash',
+        model: 'gemini-2.5-flash',
         contents: prompt,
         config: {
           responseMimeType: 'application/json',
@@ -397,445 +352,445 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 
 function generateRuleBasedResponse(query: string, history?: any[]): string {
   const q = query.toLowerCase();
-  // --- PARCHE DE PREGUNTAS FRECUENTES OLIM CONECTADOS ---
 
-  // 1. Cuenta bancaria para Sal Klitá
-  if (q.includes('sal klit') && (q.includes('cuenta') || q.includes('informo') || q.includes('cobrar') || q.includes('banco'))) {
-    return `🏦 **Cómo Informar tu Cuenta Bancaria para Cobrar el Sal Klitá:**
-
-1. **Abrir la cuenta en el banco:** Lleva tu Teudat Olé, Teudat Zehut provisoria y pasaporte.
-2. **Pedir el comprobante de cuenta:** Exige en el banco el certificado oficial llamado **Ishur Nihul Jeshbón** (אישור ניהול חשבון) o un cheque anulado donde conste tu nombre y número de cuenta.
-3. **Presentarlo ante Misrad HaAliyah:** 
-   - Puedes entregárselo en mano a tu asesor personal (**póked**) en la sucursal de tu ciudad.
-   - O enviarlo escaneado/fotografiado por correo electrónico al contacto de tu asesor asignado o a través de la zona personal en **gov.il**.
-4. **Plazo de cobro:** Una vez cargada la cuenta en el sistema, las cuotas mensuales restantes del Sal Klitá se depositarán de forma automática.`;
-  }
-
-  // 2. Canje de licencia de conducir (>5 años)
-  if (q.includes('licencia') && (q.includes('canje') || q.includes('canjeo') || q.includes('5 años') || q.includes('extranjera'))) {
-    return `🚗 **Canje de Licencia de Conducir Extranjera (>5 años de antigüedad):**
-
-Si tu licencia extranjera tiene más de 5 años de antigüedad comprobada y estás dentro de tus primeros años de Aliá:
-- **Exención total:** Puedes realizar la conversión directa **sin rendir examen práctico ni teórico**.
-
-📋 **Pasos Obligatorios:**
-1. **Tofes Yarok:** Completa el formulario digital en la web de Misrad HaRishuí (Ministerio de Transporte).
-2. **Control visual:** Realiza el examen de vista con un óptico autorizado (Bedikat Einaim).
-3. **Turno en Misrad HaRishuí:** Reserva tu turno por **MyVisit** para acudir a la oficina de licencias.
-4. **Documentos a presentar:** Pasaporte original, Teudat Zehut, Teudat Olé y tu licencia de conducir física vigente de tu país de origen.`;
-  }
-
-  // 3. Tofes 101 y Mas Hajnasá
-  if (q.includes('101') || (q.includes('mas hajnas') && q.includes('reteng'))) {
-    return `📑 **Cómo completar el Tofes 101 para evitar retenciones de más (Mas Hajnasá):**
-
-1. **Cuándo se llena:** Al ingresar a cualquier trabajo en Israel o en el mes de enero de cada nuevo año fiscal.
-2. **Puntos de Crédito (Nekudot Zijui):** 
-   - En la sección correspondiente a tu estatus personal, debes tildar expresamente la casilla de **Olé Jadash** (Nuevo Inmigrante).
-   - Adjunta siempre una copia legible de tu **Teudat Olé** con la fecha exacta de llegada al país.
-3. **El beneficio:** Durante tus primeros 42 meses de Aliá recibes puntos adicionales de descuento fiscal que anulan o reducen notablemente el impuesto a las ganancias.
-4. **Verificación:** Al recibir tu primer recibo de sueldo (**tlush sajar**), controla que figuren asignadas tus Nekudot Zijui de Olé.`;
-  }
-
-  // 4. Corte de ayuda de alquiler en mes 30
-  if (q.includes('mes 30') || (q.includes('alquiler') && (q.includes('corta') || q.includes('termina') || q.includes('finaliza')))) {
-    return `🏠 **¿Por qué se corta la ayuda de alquiler en el mes 30?:**
-
-- **Límite legal del Ministerio de Aliá:** La ayuda automática de alquiler (**Siyua bi'Sjirot**) otorgada por **Misrad HaAliyah** tiene una duración reglamentaria máxima de **24 meses continuos** (comienza automáticamente en el mes 7 y finaliza de manera estricta en el mes 30).
-- **Mes 31 en adelante:** El derecho inicial de absorción concluye por normativa general.
-- **Continuidad por necesidad económica:** Si cumplido el mes 30 tu familia califica bajo condiciones socioeconómicas vulnerables o de bajos ingresos, la asistencia económica deja de depender de Aliá y pasa a tramitarse ante el **Ministerio de Construcción y Vivienda (Misrad HaBinui VeHaShikún)** mediante evaluación social individual.`;
-  }
-
-  // 5. Dos trabajos simultáneos y Teum Mas (47%)
-  if (q.includes('teum mas') || q.includes('47%') || (q.includes('2 trabajos') || q.includes('dos trabajos'))) {
-    return `⚠️ **Dos trabajos simultáneos: Cómo hacer el Teum Mas y evitar el 47%:**
-
-Por normativa fiscal en Israel, si tienes más de un empleo y no presentas una coordinación impositiva, el empleador secundario está obligado a retener la tasa máxima legal (aproximadamente el 47%).
-
-📋 **Solución Paso a Paso:**
-1. **Número de Tik Nikuyim:** Pídele a cada uno de tus empleadores su número de deducción patronal de 9 dígitos (**Tik Nikuyim** - תיק ניכויים).
-2. **Trámite por Internet:** Ingresa al portal de **Rashut HaMisim** (Autoridad Tributaria) en la sección **Teum Mas Online**.
-3. **Declaración de Empleos:** Indica cuál es tu empleo principal (donde aplicas tus puntos de crédito de Olé Jadash) y cuál es el secundario con su sueldo estimado.
-4. **Presentación:** Descarga la constancia oficial de retención que emite el sistema y preséntala en la oficina de contabilidad o RRHH de tu segundo trabajo.`;
-  }
-
-  // 6. Pikud HaOref y directivas laborales
-  if (q.includes('pikud') || (q.includes('despedir') && q.includes('vacaciones')) || q.includes('haoref')) {
-    return `🛡️ **Directivas de Pikud HaOref y Derechos Laborales:**
-
-1. **Prohibición estricta de despido:**
-   - La ley israelí protege al trabajador: **está terminantemente prohibido despedir** a un empleado que no pueda concurrir a su puesto debido a instrucciones oficiales de seguridad del Comando del Frente Interno (**Pikud HaOref**), falta de refugio reglamentario (**Mamad/Miklat**) accesible en la zona de trabajo, o por tener que cuidar a hijos menores tras el cierre oficial de colegios.
-2. **Días de vacaciones:**
-   - El empleador **no puede descontar de manera arbitraria** estos días de tus vacaciones si no cuentas con saldo positivo acumulado de descanso, ni puede dejar tu saldo de vacaciones en negativo sin tu consentimiento previo.
-3. **Compensación salarial:**
-   - En estados de emergencia civil o conflicto, el Ministerio de Trabajo y Bituaj Leumi implementan acuerdos marco para el pago de salarios de las jornadas no trabajadas por causas de fuerza mayor.`;
-  }
-
-  // 7. Número de celular y tarjeta Rav-Kav
-  if ((q.includes('celular') || q.includes('telefono')) && (q.includes('rav-kav') || q.includes('rav kav') || q.includes('transporte'))) {
-    return `📱 **Cómo obtener número de celular y tarjeta Rav-Kav:**
-
-📲 **1. Celular israelí:**
-- Es prioritario obtenerlo en tus primeras 24-48 horas para trámites del banco, turnos y Misrad HaAliyah.
-- Puedes contratar una línea (chip SIM prepago o plan pospago) en empresas locales como Partner, Cellcom, Pelephone, HOT Mobile, Golan Telecom o 019.
-- Solo requieres presentarte con tu pasaporte extranjero o Teudat Zehut provisoria y un medio de pago.
-
-🚆 **2. Tarjeta de transporte Rav-Kav (רב-קו):**
-- En Israel el transporte público no acepta dinero en efectivo a bordo de colectivos ni trenes.
-- **Tarjeta física personalizada:** La puedes tramitar de manera gratuita con tu Teudat Olé y pasaporte en las terminales **Al HaKav** (ubicadas en estaciones de trenes principales como Savidor Merkaz o HaShalom) o en el aeropuerto.
-- **Viajar con el celular:** También puedes pagar directamente desde el celular descargando aplicaciones como **Moovit**, **HopOn** o **Rav-Kav Online**, cargándoles saldo o vinculando una tarjeta de crédito.`;
-  }
-
-  // 1. Follow-up detection: check if previous messages were discussing a specific topic
+  // Context detection from previous messages
   let previousContext = '';
   if (Array.isArray(history) && history.length > 1) {
     const prior = history.slice(-4, -1).map((m: any) => (m.content || '').toLowerCase()).join(' ');
     previousContext = prior;
   }
 
-  // Follow-up on Ramat Gan Bialik discounts or specific store question
+  // 1. OLEI (Organización de Latinoamericanos, Españoles y Portugueses en Israel)
   if (
-    q.includes('bialik') ||
-    (q.includes('ramat gan') && (q.includes('yerba') || q.includes('direccion') || q.includes('dirección') || q.includes('donde') || q.includes('dónde')))
+    q.includes('olei') ||
+    q.includes('organización de inmigrantes') ||
+    q.includes('organizacion de inmigrantes') ||
+    q.includes('asociacion de olim') ||
+    q.includes('asociación de olim') ||
+    (q.includes('acompaña') && (q.includes('banco') || q.includes('kupa') || q.includes('kupá') || q.includes('tramite') || q.includes('trámite') || q.includes('voluntari')))
   ) {
-    return `Sobre la calle comercial **Bialik** en **Ramat Gan** hay varios comercios y tiendas naturistas/dietéticas (*Batei Teva*) que suelen comercializar yerba mate y productos de importación.
+    return `🤝 **OLEI - Organización de Latinoamericanos, Españoles y Portugueses en Israel:**
 
-Sin embargo, no cuento con la numeración o altura exacta de la calle confirmada en mi base de datos. Te sugiero recorrer los comercios de la zona comercial de Bialik o consultar en grupos de WhatsApp de Olim de Ramat Gan para saber cuál tiene stock fresco en este momento.`;
+1. **Naturaleza Institucional:**
+   - La **OLEI** [עולי] es una **organización no gubernamental (ONG), voluntaria y comunitaria sin fines de lucro**, NO una entidad gubernamental ni médica. Su propósito es brindar orientación, contención afectiva y acompañamiento solidario a los inmigrantes hispanohablantes.
+
+2. **Filiales y Presencia Geográfica (Sedes Activas Obligatorias):**
+   - Cuenta con delegaciones activas y voluntariado en ciudades clave: **Tel Aviv, Jerusalén, Haifa, Netanya, Ashdod, Ra'anana, Beer Sheva, Karmiel, Modi'in y Rishon LeZion**.
+
+3. **Servicios Reales y Acompañamiento Práctico:**
+   - **Acompañamiento presencial y traducción:** Dispone de una red de voluntarios que te acompañan personalmente al banco, a consultas médicas en **Kupot Jolim** y a dependencias oficiales de absorción si aún no dominas el hebreo.
+   - **Orientación inicial:** Asesoramiento legal y social primario, apoyo en la comprensión de contratos de alquiler y boletas municipales de **Arnoná**.
+   - **Comunidad y cultura:** Encuentros comunitarios, grupos de integración social por edades y biblioteca en español.
+   - **Contacto y sitio web:** Puedes comunicarte con la sede de tu ciudad o ingresar a su portal oficial [olei.org.il](https://olei.org.il).`;
   }
 
-  // Specific query for Allenby
-  if (q.includes('allenby')) {
-    return `En **Tel Aviv**, el punto confirmado en la zona de Allenby es el local de productos argentinos/latinos ubicado en **Allenby 37** (yerba mate, dulce de leche, alfajores, golosinas y tapas de empanadas).
-
-*Pauta útil:* Conviene verificar horarios antes de ir, en especial en vísperas de Shabat o festividades.`;
-  }
-
-  // Specific query for Levanda / La Tienda
-  if (q.includes('levanda') || q.includes('la tienda')) {
-    return `En **Tel Aviv**, el local referente de comida y productos panlatinos es **"La Tienda - Comida Latina"**, ubicado en **Levanda 13**. Allí cuentan con Harina P.A.N., frijoles/caraotas, salsas mexicanas, tortillas de maíz, pulpas de fruta, panela/papelón y quesos típicos.`;
-  }
-
-  // Specific query for Shuk HaCarmel
-  if (q.includes('carmel') || q.includes('karmel')) {
-    return `En el **Shuk HaCarmel** de Tel Aviv puedes conseguir frutas tropicales (plátano macho), cilantro fresco, chiles secos/frescos y especias variadas.
-
-⚠️ *Aclaración:* El Shuk HaCarmel **no es un punto de referencia para yerba mate ni alfajores**; para esos productos conviene acudir a locales especializados como Allenby 37 o Levanda 13 en Tel Aviv.`;
-  }
-
-  // Follow-up for general discount / card / coupons
-  if (q.includes('descuento') && (previousContext.includes('yerba') || previousContext.includes('local') || previousContext.includes('amapola'))) {
-    return `🏷️ **Descuentos y Beneficios para Olim:**
-- En comercios privados (cafeterías, tiendas de yerba o carnicerías), los descuentos son acuerdos de fidelidad o promociones temporales anunciadas en sus redes sociales.
-- En supermercados grandes (como Tiv Ta'am, Shufersal o Victory), afiliarse al club de clientes (**Mo'adon Lakojot**) es gratuito y da descuentos inmediatos en góndola.
-- Recuerda además revisar los descuentos públicos por ley: el **descuento de Arnoná** (hasta 70-90% el primer año en tu municipalidad) y tus puntos de crédito impositivo (**Nekudot Zijui**) en el **Tofes 101**.`;
-  }
-
-  // Plan de Negocio y Emprendimiento
+  // 2. Misrad HaAliyah — Apertura de Cuenta Bancaria e Información de Cuenta para Cobrar Sal Klitá
   if (
-    q.includes('plan de negocio') ||
-    q.includes('abrir negocio') ||
-    q.includes('crear negocio') ||
-    q.includes('emprender') ||
-    q.includes('yazamut') ||
+    q.includes('sal klit') ||
+    (q.includes('cuenta') && (q.includes('banco') || q.includes('informo') || q.includes('informar') || q.includes('cobrar') || q.includes('abrir') || q.includes('nihul') || q.includes('jeshbon') || q.includes('kheshbon')))
+  ) {
+    return `🏦 **Cómo Abrir tu Cuenta Bancaria e Informar al Misrad HaAliyah para Cobrar el Sal Klitá:**
+
+1. **Apertura de Cuenta en el Banco:**
+   - Acude a una sucursal bancaria durante tus primeros 3 a 5 días hábiles en Israel.
+   - **Documentos obligatorios:** Libreta física de **Teudat Olé** [תעודת עולה] provisoria de papel (entregada en el aeropuerto), **Teudat Zehut** provisoria, pasaporte extranjero original y número de celular israelí activo.
+   - Solicita la exención de comisiones de mantenimiento para nuevo inmigrante (**Ptor me-Amalot**).
+
+2. **Obtención del Documento Oficial de Cuenta:**
+   - Exige en ventanilla el certificado bancario oficial llamado **Ishur Nihul Jeshbón** (**אישור ניהול חשבון**) o un cheque anulado donde conste tu nombre, número de sucursal (**snif**) y número de cuenta.
+
+3. **Presentación ante Misrad HaAliyah:**
+   - Puedes entregar el comprobante en mano a tu asesor personal (**póked**) en la sucursal de tu ciudad.
+   - O enviarlo escaneado por correo electrónico al asesor asignado o cargarlo a través de la zona personal en **gov.il**.
+
+4. **Plazos y Modalidad de Cobro:**
+   - El **Sal Klitá** [סל קליטה] consta de 6 cuotas: un primer pago inicial en el aeropuerto/efectivo seguido de **5 cuotas mensuales consecutivas** que se depositarán automáticamente en tu cuenta una vez registrada en el sistema.`;
+  }
+
+  // 3. Misrad HaAliyah — Voucher de Ulpán Privado (5.200 NIS)
+  if (
+    q.includes('voucher') ||
+    (q.includes('ulp') && (q.includes('privado') || q.includes('5.200') || q.includes('5200') || q.includes('citizen') || q.includes('bayit')))
+  ) {
+    return `🎓 **Voucher de Ulpán Privado de Misrad HaAliyah (Hasta 5.200 NIS):**
+
+1. **Beneficio Oficial:**
+   - Subsidio oficial de hasta **5.200 NIS** para cursar hebreo en institutos privados autorizados por el Estado (como *Citizen Café*, *Ulpan Bayit*, etc.).
+
+2. **Requisitos de Elegibilidad:**
+   - Haber finalizado el Ulpán estatal inicial (**Ulpán Álef** [אולפן א׳]) o demostrar que no existen cupos públicos disponibles en tu zona geográfica dentro de tu período de derechos de Aliá.
+
+3. **Paso Crítico Obligatorio (Autorización Previa del Póked):**
+   - **¡ADVERTENCIA FUNDAMENTAL!:** La solicitud del voucher (**Schovar Klitá** [שובר קליטה]) debe tramitarse y aprobarse formalmente con tu asesor (**póked**) en **Misrad HaAliyah** **ANTES de inscribirte o abonar el curso en la institución privada**. Si pagas la matrícula antes de contar con la autorización formal previa, el ministerio no otorgará el reintegro.
+
+4. **Condiciones para el Reintegro Económico:**
+   - Cumplir con una asistencia presencial o digital mínima del **80%** de las clases.
+   - Rendir y aprobar el examen final del instituto privado autorizado.
+   - Presentar la factura cancelada y el certificado de aprobación en el ministerio para que se efectúe la transferencia a tu cuenta bancaria.`;
+  }
+
+  // 4. Misrad HaAliyah — Corte de Ayuda de Alquiler en el Mes 30
+  if (
+    q.includes('mes 30') ||
+    (q.includes('alquiler') && (q.includes('corta') || q.includes('termina') || q.includes('finaliza') || q.includes('siyua') || q.includes('sjirot') || q.includes('deje de cobrar') || q.includes('dejé de cobrar')))
+  ) {
+    return `🏠 **Subsidio de Alquiler de Misrad HaAliyah y Corte Reglamentario en el Mes 30:**
+
+1. **Cronograma y Duración Legal:**
+   - La ayuda automática de alquiler (**Siyua bi'Sjirot** [סיוע בשכר דירה]) otorgada por **Misrad HaAliyah** comienza de forma automática a partir del **mes 7** de tu llegada a Israel.
+   - Tiene una duración reglamentaria máxima fijada por ley de **24 meses continuos** (cubre de forma ininterrumpida desde el **mes 7 hasta el mes 30** de tu Aliá).
+
+2. **¿Por qué se corta en el mes 30?:**
+   - Al finalizar el mes 30 de residencia, el derecho de absorción inicial **concluye por normativa general del Ministerio de Aliá**. No se trata de un error bancario ni de una suspensión individual.
+
+3. **Mes 31 en adelante (Continuidad por Vulnerabilidad Socioeconómica):**
+   - A partir del mes 31, la asistencia económica ya no depende del Ministerio de Aliá.
+   - Si tu grupo familiar califica bajo condiciones socioeconómicas vulnerables o de bajos ingresos comprobados, la continuidad del subsidio habitacional pasa a tramitarse ante el **Ministerio de Construcción y Vivienda (Misrad HaBinui VeHaShikún)** a través de sus empresas gestoras (Amidar, Milgam o Matan) mediante evaluación social individual.`;
+  }
+
+  // 5. Misrad HaAliyah — Asesoramiento Empresarial (*2994 / Maalot)
+  if (
+    q.includes('2994') ||
     q.includes('maalot') ||
     q.includes('מעלות') ||
-    q.includes('2994') ||
-    (q.includes('negocio') && (q.includes('asesor') || q.includes('prestamo') || q.includes('préstamo') || q.includes('ayuda') || q.includes('fondos')))
+    q.includes('plan de negocio') ||
+    (q.includes('negocio') && (q.includes('abrir') || q.includes('asesor') || q.includes('emprender') || q.includes('autónomo') || q.includes('osek') || q.includes('préstamo') || q.includes('prestamo')))
   ) {
-    return `💼 **Centro de Información Económico-Empresarial y Centros Maalot:**
-Para abrir o desarrollar un negocio en Israel, el Ministerio de Aliyá y Absorción (**Misrad HaAliyah veHaKlitá**) ofrece un servicio oficial y gratuito a través de la División de Emprendimiento Empresarial (**Agaf Yazamut Iskit**):
+    return `💼 **Asesoramiento Oficial Gratuito para Emprendedores y Negocios (*2994 / Maalot):**
 
-📞 **Línea Telefónica Directa:** **\*2994** (Atención en varios idiomas, incluido español).
+Para abrir, trasladar o formalizar un negocio en Israel, el Ministerio de Aliyá y Absorción (**Misrad HaAliyah veHaKlitá**) ofrece asistencia oficial a través de la División de Emprendimiento Empresarial (**Agaf Yazamut Iskit**):
 
-👥 **¿Quiénes pueden usarlo?:**
-- **Nuevos Olim:** hasta 10 años desde el estatus de oleh, mayores de 21 años.
-- **Residentes retornados:** vivieron al menos 5 años seguidos fuera de Israel y no pasaron más de 2 años desde que recuperaron su estatus.
+1. **Línea Telefónica Directa Gratuita:**
+   - Comunícate al centro oficial llamando al ***2994** (atención multilingüe, incluyendo asesores en español).
 
-📋 **Servicios Oficiales Gratuitos:**
-1. **Evaluación de viabilidad** de tu proyecto o idea comercial.
-2. **Información impositiva** y orientación sobre regímenes tributarios en Israel.
-3. **Ayuda para tramitar préstamos** a través de fondos de financiamiento específicos.
-4. **Acompañamiento empresarial y talleres.**
-5. **Centros Maalot (מרכזי מעלו״ת):** Red de ~155 asesores de negocios multilingües homologados para el armado del modelo y plan de negocio (incluido startups). Podés solicitar turno por formulario online en gov.il o llamando directamente al centro de tu zona de residencia.
+2. **Centros de Negocios Maalot (מרכזי מעלו״ת):**
+   - Red de más de 150 consultores y contadores públicos homologados.
+   - Cada Olé Jadash tiene derecho a **horas de consultoría subvencionadas sin costo** con especialistas hispanohablantes para analizar la viabilidad comercial, diseñar el modelo de negocio y estructurar el plan financiero.
 
-⚠️ *Aclaración: Este es un servicio oficial y gratuito del Ministerio de Aliyá y Absorción, no de terceros. Los requisitos y contactos pueden cambiar — verificar vigencia en gov.il.*`;
+3. **Estructura Tributaria y Trámites:**
+   - Asesoramiento paso a paso para la apertura de expediente fiscal como autónomo exento (**Osek Patur** [עוסק פטור]) o autónomo general (**Osek Murshe** [עוסק מורשה]), junto con las gestiones ante **Mas Hajnasá**, **Ma'am** (IVA) y **Bituaj Leumi**.
+
+4. **Financiamiento Preferencial:**
+   - Gestión y acceso a líneas de crédito preferenciales y fondos de garantía estatal específicos para nuevos inmigrantes.`;
   }
 
-  // Productos Panlatinos, Colombianos, Venezolanos, Mexicanos, Andinos, Caribeños
-  if (
-    q.includes('harina pan') ||
-    q.includes('harina p.a.n') ||
-    q.includes('arepa') ||
-    q.includes('platano') ||
-    q.includes('plátano') ||
-    q.includes('frijol') ||
-    q.includes('poroto negro') ||
-    q.includes('caraota') ||
-    q.includes('aji') ||
-    q.includes('ají') ||
-    q.includes('chile') ||
-    q.includes('salsa mexicana') ||
-    q.includes('tortilla de maiz') ||
-    q.includes('tortillas de maíz') ||
-    q.includes('pulpa') ||
-    q.includes('panela') ||
-    q.includes('papelon') ||
-    q.includes('papelón') ||
-    q.includes('queso llanero') ||
-    q.includes('queso blanco') ||
-    q.includes('colombia') ||
-    q.includes('venezuela') ||
-    q.includes('mexico') ||
-    q.includes('méxico') ||
-    q.includes('peru') ||
-    q.includes('perú')
-  ) {
-    return `🥑 **Productos Panlatinos, Andinos, Caribeños y Mexicanos en Israel:**
-
-📍 **Puntos Físicos Confirmados:**
-- **Tel Aviv — "La Tienda - Comida Latina":** Local referente ubicado en **Levanda 13** (amplia variedad de Harina P.A.N., frijoles/caraotas, salsas mexicanas, tortillas de maíz, pulpas de fruta, panela/papelón y quesos típicos).
-- **Tel Aviv — Shuk HaCarmel:** Exclusivamente para frutas tropicales (plátano macho), cilantro, chiles frescos/secos y especias. *(Nota: no es punto de referencia para productos empaquetados como yerba o alfajores)*.
-- **Tel Aviv — Shuk Levinsky (Florentin):** Tiendas de frutos secos y especias a granel.
-
-🛒 **Cadenas Nacionales (Todo Israel):**
-- **Tiv Ta'am** y **Keshet Teamim:** En sus distintas sucursales cuentan con sección internacional donde suele haber stock regular de Harina P.A.N. y productos importados.
-
-🚚 **Envíos a todo el país (Kibutzim, Moshavim y cualquier ciudad):**
-- Tiendas online especializadas (como La Tienda e importadores comunitarios directos) con servicio de despacho a domicilio.
-- **Redes Comunitarias:** Grupos de WhatsApp y Facebook de Olim ("Latinos en Israel", "Colombianos en Israel", "Venezolanos en Israel", "Mexicanos en Israel") para compras colectivas y ferias.
-
-⚠️ *Pauta comercial: Precios, stock y horarios (en especial vísperas de Shabat y festividades/jaguim) pueden variar; conviene consultar antes de concurrir.*`;
-  }
-
-  // Yerba mate, compras del Cono Sur y alimentos
-  if (
-    q.includes('yerba') ||
-    q.includes('mate') ||
-    q.includes('alfajor') ||
-    q.includes('dulce de leche') ||
-    q.includes('empanada') ||
-    q.includes('carniceria') ||
-    q.includes('carnicería') ||
-    q.includes('asado') ||
-    q.includes('vacio') ||
-    q.includes('vacío') ||
-    q.includes('medialuna') ||
-    q.includes('golosina') ||
-    q.includes('argentina') ||
-    q.includes('uruguay') ||
-    q.includes('chile')
-  ) {
-    return `🧉 **Productos del Cono Sur y Rioplatenses en Israel:**
-
-📍 **Puntos Físicos Confirmados:**
-- **Tel Aviv — Zona Allenby:** Local de productos argentinos/latinos en **Allenby 37** (yerba mate, dulce de leche, alfajores, golosinas y tapas).
-- **Ramat Gan — Calle Bialik:** Comercios y dietéticas sobre la calle comercial **Bialik** (yerba mate y productos de importación).
-- **Tel Aviv — "La Tienda - Comida Latina" (Levanda 13):** Variedad de productos latinoamericanos e importados.
-- *(Aclaración importante: El Shuk HaCarmel es ideal para frutas tropicales, chiles y especias frescas, pero NO se recomienda para yerba mate ni alfajores).*
-
-🛒 **Cadenas Nacionales (Todo Israel):**
-- **Tiv Ta'am** y **Keshet Teamim:** En sus distintas sucursales cuentan con góndola internacional fija con stock regular de yerba mate y productos sudamericanos.
-
-🚚 **Envíos a todo el país (Kibutzim, Moshavim y cualquier ciudad):**
-- Tiendas online especializadas e importadores directos con despacho a domicilio.
-- **Redes Comunitarias:** Grupos de WhatsApp y Facebook ("Argentinos en Israel", "Uruguayos en Israel", "Latinos en Israel") para compras colectivas y recomendaciones locales.
-
-⚠️ *Pauta comercial: Precios, stock y horarios (en especial vísperas de Shabat y festividades/jaguim) pueden variar; conviene chequear antes de concurrir.*`;
-  }
-
-  // Rental prices inquiry (Example 4)
-  if ((q.includes('alquilar') || q.includes('alquiler') || q.includes('cuanto sale') || q.includes('cuánto sale') || q.includes('precio departamento') || q.includes('precio depto')) && (q.includes('tel aviv') || q.includes('tlv') || q.includes('ramat gan') || q.includes('haifa') || q.includes('jerusalen'))) {
-    return `No tengo datos de precios actualizados cargados, y los alquileres en las ciudades de Israel varían mucho según barrio y momento del mercado, así que cualquier cifra que te diera podría estar equivocada. Te recomiendo mirar Yad2 o Facebook Marketplace filtrando por tu zona para tener una idea real y actual de precios.`;
-  }
-
-  // Bituaj Leumi timeline / partial inquiry (Example 3)
-  if ((q.includes('cuanto tarda') || q.includes('cuánto tarda') || q.includes('plazo') || q.includes('cuanto demora') || q.includes('cuánto demora')) && (q.includes('bituaj') || q.includes('reclamo') || q.includes('accidente'))) {
-    return `No tengo un plazo exacto confirmado para tu caso, porque varía según el tipo de reclamo y la carga de trabajo de la oficina. Lo que sí puedo decirte es que para accidentes laborales debes haber presentado el formulario BL 250 completado por tu empleador y el dictamen médico inicial. Para un plazo real y actualizado, te recomiendo llamar directamente a Bituaj Leumi (*6050) o consultar en btl.gov.il.`;
-  }
-
-  // Dermatologist in Haifa or unlisted specialist (Example 2)
-  if ((q.includes('dermatologo') || q.includes('dermatólogo') || q.includes('dermatologa') || q.includes('dermatóloga')) && (q.includes('haifa') || q.includes('norte'))) {
-    return `No tengo ningún dermatólogo cargado en mi lista para Haifa por el momento, así que no te puedo dar un nombre confirmado. Te recomiendo buscarlo directamente en la app de tu kupat jolim (filtrando por idioma español) o en doctors.org.il, donde vas a poder ver médicos reales con reseñas verificadas de pacientes.`;
-  }
-
-  // Doctors and Medical Directory
-  if (
-    q.includes('medico') ||
-    q.includes('médico') ||
-    q.includes('doctor') ||
-    q.includes('dra') ||
-    q.includes('directorio') ||
-    q.includes('especialista') ||
-    q.includes('pediatra') ||
-    q.includes('traumatologo') ||
-    q.includes('traumatólogo') ||
-    q.includes('psicologo') ||
-    q.includes('psicólogo') ||
-    q.includes('ginecologo') ||
-    q.includes('ginecólogo')
-  ) {
-    return `🩺 **Médicos y Profesionales de Salud que Hablan Español:**
-No tengo un médico particular precargado en mi lista para esa especialidad o zona geográfica.
-
-Para encontrar un profesional verificado:
-1. **App oficial de tu Kupat Jolim:** En las aplicaciones y portales de **Maccabi** (*3555), **Clalit** (*2700), **Meuhedet** (*3833) o **Leumit** (*507), podés filtrar la búsqueda de médicos por idioma ("Español / ספרדית") y ciudad.
-2. **Directorio Nacional:** Podés consultar en **doctors.org.il**.
-3. **Pestaña de Médicos en Olim Conectados:** Podés revisar la pestaña **"Médicos en Español"** en el menú de esta plataforma para ver recomendaciones cargadas directamente por otros miembros de la comunidad.
-
-⚠️ *Ante síntomas agudos o emergencias, acudí a tu médico de cabecera (Rofé Mishpajá), a un centro de urgencias barrial (Terem *2884 / Bikur Rofé) o llamá a MADA (101).*`;
-  }
-
-  // Urgencias hospitalarias y guardia (Miún / MADA)
-  if (
-    (q.includes('hospital') || q.includes('miun') || q.includes('urgencia') || q.includes('guardia') || q.includes('mada') || q.includes('ambulancia')) &&
-    !q.includes('activar') &&
-    !q.includes('credencial') &&
-    !q.includes('tarjeta magnetica') &&
-    !q.includes('ya puedo usarla') &&
-    !q.includes('turno')
-  ) {
-    return `⚠️ **Alerta Económica Importante de Guardia (Miún):**
-El hospital en Israel **NO es gratuito** para consultas espontáneas. Si te presentas en la guardia (**Miún** [מיון]) sin derivación (**hafniá** [הפניה]), recibirás una factura elevada (**heshbonit** [חשבונית]) de entre 500 y más de 1.000 NIS que tu Kupat Jolim no cubrirá de forma automática.
-
-📋 **Ruta Escalonada para No Pagar de Más:**
-1. **Paso 1:** Consulta primero a tu médico de cabecera (**Rofé Mishpajá** [רופא משפחה]) o utiliza la telemedicina / chat médico de la app de tu Kupá.
-2. **Paso 2:** Si la clínica está cerrada (noche o fin de semana), acude a un centro de urgencia intermedia como **Terem** [טרם] o **Bikur Rofé** [ביקור רופא]. El copago es mucho menor y allí evaluarán si requieres derivación (**hafniá**).
-3. **Paso 3:** Ve al hospital (**Miún**) ÚNICAMENTE con **hafniá**, si quedas internado, por fractura traumática evidente o riesgo inminente de vida.
-
-🚑 **Ambulancias (MADA):**
-Llamar a MADA emite factura obligatoria. Solo se exime o reembolsa al 100% si el paciente queda efectivamente **internado** en el hospital o si cumple criterios estrictos de urgencia vital tipificados por la Kupá.
-
-⚖️ *Descargo: Esta guía previene sobrecostos habituales pero ante un riesgo de vida inminente no demores la atención médica.*`;
-  }
-
+  // 6. Bituaj Leumi — Lesiones, Tendinitis y Formulario BL 250
   if (
     q.includes('tendinitis') ||
     q.includes('bl 250') ||
-    q.includes('quervain') ||
-    q.includes('carpiano') ||
-    q.includes('teunat avoda') ||
-    q.includes('teunát avodá') ||
-    (q.includes('accidente') && (q.includes('trabajo') || q.includes('laboral') || q.includes('trayecto'))) ||
-    (q.includes('lesion') && q.includes('laboral')) ||
-    (q.includes('bituaj leumi') && (q.includes('accidente') || q.includes('lesion') || q.includes('pgia') || q.includes('pgiá') || q.includes('muñeca')))
+    q.includes('bl250') ||
+    (q.includes('250') && q.includes('formulario')) ||
+    (q.includes('dolor') && q.includes('trabajo')) ||
+    (q.includes('accidente') && (q.includes('trabajo') || q.includes('laboral') || q.includes('trayecto')))
   ) {
-    return `⚠️ **Alerta Crítica de Bituaj Leumi (Accidentes y Tendinitis):**
-Las lesiones repetitivas (como tendinitis de De Quervain o túnel carpiano) o accidentes en el trabajo / trayecto deben documentarse de forma perfecta desde el minuto cero. Si el primer médico no escribe la causa laboral, **Bituaj Leumi** [ביטוח לאומי] suele rechazar el reclamo.
+    return `🏥 **Lesiones Laborales, Tendinitis y Formulario BL 250 (Bituaj Leumi):**
 
-📋 **Protocolo Obligatorio Paso a Paso:**
-1. **Paso 1 - Empleador:** Notifica de inmediato al empleador y exige el formulario **BL 250** (**Tofes Dmei Pgiá** [טופס דמי פגיעה]).
-2. **Paso 2 - Primera Consulta Médica:** Al ser atendido por el médico de la guardia o Kupá, exige que escriba textualmente en el resumen clínico (**sijum majalí** [סיכום מחלה]) que el dolor comenzó realizando tareas laborales (**be-avodá** [בעבודה]).
-3. **Paso 3 - Médico Ocupacional:** Solicita de forma prioritaria turno con el Médico Ocupacional (**Rofé Taasukatí** [רופא תעסוקתי]). Es el único cuyo dictamen oficial sobre capacidad laboral tiene validez plena para Bituaj Leumi.
+Si sufres dolores por esfuerzo repetitivo (tendinitis), molestias musculares o un accidente en tu puesto o en el trayecto laboral, es obligatorio seguir este procedimiento desde el primer minuto:
 
-📑 **Documentos y Términos Clave:**
-- **BL 250** (Tofes 250) firmado por el empleador.
-- **Sijum majalí** con mención expresa del trabajo.
-- Turno con **Rofé Taasukatí** [רופא תעסוקתי].
+1. **Firma y Sello del Formulario BL 250 (טופס 250):**
+   - El empleador **DEBE completar, firmar y sellar de forma obligatoria** el formulario oficial **BL 250** (**Tofes le-matan tipul refu'í le-nifgá avodá** [טופס למתן טיפול רפואי לנפגע בעבודה]).
+   - Con este formulario sellado, la atención médica de urgencia, consultas especializadas y estudios diagnósticos en tu **Kupat Jolim** o guardia quedan **cubiertos al 100% sin costo para ti**.
 
-⚖️ *Descargo: Información orientativa de derechos del olé. Consulta siempre con tu médico ocupacional y asesor legal en caso de litigio.*`;
+2. **Primera Atención Médica (Registro Clave):**
+   - Al acudir al médico en la Kupá o guardia, exige expresamente que en el resumen clínico (**sijum majalí** [סיכום מחלה]) se asiente de forma textual que la dolencia se inició trabajando (**be-avodá** [בעבודה]). Si el médico omite la causa laboral, Bituaj Leumi rechazará el reconocimiento.
+   - El profesional expedirá la **Teudá Refu'it Rishoná le-Nifgá Avodá** (**תעודה רפואית ראשונה לנפגע בעבודה**) donde se fijan los días de reposo.
+
+3. **Cobro de Salarios Caídos (BL 211 - Dmei Pgi'á):**
+   - Para percibir la compensación económica por los días no trabajados (**Dmei Pgi'á** [דמי פגיעה], cubierto hasta 91 días al 75% del salario base), presenta ante **Bituaj Leumi** el formulario **BL 211** adjuntando el BL 250 sellado y los comprobantes médicos.
+
+4. **Secuelas e Incapacidad:**
+   - Si la dolencia persiste o genera limitación funcional prolongada, solicita evaluación ante el Médico Ocupacional (**Rofé Taasukatí** [רופא תעסוקתי]) y apertura de expediente de discapacidad laboral.`;
   }
 
-  if (q.includes('enfermedad') || q.includes('dias de enfermedad') || q.includes('reposo') || q.includes('dmei majala') || q.includes('sueldo') || q.includes('falta')) {
-    return `⚠️ **Alerta sobre Cobro de Días de Enfermedad (Jok Dmei Majalá):**
-Tener un certificado médico (**ishur majalá** [אישור מחלה]) justifica la ausencia laboral ante el empleador, pero **NO garantiza el cobro del 100% desde el primer día**, y SOLO se cobra si tienes días acumulados disponibles.
-
-📋 **Escala Legal de Pago (Ley Israelí):**
-- **Día 1 de ausencia:** **0%** (por ley no se paga).
-- **Días 2 y 3:** Se pagan al **50%** del valor jornal diario.
-- **Día 4 en adelante:** Se paga al **100%** del jornal diario.
-
-📊 **Saldo Acumulado (Tsvirat Yeméi Majalá):**
-- Se acumulan **1.5 días de enfermedad** por cada mes completo trabajado (tope 90 días).
-- **¡Atención!** Si tu saldo acumulado en el recibo de sueldo (**tlush sajar** [תלוש שכר]) está en 0 o se agota por una enfermedad larga, los días se descontarán como ausencia no remunerada (salvo que sea accidente laboral cubierto por Bituaj Leumi).
-
-📑 **Requisitos:**
-- Solicitar y enviar inmediatamente el **Ishur Majalá** [אישור מחלה] oficial emitido por tu Kupá.`;
-  }
-
-  if (q.includes('licencia') || q.includes('conducir') || q.includes('registro') || q.includes('manejar') || q.includes('auto') || q.includes('rishayun')) {
-    return `⚠️ **Plazos Fatales de Manejo para Olim:**
-Solo puedes conducir con tu licencia extranjera durante los **primeros 12 meses** (1 año) desde tu fecha de llegada (aliá). El derecho preferencial de canje (**Hamarat Rishayón** [המרת רישיון]) dura hasta 5 años.
-
-📋 **Cómo Canjear tu Licencia en Misrad HaRishuí:**
-- **Caso 1: Licencia extranjera VIGENTE con más de 5 años de antigüedad:**
-  * Tienes conversión directa **sin rendir examen teórico ni práctico**.
-  * Pasos: Completar el formulario online **Tofes Yarok** [טופס ירוק] en el portal de transporte, realizar el examen de vista (**bedikat einaim** [בדיקת עיניים]) en una óptica autorizada (aprox. 50 NIS), y agendar turno en **Misrad HaRishuí** [משרד הרישוי] a través de **MyVisit**.
-- **Caso 2: Licencia extranjera VENCIDA:**
-  * No califica para canje automático con el plástico vencido.
-  * Solución: Solicitar a la entidad de tránsito de tu país de origen el **Certificado de Legalidad / Antigüedad de Conductor** apostillado, o bien rendir un examen práctico de control (**Mivján Shlitá** [מבחן שליטה]).
-
-📑 **Términos:** **Tofes Yarok**, **Bedikat Einaim**, **Hamarat Rishayón**, **Misrad HaRishuí**.`;
-  }
-
-  if (q.includes('101') || q.includes('tofes 101') || q.includes('impuesto') || q.includes('mas hajnas') || q.includes('nekudot')) {
-    return `⚠️ **Alerta Fiscal de Tofes 101:**
-Al empezar a trabajar o en cada mes de enero, debes completar el **Tofes 101** [טופס 101]. Si no marcas expresamente tu condición de **Olé Jadash**, el empleador te retendrá indebidamente impuesto a las ganancias (**Mas Hajnasá** [מס הכנסה]).
-
-📋 **Puntos Clave:**
-- Marca la casilla de nuevo inmigrante y adjunta copia de tu **Teudat Olé** [תעודת עולה] y fecha de llegada.
-- Esto te otorga puntos de crédito fiscal adicionales (**Nekudot Zijui** [נקודות זיכוי]), que reducen significativamente o anulan el pago de Mas Hajnasá durante tus primeros años.
-- Revisa siempre tu primer recibo de sueldo (**tlush sajar** [תלוש שכר]) para confirmar que las Nekudot Zijui estén acreditadas.`;
-  }
-
-  if (q.includes('myvisit') || q.includes('turno') || q.includes('cita') || q.includes('pnim')) {
-    return `💡 **Consejo Práctico de Olim Conectados para MyVisit:**
-Para trámites en **Misrad HaPnim** [משרד הפנים] (Teudat Zehut, pasaporte biométrico) o **Misrad HaRishuí** [משרד הרישוי] (licencias), los turnos en MyVisit suelen aparecer agotados a meses vista.
-
-⏰ **El Truco Matutino:**
-Conéctate a la web o app de **MyVisit** entre las **7:00 AM y 8:30 AM**. A esa hora el sistema libera automáticamente cancelaciones del día y cupos urgentes para esa misma semana.`;
-  }
-
-  if (q.includes('ulpan') || q.includes('ulpán') || q.includes('voucher') || q.includes('5200') || q.includes('5.200') || q.includes('hebreo')) {
-    return `🎓 **Ulpán Estatal y Vouchers de Misrad HaAliyah (~5.200 NIS):**
-
-⚠️ **Alerta Crítica:**
-El voucher para Ulpán Privado **NO es a fondo perdido**. Tú debes adelantar el pago y el Ministerio de Aliá solo te reintegra el arancel si cumples estrictamente con los requisitos.
-
-📋 **Requisitos Obligatorios para Reintegro:**
-1. **Paso 1:** Haber aprobado el examen de Ulpán inicial estatal (Ulpán Álef).
-2. **Paso 2:** Asistencia presencial mínima del **80%** (debes firmar planilla en cada clase). Si abandonas, el dinero adelantado se pierde.
-3. **Paso 3:** Rendir y aprobar el examen final de la institución privada. Solo con dicho certificado se efectúa el depósito en tu cuenta bancaria.`;
-  }
-
-  // Trámites Críticos de Recién Llegados (Día 1 a Mes 1)
-
-  // 1. Apertura de Cuenta Bancaria Israelí
+  // 7. Salud y Urgencias — Alerta Miún (Guardia Hospitalaria) y MADA
   if (
-    q.includes('cuenta bancaria') ||
-    q.includes('abrir cuenta') ||
-    q.includes('banco') ||
-    q.includes('hapoalim') ||
-    q.includes('leumi') ||
-    q.includes('discount') ||
-    q.includes('mizrahi') ||
-    q.includes('nihul jeshbon') ||
-    q.includes('nihul kheshbon')
+    (q.includes('miun') || q.includes('miún') || q.includes('guardia') || q.includes('hospital') || q.includes('mada') || q.includes('ambulancia')) &&
+    !q.includes('activar') &&
+    !q.includes('credencial') &&
+    !q.includes('turno')
   ) {
-    return `🏦 **Cómo Abrir tu Cuenta Bancaria en Israel (Paso 1 Obligatorio):**
+    return `⚠️ **Alerta Económica Importante: Guardia Hospitalaria (Miún) y Ambulancias (MADA):**
 
-⚠️ **Alerta Crítica:**
-No podrás recibir las cuotas restantes del **Sal Klitá** [סל קליטה] ni cobrar un sueldo legal sin una cuenta bancaria israelí activa a tu nombre. Debes hacer este trámite en tus primeros 3 a 5 días hábiles en el país.
+El hospital en Israel **NO es gratuito para consultas médicas espontáneas**. Acudir por cuenta propia sin seguir los pasos oficiales genera facturas elevadas (**heshbonit** [חשבונית]) de entre 500 y más de 1.000 NIS que tu obra médica no reembolsará:
 
-🤝 **Apoyo Solidario Recomendado - OLEI (Organización de Inmigrantes Hispanohablantes):**
-Si aún no dominas el hebreo o el inglés bancario, puedes contactar a la **OLEI** [עולי]. Sus voluntarios acompañan a los olim en persona al banco para evitar que te cobren comisiones abusivas o te exijan requisitos desmedidos, asegurando que te entreguen el paquete gratuito de nuevo inmigrante.
+1. **Paso 1 - Médico de Cabecera o Telemedicina:**
+   - Consulta primero con tu médico de familia (**Rofé Mishpajá** [רופא משפחה]) o accede a la telemedicina y chat médico 24/7 disponible en la app oficial de tu Kupá.
 
-📋 **Documentos que Exige el Banco:**
-1. **Teudat Olé** [תעודת עולה] original (la que te entregaron en el aeropuerto Ben Gurión).
-2. **Teudat Zehut** [תעודat זהות] provisoria (papel doblado con tu foto o número de identidad).
-3. **Pasaporte extranjero vigente**.
-4. **Número de celular israelí** (indispensable para recibir SMS de verificación y activar la app móvil).
-5. **Depósito inicial en efectivo:** Se recomienda llevar entre 50 y 100 NIS en efectivo (o el cheque entregado en el aeropuerto) para activar formalmente la cuenta en ventanilla.
-*(Nota: Si eres ciudadano estadounidense, te pedirán tu número de Social Security y formulario W-9).*
+2. **Paso 2 - Urgencias Intermedias (Fuera de horario y fines de semana):**
+   - Si la clínica está cerrada, acude a centros de atención intermedia como **Terem** [טרם] (teléfono ***2884**) o **Bikur Rofé** [ביקור רופא]. El copago es sumamente bajo y sus médicos evaluarán si tu cuadro clínico requiere derivación formal.
 
-📄 **El Documento de Oro: Ishur Nihul Jeshbón [אישור ניהול חשבון]:**
-Al abrir la cuenta, **exige de inmediato este certificado oficial**. Es la constancia bancaria que debes presentar a tu asesor de **Misrad HaAliyah** para que depositen las siguientes 5 cuotas del Sal Klitá.
+3. **Paso 3 - Cuándo acudir al Hospital (Miún [מיון]):**
+   - Concurre a la guardia hospitalaria **ÚNICAMENTE con orden de derivación formal (Hafniá [הפניה]) emitida por un médico**, si sufres un traumatismo severo con fractura evidente o si el cuadro reviste riesgo inminente de vida. Si el paciente queda efectivamente internado (**ishpuz** [אשפוז]), la factura queda 100% exenta.
 
-💡 **Consejos de Ahorro para Olim:**
-- Pregunta por el paquete preferencial de Olé Jadash (**Ptor me-Amalot** - exención de comisiones de mantenimiento por el primer año).
-- Solicita tarjeta de débito local (**Cartís Jimashon**) y claves de home banking en el momento.`;
+4. **Ambulancias (MADA - 101):**
+   - El despacho de una ambulancia de **Magen David Adom** emite factura de cobro automática. Solo queda exenta o cubierta al 100% si el traslado culmina en **internación hospitalaria efectiva** o responde a emergencias vitales tipificadas por la ley de salud.`;
   }
 
-  // 2. Vigencia y Caducidad de Teudat Olé
+  // 8. Rashut HaMisim — Tofes 101 y Puntos de Crédito (Nekudot Zijui)
+  if (
+    q.includes('101') ||
+    (q.includes('mas hajnas') && (q.includes('reteng') || q.includes('llenar') || q.includes('tofes') || q.includes('impuesto')))
+  ) {
+    return `📑 **Cómo Completar el Tofes 101 para Evitar Retenciones de Más (Mas Hajnasá):**
+
+1. **Obligatoriedad y Plazo:**
+   - Se debe completar al ingresar a cualquier nuevo empleo en Israel y anualmente en el mes de enero al inicio de cada año fiscal.
+
+2. **Puntos de Crédito para Inmigrantes (Nekudot Zijui):**
+   - En la sección relativa a tu condición personal, **debes tildar expresamente la casilla de Olé Jadash [עולה חדש]**.
+   - Anexa siempre una **copia legible de tu Teudat Olé** donde conste con claridad tu fecha de llegada al país (**Taarij Aliyá**).
+
+3. **Vigencia del Beneficio Fiscal (Primeros 42 Meses):**
+   - Los puntos de crédito fiscal adicionales (**Nekudot Zijui** [נקודות זיכוי]) descuentan directamente el impuesto a las ganancias (**Mas Hajnasá**):
+     * **Meses 1 a 18 de Aliá:** 3 puntos de crédito adicionales.
+     * **Meses 19 a 30 de Aliá:** 2 puntos de crédito adicionales.
+     * **Meses 31 a 42 de Aliá:** 1 punto de crédito adicional.
+
+4. **Verificación en el Recibo de Sueldo (Tlush Sajar):**
+   - Al cobrar tu primer salario, controla en tu **tlush sajar** [תלוש שכר] en el casillero de *Nekudot Zijui* que figuren computados tus puntos de Olé para confirmar que no te aplicaron retenciones indebidas.`;
+  }
+
+  // 9. Rashut HaMisim — Dos Trabajos Simultáneos y Teum Mas (47%)
+  if (
+    q.includes('teum mas') ||
+    q.includes('47%') ||
+    (q.includes('2 trabajos') || q.includes('dos trabajos') || q.includes('segundo trabajo') || q.includes('pluriempleo'))
+  ) {
+    return `⚠️ **Dos Trabajos Simultáneos: Cómo Hacer el Teum Mas y Evitar la Retención del 47%:**
+
+Por normativa fiscal en Israel, si una persona tiene más de un empleo y no presenta la coordinación impositiva oficial, el segundo empleador está legalmente obligado a retener la tasa máxima marginal (aproximadamente el **47%** de tu sueldo secundario).
+
+📋 **Procedimiento Obligatorio Paso a Paso:**
+1. **Paso 1 - Obtener el Tik Nikuyim de cada Empleador:**
+   - Solicita en el departamento de RRHH o contabilidad de cada uno de tus empleadores su número de expediente de deducción patronal (**Tik Nikuyim** [תיק ניכויים], un código numérico de 9 dígitos).
+
+2. **Paso 2 - Trámite Digital en Rashut HaMisim:**
+   - Ingresa al portal oficial de **Rashut HaMisim** [רשות המסים] (Autoridad Tributaria) en el aplicativo **Teum Mas Online** (תיאום מס באינטרנט).
+
+3. **Paso 3 - Declaración y Asignación de Beneficios:**
+   - Declara cuál es tu empleo principal (donde aplicas tus puntos de crédito **Nekudot Zijui** de Olé Jadash) y declara el sueldo bruto proyectado para el segundo empleo.
+
+4. **Paso 4 - Entrega de la Constancia Oficial:**
+   - El sistema emite un certificado oficial con la tasa de retención exacta que le corresponde aplicar a tu segundo trabajo. **Descarga el documento y entrégalo en administración de tu segundo empleo** antes de la fecha de cierre de liquidación de sueldos.`;
+  }
+
+  // 10. Misrad HaRishuí — Canje de Licencia de Conducir Extranjera (>5 años)
+  if (
+    q.includes('licencia') &&
+    (q.includes('canje') || q.includes('canjeo') || q.includes('5 años') || q.includes('extranjera') || q.includes('conducir') || q.includes('manejar'))
+  ) {
+    return `🚗 **Canje de Licencia de Conducir Extranjera (>5 años de Antigüedad):**
+
+Si tu licencia de conducir extranjera cuenta con más de 5 años de antigüedad comprobada y estás dentro de tus primeros años de Aliá:
+- **Exención Total:** Puedes realizar la convalidación directa **sin rendir examen práctico de manejo (test) ni examen teórico**.
+
+📋 **Pasos Obligatorios para Obtener la Licencia Israelí:**
+1. **Tofes Yarok (Formulario Digital):**
+   - Completa la solicitud en línea en el portal de **Misrad HaRishuí** [משרד הרישוי] (Ministerio de Transporte) seleccionando canje de licencia extranjera (**Hamarat Rishayón** [המרת רישיון]). Recibirás un código SMS de confirmación.
+
+2. **Examen de Vista (Bedikat Einaim):**
+   - Concurre a una óptica autorizada asociada al sistema de transporte para realizar el control oftalmológico (**Bedikat Einaim** [בדיקת עיניים], costo aproximado de 50 NIS). El resultado se carga directamente en el sistema digital.
+
+3. **Reserva de Turno en MyVisit:**
+   - Agenda tu cita presencial en la oficina de **Misrad HaRishuí** más cercana a través de la plataforma [myvisit.com](https://myvisit.com).
+
+4. **Documentación a Presentar en Ventanilla:**
+   - Pasaporte extranjero original.
+   - **Teudat Zehut** (definitiva o provisoria).
+   - Libreta de **Teudat Olé**.
+   - Licencia de conducir física original y vigente de tu país de origen.
+
+⚠️ *Plazo de Conducción:* Recuerda que solo está permitido manejar en Israel con tu registro extranjero durante los **primeros 12 meses** desde tu fecha de llegada (**Taarij Aliyá**).`;
+  }
+
+  // 11. Pikud HaOref y Emergencias — Derechos Laborales
+  if (
+    q.includes('pikud') ||
+    q.includes('haoref') ||
+    (q.includes('despedir') && q.includes('vacaciones')) ||
+    (q.includes('guerra') && q.includes('trabajo'))
+  ) {
+    return `🛡️ **Directivas de Pikud HaOref y Protección de Derechos Laborales:**
+
+En situaciones de emergencia y alertas de seguridad civil dictadas por el Comando del Frente Interno (**Pikud HaOref** [פיקוד העורף]), la legislación laboral israelí protege rigurosamente a los trabajadores:
+
+1. **Prohibición Absoluta de Despido:**
+   - La ley prohíbe taxativamente que un empleador despida a un trabajador que no concurra a sus tareas por cualquiera de las siguientes causas:
+     * Instrucciones expresas de seguridad de **Pikud HaOref** que limiten la actividad laboral en la zona.
+     * Falta de refugio reglamentario accesible (**Mamad** [ממ"ד] o **Miklat** [מקלט]) en el establecimiento de trabajo dentro del tiempo de alerta establecido para la localidad.
+     * Obligación de permanecer al cuidado de hijos menores de 14 años ante la suspensión oficial de clases presenciales en escuelas y jardines.
+
+2. **Días de Vacaciones y Saldo Negativo Prohibido:**
+   - El empleador **NO puede descontar de manera unilateral o forzosa** estos días de tus vacaciones si no cuentas con días positivos acumulados en tu haber. Está prohibido por ley dejar el balance de vacaciones en saldo negativo sin el consentimiento previo expreso del empleado.
+
+3. **Compensación Salarial:**
+   - En estados de emergencia prolongados (**Matzav Meiyujad ba-Oref**), el Estado aprueba acuerdos marco e indemnizaciones salariales a través de **Bituaj Leumi** y el Ministerio de Trabajo para cubrir las jornadas laborales caídas.`;
+  }
+
+  // 12. Celular y Transporte (Rav-Kav)
+  if (
+    (q.includes('celular') || q.includes('telefono') || q.includes('sim')) &&
+    (q.includes('rav-kav') || q.includes('rav kav') || q.includes('transporte') || q.includes('como consigo') || q.includes('cómo consigo'))
+  ) {
+    return `📱 **Cómo Obtener Número de Celular y Tarjeta Rav-Kav en tus Primeros Días:**
+
+📲 **1. Línea Celular Israelí (Día 1):**
+- **Prioridad absoluta:** Es indispensable para activar la cuenta de banco, recibir códigos SMS de autenticación de MyVisit y comunicarse con Misrad HaAliyah.
+- **Dónde contratar:** En locales de telefonía o centros comerciales de empresas autorizadas (Partner, Cellcom, Pelephone, HOT Mobile, Golan Telecom o 019).
+- **Requisitos:** Solo requieres presentarte con tu pasaporte extranjero vigente o Teudat Zehut provisoria y un medio de pago para contratar plan mensual o chip SIM prepago.
+
+🚆 **2. Tarjeta de Transporte Rav-Kav (רב-קו):**
+- En Israel **no se abona con efectivo** a bordo de colectivos urbanos ni trenes.
+- **Tarjeta física personalizada:** Se emite de forma gratuita con tu perfil de Olé Jadash en los centros **Al HaKav** (en estaciones de tren centrales como Savidor Merkaz o HaShalom en Tel Aviv y en el aeropuerto Ben Gurión), presentando tu Teudat Olé y pasaporte.
+- **Pago mediante el celular:** También puedes pagar directamente tus viajes descargando aplicaciones autorizadas como **Moovit**, **HopOn** o **Rav-Kav Online**, cargándoles saldo o asociando una tarjeta de crédito o débito.`;
+  }
+
+  // 13. Médico que Hable Español en la Kupá
+  if (
+    (q.includes('médico') || q.includes('medico') || q.includes('turno')) &&
+    (q.includes('español') || q.includes('kupa') || q.includes('kupá'))
+  ) {
+    return `🩺 **Cómo Solicitar Turno con un Médico que Hable Español en tu Kupat Jolim:**
+
+1. **Búsqueda por Idioma en Aplicación o Portal Web:**
+   - En las apps y webs oficiales de tu obra médica (**Maccabi**, **Clalit**, **Meuhedet** o **Leumit**), al buscar especialistas por ciudad o especialidad, abre el menú de filtros avanzados y selecciona en **Idioma (Language / שפה)** la opción **Español (ספרדית)**.
+
+2. **Central Telefónica con Traductor en Línea:**
+   - Comunícate a la central de turnos de tu Kupá:
+     * **Maccabi:** ***3555**
+     * **Clalit:** ***2700**
+     * **Meuhedet:** ***3833**
+     * **Leumit:** ***507**
+   - Solicita atención o traducción en español diciendo: *"Efshar meturgeman be-sfaradit?"* (*¿Es posible contar con un traductor al español?*).
+
+3. **Derivación de Médico de Cabecera:**
+   - Si no hay especialista hispanohablante en tu zona inmediata, tu médico general de familia (**Rofé Mishpajá**) puede derivarte a telemedicina o coordinar interconsulta con un profesional que atienda en tu lengua materna.
+   - También puedes consultar el directorio nacional independiente en **doctors.org.il**.`;
+  }
+
+  // 14a. Consulta puntual sobre Calle Bialik (Ramat Gan)
+  if (q.includes('bialik')) {
+    return `🧉 **Yerba Mate y Productos en Calle Bialik (Ramat Gan):**
+
+Sobre la avenida comercial **Bialik** en Ramat Gan, efectivamente hay tiendas de productos naturales (**Batei Teva**) y dietéticas que traen yerba mate y productos del Cono Sur de forma regular.
+
+Sin embargo, para mantener absoluta rigurosidad y honestidad factual, **no dispongo en este momento de la numeración catastral o altura exacta** de esos comercios en mi base de datos confirmada. Al recorrer las cuadras comerciales de Bialik podrás identificar fácilmente los locales y dietéticas que exhiben marcas tradicionales de yerba y productos importados en sus vidrieras.`;
+  }
+
+  // 14. Yerba Mate y Productos Latinoamericanos
+  if (
+    q.includes('yerba') ||
+    q.includes('mate') ||
+    q.includes('productos importados') ||
+    q.includes('dulce de leche') ||
+    q.includes('alfajor') ||
+    q.includes('harina pan') ||
+    q.includes('arepa')
+  ) {
+    return `🧉 **Dónde Comprar Yerba Mate y Productos Latinoamericanos en Israel:**
+
+📍 **Puntos Físicos Confirmados:**
+1. **Tel Aviv — Allenby 37:**
+   - Local referente especializado en productos argentinos y del Cono Sur (yerba mate de diversas marcas, dulce de leche, alfajores, golosinas y tapas para empanadas).
+2. **Tel Aviv — Levanda 13 ("La Tienda - Comida Latina"):**
+   - Punto de referencia panlatino con Harina P.A.N. para arepas, frijoles y caraotas, tortillas de maíz, salsas mexicanas, pulpas de frutas congeladas, panela/papelón y quesos típicos.
+3. **Ramat Gan — Calle Bialik:**
+   - Comercios y tiendas naturistas (**Batei Teva**) sobre la avenida comercial Bialik suelen contar con stock regular de yerba mate y productos de importación. *(Nota: no se dispone de la numeración exacta de altura catastral en la base de datos)*.
+4. **Shuk HaCarmel (Tel Aviv):**
+   - Exclusivamente para frutas tropicales (plátano macho), cilantro fresco y chiles frescos o secos. *(Aclaración: NO es punto de referencia para yerba mate ni alfajores empaquetados)*.
+
+🛒 **Cadenas de Supermercados (Todo Israel):**
+- Grandes cadenas como **Tiv Ta'am** y **Keshet Teamim** disponen en sus sucursales de góndolas fijas de importación internacional con marcas tradicionales de yerba mate y dulce de leche.
+
+🚚 **Envíos a Domicilio y Redes Comunitarias:**
+- Tiendas virtuales especializadas realizan despachos a todo el país (kibutzim, moshavim y ciudades del interior).
+- Se recomienda consultar grupos de Facebook y WhatsApp de la comunidad ("Argentinos en Israel", "Latinos en Israel", "Colombianos en Israel") para información de ferias artesanales y compras conjuntas.`;
+  }
+
+  // 15. Días de Reposo por Enfermedad (Jok Dmei Majalá)
+  if (
+    q.includes('enfermedad') ||
+    q.includes('reposo') ||
+    q.includes('dias de enfermedad') ||
+    q.includes('días de enfermedad') ||
+    q.includes('dmei majala') ||
+    q.includes('dmei majalá')
+  ) {
+    return `⚠️ **Cálculo y Pago de Días de Reposo por Enfermedad (Jok Dmei Majalá):**
+
+En Israel, la ley de días de enfermedad (**Jok Dmei Majalá** [חוק דמי מחלה]) establece un esquema escalonado de compensación:
+
+1. **Escala Legal de Remuneración:**
+   - **Día 1 de ausencia médica:** **0%** (por ley no se remunera).
+   - **Días 2 y 3 de ausencia médica:** Se abonan al **50%** del valor jornal diario regular.
+   - **Día 4 en adelante:** Se abona al **100%** del valor jornal diario.
+
+2. **Saldo Acumulado en el Recibo de Sueldo (Tlush Sajar):**
+   - Cada trabajador acumula por ley **1.5 días de enfermedad por cada mes completo trabajado** (hasta un tope acumulable de 90 días).
+   - **¡Atención!:** Para cobrar estos días debes contar con saldo positivo acumulado en tu recibo (**tlush sajar**). Si el saldo acumulado está en cero, los días no trabajados se descontarán como ausencia no remunerada (salvo que se trate de un accidente laboral cubierto con el formulario **BL 250** de Bituaj Leumi).
+
+3. **Constancia Médica Oficial:**
+   - Debes solicitar el certificado médico oficial (**Ishur Majalá** [אישור מחלה]) emitido por tu médico de Kupat Jolim y presentarlo inmediatamente a la administración de tu empleador.`;
+  }
+
+  // 16. MyVisit y Teudat Zehut Biométrica Permanente
+  if (
+    q.includes('teudat zeut') ||
+    q.includes('teudat zehut') ||
+    q.includes('myvisit') ||
+    q.includes('biometric') ||
+    q.includes('biométrica')
+  ) {
+    return `🪪 **Cómo Tramitar tu Teudat Zehut Biométrica Permanente en Misrad HaPnim (MyVisit):**
+
+1. **Plazo de Validez del Documento de Papel:**
+   - La Teudat Zehut provisoria de papel entregada en el aeropuerto Ben Gurión tiene una validez reglamentaria de **3 meses**. Antes de ese plazo debes tramitar la tarjeta plástica biométrica definitiva.
+
+2. **Reserva de Turno por MyVisit:**
+   - Accede a la plataforma [myvisit.com](https://myvisit.com) o su aplicación móvil.
+   - Selecciona **Rashut HaOjlusin ve-haHagirá** (**Misrad HaPnim** [משרד הפנים]).
+   - Elige el trámite: *"Emisión de Teudat Zehut Biométrica"* (**Hanafat Teudat Zehut Biometrit**).
+   - El primer ejemplar de Teudat Zehut biométrica para Olé Jadash es **100% gratuito** (exento de arancel).
+
+3. **Consejo Matutino para Conseguir Cita:**
+   - Ingresa a MyVisit **entre las 7:00 AM y las 8:30 AM**. A esa hora el sistema libera cancelaciones de la jornada y turnos de urgencia en sucursales próximas.
+
+4. **Documentos a Llevar a la Cita:**
+   - Teudat Olé original.
+   - Teudat Zehut provisoria de papel con foto.
+   - Pasaporte extranjero con el que ingresaste al país.
+   - Certificado original de nacimiento (y libreta de matrimonio si corresponde).`;
+  }
+
+  // 17. Activación de Cobertura en Kupat Jolim y Credencial Magnética
+  if (
+    q.includes('activar kupa') ||
+    q.includes('activar kupá') ||
+    q.includes('credencial') ||
+    q.includes('tarjeta magnetica') ||
+    q.includes('tarjeta magnética') ||
+    (q.includes('kupa') && q.includes('maccabi')) ||
+    (q.includes('kupa') && q.includes('clalit'))
+  ) {
+    return `🏥 **Activación de Cobertura y Credencial Magnética en Kupat Jolim:**
+
+1. **Activación Presencial Obligatoria:**
+   - Aunque te hayas registrado en el aeropuerto o antes de viajar, tu afiliación debe activarse formalmente de forma presencial en una sucursal (**Snif**) de la Kupá que hayas seleccionado (**Maccabi**, **Clalit**, **Meuhedet** o **Leumit**).
+
+2. **Documentos a Presentar en Ventanilla (Mazkirut):**
+   - Libreta de **Teudat Olé** original.
+   - Constancia de inscripción de salud del aeropuerto o del Correo (**Doar Israel**).
+   - Número de **Teudat Zehut**.
+   - Datos de tu cuenta bancaria (certificado **Ishur Nihul Jeshbón**) para vincular el débito automático (**Horaat Keva**) del seguro complementario.
+
+3. **Entrega de Credencial Magnética (Cartís Magentí):**
+   - En ventanilla imprimirán tu tarjeta plástica magnética en el acto o te entregarán un número provisorio para comprar medicamentos subvencionados y consultar médicos inmediatamente.
+
+4. **Período de Gracia para Cobertura Complementaria (90 Días):**
+   - **¡Dato clave!:** Durante los **primeros 90 días desde tu fecha de Aliá**, puedes afiliarte a los planes complementarios más altos (Maccabi Sheli, Clalit Mushlam/Platinium) **sin períodos de carencia** (sin meses de espera para cirugías, tratamientos dentales o especialistas).`;
+  }
+
+  // 18. Vigencia y Plazos de los Beneficios de Teudat Olé
   if (
     q.includes('teudat ole') ||
     q.includes('teudat olé') ||
@@ -844,220 +799,22 @@ Al abrir la cuenta, **exige de inmediato este certificado oficial**. Es la const
     q.includes('vencimiento') ||
     q.includes('derechos primer año')
   ) {
-    return `📄 **Vigencia de tu Teudat Olé y Cronograma de Derechos:**
+    return `📄 **Vigencia y Cronograma de Derechos de tu Teudat Olé:**
 
-⚠️ **Diferencia Fundamental:**
-- Tu condición de **Olé Jadash** es permanente ante la ley del retorno, pero los **beneficios económicos y fiscales tienen distintos plazos de caducidad**.
-- La libreta física de **Teudat Olé** [תעודת עולה] que te dieron en el aeropuerto no "vence" como documento de identidad histórico, pero tus derechos tienen plazos estrictos contados desde tu fecha de llegada (**Taarij Aliyá**):
+1. **Condición Permanente vs. Derechos Temporales:**
+   - Tu estatus de **Olé Jadash** es permanente ante la Ley del Retorno, pero los **beneficios económicos, impositivos y aduaneros tienen plazos de caducidad estrictos** contados desde tu fecha de llegada (**Taarij Aliyá**):
 
-⏱️ **Cronograma de Vencimiento de Derechos Clave:**
-1. **Primeros 6 meses:** Sal Klitá (canasta de absorción en 6 cuotas). Cobertura básica de Kupat Jolim sin costo de aporte mensual.
-2. **Meses 7 a 30 (24 meses):** Subsidio de alquiler (**Siyua biSjirot**) depositado mes a mes. **Caduca de forma improrrogable en el mes 30.**
-3. **Primeros 12 meses (1 año):**
-   * **Conducir con licencia extranjera:** Plazo fatal de 12 meses. Después es ilegal manejar sin canjearla ante Misrad HaRishuí.
-   * **Descuento de Arnoná (tasa municipal):** Descuento del 70% al 90% en la Iriyá aplicable durante 12 meses continuos de contrato de alquiler.
-4. **Primeros 3 a 4.5 años:** Puntos de crédito impositivos (**Nekudot Zijui** en el Tofes 101) para no pagar impuesto a las ganancias.
-5. **Primeros 5 años:** Exención o reducción arancelaria para canjear licencia de conducir (si tienes más de 5 años de antigüedad) y descuento en compra de electrodomésticos o auto nuevo.`;
+2. **Cronograma Oficial de Plazos:**
+   - **Meses 1 a 6:** Sal Klitá (canasta básica en 6 cuotas) y cobertura médica básica estatal gratuita.
+   - **Meses 7 a 30 (24 meses continuos):** Subsidio mensual de alquiler (**Siyua bi'Sjirot**). Caduca de forma definitiva al finalizar el mes 30.
+   - **Primeros 12 meses (1 año):**
+     * Conducir con licencia extranjera original (luego de 12 meses es ilegal conducir sin canje).
+     * Descuento en la tasa municipal de **Arnoná** (del 70% al 90% según el municipio) durante 12 meses de contrato.
+   - **Primeros 42 meses (3.5 años):** Puntos de crédito fiscal (**Nekudot Zijui** en el Tofes 101) para deducir el impuesto a las ganancias.
+   - **Primeros 5 años:** Exención de examen práctico para canje de licencia extranjera de conducir (si acredita más de 5 años de antigüedad) y exención aduanera en compra de electrodomésticos o automóvil nuevo.`;
   }
 
-  // 3. Turno en MyVisit para Teudat Zehut Biométrica Permanente
-  if (
-    q.includes('teudat zeut') ||
-    q.includes('teudat zehut') ||
-    q.includes('biometric') ||
-    q.includes('biométrica') ||
-    (q.includes('pnim') && (q.includes('dni') || q.includes('documento') || q.includes('cedula')))
-  ) {
-    return `🪪 **Cómo tramitar tu Teudat Zehut Biométrica Permanente (Misrad HaPnim):**
-
-⚠️ **Plazo Legal Importante:**
-La Teudat Zehut de papel provisoria que te entregan en el aeropuerto Ben Gurión tiene una validez de **3 meses**. Dentro de ese período debes tramitar la tarjeta plástica biométrica definitiva.
-
-📱 **Paso a Paso en MyVisit (Sitio / App):**
-1. **Accede a MyVisit:** Ingresa a la app o al sitio web [myvisit.com](https://myvisit.com) o [govisit.co.il](https://govisit.co.il).
-2. **Selecciona el organismo:** Elige **Rashut HaOjlusin ve-haHagirá** (Autoridad de Población e Inmigración - **Misrad HaPnim** [משרד הפנים]).
-3. **Servicio:** Selecciona *"Emisión de Teudat Zehut Biométrica"* (**Hanafat Teudat Zehut Biometrit**).
-4. **Identificación:** Coloca tu número de Zehut de 9 dígitos (el que figura en tu libreta provisoria o Teudat Olé) y tu número de celular israelí para el SMS.
-5. **Costo:** El primer trámite de Teudat Zehut biométrica para Olé Jadash es **100% gratuito** (sin arancel estatal).
-
-⏰ **Consejo de Oro para Conseguir Turno:**
-Debido a la alta demanda, las citas suelen aparecer lejanas. Ingresa a la app de MyVisit **temprano entre las 7:00 AM y 8:30 AM**; a esa hora se liberan automáticamente cancelaciones del día y cupos de urgencia en sucursales cercanas.
-
-📋 **Qué llevar a la cita:**
-- Libreta de **Teudat Olé**.
-- Teudat Zehut provisoria de papel.
-- Pasaporte extranjero con el que ingresaste a Israel.
-- Certificado de nacimiento original (y libreta de matrimonio si corresponde).`;
-  }
-
-  // 4. Activación de Cobertura en Kupat Jolim (Maccabi, Clalit, Meuhedet, Leumit)
-  if (
-    q.includes('maccabi') ||
-    q.includes('clalit') ||
-    q.includes('meuhedet') ||
-    q.includes('leumit') ||
-    q.includes('cobertura') ||
-    q.includes('activar kupa') ||
-    q.includes('activar kupá') ||
-    q.includes('elegí maccabi') ||
-    q.includes('elegi maccabi') ||
-    q.includes('ya puedo usarla') ||
-    q.includes('tarjeta magnetica') ||
-    q.includes('credencial')
-  ) {
-    return `🏥 **Activación de Cobertura en Kupat Jolim (Maccabi / Clalit / Meuhedet / Leumit):**
-
-⚠️ **¿Completaste el formulario antes de viajar o en el aeropuerto?:**
-¡Sí! Tu afiliación básica está pre-registrada en el sistema de salud israelí, **PERO debes activarla formalmente en una sucursal física** para obtener tu credencial magnética (**Cartís Magentí**) y dar de alta el seguro complementario.
-
-🤝 **Apoyo Solidario Recomendado - OLEI (Organización de Inmigrantes Hispanohablantes):**
-Si el idioma o la burocracia inicial te abruman, **contacta a la OLEI**. Cuentan con voluntarios hispanohablantes experimentados que te acompañan a la sucursal de tu Kupá para gestionar la tarjeta magnética, entender los planes complementarios y vincular el débito automático (**Horaat Keva**) sin contratiempos.
-
-📋 **Pasos Inmediatos para Usar tu Cobertura:**
-1. **Paso 1 - Presentarse en una sucursal (Snif):** Acude a la sede de la Kupá que elegiste (Maccabi, Clalit, etc.) más cercana a tu domicilio. No necesitas turno previo para la ventanilla de afiliación (**Mazkirut**).
-2. **Paso 2 - Documentación requerida:**
-   - Libreta de **Teudat Olé** original.
-   - Constancia de inscripción de salud del aeropuerto o del Correo (**Doar Israel**).
-   - Número de Teudat Zehut.
-   - Datos de tu cuenta bancaria (para vincular el débito directo o **Horaat Keva** del seguro complementario).
-3. **Paso 3 - Credencial Magnética:** En ventanilla imprimirán tu tarjeta plástica con chip/banda en el acto o te darán un código provisorio con el que ya puedes ver médicos y comprar medicamentos subvencionados en la farmacia.
-4. **Paso 4 - Seguro Complementario (Sheli / Gold / Zahav):**
-   * **¡Dato clave!:** Durante los **primeros 90 días desde tu aliá**, puedes inscribirte a los niveles más altos de cobertura complementaria **sin período de carencia** (sin meses de espera para cirugías, tratamientos dentales o especialistas).
-
-💡 **¿Y si tengo una urgencia médica hoy mismo antes de ir al Snif?:**
-Con tu número de Teudat Zehut y el papel del aeropuerto ya estás empadronado en el seguro de salud estatal. Comunícate al call center de tu Kupá (*3555 para Maccabi, *2700 para Clalit) para que te asignen médico de guardia o te indiquen el centro de urgencias (**Terem**) con convenio.`;
-  }
-
-  // 4b. Consultas sobre OLEI y organizaciones de ayuda al Olé
-  if (
-    q.includes('olei') ||
-    q.includes('organización de inmigrantes') ||
-    q.includes('asociacion de olim') ||
-    q.includes('asociación de olim') ||
-    q.includes('voluntarios') ||
-    q.includes('acompañamiento')
-  ) {
-    return `🤝 **OLEI - Organización de Inmigrantes Hispanohablantes en Israel:**
-
-La **OLEI** [עולי] es la institución comunitaria central y solidaria que nuclea y asiste a todos los inmigrantes de habla hispana en Israel desde su llegada:
-
-🌟 **¿En qué te ayuda la OLEI en tus primeros trámites?:**
-1. **Apertura de Cuenta Bancaria:** Acompañamiento presencial de voluntarios a las sucursales para asegurar la apertura sin comisiones indebidas y la obtención del **Ishur Nihul Jeshbón**.
-2. **Kupat Jolim:** Asistencia en la oficina de tu Kupá (Maccabi, Clalit, etc.) para tramitar la credencial magnética y elegir tu médico de familia.
-3. **Traducción y Burocracia:** Lectura y comprensión de cartas oficiales, contratos de alquiler en hebreo y boletas municipales de **Arnoná**.
-4. **Red Social y Emocional:** Encuentros comunitarios, grupos de pares por edades y actividades culturales para no sentirte solo en tus primeras semanas.
-
-📍 **Sedes de OLEI en Israel:**
-Tienen filiales activas en Tel Aviv, Jerusalén, Netanya, Haifa, Ra'anana, Rishon LeZion, Ashdod, Beer Sheva y Kfar Saba.
-Puedes consultar con tu sede local o ingresar a su web oficial [olei.org.il](https://olei.org.il).`;
-  }
-
-  // 5. Celular y Transporte (Rav-Kav) para recién llegados
-  if (
-    q.includes('rav-kav') ||
-    q.includes('rav kav') ||
-    q.includes('sim') ||
-    q.includes('celular') ||
-    q.includes('telefono') ||
-    q.includes('colectivo') ||
-    q.includes('tren')
-  ) {
-    return `📱 **Celular y Transporte Público para Recién Llegados:**
-
-1. **Número de Celular Israelí (Día 1):**
-   - Es el requisito imprescindible para todo: abrir la cuenta del banco, recibir turnos de MyVisit y comunicarse con Misrad HaAliyah.
-   - Puedes comprar una tarjeta SIM prepaga o con abono mensual (Partner, Cellcom, Pelephone, 012, Golan, Hot Mobile) en kioscos, centros comerciales o casas de telefonía presentando tu pasaporte extranjero.
-
-2. **Tarjeta de Transporte Rav-Kav [רב-קו]:**
-   - En Israel **no se paga con dinero en efectivo arriba de los colectivos ni trenes**.
-   - **Cómo obtenerla:** Puedes emitir tu tarjeta Rav-Kav personalizada (con foto y perfil) en los centros de atención **Al HaKav** (en estaciones centrales de trenes y autobuses como Savidor Merkaz o HaShalom en Tel Aviv) de forma gratuita presentando tu Teudat Olé y pasaporte.
-   - **Apps de pago en el celular:** También puedes pagar directamente descargando en tu celular las apps autorizadas como **Moovit**, **Pango** o **HopOn Rav-Kav**, vinculando una tarjeta de crédito o débito.`;
-  }
-
-  // 11. Sal Klitá y Subsidio de Alquiler (Plazos Exactos)
-  if (
-    q.includes('sal klita') ||
-    q.includes('sal klitá') ||
-    q.includes('canasta') ||
-    q.includes('subsidio de alquiler') ||
-    q.includes('ayuda de alquiler') ||
-    q.includes('siyua') ||
-    q.includes('sjirot') ||
-    q.includes('mes 30') ||
-    q.includes('mes 7') ||
-    q.includes('deje de cobrar') ||
-    q.includes('dejé de cobrar') ||
-    q.includes('corte de pago')
-  ) {
-    return `💰 **Sal Klitá y Subsidio de Alquiler (Plazos Legales Exactos):**
-
-⚠️ **Alerta de Plazos Fatales (Corte en el Mes 30):**
-Muchos olim se alarman al ver que la ayuda económica se detiene. Este es el cronograma oficial reglamentario fijado por **Misrad HaAliyah**:
-
-📋 **Cronograma Oficial de Cobro:**
-1. **Meses 1 a 6 (Sal Klitá [סל קליטה]):**
-   - La canasta básica de absorción se abona durante los primeros 6 meses: un primer pago inicial en el aeropuerto (o cuenta bancaria) seguido de **5 cuotas mensuales consecutivas**.
-2. **Meses 7 a 30 (Ayuda de Alquiler - Siyua bi'Sjirot [סיוע בשכר דירה]):**
-   - Comienza **automáticamente en el mes 7** de aliá.
-   - Tiene una duración exacta de **24 meses consecutivos** (desde el mes 7 hasta el mes 30 de tu aliá).
-3. **Mes 31 en adelante:**
-   - **Corte definitivo por ley.** Al finalizar el mes 30 de permanencia, el subsidio de alquiler caduca de forma reglamentaria y no se renueva automáticamente.
-
-📑 **Términos Clave:** **Sal Klitá** [סל קליטה], **Siyua bi'Sjirot** [סיוע בשכר דירה], **Misrad HaAliyah ve-haKlitá**.`;
-  }
-
-  // 12. Pluriempleo y Teum Mas
-  if (
-    q.includes('teum mas') ||
-    q.includes('dos trabajos') ||
-    q.includes('pluriempleo') ||
-    q.includes('segundo trabajo') ||
-    q.includes('retencion 47') ||
-    q.includes('47%') ||
-    q.includes('tik nikuyim') ||
-    q.includes('coordinacion fiscal') ||
-    q.includes('coordinación fiscal')
-  ) {
-    return `⚠️ **Alerta Fiscal Crítica: Pluriempleo y Retención del 47% (Teum Mas):**
-Si trabajas en **dos o más empleos simultáneos** en Israel y no haces el trámite preventivo, el segundo empleador está legalmente obligado a retenerte la tasa máxima de impuesto a las ganancias (**Mas Hajnasá** [מס הכנסה]), que ronda el **47%** de tu sueldo secundario.
-
-📋 **Procedimiento Obligatorio Paso a Paso:**
-1. **Paso 1 - Datos Patronales:** Pide a cada uno de tus empleadores su número de expediente de deducción patronal (**Tik Nikuyim** [תיק ניכויים], un número de 9 dígitos).
-2. **Paso 2 - Portal Digital:** Ingresa al portal oficial de **Rashut HaMisim** [רשות המסים] (Autoridad Tributaria) en la sección **Teum Mas Online** (תיאום מס באינטרנט).
-3. **Paso 3 - Declaración:** Indica cuál es tu empleador principal (donde cobras el ingreso mayor y aprovechas tus **Nekudot Zijui** de olé jadash) y declara el estimado de ingresos del segundo trabajo.
-4. **Paso 4 - Entrega de Certificados:** El sistema genera en el acto los certificados de porcentaje de retención para cada empresa. **Debes entregar una copia al departamento de RRHH/Contabilidad del segundo empleador** antes del cierre de liquidación del mes.
-
-📑 **Documentos:** Número de **Tik Nikuyim** de cada empresa, estimación de ingresos mensuales y Teudat Zehut.`;
-  }
-
-  // 13. Protocolo Laboral en Estado de Guerra (Pikud HaOref)
-  if (
-    q.includes('guerra') ||
-    q.includes('pikud haoref') ||
-    q.includes('pikud') ||
-    q.includes('alarma') ||
-    q.includes('misil') ||
-    q.includes('refugio') ||
-    q.includes('mamad') ||
-    q.includes('miklat') ||
-    q.includes('despido') && q.includes('seguridad') ||
-    q.includes('vacaciones') && (q.includes('guerra') || q.includes('alerta') || q.includes('forzada')) ||
-    q.includes('matzav meiyujad')
-  ) {
-    return `🛡️ **Protocolo Laboral en Emergencia y Estado de Guerra (Pikud HaOref):**
-
-⚠️ **Prohibición Legal de Despido:**
-En Israel rigen con fuerza de ley las directivas del Comando del Frente Interno (**Pikud HaOref** [פיקוד העורף]):
-- Si Pikud HaOref prohíbe la actividad presencial o si en tu lugar de trabajo **no hay refugio accesible** (**Mamad** [ממ"ד] o **Miklat** [מקלט]) dentro del tiempo reglamentario de alerta, **está estrictamente PROHIBIDO por ley que te despidan** por ausentarte para resguardar tu vida o la de tus hijos menores por cierre escolar.
-
-📋 **Salarios, Vacaciones y Compensaciones:**
-1. **Vacaciones Forzadas:** El empleador **NO puede descontar días de vacaciones de forma arbitraria** si no dispones de saldo positivo acumulado de días de vacaciones en tu recibo (**tlush sajar**). No se permite dejar tu balance de vacaciones en negativo sin tu consentimiento expreso.
-2. **Sueldos en Áreas de Conflicto:** En situaciones de emergencia prolongada (**Matzav Meiyujad ba-Oref** [מצב מיוחד בעורף]), el Estado firma acuerdos marco con **Bituaj Leumi** y organizaciones gremiales para otorgar indemnizaciones salariales a los trabajadores de zonas paralizadas.
-
-⚖️ *Descargo: Las directivas de Pikud HaOref prevalecen sobre cualquier exigencia patronal presencial.*`;
-  }
-
-  // 14. Pasaporte Israelí (Darkón) vs. Teudat Ma'avar
+  // 19. Pasaporte Israelí (Darkón) vs. Teudat Ma'avar
   if (
     q.includes('darkon') ||
     q.includes('darkón') ||
@@ -1065,90 +822,91 @@ En Israel rigen con fuerza de ley las directivas del Comando del Frente Interno 
     q.includes('teudat maavar') ||
     q.includes('teudat ma\'avar') ||
     q.includes('maavar') ||
-    q.includes('viajar antes del año') ||
-    q.includes('viaje exterior') ||
-    q.includes('visa viaje')
+    q.includes('viajar antes del año')
   ) {
     return `🛂 **Pasaporte Israelí (Darkón) vs. Teudat Ma'avar:**
 
-⚠️ **Alerta Crítica de Viaje para Olim:**
-Como nuevo inmigrante, existe una diferencia legal sustancial entre ambos documentos de viaje:
-
-1. **La Regla del Primer Año (Darkón Regular [דרכון]):**
-   - Como norma general, el olé jadash debe completar **un año (12 meses)** de residencia y centro de vida efectivo en Israel para calificar para el pasaporte israelí biométrico ordinario (**Darkón**).
+1. **La Regla del Primer Año para el Darkón Regular (דרכון):**
+   - Como norma legal general, el nuevo inmigrante debe residir de forma efectiva en Israel durante **un año completo (12 meses)** y demostrar su centro de vida en el país para tener derecho al pasaporte biométrico estándar (**Darkón**).
 
 2. **Documento Provisorio de Viaje (Teudat Ma'avar [תעודת מעבר]):**
-   - Si necesitas salir del país antes de cumplir el año de aliá, **Misrad HaPnim** te emitirá una **Teudat Ma'avar** (Documento de viaje en lugar de pasaporte nacional / Travel Document in Lieu of National Passport).
+   - Si precisas salir al extranjero antes de cumplir el primer año de Aliá, **Misrad HaPnim** emitirá una **Teudat Ma'avar** (Documento de viaje en sustitución de pasaporte nacional).
 
-🚨 **¡ADVERTENCIA DE VISAS CON LA TEUDAT MA'AVAR!**
-- El Darkón israelí regular tiene exención de visa en decenas de países (Unión Europea, Reino Unido, etc.).
-- Sin embargo, **la Teudat Ma'avar NO siempre goza de estos convenios bilaterales**.
-- **Acción Obligatoria:** Si viajas con Teudat Ma'avar, debes comunicarte con la embajada o consulado del país de destino para verificar si te exigen solicitar una **visa consular previa**. No asumas que ingresas libremente como con un Darkón regular.`;
+3. **¡Alerta Crítica sobre Requisitos de Visado!:**
+   - A diferencia del Darkón ordinario (que posee exención de visado en Europa y múltiples países), la **Teudat Ma'avar NO siempre goza de esos convenios bilaterales**.
+   - **Acción Obligatoria:** Si viajas con Teudat Ma'avar, debes comunicarte con la embajada o consulado del país de destino para verificar si requieres gestionar una **visa consular previa**.`;
   }
 
-  // 15. Transporte Público en Jagim y Shabat
+  // 20. Transporte Público en Jagim y Shabat
   if (
     q.includes('transporte') ||
     q.includes('colectivo') ||
     q.includes('autobus') ||
     q.includes('autobús') ||
     q.includes('tren') ||
-    q.includes('ferrocarril') ||
-    q.includes('shabat') && q.includes('viaje') ||
+    (q.includes('shabat') && q.includes('viaje')) ||
     q.includes('jagim') ||
-    q.includes('fiestas') ||
-    q.includes('pesaj') ||
     q.includes('yom kipur') ||
-    q.includes('iom kipur') ||
-    q.includes('jol hamoed')
+    q.includes('iom kipur')
   ) {
     return `🚌 **Transporte Público en Shabat y Festividades (Jagim):**
 
-⚠️ **Regla General de Corte de Servicios:**
-En las vísperas y días de festividades solemnes (*Rosh Hashaná, Iom Kipur, Pésaj, Shavuot, Sucot*):
-1. **Cese de Actividades:** Tanto los trenes (**Rakevet Israel** [רכבת ישראל]) como las líneas de colectivos interurbanos y urbanos regulares (Egged, Dan, Metropoline, etc.) **dejan de funcionar varias horas antes del anochecer de la víspera (Erev Jag)**.
-2. **Iom Kipur:** El cese es absoluto (100% de paralización de transporte terrestre y aéreo en todo el país).
-3. **Reanudación:** El servicio se restablece únicamente **después de la salida de las estrellas del día festivo** (Motzaei Jag / Shabat), generalmente a partir de las 20:00 o 21:00 hs según la época del año.
+1. **Corte de Servicios:**
+   - En vísperas de Shabat y festividades solemnes judías (*Rosh Hashaná, Iom Kipur, Pésaj, Shavuot, Sucot*), tanto los trenes (**Rakevet Israel** [רכבת ישראל]) como las líneas de autobuses interurbanos y urbanos regulares suspenden sus servicios varias horas antes del anochecer (**Erev Jag / Erev Shabat**).
+   - En **Iom Kipur**, la paralización del transporte público y aéreo es del 100% en todo el territorio nacional.
 
-🕒 **Días Intermedios (Jol HaMoed [חול המועד]):**
-- Durante los días intermedios de Pésaj y Sucot, el transporte público **SÍ funciona**, pero suele operar con esquemas de horarios especiales o reducidos (frecuencia de día de vacaciones escolares). Planifica tus viajes con apps oficiales como Moovit o Rav-Kav Online.`;
+2. **Reanudación del Servicio:**
+   - El transporte vuelve a operar únicamente tras la salida de las estrellas del día festivo o Shabat (**Motzaei Shabat / Jag**), normalmente a partir de las 20:00 o 21:00 hs según la estación.
+
+3. **Días Intermedios (Jol HaMoed [חול המועד]):**
+   - Durante los días intermedios de Pésaj y Sucot, el transporte público **SÍ funciona**, pero opera bajo cronogramas especiales de feriado o vacaciones escolares. Se recomienda consultar horarios actualizados en **Moovit** o **Rav-Kav Online**.`;
   }
 
-  // 16. Sistema Político y Elecciones (Knéset)
+  // 21. Sistema Político y Elecciones en Israel (Knéset)
   if (
     q.includes('elecciones') ||
     q.includes('votar') ||
     q.includes('voto') ||
     q.includes('kneset') ||
     q.includes('knéset') ||
-    q.includes('primer ministro') ||
-    q.includes('coalicion') ||
-    q.includes('coalición') ||
-    q.includes('partido') ||
-    q.includes('es obligatorio votar')
+    q.includes('primer ministro')
   ) {
     return `🗳️ **Sistema Político y Elecciones en Israel (Knéset):**
 
 1. **¿El voto es obligatorio?:**
-   - **No.** El sufragio en Israel es **optativo y secreto**. Tienen derecho a votar todos los ciudadanos israelíes mayores de 18 años inscriptos en el padrón electoral (**Pinkas Bojarim** [פנקס בוחרים]). Además, el día de las elecciones nacionales es considerado feriado no laborable (Iom Shabaton).
+   - **No.** El sufragio en Israel es **optativo y secreto**. Tienen derecho a votar todos los ciudadanos israelíes mayores de 18 años inscriptos en el padrón electoral (**Pinkas Bojarim** [פנקס בוחרים]). La jornada electoral parlamentaria se declara feriado no laborable (**Iom Shabaton**).
 
 2. **Sistema Parlamentario Unicameral:**
-   - No se vota de forma directa por una persona o candidato a Primer Ministro.
-   - Se vota a una **lista cerrada de un partido político** que compite por los **120 escaños de la Knéset** [כנסת] (el parlamento unicameral de Israel).
+   - No se elige de forma directa a la persona del Primer Ministro. Se vota a una **lista cerrada de un partido político** que compite por los **120 escaños de la Knéset** [כנסת].
 
-3. **Formación de Gobierno (La Regla de los 61 Escaños):**
-   - Para gobernar, un líder debe construir una coalición mayoritaria que sume **al menos 61 de los 120 escaños**. El Presidente del Estado de Israel (**Nasí HaMediná**) encomienda la tarea al parlamentario con mayores respaldos de recomendación.`;
+3. **Formación de Gobierno:**
+   - Para gobernar, un líder debe construir una coalición mayoritaria que sume **al menos 61 de los 120 escaños**. El Presidente del Estado de Israel (**Nasí HaMediná**) encomienda formalmente la tarea al candidato con mayores apoyos parlamentarios.`;
   }
 
-  return `No cuento con la información oficial o confirmada sobre este trámite o comercio en particular. Para evitar darte un dato impreciso o desactualizado, te sugiero corroborarlo directamente con la entidad oficial correspondiente (Misrad HaAliyah, Bituaj Leumi, Misrad HaPnim, Kupot Jolim) o consultar con un coordinador oficial o grupos comunitarios (como OLEI — olei.org.il).
+  // Respuesta orientativa exhaustiva y estructurada (sin mensajes cortos vacíos ni etiquetas artificiales)
+  return `Para orientarte con la máxima exactitud en tu proceso de Aliá, selecciona tu consulta entre los trámites y derechos oficiales:
 
-Si buscas información sobre:
-- 🩺 **Salud y Médicos:** Evitar sobrecostos en **Miún** y **MADA**, o consultar la cartilla oficial de tu Kupá.
-- 💼 **Bituaj Leumi y Trabajo:** Formulario **BL 250**, accidentes laborales y días de reposo (**Jok Dmei Majalá**).
-- 📋 **Trámites de Absorción:** Sal Klitá (meses 1-6), ayuda de alquiler (meses 7-30), licencia de conducir, **Tofes 101**, vouchers de **Ulpán** y plan de negocio (**\*2994**).
-- 🛒 **Productos Latinos:** Local referente "La Tienda" (Levanda 13), local en Allenby 37, calle Bialik en Ramat Gan y cadenas como Tiv Ta'am o Keshet Teamim.
+1. **Misrad HaAliyah:**
+   - Apertura de cuenta bancaria e **Ishur Nihul Jeshbón** para cobro de **Sal Klitá** (meses 1 a 6).
+   - Subsidio de **Ulpán Privado** de hasta **5.200 NIS** con autorización previa del póked (**Schovar Klitá**).
+   - Finalización reglamentaria de la ayuda de alquiler (**Siyua bi'Sjirot**) en el **mes 30**.
+   - Asesoramiento gratuito para emprendedores y autónomos (**Osek Patur / Murshe**) llamando al ***2994** y centros **Maalot**.
 
-Escríbeme el tema específico y te brindo los pasos y datos confirmados.`;
+2. **Bituaj Leumi y Salud:**
+   - Cobertura total por accidentes o tendinitis laboral mediante formulario **BL 250** sellado por el empleador y subsidio **Dmei Pgi'á** con formulario **BL 211**.
+   - Escala legal de cobro de días de reposo (**Jok Dmei Majalá**: día 1 al 0%, días 2-3 al 50%, día 4+ al 100%).
+   - Alerta económica para evitar facturas en **Miún** (guardia hospitalaria) acudiendo con derivación (**hafniá**) o a centros intermedios (**Terem** /**Bikur Rofé**).
+
+3. **Empleo, Impuestos y Transporte:**
+   - Activación de puntos de crédito (**Nekudot Zijui**) en el **Tofes 101** durante 42 meses.
+   - Coordinación fiscal obligatoria (**Teum Mas**) en **Rashut HaMisim** para dos empleos para evitar la retención del 47%.
+   - Canje de licencia extranjera de más de 5 años sin exámenes con **Tofes Yarok** y cita en **MyVisit**.
+   - Tarjeta **Rav-Kav** personalizada y contratación de línea celular israelí.
+
+4. **Acompañamiento Comunitario:**
+   - Asistencia voluntaria de la **OLEI** (ONG comunitaria con sedes en Tel Aviv, Jerusalén, Haifa, Netanya, Ashdod, Ra'anana, Beer Sheva, Karmiel, Modi'in y Rishon LeZion) para trámites de bancos y salud.
+
+Escribe tu consulta puntual para brindarte el paso a paso oficial detallado.`;
 }
 
 // Development vite setup vs production static
