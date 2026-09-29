@@ -25,7 +25,7 @@ interface DoctorsDirectoryProps {
   onAddDoctor: (newDoctor: Doctor) => void;
 }
 
-const AVAILABLE_KUPOT = ['Maccabi', 'Clalit', 'Meuhedet', 'Leumit', 'Privado', 'No estoy seguro'];
+const AVAILABLE_KUPOT = ['Maccabi', 'Clalit', 'Meuhedet', 'Leumit', 'Privado'];
 
 export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ 
   doctors: initialDoctors, 
@@ -53,7 +53,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               specialty: item.specialty,
               city: item.city,
               phone: item.phone || 'No especificado (consultar en la Kupá)',
-              kupot: [item.kupa || 'No estoy seguro'],
+              kupot: item.kupa ? [item.kupa] : [],
               reviews: Array.isArray(item.comments)
                 ? item.comments.map((c: any, idx: number) => ({
                     id: c.id || `rev-${idx}-${Date.now()}`,
@@ -172,20 +172,10 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
   });
 
   const handleKupaToggle = (kupa: string) => {
-    if (kupa === 'No estoy seguro') {
-      if (selectedKupot.includes('No estoy seguro')) {
-        setSelectedKupot([]);
-      } else {
-        setSelectedKupot(['No estoy seguro']);
-      }
-      return;
-    }
-
-    const filteredWithoutUnsure = selectedKupot.filter((k) => k !== 'No estoy seguro');
-    if (filteredWithoutUnsure.includes(kupa)) {
-      setSelectedKupot(filteredWithoutUnsure.filter((k) => k !== kupa));
+    if (selectedKupot.includes(kupa)) {
+      setSelectedKupot(selectedKupot.filter((k) => k !== kupa));
     } else {
-      setSelectedKupot([...filteredWithoutUnsure, kupa]);
+      setSelectedKupot([...selectedKupot, kupa]);
     }
   };
 
@@ -291,7 +281,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         specialty: doctorSpecialty.trim(),
         city: doctorCity.trim(),
         phone: doctorPhone.trim() || 'No especificado (consultar en la Kupá)',
-        kupot: selectedKupot.length > 0 ? selectedKupot : ['No estoy seguro'],
+        kupot: selectedKupot,
         reviews: [newReview],
         reviewsCount: 1,
         isCommunityAdded: true,
@@ -308,7 +298,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
             id: newDoctorEntry.id,
             name: newDoctorEntry.name,
             specialty: newDoctorEntry.specialty,
-            kupa: selectedKupot.join(', ') || 'No estoy seguro',
+            kupa: selectedKupot.join(', '),
             city: newDoctorEntry.city,
             phone: newDoctorEntry.phone,
             source: 'Comunidad',
@@ -420,7 +410,6 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               <option value="Meuhedet">Meuhedet (מאוחדת)</option>
               <option value="Leumit">Leumit (לאומית)</option>
               <option value="Privado">Privado</option>
-              <option value="No estoy seguro">No estoy seguro</option>
             </select>
 
             {/* City Selector */}
@@ -510,7 +499,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                         key={k}
                         className="text-[11px] font-medium bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md border border-gray-200"
                       >
-                        {k === 'No estoy seguro' ? 'Kupá: No confirmada' : k}
+                        {k}
                       </span>
                     ))}
                   </div>
@@ -732,7 +721,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 mb-1">
-                      Kupot que Acepta (Marcá las que conozcas o seleccioná "No estoy seguro")
+                      Kupot que Acepta (Marcá las que conozcas)
                     </label>
                     <div className="flex flex-wrap gap-2 pt-1">
                       {AVAILABLE_KUPOT.map((k) => {
