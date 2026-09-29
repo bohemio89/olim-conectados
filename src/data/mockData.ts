@@ -203,7 +203,7 @@ export const INITIAL_DOCTORS: Doctor[] = [
   },
   {
     "id": "doc-12",
-    "name": "Lerner Gabriel",
+    "name": "Dr. Gabriel Lerner",
     "specialty": "Medicina Familiar (Rofé Mishpajá)",
     "kupot": [
       "Clalit"
@@ -1752,7 +1752,7 @@ export const INITIAL_DOCTORS: Doctor[] = [
   },
   {
     "id": "doc-103",
-    "name": "Beitler Gabriela",
+    "name": "Dra. Gabriela Beitler",
     "specialty": "Psiquiatría",
     "kupot": [
       "Clalit",
@@ -1992,7 +1992,7 @@ export const INITIAL_DOCTORS: Doctor[] = [
   },
   {
     "id": "doc-116",
-    "name": "Wolowelski Alejandro",
+    "name": "Dr. Alejandro Wolowelski",
     "specialty": "Traumatología y Ortopedia",
     "kupot": [
       "Clalit"
