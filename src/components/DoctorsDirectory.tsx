@@ -111,7 +111,11 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
 
   const getDoctorBadge = (consultationFocus?: string) => {
     const focus = (consultationFocus || '').trim();
-    if (focus.toUpperCase().startsWith('VERIFICADO')) {
+    if (
+      focus.toUpperCase().startsWith('VERIFICADO') ||
+      focus.startsWith('✓ Verificado') ||
+      focus.toLowerCase().includes('verificado en cartilla')
+    ) {
       return {
         text: '✓ Verificado en cartilla oficial',
         className: 'bg-emerald-50 text-emerald-800 border-emerald-200',
