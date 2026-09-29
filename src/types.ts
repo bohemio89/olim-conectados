@@ -32,6 +32,7 @@ export interface Doctor {
   isCommunityAdded?: boolean;
   uploadedAt?: string;
   experienceComment?: string;
+  officialLink?: string;
 }
 
 export interface CommunityStore {

@@ -14,7 +14,8 @@ import {
   Users,
   Stethoscope,
   Sparkles,
-  Info
+  Info,
+  ExternalLink
 } from 'lucide-react';
 import { Doctor, KupaName, DoctorReview } from '../types';
 
@@ -64,7 +65,8 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 : [],
               reviewsCount: Array.isArray(item.comments) ? item.comments.length : 0,
               isCommunityAdded: true,
-              uploadedAt: item.created_at ? new Date(item.created_at).toLocaleDateString('es-ES') : 'Reciente'
+              uploadedAt: item.created_at ? new Date(item.created_at).toLocaleDateString('es-ES') : 'Reciente',
+              officialLink: item.officialLink || item.official_link || undefined
             }));
             setCloudDoctors(formatted);
           }
@@ -92,6 +94,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
   const [doctorSpecialty, setDoctorSpecialty] = useState('');
   const [doctorCity, setDoctorCity] = useState('');
   const [doctorPhone, setDoctorPhone] = useState('');
+  const [doctorOfficialLink, setDoctorOfficialLink] = useState('');
   const [selectedKupot, setSelectedKupot] = useState<string[]>([]);
   const [authorName, setAuthorName] = useState('');
   const [commentText, setCommentText] = useState('');
@@ -189,6 +192,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
     setDoctorSpecialty('');
     setDoctorCity('');
     setDoctorPhone('');
+    setDoctorOfficialLink('');
     setSelectedKupot([]);
     setAuthorName('');
     setCommentText('');
@@ -288,6 +292,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         reviewsCount: 1,
         isCommunityAdded: true,
         uploadedAt: todayStr,
+        officialLink: doctorOfficialLink.trim() || undefined,
       };
 
       // Guardar en Supabase en tiempo real a través de /api/doctors
@@ -304,6 +309,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
             phone: newDoctorEntry.phone,
             source: 'Comunidad',
             verified: false,
+            officialLink: newDoctorEntry.officialLink,
             comments: [
               {
                 author: newReview.author,
@@ -541,17 +547,32 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 </div>
 
                 <div className="mt-5 pt-3 border-t border-gray-100">
-                  <div className="flex items-center justify-between gap-3">
-                    {doc.phone && doc.phone !== 'No especificado (consultar en la Kupá)' ? (
-                      <a
-                        href={`tel:${doc.phone.replace(/[^0-9]/g, '')}`}
-                        className="text-xs font-semibold text-gray-700 hover:text-blue-600 flex items-center gap-1.5 transition"
-                      >
-                        <Phone className="w-3.5 h-3.5" /> Llamar
-                      </a>
-                    ) : (
-                      <span className="text-[11px] text-gray-400">Verificar en la app de la Kupá</span>
-                    )}
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      {doc.phone && doc.phone !== 'No especificado (consultar en la Kupá)' ? (
+                        <a
+                          href={`tel:${doc.phone.replace(/[^0-9]/g, '')}`}
+                          className="text-xs font-semibold text-gray-700 hover:text-blue-600 flex items-center gap-1.5 transition"
+                        >
+                          <Phone className="w-3.5 h-3.5" /> Llamar
+                        </a>
+                      ) : (
+                        <span className="text-[11px] text-gray-400">Verificar en la app de la Kupá</span>
+                      )}
+
+                      {doc.officialLink && (
+                        <a
+                          href={doc.officialLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2.5 py-1 rounded-lg flex items-center gap-1 transition"
+                          title="Abrir ficha oficial en la cartilla médica"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>Ficha Oficial</span>
+                        </a>
+                      )}
+                    </div>
 
                     <button
                       onClick={() => openAddReviewModal(doc)}
@@ -728,6 +749,19 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                         );
                       })}
                     </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">
+                      Ficha Oficial (Opcional - Enlace web a la cartilla)
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="Ej: https://www.clalit.co.il/... o link oficial de la cartilla"
+                      value={doctorOfficialLink}
+                      onChange={(e) => setDoctorOfficialLink(e.target.value)}
+                      className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                    />
                   </div>
                 </>
               )}
