@@ -564,21 +564,22 @@ export const INITIAL_DOCTORS: Doctor[] = [
   },
   {
     "id": "doc-35",
-    "name": "Moore Felix",
-    "specialty": "Medicina Familiar (Rofé Mishpajá)",
+    "name": "Prof. Felix Mor",
+    "specialty": "Medicina Familiar y General",
     "kupot": [
       "Maccabi"
     ],
     "city": "Ramat Gan",
     "address": "Ramat Gan",
-    "phone": "09-7670216",
+    "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
     "reviewsCount": 0,
-    "consultationFocus": "Fuente: Piedra Libre Digital (directorio comunitario). Verificar vigencia, especialidad exacta y cobertura directamente con el profesional antes de sacar turno.",
-    "receptionHours": "Consultar directamente al profesional",
-    "acceptsNewPatients": false,
-    "reviews": []
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": [],
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=C167C458B39DB8739D979D78553DE261F1CF9651D9937E267FEFCBA14A864DD6&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults"
   },
   {
     "id": "doc-36",
@@ -892,8 +893,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
   },
   {
     "id": "doc-55",
-    "name": "Schneiderman Daniel",
-    "specialty": "Pediatría (Rofé Yeladim)",
+    "name": "Dr. Daniel Schneiderman",
+    "specialty": "Pediatría y TDAH Infantil",
     "kupot": [
       "Maccabi"
     ],
@@ -903,10 +904,11 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "spanishLevel": "Fluido",
     "rating": 0,
     "reviewsCount": 0,
-    "consultationFocus": "Fuente: Piedra Libre Digital (directorio comunitario). Verificar vigencia, especialidad exacta y cobertura directamente con el profesional antes de sacar turno.",
-    "receptionHours": "Consultar directamente al profesional",
-    "acceptsNewPatients": false,
-    "reviews": []
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": [],
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=E3912099C1673173E109678B304A203E2E8236843FBB2AD1DB96814A8C9486BA&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults"
   },
   {
     "id": "doc-56",
@@ -6406,20 +6408,21 @@ export const INITIAL_DOCTORS: Doctor[] = [
   {
     "id": "doc-359",
     "name": "Dra. Eliani Weinfeld",
-    "specialty": "Geriatría",
+    "specialty": "Medicina Familiar / General y Geriatría",
     "kupot": [
       "Maccabi"
     ],
-    "city": "Tel Aviv-Yafo",
+    "city": "Tel Aviv-Yafo / Ramat Gan",
     "address": "Tel Aviv-Yafo",
-    "phone": "03-7463240",
+    "phone": "03-7463240 / *3555",
     "spanishLevel": "Fluido",
     "rating": 0,
     "reviewsCount": 0,
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=96D1B5349D4C2518AB51600D18609DAFF02A891AF2A95EF11FAD8C3B737F291F&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults"
   },
   {
     "id": "doc-360",
@@ -6759,6 +6762,177 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "rating": 0,
     "reviewsCount": 0,
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-379",
+    "name": "Dra. Sofia Masalha",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Holon",
+    "address": "Holon",
+    "phone": "03-5080355",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=17F6967F9145FFF31AC45FDC511C5217107DA89292A171F0098B26CDDEB6D939&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-380",
+    "name": "Dr. Michael Salam",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Holon",
+    "address": "Holon",
+    "phone": "03-5530000",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=F2DADD329DDC4B8BB89699DB35FB8737119F59F5572FDD472F10097665597397&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-381",
+    "name": "Dr. Ariel Katz",
+    "specialty": "Otorrinolaringología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Holon",
+    "address": "Holon",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=BE6A03ACB26373E918A67884C43416BABE899C890E9950CD36927384186180D1&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-382",
+    "name": "Dr. Yoav Gilburd",
+    "specialty": "Ginecología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Holon",
+    "address": "Holon",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=8E6E8DD64312789FD818CD0955765F66F56898C2900FB9CB137C2B6BFD162994&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-383",
+    "name": "Dr. Yoav Apel",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Ramat Gan",
+    "address": "Ramat Gan",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=509185A93CE563DE15D340CBA744E7B541C441A48243CF9AED2B37EC2BA9A2AA&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-384",
+    "name": "Dra. Deborah Wilkovsky",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Ramat Gan",
+    "address": "Ramat Gan",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=03BB67F3E6E41BD0207DEF80A1AD65A4008679B2767FE88279EE24EF48EB45D2&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-385",
+    "name": "Dra. Frida Feldman-Kopler",
+    "specialty": "Psiquiatría de Adultos",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Ramat Gan",
+    "address": "Ramat Gan",
+    "phone": "03-6778828",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=D59BDF7B05A19971796484DB4342A72AF81A87FD4D29DC01C24920460F2028D2&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-386",
+    "name": "Dra. Oshrit Heresh Chiger",
+    "specialty": "Pediatría",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Ramat Gan",
+    "address": "Ramat Gan",
+    "phone": "053-8411220",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=DAE9D950C0EC3B0A3093871D506D8DE9DC0DB2CDB834F6B63D5C71BD2E5DC3CC&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-387",
+    "name": "Dra. Anat Gabay",
+    "specialty": "Oftalmología y Neuro-oftalmología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Ramat Gan",
+    "address": "Ramat Gan",
+    "phone": "052-2603272",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=166A33CBC28F75108CB91E95A595F082D2B6FA6AB6A8462D5D63BB7CAEE76FD1&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
     "reviews": []
