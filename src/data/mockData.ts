@@ -258,8 +258,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
   },
   {
     "id": "doc-17",
-    "name": "Schul Amsalem Vivian",
-    "specialty": "Medicina Familiar (Rofé Mishpajá)",
+    "name": "Dr. Shul Amsalem Vidan",
+    "specialty": "Medicina Familiar y General",
     "kupot": [
       "Maccabi"
     ],
@@ -269,27 +269,27 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "spanishLevel": "Fluido",
     "rating": 0,
     "reviewsCount": 0,
-    "consultationFocus": "Fuente: Piedra Libre Digital (directorio comunitario). Verificar vigencia, especialidad exacta y cobertura directamente con el profesional antes de sacar turno.",
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar directamente al profesional",
-    "acceptsNewPatients": false,
+    "acceptsNewPatients": true,
     "reviews": []
   },
   {
     "id": "doc-18",
-    "name": "Honigman Elena",
-    "specialty": "Medicina Familiar (Rofé Mishpajá)",
+    "name": "Dra. Helena Honigman",
+    "specialty": "Medicina Familiar y General",
     "kupot": [
       "Maccabi"
     ],
-    "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
     "phone": "03-5602469",
     "spanishLevel": "Fluido",
     "rating": 0,
     "reviewsCount": 0,
-    "consultationFocus": "Fuente: Piedra Libre Digital (directorio comunitario). Verificar vigencia, especialidad exacta y cobertura directamente con el profesional antes de sacar turno.",
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar directamente al profesional",
-    "acceptsNewPatients": false,
+    "acceptsNewPatients": true,
     "reviews": []
   },
   {
@@ -366,20 +366,20 @@ export const INITIAL_DOCTORS: Doctor[] = [
   },
   {
     "id": "doc-23",
-    "name": "Spinrad Sara",
-    "specialty": "Medicina Familiar (Rofé Mishpajá)",
+    "name": "Dra. Sara Spinrad",
+    "specialty": "Medicina Familiar y General",
     "kupot": [
       "Maccabi"
     ],
-    "city": "Tel Aviv",
-    "address": "Tel Aviv",
-    "phone": "*3555",
+    "city": "Givatayim",
+    "address": "Givatayim",
+    "phone": "03-5726262",
     "spanishLevel": "Fluido",
     "rating": 0,
     "reviewsCount": 0,
-    "consultationFocus": "Fuente: Piedra Libre Digital (directorio comunitario). Verificar vigencia, especialidad exacta y cobertura directamente con el profesional antes de sacar turno.",
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar directamente al profesional",
-    "acceptsNewPatients": false,
+    "acceptsNewPatients": true,
     "reviews": []
   },
   {
@@ -6222,6 +6222,546 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "acceptsNewPatients": true,
     "reviews": [],
     "officialLink": "https://www.clalit.co.il/he/sefersherut/pages/doctordetails.aspx?edeptcode=23280&eservicecode=769&employeeid=68793AF78B9EF42E63D4D8A436F0C007"
+  },
+  {
+    "id": "doc-349",
+    "name": "Dr. Yoel Dascalu",
+    "specialty": "Dermatología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Givatayim",
+    "address": "Givatayim",
+    "phone": "053-9859839",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-350",
+    "name": "Dra. Judith Pross",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Givatayim",
+    "address": "Givatayim",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-351",
+    "name": "Dr. Gabriel Kenet",
+    "specialty": "Gastroenterología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Givatayim",
+    "address": "Givatayim",
+    "phone": "053-9955965",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-352",
+    "name": "Dr. Uriel Katz",
+    "specialty": "Inmunología / Alergología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-5476685",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-353",
+    "name": "Dra. Lilian Maoz",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-5287505",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-354",
+    "name": "Dr. Tal Romah",
+    "specialty": "Pediatría",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-355",
+    "name": "Dr. Zvi Cohen",
+    "specialty": "Pediatría",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-5195090",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-356",
+    "name": "Dr. Zeev Marmor",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "053-9955472",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-357",
+    "name": "Dr. Eyal Risher",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-358",
+    "name": "Dr. Hagai Ben Sasson",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "053-9956083",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-359",
+    "name": "Dra. Eliani Weinfeld",
+    "specialty": "Geriatría",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-7463240",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-360",
+    "name": "Dr. Eduardo Schechter",
+    "specialty": "Ginecología / Cuello Uterino",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-361",
+    "name": "Dr. Eliakim Weitzbard",
+    "specialty": "Cirugía General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-6495885",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-362",
+    "name": "Dra. Miriam Herman",
+    "specialty": "Pediatría",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-5281888",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-363",
+    "name": "Dr. Ami Hirsch",
+    "specialty": "Oftalmología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "053-9857459",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-364",
+    "name": "Dr. Amos Bar",
+    "specialty": "Ginecología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-6994575",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-365",
+    "name": "Dr. Daniel Kugler",
+    "specialty": "Ginecología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-5117787",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-366",
+    "name": "Dr. Ricardo Tuber",
+    "specialty": "Cardiología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-367",
+    "name": "Dra. Nino Kikozashvili",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-368",
+    "name": "Dra. Tamar Shafran",
+    "specialty": "Oftalmología Infantil",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "053-9956573",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-369",
+    "name": "Dra. Sharon Gutman Robins",
+    "specialty": "Oftalmología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "053-9955373",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-370",
+    "name": "Dra. Silvia Rotenberg",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "053-8411208",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-371",
+    "name": "Dr. Yoram Miron",
+    "specialty": "Oftalmología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-372",
+    "name": "Dra. Michal Dayan",
+    "specialty": "Otorrinolaringología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-373",
+    "name": "Dra. Galia Halevy",
+    "specialty": "Medicina Familiar y General",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "*3555",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-374",
+    "name": "Dra. Sara Rotman",
+    "specialty": "Otorrinolaringología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "053-9957198",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-375",
+    "name": "Dr. Moti Karpman",
+    "specialty": "Ginecología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-7178244",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-376",
+    "name": "Dr. Ariel Margolis",
+    "specialty": "Otorrinolaringología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "053-9956836",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-377",
+    "name": "Dr. Carlos Idsses",
+    "specialty": "Dermatología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "03-6964885",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
+  },
+  {
+    "id": "doc-378",
+    "name": "Dr. Simon Israeli-Koren",
+    "specialty": "Neurología",
+    "kupot": [
+      "Maccabi"
+    ],
+    "city": "Tel Aviv-Yafo",
+    "address": "Tel Aviv-Yafo",
+    "phone": "053-9956105",
+    "spanishLevel": "Fluido",
+    "rating": 0,
+    "reviewsCount": 0,
+    "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
+    "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
+    "acceptsNewPatients": true,
+    "reviews": []
   }
 ];
 
