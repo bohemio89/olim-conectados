@@ -20,7 +20,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Naharía",
-    "address": "Naharía",
     "phone": "04-9921119",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -38,7 +37,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rosh Haayin",
-    "address": "Rosh Haayin",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -56,7 +54,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Modi'in",
-    "address": "Modi'in",
     "phone": "03-6170700 / 03-9436215",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -75,7 +72,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-6981400",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -94,7 +90,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "054-5758780",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -113,7 +108,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "053-8411232",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -132,7 +126,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "08-6475555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -151,7 +144,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Herzliya",
-    "address": "Herzliya",
     "phone": "09-9592333",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -170,7 +162,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Modiin - Maccabim Reut",
-    "address": "Modiin - Maccabim Reut",
     "phone": "08-8614430",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -191,7 +182,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "04-8378940",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -209,7 +199,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -228,7 +217,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Leumit"
     ],
     "city": "Hertzlia",
-    "address": "Hertzlia",
     "phone": "09-972-7500",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -246,7 +234,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Kiriat Gat",
-    "address": "Kiriat Gat",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -264,7 +251,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Givatayim",
-    "address": "Givatayim",
     "phone": "03-5739260",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -282,7 +268,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-5602469",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -300,7 +285,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Naharia",
-    "address": "Naharia",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -318,7 +302,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "09-7447322",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -336,7 +319,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Yavne",
-    "address": "Yavne",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -354,7 +336,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Ierujam (20 min de Beer Sheva)",
-    "address": "Ierujam (20 min de Beer Sheva)",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -372,7 +353,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Givatayim",
-    "address": "Givatayim",
     "phone": "03-5726262",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -390,7 +370,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "*3555 / 1-700-50-53-53 / 09-8868450",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -408,7 +387,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Even Yehuda",
-    "address": "Even Yehuda",
     "phone": "*3555 / 1-700-50-53-53",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -426,7 +404,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Mond",
-    "address": "Tel Mond",
     "phone": "*3555 / 1-700-50-53-53",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -444,7 +421,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Raanana",
-    "address": "Raanana",
     "phone": "09-7421750",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -462,7 +438,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Hadera",
-    "address": "Hadera",
     "phone": "04-6860775",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -480,7 +455,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -498,7 +472,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Gedera",
-    "address": "Gedera",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -516,7 +489,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Petaj Tikva",
-    "address": "Petaj Tikva",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -534,7 +506,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Beer Sheva",
-    "address": "Beer Sheva",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -552,7 +523,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "04-8340280",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -570,7 +540,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Ramat Gan",
-    "address": "Ramat Gan",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -579,7 +548,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
     "reviews": [],
-    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=C167C458B39DB8739D979D78553DE261F1CF9651D9937E267FEFCBA14A864DD6&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults"
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=C167C458B39DB8739D979D78553DE261F1CF9651D9937E267FEFCBA14A864DD6&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
+    "address": "Arlozorov 4"
   },
   {
     "id": "doc-36",
@@ -589,7 +559,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "09-7446765",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -607,7 +576,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Meuhedet"
     ],
     "city": "Harish",
-    "address": "Harish",
     "phone": "04-7743900",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -625,7 +593,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Meuhedet"
     ],
     "city": "Beit Shemesh",
-    "address": "Beit Shemesh",
     "phone": "*3833",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -643,7 +610,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Beer Sheva / Tel Aviv",
-    "address": "Beer Sheva / Tel Aviv",
     "phone": "053-4285697",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -661,7 +627,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ashdod",
-    "address": "Ashdod",
     "phone": "08-8519400",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -679,7 +644,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "09-7400855",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -697,7 +661,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiriat Bialik",
-    "address": "Kiriat Bialik",
     "phone": "04-8787966",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -715,7 +678,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ra'anana",
-    "address": "Ra'anana",
     "phone": "09-7707111",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -734,7 +696,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rosh Hayin",
-    "address": "Rosh Hayin",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -752,7 +713,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -771,7 +731,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Leumit"
     ],
     "city": "Kohav Yaakov / Tel Tzion / Shaar Binyamin",
-    "address": "Kohav Yaakov / Tel Tzion / Shaar Binyamin",
     "phone": "1-700-507-507 / *507",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -790,7 +749,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "09-8655688",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -809,7 +767,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -827,7 +784,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Naharia / Kiryat Yam",
-    "address": "Naharia / Kiryat Yam",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -845,7 +801,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Beer Sheva",
-    "address": "Beer Sheva",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -863,7 +818,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Shoham",
-    "address": "Shoham",
     "phone": "03-9730308",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -881,7 +835,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Modiin - Maccabim - Reut",
-    "address": "Modiin - Maccabim - Reut",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -899,7 +852,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Holon",
-    "address": "Holon",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -908,7 +860,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
     "reviews": [],
-    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=E3912099C1673173E109678B304A203E2E8236843FBB2AD1DB96814A8C9486BA&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults"
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=E3912099C1673173E109678B304A203E2E8236843FBB2AD1DB96814A8C9486BA&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults",
+    "address": "Rafael Eitan 4"
   },
   {
     "id": "doc-56",
@@ -919,7 +872,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Meuhedet"
     ],
     "city": "Raanana",
-    "address": "Raanana",
     "phone": "09-7452640",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -937,7 +889,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Bnei Brak",
-    "address": "Bnei Brak",
     "phone": "03-5605001 / 053-9956151",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -955,7 +906,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Ashkelon",
-    "address": "Ashkelon",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -973,7 +923,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Yehud",
-    "address": "Yehud",
     "phone": "*3555 / 1-700-50-53-53",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -991,7 +940,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Carmiel",
-    "address": "Carmiel",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1009,7 +957,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Eilat",
-    "address": "Eilat",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1027,7 +974,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Jerusalem",
-    "address": "Jerusalem",
     "phone": "02-5822903",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1045,7 +991,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Meuhedet"
     ],
     "city": "Bnei Brak / Guivat Shmuel",
-    "address": "Bnei Brak / Guivat Shmuel",
     "phone": "*3833",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1064,7 +1009,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Jerusalem",
-    "address": "Jerusalem",
     "phone": "*3833 / 02-6518921",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1083,7 +1027,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Raanana",
-    "address": "Raanana",
     "phone": "054-6620064",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1102,7 +1045,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Hod HaSharon",
-    "address": "Hod HaSharon",
     "phone": "052-8305272",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1122,7 +1064,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Rishon LeZion",
-    "address": "Rishon LeZion",
     "phone": "054-5716876",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1143,7 +1084,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Ashdod",
-    "address": "Ashdod",
     "phone": "050-4615495",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1162,7 +1102,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "050-6484373 / 050-648437",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1180,7 +1119,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Meuhedet"
     ],
     "city": "Petaj Tikva / Tel Aviv / Raanana / Kfar Saba",
-    "address": "Petaj Tikva / Tel Aviv / Raanana / Kfar Saba",
     "phone": "*3833",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1198,7 +1136,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Raanana",
-    "address": "Raanana",
     "phone": "054-7925310",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1216,7 +1153,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Or Yehuda",
-    "address": "Or Yehuda",
     "phone": "054-3088571",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1234,7 +1170,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "050-7236478",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1252,7 +1187,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "054-4573903",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1270,7 +1204,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "052-5018410",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1288,7 +1221,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Ramat Gan",
-    "address": "Ramat Gan",
     "phone": "054-3242807",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1306,7 +1238,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Moshav Hosen",
-    "address": "Moshav Hosen",
     "phone": "052-8593216",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1324,7 +1255,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Hod Hasharón",
-    "address": "Hod Hasharón",
     "phone": "053-3731823",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1342,7 +1272,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Eilat",
-    "address": "Eilat",
     "phone": "052-8040977",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1360,7 +1289,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Gan Yavne",
-    "address": "Gan Yavne",
     "phone": "054-5388369",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1378,7 +1306,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Mevatseret Tzion / Jerusalem",
-    "address": "Mevatseret Tzion / Jerusalem",
     "phone": "054-8730700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1396,7 +1323,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kiriat Yam",
-    "address": "Kiriat Yam",
     "phone": "053-2318802",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1415,7 +1341,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Modi'in",
-    "address": "Modi'in",
     "phone": "08-9736113",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1434,7 +1359,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Nahariya",
-    "address": "Nahariya",
     "phone": "050-6882045",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1452,7 +1376,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Beer Sheva",
-    "address": "Beer Sheva",
     "phone": "050-6221109",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1470,7 +1393,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Pardes Hana Karkur",
-    "address": "Pardes Hana Karkur",
     "phone": "055-6874124",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1488,7 +1410,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "054-4348034",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1506,7 +1427,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Harish",
-    "address": "Harish",
     "phone": "052-8773707",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1524,7 +1444,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Ramat Gan",
-    "address": "Ramat Gan",
     "phone": "052-3267306",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1542,7 +1461,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Rehovot",
-    "address": "Rehovot",
     "phone": "052-5361531",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1560,7 +1478,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Modiin - Macabim - Reut",
-    "address": "Modiin - Macabim - Reut",
     "phone": "052-2637595",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1578,7 +1495,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "054-4795763",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1596,7 +1512,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "050-6561482",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1614,7 +1529,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Raanana",
-    "address": "Raanana",
     "phone": "054-7828501",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1632,7 +1546,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "054-7654880",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1650,7 +1563,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Modiin - Macabim - Reut",
-    "address": "Modiin - Macabim - Reut",
     "phone": "052-5546004",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1668,7 +1580,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Ramat Hasharon",
-    "address": "Ramat Hasharon",
     "phone": "052-4642395",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1686,7 +1597,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "054-4328563",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1705,7 +1615,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "04-8371221",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1723,7 +1632,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiriat Haim",
-    "address": "Kiriat Haim",
     "phone": "04-8470074",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1742,7 +1650,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Meuhedet"
     ],
     "city": "Haifa / Kiriat Yam",
-    "address": "Haifa / Kiriat Yam",
     "phone": "04-861-2320",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1761,7 +1668,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Modiin",
-    "address": "Modiin",
     "phone": "052-8467422",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1782,7 +1688,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Meuhedet"
     ],
     "city": "Hedera / Netanya",
-    "address": "Hedera / Netanya",
     "phone": "*2700 / *3555 / *3833",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1800,7 +1705,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Netanya / Kfar Saba",
-    "address": "Netanya / Kfar Saba",
     "phone": "09-8924271",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1818,7 +1722,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv",
-    "address": "Tel Aviv",
     "phone": "03-5425285",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1836,7 +1739,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Raanana",
-    "address": "Raanana",
     "phone": "09-7470777",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1855,7 +1757,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Raanana",
-    "address": "Raanana",
     "phone": "03-5193553",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1873,7 +1774,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "09-8924271",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1891,7 +1791,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Hertzlía",
-    "address": "Hertzlía",
     "phone": "WhatsApp +972 54-4549710",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1909,7 +1808,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "052-2244134",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1927,7 +1825,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Kfar Yona",
-    "address": "Kfar Yona",
     "phone": "+972 52-9663703",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1945,7 +1842,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Acco",
-    "address": "Acco",
     "phone": "04-9957070",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1964,7 +1860,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Hedera",
-    "address": "Hedera",
     "phone": "04-6328585",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -1982,7 +1877,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "09-8603555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2000,7 +1894,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiriat Bialik",
-    "address": "Kiriat Bialik",
     "phone": "04-8787800",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2019,7 +1912,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ariel / Petaj Tikva / Ramat Gan",
-    "address": "Ariel / Petaj Tikva / Ramat Gan",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2037,7 +1929,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Petah Tikva",
-    "address": "Petah Tikva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2057,7 +1948,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Privado"
     ],
     "city": "Raanana",
-    "address": "Raanana",
     "phone": "09-7742780 / 09-9745929",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2075,7 +1965,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Ramat Hasharon",
-    "address": "Ramat Hasharon",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2093,7 +1982,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Meuhedet"
     ],
     "city": "Beit Shemesh / Jerusalem (Hospital Shaarey Zedek)",
-    "address": "Beit Shemesh / Jerusalem (Hospital Shaarey Zedek)",
     "phone": "*3833 / 02-6555999",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2129,7 +2017,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rishon LeZion",
-    "address": "Rishon LeZion",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2148,7 +2035,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rishon LeZion",
-    "address": "Rishon LeZion",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2167,7 +2053,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tamra",
-    "address": "Tamra",
     "phone": "04-9948938 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2186,7 +2071,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-5854347 / 02-5853995",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2205,7 +2089,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2224,7 +2107,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Abu Ghosh",
-    "address": "Abu Ghosh",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2243,7 +2125,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Elad",
-    "address": "Elad",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2262,7 +2143,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Arad",
-    "address": "Arad",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2281,7 +2161,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Nahariya",
-    "address": "Nahariya",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2300,7 +2179,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Binyamina - Giv'at Ada",
-    "address": "Binyamina - Giv'at Ada",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2319,7 +2197,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ashdod",
-    "address": "Ashdod",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2338,7 +2215,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Pardes Hanna - Karkur",
-    "address": "Pardes Hanna - Karkur",
     "phone": "057-8411285",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2357,7 +2233,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Hod HaSharon",
-    "address": "Hod HaSharon",
     "phone": "09-7624600",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2376,7 +2251,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Holon",
-    "address": "Holon",
     "phone": "03-7503300",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2395,7 +2269,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ashdod",
-    "address": "Ashdod",
     "phone": "08-8623222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2414,7 +2287,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2433,7 +2305,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-7503140 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2452,7 +2323,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Yehud-Monosson",
-    "address": "Yehud-Monosson",
     "phone": "02-5378608",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2471,7 +2341,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Ya'akov",
-    "address": "Be'er Ya'akov",
     "phone": "08-6107100",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2490,7 +2359,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2509,7 +2377,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rosh HaAyin",
-    "address": "Rosh HaAyin",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2528,7 +2395,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Eilon",
-    "address": "Eilon",
     "phone": "04-9858222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2547,7 +2413,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Netter",
-    "address": "Kfar Netter",
     "phone": "09-8997948",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2566,7 +2431,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Nahariya",
-    "address": "Nahariya",
     "phone": "04-8809222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2585,7 +2449,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sderot",
-    "address": "Sderot",
     "phone": "04-8568205",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2604,7 +2467,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sderot",
-    "address": "Sderot",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2623,7 +2485,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sderot",
-    "address": "Sderot",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2642,7 +2503,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sderot",
-    "address": "Sderot",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2661,7 +2521,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Tiv'on",
-    "address": "Kiryat Tiv'on",
     "phone": "04-9539300",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2680,7 +2539,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Binyamina - Giv'at Ada",
-    "address": "Binyamina - Giv'at Ada",
     "phone": "04-6388335",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2699,7 +2557,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rishon LeZion",
-    "address": "Rishon LeZion",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2718,7 +2575,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Nof HaGalil",
-    "address": "Nof HaGalil",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2737,7 +2593,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Pardes Hanna - Karkur",
-    "address": "Pardes Hanna - Karkur",
     "phone": "04-6174222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2756,7 +2611,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Nof HaGalil",
-    "address": "Nof HaGalil",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2775,7 +2629,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "04-8590202 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2794,7 +2647,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-5658222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2813,7 +2665,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Beit Shemesh",
-    "address": "Beit Shemesh",
     "phone": "02-9901777 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2832,7 +2683,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Bat Yam",
-    "address": "Bat Yam",
     "phone": "03-5004600",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2851,7 +2701,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2870,7 +2719,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Efrat",
-    "address": "Efrat",
     "phone": "02-9937540",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2889,7 +2737,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-6706750",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2908,7 +2755,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "09-8603800",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2927,7 +2773,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Nof HaGalil",
-    "address": "Nof HaGalil",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2946,7 +2791,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Modi'in",
-    "address": "Modi'in",
     "phone": "08-8614420 / *2700 / 09-8603800",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2965,7 +2809,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ma'ale Adumim",
-    "address": "Ma'ale Adumim",
     "phone": "02-5353500",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2984,7 +2827,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Efrat",
-    "address": "Efrat",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3003,7 +2845,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3022,7 +2863,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3041,7 +2881,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Beit Shemesh",
-    "address": "Beit Shemesh",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3060,7 +2899,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Nesher",
-    "address": "Nesher",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3079,7 +2917,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-5311233",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3098,7 +2935,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3117,7 +2953,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-5889533 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3136,7 +2971,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-6460600",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3155,7 +2989,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tzora",
-    "address": "Tzora",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3174,7 +3007,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-6441666",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3193,7 +3025,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-5843222 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3212,7 +3043,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Beitar Illit",
-    "address": "Beitar Illit",
     "phone": "02-5887000",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3231,7 +3061,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ma'ale Adumim",
-    "address": "Ma'ale Adumim",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3250,7 +3079,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Beit Shemesh",
-    "address": "Beit Shemesh",
     "phone": "02-5098170",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3269,7 +3097,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Beit Shemesh",
-    "address": "Beit Shemesh",
     "phone": "02-5098170",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3288,7 +3115,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Mevaseret Zion",
-    "address": "Mevaseret Zion",
     "phone": "*2700 / 02-5098170",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3307,7 +3133,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3326,7 +3151,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Beit Shemesh",
-    "address": "Beit Shemesh",
     "phone": "02-9902666",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3345,7 +3169,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-5327304 / 02-5327305",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3364,7 +3187,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-5658222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3383,7 +3205,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-6733715",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3402,7 +3223,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3421,7 +3241,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Beit El",
-    "address": "Beit El",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3440,7 +3259,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "*2700 / 054-9223289",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3459,7 +3277,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "03-5239430 / 054-9223289",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3478,7 +3295,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-5608333 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3497,7 +3313,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Proctología y Mastología",
-    "address": "Proctología y Mastología",
     "phone": "Tel Aviv - Yafo",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3516,7 +3331,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-7622300 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3535,7 +3349,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-7622300",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3554,7 +3367,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "050-3720144",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3573,7 +3385,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-7471200",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3592,7 +3403,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Holon",
-    "address": "Holon",
     "phone": "03-7471200",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3611,7 +3421,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Holon",
-    "address": "Holon",
     "phone": "03-6301825",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3630,7 +3439,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3649,7 +3457,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-5423888",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3668,7 +3475,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Bat Yam",
-    "address": "Bat Yam",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3687,7 +3493,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Bat Yam",
-    "address": "Bat Yam",
     "phone": "03-5556505 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3706,7 +3511,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-5068110",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3725,7 +3529,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-7451500",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3744,7 +3547,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "*2700 / 03-7451500",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3763,7 +3565,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "053-9956259",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3782,7 +3583,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-7622310 / 051-5912251",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3801,7 +3601,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Ono",
-    "address": "Kiryat Ono",
     "phone": "052-4383363",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3820,7 +3619,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Bnei Brak",
-    "address": "Bnei Brak",
     "phone": "03-5777205",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3839,7 +3637,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Bnei Brak",
-    "address": "Bnei Brak",
     "phone": "03-6717800",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3858,7 +3655,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Ono",
-    "address": "Kiryat Ono",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3877,7 +3673,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Petah Tikva",
-    "address": "Petah Tikva",
     "phone": "054-5537465",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3896,7 +3691,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Hod HaSharon",
-    "address": "Hod HaSharon",
     "phone": "052-3409773",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3915,7 +3709,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Petah Tikva",
-    "address": "Petah Tikva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3934,7 +3727,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Petah Tikva",
-    "address": "Petah Tikva",
     "phone": "03-9120400",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3953,7 +3745,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Bialik",
-    "address": "Kiryat Bialik",
     "phone": "04-8776277",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3972,7 +3763,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Safed (Tzfat)",
-    "address": "Safed (Tzfat)",
     "phone": "04-6918300",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -3991,7 +3781,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Petah Tikva",
-    "address": "Petah Tikva",
     "phone": "03-9089743",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4010,7 +3799,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Petah Tikva",
-    "address": "Petah Tikva",
     "phone": "03-9089743",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4029,7 +3817,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rosh HaAyin",
-    "address": "Rosh HaAyin",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4048,7 +3835,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Elad",
-    "address": "Elad",
     "phone": "02-9937266",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4067,7 +3853,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Giv'atayim",
-    "address": "Giv'atayim",
     "phone": "02-6441777",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4086,7 +3871,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "02-5867111",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4105,7 +3889,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "09-7627200",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4124,7 +3907,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Hod HaSharon",
-    "address": "Hod HaSharon",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4143,7 +3925,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Einat",
-    "address": "Einat",
     "phone": "03-9385175",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4162,7 +3943,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rehovot",
-    "address": "Rehovot",
     "phone": "08-9464104",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4181,7 +3961,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sderot",
-    "address": "Sderot",
     "phone": "052-5013473",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4200,7 +3979,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "052-5013473",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4219,7 +3997,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Modi'in",
-    "address": "Modi'in",
     "phone": "08-6308910",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4238,7 +4015,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Petah Tikva",
-    "address": "Petah Tikva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4257,7 +4033,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Nahariya",
-    "address": "Nahariya",
     "phone": "054-5404668",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4276,7 +4051,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Bnei Brak",
-    "address": "Bnei Brak",
     "phone": "03-5799247",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4295,7 +4069,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Petah Tikva",
-    "address": "Petah Tikva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4314,7 +4087,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Ono",
-    "address": "Kiryat Ono",
     "phone": "03-9247651",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4333,7 +4105,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Karmiel",
-    "address": "Karmiel",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4352,7 +4123,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "09-8901200",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4371,7 +4141,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Deir Hanna",
-    "address": "Deir Hanna",
     "phone": "04-6786219",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4390,7 +4159,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sakhnin",
-    "address": "Sakhnin",
     "phone": "04-6191155",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4409,7 +4177,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Ata",
-    "address": "Kiryat Ata",
     "phone": "04-8449387",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4428,7 +4195,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "04-8462300",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4447,7 +4213,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Motzkin",
-    "address": "Kiryat Motzkin",
     "phone": "04-8781222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4466,7 +4231,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Ata",
-    "address": "Kiryat Ata",
     "phone": "04-8432400",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4485,7 +4249,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "04-8141300 / 04-8430700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4504,7 +4267,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rechasim",
-    "address": "Rechasim",
     "phone": "04-6641025",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4523,7 +4285,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tirat Carmel",
-    "address": "Tirat Carmel",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4542,7 +4303,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4561,7 +4321,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Bialik",
-    "address": "Kiryat Bialik",
     "phone": "04-8774590",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4580,7 +4339,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Bialik",
-    "address": "Kiryat Bialik",
     "phone": "052-2264740 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4599,7 +4357,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "04-6036400",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4618,7 +4375,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "04-8787934",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4637,7 +4393,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Bialik",
-    "address": "Kiryat Bialik",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4656,7 +4411,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Haifa",
-    "address": "Haifa",
     "phone": "04-6283867",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4675,7 +4429,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sakhnin",
-    "address": "Sakhnin",
     "phone": "04-6747628",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4694,7 +4447,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Majd al-Krum",
-    "address": "Majd al-Krum",
     "phone": "04-9981147",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4713,7 +4465,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Menahem",
-    "address": "Kfar Menahem",
     "phone": "08-8508400",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4732,7 +4483,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Na'an",
-    "address": "Na'an",
     "phone": "08-9442821",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4751,7 +4501,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rehovot",
-    "address": "Rehovot",
     "phone": "054-3192195",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4770,7 +4519,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Mazkeret Batya",
-    "address": "Mazkeret Batya",
     "phone": "054-8188249",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4789,7 +4537,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ashdod",
-    "address": "Ashdod",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4808,7 +4555,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Rishon LeZion",
-    "address": "Rishon LeZion",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4827,7 +4573,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sderot",
-    "address": "Sderot",
     "phone": "08-9770006",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4846,7 +4591,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ashdod",
-    "address": "Ashdod",
     "phone": "08-8560831",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4865,7 +4609,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Modi'in Illit",
-    "address": "Modi'in Illit",
     "phone": "08-9781200",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4884,7 +4627,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Modi'in Illit",
-    "address": "Modi'in Illit",
     "phone": "08-9781200",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4903,7 +4645,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Chabad",
-    "address": "Kfar Chabad",
     "phone": "03-9602400",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4922,7 +4663,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "08-6299661",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4941,7 +4681,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Modi'in",
-    "address": "Modi'in",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4960,7 +4699,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Shoham",
-    "address": "Shoham",
     "phone": "03-9775300",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4979,7 +4717,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sderot",
-    "address": "Sderot",
     "phone": "08-9558222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -4998,7 +4735,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sderot",
-    "address": "Sderot",
     "phone": "08-6621239",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5017,7 +4753,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Hura",
-    "address": "Hura",
     "phone": "08-6682222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5036,7 +4771,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "08-6299600",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5055,7 +4789,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5074,7 +4807,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "08-6292770",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5093,7 +4825,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "08-6299600 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5112,7 +4843,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5131,7 +4861,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Sheva",
-    "address": "Tel Sheva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5150,7 +4879,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "08-6268844",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5169,7 +4897,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Endoscopia y Colonoscopia",
-    "address": "Endoscopia y Colonoscopia",
     "phone": "Be'er Sheva",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5188,7 +4915,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "08-6475222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5207,7 +4933,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5226,7 +4951,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kiryat Gat",
-    "address": "Kiryat Gat",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5245,7 +4969,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5264,7 +4987,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "08-6246222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5283,7 +5005,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Be'er Sheva",
-    "address": "Be'er Sheva",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5302,7 +5023,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Herzliya",
-    "address": "Herzliya",
     "phone": "09-9620700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5321,7 +5041,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tzur Yitzhak",
-    "address": "Tzur Yitzhak",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5340,7 +5059,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Herzliya",
-    "address": "Herzliya",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5359,7 +5077,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Sderot",
-    "address": "Sderot",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5378,7 +5095,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ra'anana",
-    "address": "Ra'anana",
     "phone": "09-8878983",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5397,7 +5113,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Herzliya",
-    "address": "Herzliya",
     "phone": "052-3900683",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5416,7 +5131,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "*2700 / 052-4848675",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5435,7 +5149,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Herzliya",
-    "address": "Herzliya",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5454,7 +5167,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "09-8304700 / 09-8635400",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5473,7 +5185,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "09-7631200 / 09-7631222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5492,7 +5203,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Eyal",
-    "address": "Eyal",
     "phone": "09-7639100",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5511,7 +5221,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "09-7634000 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5530,7 +5239,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Herzliya",
-    "address": "Herzliya",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5549,7 +5257,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Immanuel",
-    "address": "Immanuel",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5568,7 +5275,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5587,7 +5293,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5606,7 +5311,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5625,7 +5329,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5644,7 +5347,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "09-7946500",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5663,7 +5365,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Netanya",
-    "address": "Netanya",
     "phone": "09-8635222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5682,7 +5383,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Saba",
-    "address": "Kfar Saba",
     "phone": "09-7946500",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5701,7 +5401,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kfar Yona",
-    "address": "Kfar Yona",
     "phone": "09-8902222",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5720,7 +5419,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Pardes Hanna - Karkur",
-    "address": "Pardes Hanna - Karkur",
     "phone": "04-6174600 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5739,7 +5437,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Hadera",
-    "address": "Hadera",
     "phone": "04-6638600",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5758,7 +5455,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Hadera",
-    "address": "Hadera",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5777,7 +5473,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Mishmar HaSharon",
-    "address": "Mishmar HaSharon",
     "phone": "09-8661500 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5796,7 +5491,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Or Akiva",
-    "address": "Or Akiva",
     "phone": "04-6102111",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5815,7 +5509,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Or Akiva",
-    "address": "Or Akiva",
     "phone": "04-6102111 / *2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5834,7 +5527,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Hadera",
-    "address": "Hadera",
     "phone": "04-6327012",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5853,7 +5545,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Hadera",
-    "address": "Hadera",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5872,7 +5563,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kafr Qara",
-    "address": "Kafr Qara",
     "phone": "04-6357124",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5891,7 +5581,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Pardes Hanna - Karkur",
-    "address": "Pardes Hanna - Karkur",
     "phone": "04-6372241 / 073-2417381",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5910,7 +5599,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Kafr Qara",
-    "address": "Kafr Qara",
     "phone": "050-4314530",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5929,7 +5617,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ramat HaSharon",
-    "address": "Ramat HaSharon",
     "phone": "03-5497294",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5948,7 +5635,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Herzliya",
-    "address": "Herzliya",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5967,7 +5653,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Afula",
-    "address": "Afula",
     "phone": "04-6403318",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -5986,7 +5671,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Afula",
-    "address": "Afula",
     "phone": "04-6403318 / 04-6141760",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6005,7 +5689,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Eilat",
-    "address": "Eilat",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6024,7 +5707,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Eilat",
-    "address": "Eilat",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6043,7 +5725,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Jerusalén",
-    "address": "Jerusalén",
     "phone": "08-6381111",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6062,7 +5743,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Eilat",
-    "address": "Eilat",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6081,7 +5761,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Eilat",
-    "address": "Eilat",
     "phone": "08-6334836",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6100,7 +5779,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Eilat",
-    "address": "Eilat",
     "phone": "076-8629021",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6119,7 +5797,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Eilat",
-    "address": "Eilat",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6138,7 +5815,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ashdod",
-    "address": "Ashdod",
     "phone": "03-9765777",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6157,7 +5833,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Ariel",
-    "address": "Ariel",
     "phone": "03-9765777 / 054-7701621",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6176,7 +5851,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Holon",
-    "address": "Holon",
     "phone": "03-6366111",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6195,7 +5869,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "*2700",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6214,7 +5887,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Clalit"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Tel Aviv - Yafo",
     "phone": "03-7662121 / 03-6366111",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6233,7 +5905,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Givatayim",
-    "address": "Givatayim",
     "phone": "053-9859839",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6251,7 +5922,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Givatayim",
-    "address": "Givatayim",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6269,7 +5939,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Givatayim",
-    "address": "Givatayim",
     "phone": "053-9955965",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6287,7 +5956,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-5476685",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6305,7 +5973,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-5287505",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6323,7 +5990,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6341,7 +6007,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-5195090",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6359,7 +6024,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "053-9955472",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6377,7 +6041,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6395,7 +6058,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "053-9956083",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6413,7 +6075,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo / Ramat Gan",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-7463240 / *3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6422,7 +6083,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
     "reviews": [],
-    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=96D1B5349D4C2518AB51600D18609DAFF02A891AF2A95EF11FAD8C3B737F291F&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults"
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=96D1B5349D4C2518AB51600D18609DAFF02A891AF2A95EF11FAD8C3B737F291F&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
+    "address": "Landau Chaim 7 / Derech Negba 48"
   },
   {
     "id": "doc-360",
@@ -6432,7 +6094,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6450,7 +6111,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-6495885",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6468,7 +6128,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-5281888",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6486,7 +6145,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "053-9857459",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6504,7 +6162,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-6994575",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6522,7 +6179,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-5117787",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6540,7 +6196,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6558,7 +6213,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6576,7 +6230,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "053-9956573",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6594,7 +6247,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "053-9955373",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6612,7 +6264,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "053-8411208",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6630,7 +6281,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6648,7 +6298,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6666,7 +6315,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6684,7 +6332,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "053-9957198",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6702,7 +6349,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-7178244",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6720,7 +6366,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "053-9956836",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6738,7 +6383,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "03-6964885",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6756,7 +6400,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv-Yafo",
-    "address": "Tel Aviv-Yafo",
     "phone": "053-9956105",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6774,7 +6417,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Holon",
-    "address": "Holon",
     "phone": "03-5080355",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6783,7 +6425,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=17F6967F9145FFF31AC45FDC511C5217107DA89292A171F0098B26CDDEB6D939&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Rabinovich Yehoshua 58"
   },
   {
     "id": "doc-380",
@@ -6793,7 +6436,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Holon",
-    "address": "Holon",
     "phone": "03-5530000",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6802,7 +6444,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=F2DADD329DDC4B8BB89699DB35FB8737119F59F5572FDD472F10097665597397&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Geulim 43"
   },
   {
     "id": "doc-381",
@@ -6812,7 +6455,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Holon",
-    "address": "Holon",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6821,7 +6463,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=BE6A03ACB26373E918A67884C43416BABE899C890E9950CD36927384186180D1&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Hofien 13"
   },
   {
     "id": "doc-382",
@@ -6831,7 +6474,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Holon",
-    "address": "Holon",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6840,7 +6482,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=8E6E8DD64312789FD818CD0955765F66F56898C2900FB9CB137C2B6BFD162994&RequestId=7fbf94d1-3051-f8d8-224e-cdda70e8ce7e&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Rafael Eitan 4"
   },
   {
     "id": "doc-383",
@@ -6850,7 +6493,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Ramat Gan",
-    "address": "Ramat Gan",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6859,7 +6501,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=509185A93CE563DE15D340CBA744E7B541C441A48243CF9AED2B37EC2BA9A2AA&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Shalem 32"
   },
   {
     "id": "doc-384",
@@ -6869,7 +6512,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Ramat Gan",
-    "address": "Ramat Gan",
     "phone": "*3555",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6878,7 +6520,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=03BB67F3E6E41BD0207DEF80A1AD65A4008679B2767FE88279EE24EF48EB45D2&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Ora 4"
   },
   {
     "id": "doc-385",
@@ -6888,7 +6531,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Ramat Gan",
-    "address": "Ramat Gan",
     "phone": "03-6778828",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6897,7 +6539,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=D59BDF7B05A19971796484DB4342A72AF81A87FD4D29DC01C24920460F2028D2&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "HaGaon Eliyahu 2"
   },
   {
     "id": "doc-386",
@@ -6907,7 +6550,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Ramat Gan",
-    "address": "Ramat Gan",
     "phone": "053-8411220",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6916,7 +6558,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=DAE9D950C0EC3B0A3093871D506D8DE9DC0DB2CDB834F6B63D5C71BD2E5DC3CC&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Krinitzi 35"
   },
   {
     "id": "doc-387",
@@ -6926,7 +6569,6 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Ramat Gan",
-    "address": "Ramat Gan",
     "phone": "052-2603272",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -6935,7 +6577,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=166A33CBC28F75108CB91E95A595F082D2B6FA6AB6A8462D5D63BB7CAEE76FD1&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Achimeir Abba 4"
   }
 ];
 

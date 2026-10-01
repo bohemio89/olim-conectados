@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Search, 
   MapPin, 
+  Building2,
   Phone, 
   Clock, 
   ShieldCheck, 
@@ -52,6 +53,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               name: item.name,
               specialty: item.specialty,
               city: item.city,
+              address: item.address || undefined,
               phone: item.phone || 'No especificado (consultar en la Kupá)',
               kupot: item.kupa ? [item.kupa] : [],
               reviews: Array.isArray(item.comments)
@@ -93,6 +95,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
   const [doctorName, setDoctorName] = useState('');
   const [doctorSpecialty, setDoctorSpecialty] = useState('');
   const [doctorCity, setDoctorCity] = useState('');
+  const [doctorAddress, setDoctorAddress] = useState('');
   const [doctorPhone, setDoctorPhone] = useState('');
   const [doctorOfficialLink, setDoctorOfficialLink] = useState('');
   const [selectedKupot, setSelectedKupot] = useState<string[]>([]);
@@ -185,6 +188,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
     setDoctorName('');
     setDoctorSpecialty('');
     setDoctorCity('');
+    setDoctorAddress('');
     setDoctorPhone('');
     setDoctorOfficialLink('');
     setSelectedKupot([]);
@@ -212,8 +216,11 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
 
   const handleTestOrSubmit = async (submitDirectly: boolean = false) => {
     if (!commentText.trim()) return;
-    if (modalMode === 'addDoctor' && (!doctorName.trim() || !doctorSpecialty.trim() || !doctorCity.trim())) {
-      alert('Por favor completa al menos el nombre, especialidad y ciudad del médico.');
+    if (
+      modalMode === 'addDoctor' &&
+      (!doctorName.trim() || !doctorSpecialty.trim() || !doctorCity.trim() || !doctorAddress.trim())
+    ) {
+      alert('Por favor completa todos los campos requeridos: Nombre, Especialidad, Ciudad y Dirección.');
       return;
     }
 
@@ -280,6 +287,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         name: doctorName.trim(),
         specialty: doctorSpecialty.trim(),
         city: doctorCity.trim(),
+        address: doctorAddress.trim(),
         phone: doctorPhone.trim() || 'No especificado (consultar en la Kupá)',
         kupot: selectedKupot,
         reviews: [newReview],
@@ -300,6 +308,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
             specialty: newDoctorEntry.specialty,
             kupa: selectedKupot.join(', '),
             city: newDoctorEntry.city,
+            address: newDoctorEntry.address,
             phone: newDoctorEntry.phone,
             source: 'Comunidad',
             verified: false,
@@ -509,6 +518,19 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                       <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" />
                       <span>{doc.city}</span>
                     </div>
+
+                    <div className="flex items-start gap-2">
+                      <Building2 className="w-3.5 h-3.5 text-gray-400 shrink-0 mt-0.5" />
+                      <div className="leading-tight">
+                        <span className="font-medium text-gray-500">Dirección: </span>
+                        {doc.address && doc.address.trim() && doc.address.trim().toLowerCase() !== doc.city.trim().toLowerCase() ? (
+                          <span className="text-gray-800">{doc.address.trim()}</span>
+                        ) : (
+                          <span className="text-gray-400 italic">No especificada</span>
+                        )}
+                      </div>
+                    </div>
+
                     {doc.phone && doc.phone !== 'No especificado (consultar en la Kupá)' && (
                       <div className="flex items-center gap-2">
                         <Phone className="w-3.5 h-3.5 text-gray-400 shrink-0" />
@@ -707,16 +729,30 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
 
                     <div>
                       <label className="block text-xs font-semibold text-gray-700 mb-1">
-                        Teléfono de Contacto o Snif (Opcional)
+                        Dirección <span className="text-rose-500">*</span>
                       </label>
                       <input
                         type="text"
-                        placeholder="Ej: 0559360936"
-                        value={doctorPhone}
-                        onChange={(e) => setDoctorPhone(e.target.value)}
+                        placeholder="Ej: Dizengoff 100, piso 2 / Snif Central"
+                        value={doctorAddress}
+                        onChange={(e) => setDoctorAddress(e.target.value)}
                         className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                        required
                       />
                     </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-700 mb-1">
+                      Teléfono de Contacto o Snif (Opcional)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Ej: 0559360936 o *3555"
+                      value={doctorPhone}
+                      onChange={(e) => setDoctorPhone(e.target.value)}
+                      className="w-full text-xs px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+                    />
                   </div>
 
                   <div>
