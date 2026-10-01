@@ -258,7 +258,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar directamente al profesional",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Katznelson 96"
   },
   {
     "id": "doc-18",
@@ -275,7 +276,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar directamente al profesional",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Yavne 17",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=ACF342B238B78698815B83CF2D79A4E0EC970CCD2A5A573A3CBE9437F58D728A&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-19",
@@ -360,7 +363,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar directamente al profesional",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Aliyat HaNoar 25"
   },
   {
     "id": "doc-24",
@@ -1999,7 +2003,7 @@ export const INITIAL_DOCTORS: Doctor[] = [
       "Maccabi"
     ],
     "city": "Tel Aviv - Yafo",
-    "address": "Sha'ul HaMelech 8, Tel Aviv - Yafo (Edificio Amot HaMishpat / Migdal Psagot, piso -1)",
+    "address": "Sderot Shaul HaMelech 8 (Edificio Amot HaMishpat / Migdal Psagot, piso -1)",
     "phone": "03-5562454 (turnos: *3555)",
     "spanishLevel": "Fluido",
     "rating": 0,
@@ -2007,7 +2011,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il) el 27/09/2026. Habla hebreo, espanol e ingles. Sin costo de copago para socios de Maccabi.",
     "receptionHours": "Dom 9:00-13:15, Lun 15:30-20:00, Mar 15:30-20:00 (segun cartilla oficial de Maccabi, verificar vigencia)",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=C22C12CDFAB5322E5A7E3837AA2BB889433B5DC29EE4B9CCF3672DAF7D594CE6&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-123",
@@ -5912,7 +5917,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Weizmann 42",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=7FBB41DAEDEF996841DF7DDA8330D64F352CDBB38CD410317581B347FEEA76D9"
   },
   {
     "id": "doc-350",
@@ -5929,7 +5936,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Aliyat HaNoar 25",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=F4C9B86CA1A2CD211D8A29A09B42D1594F3C8A081AF37B4D9428B71638D7E369"
   },
   {
     "id": "doc-351",
@@ -5946,7 +5955,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Borochov 54"
   },
   {
     "id": "doc-352",
@@ -5963,7 +5973,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Weizmann 14",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=EE964FF3D9E9DF52AC6CD9F3FCD8AE5C50BCA45520E9E67F0563BC60B5B2E1EF"
   },
   {
     "id": "doc-353",
@@ -5980,7 +5992,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Bar Giora 16",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=4D00D5E4D895786C147A572F35DF803F217A9B9CA6EBFAEAFA893693FEEAF9D0"
   },
   {
     "id": "doc-354",
@@ -5997,7 +6011,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Yigal Alon 82",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=F0824B390C918EFFAA5D37DD8C6796CBBF220DD27A2FD9A3A0C27F611C33F4A2&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-355",
@@ -6014,7 +6030,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Beker Aharon 8",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=4E370144CD1813098D5C0F7E5AF3C41BCA7FBF996A754D470371BFE7D7AD58E8&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-356",
@@ -6031,7 +6049,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Shlomo HaMelech 105",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=684FF230A395BB2D03C325E791221F5BC29C6E3169DA6A4FDC36B7BA37046C83&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-357",
@@ -6048,7 +6068,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Derech HaHagana 41",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=994A2C7C895A92F6987D1C019BEE2EE46B2234E3100CDD7E243391EB9DD20503&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-358",
@@ -6065,7 +6087,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=FA1610511029301C1B6F9A33B83477D9FC98F3C6DD219D96626A6B6720EB74E8&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-359",
@@ -6083,8 +6106,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
     "reviews": [],
-    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=96D1B5349D4C2518AB51600D18609DAFF02A891AF2A95EF11FAD8C3B737F291F&RequestId=b347c568-789a-b4ce-7b05-1b439eaa832d&Source=SearchPageResults",
-    "address": "Landau Chaim 7 / Derech Negba 48"
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=772CC19C15D7A26FC239BB685D5287DC119A7D5B0D499BD901E446932567F779&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults",
+    "address": "Raoul Wallenberg 32 (Tel Aviv) / Landau Chaim 7, Derech Negba 48 (Ramat Gan)"
   },
   {
     "id": "doc-360",
@@ -6101,7 +6124,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Yigal Alon 96",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=4068E7DFB4DEF1AF3A73932FC7C1332F538836E4C612E1FCE9DE73896FE60B49&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-361",
@@ -6118,7 +6143,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Kehilat Riga 9",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=193B09703317BE82B3E3D8A853554725665029A7DFA5A271EBF844E423FA910D&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-362",
@@ -6135,7 +6162,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Melchett 1",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=4A24939D42D2D7A67ECFB7C14ACDF0C5A423DA4CBA6FAD37832069CE1B382A07&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-363",
@@ -6152,7 +6181,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Frish Daniel 3",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=0EED2270C290B6954F9672A32313F5EB1003EEEAD72D4E304CA0855E60D42BA6&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-364",
@@ -6169,7 +6200,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Uri Zvi Greenberg 25",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=7CCFCCB74AA6B2762F324B7933853952C27D264F95FA5B9400E8B008970EB90A&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-365",
@@ -6186,7 +6219,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Hirshenberg 3",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=CCBDE5AAA0607DC4B4AE3A6C6569832F226196DCB03C596B955221B429D4CA20&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-366",
@@ -6203,7 +6238,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "HaTkuma 36",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=9EAB5430130633E48547D9637A144DC14CA93EB1025E221C715B2BF9282365F3&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-367",
@@ -6220,7 +6257,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "HaShla 7",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=9FFDAAC564754519505F3479D486FF10356B727326E633A06B2ADD36166C33A2&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-368",
@@ -6237,7 +6276,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Yigal Alon 82",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=571F74E36D7C873A3EA581D9FD2117FEF7A1CC78D6CA5B395551D9D34103E200&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-369",
@@ -6254,7 +6295,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Yigal Alon 82",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=440F6C53FF0C914B23FC087B23014E42A268E6F0D353B44F8531715DC586E605&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-370",
@@ -6271,7 +6314,8 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=73772998974F4EDB59B8BA5EAA3750137967D1AB1C74409145842A011161C731&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-371",
@@ -6288,7 +6332,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Sprinzak 3",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=326ECADC5E8A95F87DADD978E79E689128D5813F4306E1254C14C1D780544209&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-372",
@@ -6305,7 +6351,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Yigal Alon 82",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=C36F86038AC4BF6506FC7DB8DA6A653870E9C3812491B3F7B636D515EE7F0614&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-373",
@@ -6322,7 +6370,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Achimeir Abba 27",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=3D97568F824341D0255D2D96BE56D3CC3F958E64EB144AA127FA9C6CF41509F8&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-374",
@@ -6339,7 +6389,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "HaBarzel 24",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=0EA74F95DAB7EAC1DB4C196EBE4357FA91B143252F53F2F03D31E34D575B316F&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-375",
@@ -6356,7 +6408,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "La Guardia 58",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=58FB0D22358D9DD7BAD99AC12CEB48E62D8FE1F39C8F10F7183277D26DB241FA&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-376",
@@ -6373,7 +6427,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "HaBarzel 24",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=6C388E9CAC780F4C0A5EB68A070FF5356FAABCA83D5B24BEABB4D227DF363C92&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-377",
@@ -6390,7 +6446,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Sprinzak 3",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=9374B570D15BC63DB71DF9E4FEE84D31D60C31B4D85717CA8723651B4B45B2DC&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-378",
@@ -6407,7 +6465,9 @@ export const INITIAL_DOCTORS: Doctor[] = [
     "consultationFocus": "VERIFICADO en la cartilla oficial de Maccabi (maccabi4u.co.il).",
     "receptionHours": "Consultar turnos a través de la app de Maccabi o al *3555",
     "acceptsNewPatients": true,
-    "reviews": []
+    "reviews": [],
+    "address": "Weizmann 14",
+    "officialLink": "https://serguide.maccabi4u.co.il/heb/doctors/doctorssearchresults/doctorsinfopage/?ItemKeyIndex=CA020DA82630E7DFC10E1FE6F2F263B3140A0ADBC93D1B9831E4FA3271D383A0&RequestId=1bc9100b-64a6-3a29-a32d-583a7234e2f2&Source=SearchPageResults"
   },
   {
     "id": "doc-379",
