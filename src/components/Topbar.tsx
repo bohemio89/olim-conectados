@@ -1,98 +1,41 @@
 import React from 'react';
-import { 
-  Bot, 
-  Menu, 
-  Compass
-} from 'lucide-react';
-import { ALL_NAV_ITEMS } from './Sidebar';
-import { GlobalSearchBar } from './GlobalSearchBar';
+import { Menu, Search, X } from 'lucide-react';
 import { EmergencyButton } from './EmergencyButton';
+import { GlobalSearchBar } from './GlobalSearchBar';
 
 interface TopbarProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
   onOpenMobileSidebar: () => void;
-  clickCounts: Record<string, number>;
-  onItemClick: (tabId: string) => void;
-  isCollapsed: boolean;
-  onToggleCollapse: () => void;
+  onNavigateHome: () => void;
+  onNavigateToTab: (tabId: string) => void;
   onSendQueryToChat?: (query: string) => void;
+  isLargeText: boolean;
+  onToggleLargeText: () => void;
 }
 
-/**
- * Topbar rediseñado conforme a las pautas de UX:
- * 1. Menos carga visual: logo, nombre del sitio, buscador persistente en lenguaje natural, y botón hamburguesa en mobile.
- * 2. Unificación del botón de emergencia (EmergencyButton 101).
- * 3. Eliminación de redundancia de texto "Asistente IA" (solo ícono + label conciso).
- * 4. El banner fijo invasivo de alerta se trasladó al feed normal de contenido como Card destacada.
- */
 export const Topbar: React.FC<TopbarProps> = ({
-  activeTab,
-  setActiveTab,
   onOpenMobileSidebar,
-  clickCounts,
-  onItemClick,
-  isCollapsed,
-  onToggleCollapse,
+  onNavigateToTab,
   onSendQueryToChat,
+  isLargeText,
+  onToggleLargeText,
 }) => {
-  // Select top 3 relevant navigation items for desktop quick pills
-  const topRelevant = [...ALL_NAV_ITEMS].sort((a, b) => {
-    const countA = clickCounts[a.id] || 0;
-    const countB = clickCounts[b.id] || 0;
-    return countB - countA;
-  }).slice(0, 3);
-
-  const handleQuickClick = (id: string) => {
-    setActiveTab(id);
-    onItemClick(id);
-  };
-
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-200">
-      <div className="px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 sm:gap-4">
-        {/* Left: Mobile Burger + Logo Brand Identity */}
-        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-          {/* Mobile Menu Trigger */}
-          <button
-            onClick={onOpenMobileSidebar}
-            className="lg:hidden p-2 -ml-1 text-gray-700 hover:bg-gray-100 rounded-xl transition"
-            aria-label="Abrir menú de opciones"
-          >
-            <Menu className="w-5 h-5 text-gray-800" />
-          </button>
+    <header className="sticky top-0 z-30 bg-[#FBF3E6]/90 backdrop-blur-md transition-colors">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 sm:gap-6">
+        
+        {/* Mobile Hamburger */}
+        <button
+          onClick={onOpenMobileSidebar}
+          className="lg:hidden p-2 text-[#0E2559] hover:bg-black/5 rounded-xl transition shrink-0"
+          aria-label="Abrir menú de navegación"
+        >
+          <Menu className="w-5 h-5 text-[#0E2559]" />
+        </button>
 
-          {/* Brand Logo & Name */}
-          <button
-            onClick={() => handleQuickClick('assistant')}
-            className="flex items-center gap-2 text-left group focus:outline-none"
-          >
-            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs group-hover:bg-blue-700 transition">
-              <Compass className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-sm sm:text-base tracking-tight text-gray-900 group-hover:text-blue-600 transition">
-                  Olim Conectados
-                </span>
-                <span className="text-[10px] font-extrabold bg-blue-50 text-blue-700 px-1.5 py-0.2 rounded border border-blue-200 hidden xs:inline">
-                  עולים
-                </span>
-              </div>
-              <span className="text-[10px] text-gray-500 hidden sm:block">
-                Guía Comunitaria y Derechos en Israel
-              </span>
-            </div>
-          </button>
-        </div>
-
-        {/* Center: Persistent Natural Language Search Bar (Item B UX) */}
-        <div className="flex-1 max-w-md mx-1 sm:mx-3">
+        {/* Search Bar matching the reference screenshot */}
+        <div className="flex-1 max-w-xl min-w-0">
           <GlobalSearchBar
-            onNavigateToTab={(tabId) => {
-              setActiveTab(tabId);
-              onItemClick(tabId);
-            }}
+            onNavigateToTab={onNavigateToTab}
             onSendToChat={(query) => {
               if (onSendQueryToChat) {
                 onSendQueryToChat(query);
@@ -101,36 +44,27 @@ export const Topbar: React.FC<TopbarProps> = ({
           />
         </div>
 
-        {/* Right: Quick Pills (Desktop) + Unified Emergency Button */}
-        <div className="flex items-center gap-2 shrink-0">
-          {/* Desktop quick tabs */}
-          <div className="hidden xl:flex items-center gap-1 bg-gray-50 p-1 rounded-xl border border-gray-200 text-xs">
-            {topRelevant.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={`topbar-quick-${item.id}`}
-                  onClick={() => handleQuickClick(item.id)}
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition ${
-                    isActive
-                      ? 'bg-blue-600 text-white shadow-2xs'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/60'
-                  }`}
-                >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-gray-400'}`} />
-                  <span>{item.shortLabel}</span>
-                </button>
-              );
-            })}
-          </div>
+        {/* Right side: "A+ Texto" pill + "Emergencia MADA 101" solid red pill */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          {/* A+ Texto Button */}
+          <button
+            type="button"
+            onClick={onToggleLargeText}
+            className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold border transition shadow-2xs ${
+              isLargeText
+                ? 'bg-[#0E2559] text-white border-[#0E2559]'
+                : 'bg-white text-[#0E2559] border-slate-700/80 hover:bg-slate-50'
+            }`}
+            title={isLargeText ? 'Restablecer tamaño normal de texto' : 'Agrandar texto de la pantalla'}
+            aria-label="Agrandar tamaño de fuente"
+          >
+            <span className="whitespace-nowrap">{isLargeText ? 'A- Normal' : 'A+ Texto'}</span>
+          </button>
 
-          {/* Unified Emergency Button across the site (Punto 3 UX) */}
-          <EmergencyButton
-            variant="compact"
-            onClick={() => handleQuickClick('emergency')}
-          />
+          {/* Emergencia MADA 101 */}
+          <EmergencyButton />
         </div>
+
       </div>
     </header>
   );

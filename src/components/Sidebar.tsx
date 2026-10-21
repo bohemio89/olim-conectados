@@ -1,181 +1,67 @@
 import React from 'react';
 import { 
-  Bot, 
+  PanelLeftClose, 
+  PanelLeftOpen, 
+  X,
+  BookOpen,
+  Home,
+  ChevronRight,
+  MessageCirclePlus, 
   Stethoscope, 
-  AlertTriangle, 
-  Briefcase, 
+  Siren, 
+  Store, 
+  Landmark, 
+  ClipboardCheck, 
+  HardHat, 
   Calculator, 
   Car, 
-  FileText, 
-  ShoppingBag, 
-  ShieldAlert,
-  ChevronRight,
-  TrendingUp,
-  Sparkles,
-  PhoneCall,
-  Menu,
-  X,
-  Compass,
-  PanelLeftClose,
-  PanelLeftOpen,
-  PartyPopper,
-  CheckSquare
+  Ticket, 
+  Users, 
+  Martini,
 } from 'lucide-react';
-import { EmergencyButton } from './EmergencyButton';
+import { LogoSymbol } from './LogoSymbol';
+import { CATEGORY_GROUPS, SECTIONS, CategoryGroupId } from '../data/navigation';
 
-export interface NavItemConfig {
-  id: string;
-  label: string;
-  shortLabel: string;
-  icon: React.ComponentType<{ className?: string }>;
-  category: 'Asistencia & Salud' | 'Derechos & Trámites' | 'Comunidad & Emprendimientos';
-  badge?: string;
-  alert?: boolean;
-  description: string;
-}
-
-export const ALL_NAV_ITEMS: NavItemConfig[] = [
-  {
-    id: 'assistant',
-    label: 'Asistente IA Olim',
-    shortLabel: 'Asistente IA',
-    icon: Bot,
-    category: 'Asistencia & Salud',
-    badge: 'Popular',
-    description: 'Consultas sobre salud, trámites y vida en Israel con memoria contextual'
-  },
-  {
-    id: 'doctors',
-    label: 'Médicos en Español',
-    shortLabel: 'Médicos',
-    icon: Stethoscope,
-    category: 'Asistencia & Salud',
-    badge: 'Top',
-    description: 'Directorio calificado en Maccabi, Clalit, Meuhedet y Leumit'
-  },
-  {
-    id: 'emergency',
-    label: 'Guardia & Miún SOS',
-    shortLabel: 'Guardia / Miún',
-    icon: AlertTriangle,
-    category: 'Asistencia & Salud',
-    alert: true,
-    description: 'Cómo evitar facturas de cientos de shékels en Miún y ambulancias'
-  },
-  {
-    id: 'community',
-    label: 'Comunidad & Redes',
-    shortLabel: 'Comunidad',
-    icon: ShoppingBag,
-    category: 'Comunidad & Emprendimientos',
-    description: 'Puntos de encuentro y grupos colaborativos de Olim'
-  },
-  {
-    id: 'nightlife',
-    label: 'Vida Nocturna',
-    shortLabel: 'Vida Nocturna',
-    icon: PartyPopper,
-    category: 'Comunidad & Emprendimientos',
-    description: 'Encuentros, música en español y actividades sociales para Olim'
-  },
-  {
-    id: 'business-plan',
-    label: 'Plan de Negocio',
-    shortLabel: 'Plan de Negocio',
-    icon: Briefcase,
-    category: 'Derechos & Trámites',
-    badge: 'Oficial',
-    description: 'Asesoramiento gratuito del Ministerio (*2994) y Centros Maalot para abrir un negocio'
-  },
-  {
-    id: 'crisis-civil',
-    label: 'Crisis, Economía & Vida Civil',
-    shortLabel: 'Crisis & Economía',
-    icon: ShieldAlert,
-    category: 'Derechos & Trámites',
-    description: 'Sal Klitá, subsidio de alquiler (meses 7-30), Teum Mas y Pikud HaOref'
-  },
-  {
-    id: 'checklist',
-    label: 'Mi Checklist de Oleh',
-    shortLabel: 'Checklist Oleh',
-    icon: CheckSquare,
-    category: 'Derechos & Trámites',
-    badge: 'Nuevo',
-    description: 'Guía secuencial paso a paso con seguimiento de trámites y progreso guardado'
-  },
-  {
-    id: 'bituaj',
-    label: 'Accidente & Bituaj Leumi',
-    shortLabel: 'Bituaj Leumi',
-    icon: Briefcase,
-    category: 'Derechos & Trámites',
-    description: 'Lesiones laborales, tendinitis, formulario BL 250 y Rofé Taasukatí'
-  },
-  {
-    id: 'sick-leave',
-    label: 'Calculadora Días Majalá',
-    shortLabel: 'Días Enfermedad',
-    icon: Calculator,
-    category: 'Derechos & Trámites',
-    description: 'Cálculo legal según Jok Dmei Majalá y saldo acumulado'
-  },
-  {
-    id: 'license',
-    label: 'Licencia de Conducir',
-    shortLabel: 'Licencia',
-    icon: Car,
-    category: 'Derechos & Trámites',
-    description: 'Conversión con Tofes Yarok y reválida de carné'
-  },
-  {
-    id: 'bureaucracy',
-    label: 'Trámites & Vouchers',
-    shortLabel: 'Trámites',
-    icon: FileText,
-    category: 'Derechos & Trámites',
-    description: 'Tofes 101, MyVisit, descuento de Arnoná y voucher de Ulpán'
-  },
-];
-
-interface SidebarLayoutProps {
+interface SidebarProps {
   activeTab: string;
-  setActiveTab: (tab: string) => void;
-  clickCounts: Record<string, number>;
-  onItemClick: (tabId: string) => void;
+  onSelectTab: (tabId: string) => void;
   isOpenMobile: boolean;
   setIsOpenMobile: (open: boolean) => void;
   isCollapsed: boolean;
-  setIsCollapsed: (collapsed: boolean) => void;
+  onToggleCollapse: () => void;
 }
 
-export const Sidebar: React.FC<SidebarLayoutProps> = ({
+export const Sidebar: React.FC<SidebarProps> = ({
   activeTab,
-  setActiveTab,
-  clickCounts,
-  onItemClick,
+  onSelectTab,
   isOpenMobile,
   setIsOpenMobile,
   isCollapsed,
-  setIsCollapsed,
+  onToggleCollapse,
 }) => {
-  // Sort items by relevance/click count for the "Más Buscados" section
-  const topItems = [...ALL_NAV_ITEMS].sort((a, b) => {
-    const countA = clickCounts[a.id] || 0;
-    const countB = clickCounts[b.id] || 0;
-    return countB - countA;
-  }).slice(0, 4);
+  const groupsOrder: CategoryGroupId[] = ['salud', 'tramites', 'comunidad'];
 
-  const categories = [
-    'Asistencia & Salud',
-    'Derechos & Trámites',
-    'Comunidad & Emprendimientos'
-  ] as const;
-
-  const handleSelect = (id: string) => {
-    setActiveTab(id);
-    onItemClick(id);
+  const handleItemClick = (id: string) => {
+    onSelectTab(id);
     setIsOpenMobile(false);
+  };
+
+  const groupCapsuleStyles: Record<CategoryGroupId, { bg: string; iconColor: string; activeBg: string }> = {
+    salud: {
+      bg: 'bg-[#E8F3FA]',
+      iconColor: 'text-[#1F5F8B]',
+      activeBg: 'bg-[#1F5F8B]',
+    },
+    tramites: {
+      bg: 'bg-[#F3EEFA]',
+      iconColor: 'text-[#6B4FA0]',
+      activeBg: 'bg-[#6B4FA0]',
+    },
+    comunidad: {
+      bg: 'bg-[#E7F6EE]',
+      iconColor: 'text-[#2A7050]',
+      activeBg: 'bg-[#2A7050]',
+    },
   };
 
   return (
@@ -184,165 +70,199 @@ export const Sidebar: React.FC<SidebarLayoutProps> = ({
       {isOpenMobile && (
         <div 
           onClick={() => setIsOpenMobile(false)}
-          className="fixed inset-0 bg-gray-900/60 backdrop-blur-xs z-40 lg:hidden"
+          className="fixed inset-0 bg-[#0E2559]/50 backdrop-blur-xs z-40 lg:hidden transition-opacity"
         />
       )}
 
-      {/* Sidebar Container: w-72 when expanded, w-20 when collapsed on desktop */}
+      {/* Sidebar Aside */}
       <aside 
-        className={`fixed top-0 bottom-0 left-0 z-50 bg-white border-r border-gray-200 flex flex-col transition-all duration-300 ease-in-out ${
-          isCollapsed ? 'lg:w-20' : 'lg:w-72'
+        className={`fixed top-0 bottom-0 left-0 z-50 bg-white border-r border-[#0E2559]/10 flex flex-col shadow-xs transition-all duration-300 ease-in-out ${
+          isCollapsed ? 'lg:w-[72px]' : 'lg:w-[290px]'
         } ${
           isOpenMobile 
-            ? 'w-72 translate-x-0' 
+            ? 'w-[290px] translate-x-0' 
             : '-translate-x-full lg:translate-x-0'
         }`}
       >
-        {/* Top Header / Branding & Toggle Button */}
-        <div className="h-16 px-4 border-b border-gray-100 flex items-center justify-between shrink-0">
-          <div 
-            onClick={() => handleSelect('assistant')}
-            className={`flex items-center gap-2.5 cursor-pointer group overflow-hidden ${
-              isCollapsed ? 'justify-center w-full' : ''
-            }`}
-            title="Olim Conectados - Inicio"
+        {/* Top Header: Logo + Collapse Button */}
+        <div className={`h-16 flex items-center border-b border-[#0E2559]/10 px-3 bg-white ${
+          isCollapsed ? 'justify-center' : 'justify-between'
+        }`}>
+          <button 
+            onClick={() => handleItemClick('home')}
+            className="flex items-center gap-2.5 text-left group overflow-hidden focus:outline-none"
+            title="OLIM CONECTADOS - Inicio"
           >
-            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs group-hover:bg-blue-700 transition shrink-0">
-              <Compass className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center p-1 bg-white hover:bg-slate-50 transition">
+              <LogoSymbol className="w-8 h-8 shrink-0 transition-transform group-hover:scale-105" />
             </div>
             
             {!isCollapsed && (
-              <div className="min-w-0 transition-opacity duration-200">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-sm tracking-tight text-gray-900 truncate">
-                    Olim Conectados
-                  </span>
-                  <span className="text-[10px] font-bold bg-blue-50 text-blue-700 px-1.5 py-0.2 rounded border border-blue-200 shrink-0">
-                    עולים
-                  </span>
-                </div>
-                <p className="text-[11px] text-gray-500 font-medium truncate">Guía y Comunidad</p>
+              <div className="min-w-0">
+                <span className="font-extrabold text-sm tracking-tight text-[#0E2559] block truncate">
+                  OLIM CONECTADOS
+                </span>
+                <span className="text-[10px] text-[#0E2559]/70 font-semibold block truncate">
+                  Toda tu Aliyah en español
+                </span>
               </div>
             )}
-          </div>
+          </button>
 
-          {/* Desktop Toggle Button: Icon of "=" / Menu / Collapse */}
+          {/* Desktop Toggle Button */}
           <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden lg:flex p-2 rounded-xl text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition"
-            title={isCollapsed ? 'Expandir menú lateral' : 'Contraer menú lateral'}
+            onClick={onToggleCollapse}
+            className="hidden lg:flex p-1.5 rounded-xl text-[#0E2559]/70 hover:text-[#0E2559] hover:bg-[#FBF3E6] transition ml-auto"
+            title={isCollapsed ? 'Expandir menú (≈290px)' : 'Contraer menú (≈72px)'}
             aria-label="Alternar menú lateral"
           >
             {isCollapsed ? (
-              <Menu className="w-5 h-5" />
+              <PanelLeftOpen className="w-4 h-4 text-[#0E2559]/60" />
             ) : (
-              <PanelLeftClose className="w-5 h-5" />
+              <PanelLeftClose className="w-4 h-4 text-[#0E2559]/60" />
             )}
           </button>
 
           {/* Mobile Close Button */}
           <button 
             onClick={() => setIsOpenMobile(false)}
-            className="lg:hidden p-1.5 rounded-lg text-gray-500 hover:bg-gray-100"
+            className="lg:hidden p-1.5 rounded-lg text-[#0E2559]/70 hover:bg-black/5"
+            aria-label="Cerrar menú"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Scrollable Nav Area */}
-        <div className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+        {/* Scrollable Navigation Area */}
+        <div className={`flex-1 overflow-y-auto px-2 py-4 space-y-3.5 no-scrollbar ${isCollapsed ? 'flex flex-col items-center' : ''}`}>
           
-          {/* Quick Trending / Más Relevantes Section (Only shown when expanded) */}
-          {!isCollapsed && (
-            <div>
-              <div className="flex items-center justify-between px-2 mb-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
-                  <TrendingUp className="w-3.5 h-3.5 text-blue-600" />
-                  Más Utilizados
-                </span>
-                <span className="text-[10px] text-gray-400">Por clics</span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-1.5">
-                {topItems.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = activeTab === item.id;
-                  return (
-                    <button
-                      key={`top-${item.id}`}
-                      onClick={() => handleSelect(item.id)}
-                      className={`flex items-center gap-2 p-2 rounded-xl text-left border transition text-xs font-semibold ${
-                        isActive 
-                          ? 'bg-blue-50 border-blue-300 text-blue-700 font-bold shadow-2xs' 
-                          : 'bg-gray-50/70 border-gray-100 text-gray-700 hover:bg-gray-100 hover:border-gray-200'
-                      }`}
-                    >
-                      <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-blue-600' : 'text-gray-400'}`} />
-                      <span className="truncate">{item.shortLabel}</span>
-                    </button>
-                  );
-                })}
-              </div>
+          {/* Top Primary Actions: Booklet/Docs + Home */}
+          <div className={`flex flex-col items-center gap-1.5 ${isCollapsed ? 'w-full' : 'w-full'}`}>
+            {/* Guide / Overview Button */}
+            <div className="relative group w-full flex justify-center">
+              <button
+                onClick={() => handleItemClick('checklist')}
+                className={`flex items-center rounded-xl transition text-[#0E2559]/80 hover:text-[#0E2559] hover:bg-slate-100/80 ${
+                  isCollapsed ? 'p-2.5 justify-center' : 'w-full px-3.5 py-2.5 justify-between'
+                }`}
+                title={isCollapsed ? 'Guía del Oleh' : undefined}
+              >
+                <div className="flex items-center gap-2.5">
+                  <BookOpen className="w-5 h-5 text-[#0E2559]/70" />
+                  {!isCollapsed && <span className="text-xs font-bold text-[#0E2559]">Guía del Oleh</span>}
+                </div>
+              </button>
+              {isCollapsed && (
+                <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-[#0E2559] text-white text-xs font-bold py-1 px-2.5 rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50">
+                  Guía del Oleh
+                </div>
+              )}
             </div>
-          )}
 
-          {/* Categorized Menu Sections */}
-          {categories.map((category) => {
-            const items = ALL_NAV_ITEMS.filter((item) => item.category === category);
-            return (
-              <div key={category} className="space-y-1">
-                {!isCollapsed && (
-                  <p className="px-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">
-                    {category}
-                  </p>
+            {/* Inicio (Home) */}
+            <div className="relative group w-full flex justify-center">
+              <button
+                onClick={() => handleItemClick('home')}
+                className={`flex items-center rounded-xl transition ${
+                  isCollapsed 
+                    ? `p-2.5 justify-center ${activeTab === 'home' ? 'bg-[#0E2559] text-white shadow-sm' : 'text-[#0E2559]/80 hover:bg-slate-100/80'}`
+                    : `w-full px-3.5 py-2.5 justify-between ${activeTab === 'home' ? 'bg-[#0E2559] text-white font-bold shadow-sm' : 'text-[#0E2559]/80 hover:bg-[#FBF3E6]'}`
+                }`}
+                title={isCollapsed ? 'Inicio' : undefined}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Home className={`w-5 h-5 ${activeTab === 'home' ? 'text-white' : 'text-[#0E2559]/80'}`} />
+                  {!isCollapsed && <span className="text-xs font-bold">Inicio</span>}
+                </div>
+                {!isCollapsed && activeTab === 'home' && (
+                  <span className="w-2 h-2 rounded-full bg-[#E8A33D]" />
                 )}
-                <div className="space-y-1 pt-1">
-                  {items.map((item) => {
-                    const Icon = item.icon;
-                    const isActive = activeTab === item.id;
+              </button>
+              {isCollapsed && (
+                <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-[#0E2559] text-white text-xs font-bold py-1 px-2.5 rounded-lg shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50">
+                  Inicio
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* 3 Categories */}
+          {groupsOrder.map((groupId) => {
+            const group = CATEGORY_GROUPS[groupId];
+            const items = SECTIONS.filter((s) => s.groupId === groupId);
+            const style = groupCapsuleStyles[groupId];
+
+            if (isCollapsed) {
+              // Collapsed mode: Pill capsule with icons matching image_ac6ea286.png
+              return (
+                <div 
+                  key={groupId}
+                  className={`${style.bg} rounded-2xl p-1.5 flex flex-col items-center gap-1.5 w-12 shadow-2xs`}
+                >
+                  {items.map((sec) => {
+                    const Icon = sec.icon;
+                    const isActive = activeTab === sec.id;
+                    return (
+                      <div key={sec.id} className="relative group">
+                        <button
+                          onClick={() => handleItemClick(sec.id)}
+                          className={`p-2 rounded-xl transition flex items-center justify-center ${
+                            isActive
+                              ? `${style.activeBg} text-white shadow-xs`
+                              : `${style.iconColor} hover:bg-white/80`
+                          }`}
+                          aria-label={sec.name}
+                        >
+                          <Icon className="w-5 h-5" />
+                        </button>
+
+                        {/* Dark Navy Speech Bubble Tooltip matching reference screenshot */}
+                        <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-[#0E2559] text-white text-[11.5px] font-bold py-1.5 px-3 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50 whitespace-pre leading-tight">
+                          {/* Triangle pointer */}
+                          <div className="absolute -left-1.5 top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-6 border-r-[#0E2559]" />
+                          <span>{sec.name}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            }
+
+            // Expanded mode
+            return (
+              <div key={groupId} className="space-y-1 pt-1">
+                <div className="px-3 pb-1 flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-[#0E2559]/60">
+                  <span>{group.name}</span>
+                </div>
+
+                <div className="space-y-1">
+                  {items.map((sec) => {
+                    const Icon = sec.icon;
+                    const isActive = activeTab === sec.id;
                     return (
                       <button
-                        key={item.id}
-                        onClick={() => handleSelect(item.id)}
-                        title={isCollapsed ? `${item.label} (${item.category})` : undefined}
-                        className={`w-full flex items-center rounded-xl text-left text-xs font-medium transition-all group ${
-                          isCollapsed 
-                            ? 'justify-center p-3' 
-                            : 'justify-between px-3 py-2.5'
-                        } ${
+                        key={sec.id}
+                        onClick={() => handleItemClick(sec.id)}
+                        className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-semibold transition ${
                           isActive
-                            ? 'bg-blue-600 text-white shadow-xs font-bold'
-                            : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                            ? 'bg-[#0E2559] text-white font-bold shadow-xs'
+                            : 'text-[#0E2559]/90 hover:bg-[#FBF3E6]'
                         }`}
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <Icon className={`w-5 h-5 shrink-0 ${
-                            isActive 
-                              ? 'text-white' 
-                              : item.alert 
-                              ? 'text-rose-500' 
-                              : 'text-gray-400 group-hover:text-gray-700'
+                          <Icon className={`w-4 h-4 shrink-0 ${
+                            isActive ? 'text-[#E8A33D]' : style.iconColor
                           }`} />
-                          
-                          {!isCollapsed && (
-                            <span className="leading-snug break-words hyphens-auto">{item.label}</span>
-                          )}
+                          <span className="truncate">{sec.name}</span>
                         </div>
 
-                        {!isCollapsed && (
-                          <div className="flex items-center gap-1.5 shrink-0">
-                            {item.badge && !isActive && (
-                              <span className="text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.5 rounded-md">
-                                {item.badge}
-                              </span>
-                            )}
-                            {item.alert && !isActive && (
-                              <span className="text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200 px-1.5 py-0.5 rounded-md">
-                                SOS
-                              </span>
-                            )}
-                            <ChevronRight className={`w-3.5 h-3.5 ${isActive ? 'text-blue-200' : 'text-gray-300 group-hover:text-gray-500'}`} />
-                          </div>
+                        {sec.badge && (
+                          <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-md ${
+                            isActive ? 'bg-white/20 text-white' : 'bg-white text-[#0E2559] border border-[#0E2559]/10'
+                          }`}>
+                            {sec.badge}
+                          </span>
                         )}
                       </button>
                     );
@@ -351,27 +271,9 @@ export const Sidebar: React.FC<SidebarLayoutProps> = ({
               </div>
             );
           })}
+
         </div>
 
-        {/* Bottom Fast Emergency Box - Unified Component */}
-        <div className="p-3 border-t border-gray-100 bg-gray-50/50 shrink-0">
-          {!isCollapsed ? (
-            <div className="space-y-1">
-              <EmergencyButton
-                variant="solid"
-                onClick={() => handleSelect('emergency')}
-                className="w-full"
-                showSubtext={true}
-              />
-            </div>
-          ) : (
-            <EmergencyButton
-              variant="compact"
-              onClick={() => handleSelect('emergency')}
-              className="w-full"
-            />
-          )}
-        </div>
       </aside>
     </>
   );

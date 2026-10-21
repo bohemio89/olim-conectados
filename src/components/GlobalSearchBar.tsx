@@ -265,8 +265,8 @@ export const GlobalSearchBar: React.FC<GlobalSearchBarProps> = ({
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          placeholder="Buscar trámites, salud, boliches o preguntar al asistente..."
-          className="w-full pl-9 pr-8 py-2 bg-gray-100/90 hover:bg-gray-100 focus:bg-white border border-gray-200 focus:border-blue-500 rounded-xl text-xs sm:text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition shadow-2xs"
+          placeholder="Buscar trámites, salud, boliches..."
+          className="w-full pl-9 pr-8 py-2 bg-[#EFE9DF] hover:bg-[#eae3d7] focus:bg-white border border-transparent focus:border-[#0E2559]/25 rounded-full text-xs sm:text-sm text-[#0E2559] placeholder-[#0E2559]/50 focus:outline-none transition shadow-2xs"
         />
         {searchTerm && (
           <button
