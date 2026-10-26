@@ -20,6 +20,9 @@ import { BusinessPlanGuide } from './components/BusinessPlanGuide';
 import { INITIAL_DOCTORS, COMMUNITY_STORES, COMMUNITY_GROUPS, NIGHTLIFE_VENUES } from './data/mockData';
 import { Doctor, DoctorReview } from './types';
 import { SECTIONS, SECTION_MAP } from './data/navigation';
+import { BottomNav } from './components/BottomNav';
+import { LogoSymbol } from './components/LogoSymbol';
+import { Plus, Phone } from 'lucide-react';
 
 // Mapeo entre identificador interno de pestaña y ruta de la URL
 const TAB_TO_PATH: Record<string, string> = {
@@ -201,6 +204,8 @@ export default function App() {
         setIsOpenMobile={setIsMobileSidebarOpen}
         isCollapsed={isSidebarCollapsed}
         onToggleCollapse={handleToggleCollapse}
+        isLargeText={isLargeText}
+        onToggleLargeText={handleToggleLargeText}
       />
 
       {/* 2. Envoltorio de Contenido Principal */}
@@ -219,77 +224,164 @@ export default function App() {
           onToggleLargeText={handleToggleLargeText}
         />
 
-        {/* Viewport de Contenido */}
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        {/* Viewport de Contenido con espaciado inferior: 164 px en celular, 96 px en notebook */}
+        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-[164px] lg:pb-[96px] flex flex-col justify-between">
           
-          {/* Index (Portada) */}
-          {activeTab === 'home' && (
-            <IndexView
-              onNavigateToTab={navigateToTab}
-              onOpenAssistantWithQuery={handleOpenAssistantWithQuery}
-            />
-          )}
-
-          {/* Secciones Internas: Encabezado Universal + Contenido Original */}
-          {activeTab !== 'home' && currentSection && (
-            <div>
-              {/* Encabezado Universal con color del grupo, migas de pan y tabs */}
-              <SectionHeader
-                currentSection={currentSection}
+          <div>
+            {/* Index (Portada) */}
+            {activeTab === 'home' && (
+              <IndexView
                 onNavigateToTab={navigateToTab}
+                onOpenAssistantWithQuery={handleOpenAssistantWithQuery}
               />
+            )}
 
-              {/* Contenido propio de cada sección (intacto) */}
+            {/* Secciones Internas: Encabezado Universal + Contenido Original */}
+            {activeTab !== 'home' && currentSection && (
               <div>
-                {activeTab === 'assistant' && (
-                  <AssistantChat 
-                    initialQuery={floatingAssistantQuery} 
-                    onNavigateToTab={navigateToTab}
-                  />
-                )}
-                {activeTab === 'doctors' && (
-                  <DoctorsDirectory 
-                    doctors={doctorsList} 
-                    onAddReview={handleAddReview}
-                    onAddDoctor={handleAddDoctor}
-                  />
-                )}
-                {activeTab === 'emergency' && <EmergencyGuide />}
-                {activeTab === 'business-plan' && <BusinessPlanGuide />}
-                {activeTab === 'crisis-civil' && <CrisisCivilGuide />}
-                {activeTab === 'checklist' && (
-                  <OlehChecklist
-                    onNavigateToTab={navigateToTab}
-                  />
-                )}
-                {activeTab === 'bituaj' && <BituajLeumiGuide />}
-                {activeTab === 'sick-leave' && <SickLeaveCalculator />}
-                {activeTab === 'license' && <DriverLicenseWizard />}
-                {activeTab === 'bureaucracy' && <BureaucracyGuide />}
-                {activeTab === 'community' && (
-                  <CommunityHub 
-                    stores={COMMUNITY_STORES} 
-                    groups={COMMUNITY_GROUPS} 
-                    onNavigateToNightlife={() => navigateToTab('nightlife')}
-                  />
-                )}
-                {activeTab === 'nightlife' && (
-                  <NightlifeGuide venues={NIGHTLIFE_VENUES} />
-                )}
+                {/* Encabezado Universal con color del grupo, migas de pan y tabs */}
+                <SectionHeader
+                  currentSection={currentSection}
+                  onNavigateToTab={navigateToTab}
+                  action={
+                    activeTab === 'doctors' ? (
+                      <button
+                        onClick={() => {
+                          window.dispatchEvent(new CustomEvent('open-recommend-doctor'));
+                        }}
+                        className="min-h-[44px] bg-[#1F5F8B] hover:bg-[#194c70] text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-2xs flex items-center gap-2 transition"
+                      >
+                        <Plus className="w-4 h-4 text-white" />
+                        <span>Recomendar un médico</span>
+                      </button>
+                    ) : activeTab === 'community' ? (
+                      <button
+                        onClick={() => {
+                          window.dispatchEvent(new CustomEvent('open-add-store'));
+                        }}
+                        className="min-h-[44px] bg-[#2A7050] hover:bg-[#235e43] text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-2xs flex items-center gap-2 transition"
+                      >
+                        <Plus className="w-4 h-4 text-white" />
+                        <span>Sumar un comercio</span>
+                      </button>
+                    ) : activeTab === 'business-plan' ? (
+                      <a
+                        href="tel:*2994"
+                        className="min-h-[44px] bg-[#2A7050] hover:bg-[#235e43] text-white font-bold text-sm px-5 py-2.5 rounded-2xl shadow-2xs flex items-center gap-2 transition"
+                      >
+                        <Phone className="w-4 h-4 text-white" />
+                        <span>Llamar *2994</span>
+                      </a>
+                    ) : undefined
+                  }
+                />
+
+                {/* Contenido propio de cada sección (intacto) */}
+                <div>
+                  {activeTab === 'assistant' && (
+                    <AssistantChat 
+                      initialQuery={floatingAssistantQuery} 
+                      onNavigateToTab={navigateToTab}
+                    />
+                  )}
+                  {activeTab === 'doctors' && (
+                    <DoctorsDirectory 
+                      doctors={doctorsList} 
+                      onAddReview={handleAddReview}
+                      onAddDoctor={handleAddDoctor}
+                    />
+                  )}
+                  {activeTab === 'emergency' && <EmergencyGuide />}
+                  {activeTab === 'business-plan' && <BusinessPlanGuide />}
+                  {activeTab === 'crisis-civil' && <CrisisCivilGuide />}
+                  {activeTab === 'checklist' && (
+                    <OlehChecklist
+                      onNavigateToTab={navigateToTab}
+                    />
+                  )}
+                  {activeTab === 'bituaj' && <BituajLeumiGuide />}
+                  {activeTab === 'sick-leave' && (
+                    <SickLeaveCalculator onNavigateToTab={navigateToTab} />
+                  )}
+                  {activeTab === 'license' && <DriverLicenseWizard />}
+                  {activeTab === 'bureaucracy' && <BureaucracyGuide />}
+                  {activeTab === 'community' && (
+                    <CommunityHub 
+                      stores={COMMUNITY_STORES} 
+                      groups={COMMUNITY_GROUPS} 
+                      onNavigateToNightlife={() => navigateToTab('nightlife')}
+                    />
+                  )}
+                  {activeTab === 'nightlife' && (
+                    <NightlifeGuide venues={NIGHTLIFE_VENUES} />
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 6. Pie de Página Universal (Visible en todas las páginas) */}
+          <footer className="mt-14 rounded-2xl bg-[#0E2559] text-white p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Left: Logo Badge + Title + Verification */}
+            <div className="flex items-center gap-3.5 text-center sm:text-left">
+              <div className="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shrink-0">
+                <LogoSymbol className="w-8 h-8" />
+              </div>
+              <div>
+                <span className="font-bold text-base sm:text-lg tracking-tight text-[#E8A33D] block">
+                  Olim Conectados
+                </span>
+                <p className="text-xs text-slate-300 mt-0.5">
+                  Información con fuente oficial · Última revisión: octubre 2026
+                </p>
               </div>
             </div>
-          )}
+
+            {/* Right: Quick Links */}
+            <nav aria-label="Enlaces rápidos del pie" className="flex items-center gap-5 sm:gap-7 text-xs sm:text-sm font-semibold text-white/90">
+              <button 
+                onClick={() => navigateToTab('doctors')}
+                className="hover:text-[#E8A33D] transition focus:outline-none"
+              >
+                Salud
+              </button>
+              <button 
+                onClick={() => navigateToTab('bureaucracy')}
+                className="hover:text-[#E8A33D] transition focus:outline-none"
+              >
+                Trámites
+              </button>
+              <button 
+                onClick={() => navigateToTab('community')}
+                className="hover:text-[#E8A33D] transition focus:outline-none"
+              >
+                Comunidad
+              </button>
+              <a 
+                href="tel:101"
+                className="hover:text-[#E8A33D] transition focus:outline-none text-[#E8A33D]"
+              >
+                Emergencia 101
+              </a>
+            </nav>
+          </footer>
 
         </main>
       </div>
 
-      {/* 3. Asistente IA Olim (Burbuja Flotante Fija 72px/60px y Panel 410x610) */}
+      {/* 4 & 5. Asistente IA Olim (Burbuja Flotante y Panel/Drawer) */}
       <FloatingAssistant
         activeTab={activeTab}
         isOpen={isFloatingAssistantOpen}
         onToggle={() => setIsFloatingAssistantOpen((prev) => !prev)}
         onClose={() => setIsFloatingAssistantOpen(false)}
         presetQuery={floatingAssistantQuery}
+        onNavigateToTab={navigateToTab}
+      />
+
+      {/* 3. Barra de Navegación Inferior en Celular (lg:hidden) */}
+      <BottomNav
+        activeTab={activeTab}
         onNavigateToTab={navigateToTab}
       />
 

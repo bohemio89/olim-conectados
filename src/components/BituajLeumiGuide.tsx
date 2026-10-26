@@ -1,42 +1,43 @@
 import React, { useState } from 'react';
 import { 
-  Briefcase, 
-  AlertOctagon, 
-  FileCheck, 
-  Stethoscope, 
-  CheckSquare, 
   Copy, 
   Check, 
-  Clock, 
-  ArrowRight,
-  ShieldCheck,
-  FileWarning
+  ChevronRight, 
+  ChevronDown, 
+  ChevronUp, 
+  ShieldCheck, 
+  AlertTriangle,
+  CheckSquare
 } from 'lucide-react';
+import { SourceBadge } from './SourceBadge';
 
 export const BituajLeumiGuide: React.FC = () => {
-  const [selectedInjuryType, setSelectedInjuryType] = useState<'repetitive' | 'acute'>('repetitive');
+  const [selectedInjuryType, setSelectedInjuryType] = useState<'repetitive' | 'acute'>('acute');
   const [copiedPhrase, setCopiedPhrase] = useState(false);
-  const [checkedSteps, setCheckedSteps] = useState<Record<string, boolean>>({
-    step1: false,
-    step2: false,
-    step3: false,
-    step4: false,
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+
+  // 4 Documentos con casillas (2 de 4 marcados por defecto como en la captura)
+  const [checkedDocs, setCheckedDocs] = useState<Record<string, boolean>>({
+    doc1: true,
+    doc2: true,
+    doc3: false,
+    doc4: false,
   });
 
-  const toggleStep = (key: string) => {
-    setCheckedSteps((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggleDoc = (id: string) => {
+    setCheckedDocs((prev) => ({ ...prev, [id]: !prev[id] }));
   };
+
+  const completedCount = Object.values(checkedDocs).filter(Boolean).length;
 
   const hebrewPhrases = {
     repetitive: {
-      hebrew: 'אני עובד בעבודה פיזית הכוללת תנועות חוזרות ונשנות. הכאב ביד ובשורש כף היד החל והחמיר עקב העבודה (מיקרוטראומה / תסמונת דה קרוון / תעלה קרפלית). אבקש לציין במפורש בסיכום הרפואי שהפגיעה נגרמה בעבודה.',
-      transliteration: 'Ani oved be-avodá fizit ha-kolelet tnuot jozrot ve-nishnot. Ha-keev ba-yad ve-be-shoresh kaf ha-yad hejel ve-hejmir ekev ha-avodá. Evakesh letzayen be-meforash ba-sijum ha-refuati she-ha-pgiá nigremá ba-avodá.',
-      spanish: 'Trabajo en tareas físicas con movimientos repetitivos. El dolor en mi mano y muñeca comenzó y empeoró debido al trabajo (microtraumatismo / tendinitis de De Quervain / túnel carpiano). Pido que conste expresamente en el resumen médico que la afección se produjo EN EL TRABAJO.',
+      hebrew: 'אני עובד בעבודה פיזית עם תנועות חוזרות. הכאב החל והחמיר עקב העבודה. אבקש לרשום בסיכום שהפגיעה נגרמה בעבודה.',
+      spanish: '"Trabajo en tareas físicas con movimientos repetitivos. El dolor comenzó y empeoró por el trabajo. Pido que conste en el informe médico que ocurrió en el trabajo."',
     },
     acute: {
-      hebrew: 'נפגעתי בתאונה תוך כדי ועקב עבודתי (או בדרך לעבודה). אבקש לרשום בסיכום שהאירוע התרחש בעבודה, לרבות שעת האירוע ונסיבותיו המדויקות.',
-      transliteration: 'Nifgati be-teuná toj kdé ve-ekev avodatí (o ba-derej la-avodá). Evakesh lirshom ba-sijum she-ha-eruá hitrajez ba-avodá.',
-      spanish: 'Sufrí un accidente durante y como consecuencia de mi trabajo (o en el trayecto). Pido asentar en el informe médico que el hecho ocurrió en el trabajo, con la hora y circunstancias exactas.',
+      hebrew: 'נפגעתי בתאונה תוך כדי ועקב עבודתי. אבקש לרשום בסיכום שהאירוע התרחש בעבודה.',
+      spanish: '"Me accidenté trabajando. Pido que el informe diga que ocurrió en el trabajo."',
     },
   };
 
@@ -48,217 +49,284 @@ export const BituajLeumiGuide: React.FC = () => {
     setTimeout(() => setCopiedPhrase(false), 2000);
   };
 
+  const steps = [
+    {
+      num: 1,
+      title: 'Avisa y pide el BL 250',
+      desc: 'Tu empleador lo firma y sella con fecha, hora y tarea.',
+    },
+    {
+      num: 2,
+      title: 'Que el médico escriba "be-avodá"',
+      desc: 'En el primer resumen médico (sijum majalí).',
+    },
+    {
+      num: 3,
+      title: 'Médico ocupacional',
+      desc: 'El Rofé Taasukatí de tu Kupá define los días de reposo.',
+    },
+    {
+      num: 4,
+      isFinal: true,
+      title: 'Presenta en Bituaj Leumi',
+      desc: 'Te pagan el 75% del salario desde el día siguiente a la lesión, hasta 91 días.',
+    },
+  ];
+
+  const documents = [
+    { id: 'doc1', title: 'Formulario BL 250' },
+    { id: 'doc2', title: 'Primer informe médico con "be-avodá"' },
+    { id: 'doc3', title: 'Certificado del médico ocupacional' },
+    { id: 'doc4', title: 'Últimos 3 recibos de sueldo' },
+  ];
+
   return (
     <div className="space-y-6">
-      {/* Red Alert Banner */}
-      <div className="bg-gradient-to-br from-indigo-900 via-blue-900 to-indigo-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-indigo-500/30 border border-indigo-400/40 text-indigo-200 text-xs px-3 py-1 rounded-full font-bold mb-3 uppercase tracking-wider">
-            <AlertOctagon className="w-3.5 h-3.5 text-amber-300" />
-            <span>Trampas Burocráticas Evitables</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Accidentes Laborales, Tendinitis y Bituaj Leumi
-          </h1>
-          <p className="mt-2 text-sm sm:text-base text-indigo-100/90 leading-relaxed">
-            Una lesión por esfuerzo repetitivo (tendinitis de De Quervain, túnel carpiano en cocina, construcción o informática) o un golpe en el trabajo <strong>deben documentarse con precisión quirúrgica desde el primer minuto</strong>. Si el primer médico no escribe expresamente que ocurrió trabajando, <strong>Bituaj Leumi desestimará tu reclamo</strong>.
-          </p>
-        </div>
-      </div>
-
-      {/* The 3 Golden Steps Protocol */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs">
-        <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
-          <ShieldCheck className="w-5 h-5 text-blue-600" />
-          El Protocolo de Oro de 3 Pasos
-        </h2>
-        <p className="text-xs text-gray-500 mt-1">
-          Sigue este orden estricto para no perder la indemnización ni el salario por baja laboral (Dmei Pgiá):
+      
+      {/* 1. Franja roja */}
+      <div className="bg-rose-50/90 border border-rose-200 text-rose-950 rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 shadow-2xs">
+        <AlertTriangle className="w-5 h-5 text-rose-700 shrink-0" />
+        <p className="font-bold text-sm sm:text-base leading-snug">
+          Si el médico no escribe "be-avodá" (בעבודה), Bituaj Leumi puede rechazar tu reclamo.
         </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-          {/* Step 1 */}
-          <div className="border border-blue-200 bg-blue-50/50 rounded-xl p-4 flex flex-col justify-between">
-            <div>
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-black flex items-center justify-center text-sm mb-3">
-                1
-              </div>
-              <h3 className="text-sm font-bold text-gray-900">
-                Avisar al Empleador y Pedir el BL 250
-              </h3>
-              <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
-                Notifica de inmediato a tu supervisor o RRHH y exige el <strong>Formulario BL 250 (Tofes Dmei Pgiá)</strong> firmado y sellado por la empresa.
-              </p>
-            </div>
-            <div className="mt-4 text-[11px] font-semibold text-blue-800 bg-white p-2.5 rounded-lg border border-blue-200">
-              📌 Debe detallar fecha, hora y descripción exacta de la tarea que provocó la lesión.
-            </div>
-          </div>
-
-          {/* Step 2 */}
-          <div className="border border-amber-200 bg-amber-50/50 rounded-xl p-4 flex flex-col justify-between">
-            <div>
-              <div className="w-8 h-8 rounded-full bg-amber-600 text-white font-black flex items-center justify-center text-sm mb-3">
-                2
-              </div>
-              <h3 className="text-sm font-bold text-gray-900">
-                La Clave Médica: "Be-Avodá"
-              </h3>
-              <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
-                En tu primera visita médica (Kupá o guardia), exige que en el resumen (<strong>sijum majalí</strong>) figure por escrito que el dolor se produjo trabajando.
-              </p>
-            </div>
-            <div className="mt-4 text-[11px] font-bold text-amber-900 bg-white p-2.5 rounded-lg border border-amber-200">
-              ⚠️ Si el médico omite escribir "be-avodá" [בעבודה], Bituaj Leumi considerará que fue una afección común.
-            </div>
-          </div>
-
-          {/* Step 3 */}
-          <div className="border border-emerald-200 bg-emerald-50/50 rounded-xl p-4 flex flex-col justify-between">
-            <div>
-              <div className="w-8 h-8 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center text-sm mb-3">
-                3
-              </div>
-              <h3 className="text-sm font-bold text-gray-900">
-                Turno con Médico Ocupacional (Rofé Taasukatí)
-              </h3>
-              <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
-                Saca turno urgente con el <strong>Rofé Taasukatí</strong> [רופא תעסוקתי] de tu Kupá. Solo su dictamen de incapacidad laboral tiene validez plena para el subsidio.
-              </p>
-            </div>
-            <div className="mt-4 text-[11px] font-semibold text-emerald-900 bg-white p-2.5 rounded-lg border border-emerald-200">
-              📑 Es quien determina los días de reposo o restricciones para que el empleador adapte tu puesto.
-            </div>
-          </div>
-        </div>
       </div>
 
-      {/* Hebrew Script Assistant: What to show to the Doctor */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
-          <div>
-            <h2 className="text-base font-bold text-gray-900 flex items-center gap-2">
-              <Stethoscope className="w-5 h-5 text-indigo-600" />
-              Generador de Frase Exacta para Mostrarle al Médico
-            </h2>
-            <p className="text-xs text-gray-500 mt-0.5">
-              Si tu hebreo no es fluido, abre esta pantalla frente al doctor en la consulta o cópialo en un mensaje:
-            </p>
-          </div>
+      {/* 2. Card: Qué hacer si te lesionas trabajando con roadmap de 4 pasos */}
+      <div className="bg-white rounded-3xl border border-black/10 p-6 sm:p-8 shadow-2xs space-y-6">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#0E2559]">
+          Qué hacer si te lesionas trabajando
+        </h2>
 
-          {/* Selector Type */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => setSelectedInjuryType('repetitive')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
-                selectedInjuryType === 'repetitive'
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              Tendinitis / Esfuerzo Repetitivo
-            </button>
-            <button
-              onClick={() => setSelectedInjuryType('acute')}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
-                selectedInjuryType === 'acute'
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              Accidente / Golpe Directo
-            </button>
-          </div>
+        {/* Roadmap de 4 pasos - Notebook (Horizontal con flechas) */}
+        <div className="hidden lg:grid grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-stretch gap-2.5 pt-2">
+          {steps.map((st, idx) => (
+            <React.Fragment key={st.num}>
+              {st.isFinal ? (
+                <div className="bg-[#6B4FA0] text-white rounded-2xl p-5 shadow-xs flex flex-col justify-between">
+                  <div>
+                    <div className="w-7 h-7 rounded-full bg-white text-[#6B4FA0] flex items-center justify-center font-black text-sm mb-3">
+                      <Check className="w-4 h-4 stroke-[3]" />
+                    </div>
+                    <h3 className="text-base font-extrabold leading-snug">
+                      {st.title}
+                    </h3>
+                    <p className="text-xs sm:text-[13px] text-white/90 mt-2 leading-relaxed">
+                      {st.desc}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-white border border-black/10 rounded-2xl p-5 shadow-2xs flex flex-col justify-between">
+                  <div>
+                    <div className="w-7 h-7 rounded-full bg-[#6B4FA0] text-white flex items-center justify-center font-black text-xs mb-3">
+                      {st.num}
+                    </div>
+                    <h3 className="text-base font-extrabold text-[#0E2559] leading-snug">
+                      {st.title}
+                    </h3>
+                    <p className="text-xs sm:text-[13px] text-slate-600 mt-2 leading-relaxed">
+                      {st.desc}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {idx < steps.length - 1 && (
+                <div className="flex items-center justify-center">
+                  <ChevronRight className="w-5 h-5 text-slate-400" />
+                </div>
+              )}
+            </React.Fragment>
+          ))}
         </div>
 
-        {/* Phrase Display */}
-        <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-5 space-y-3">
-          <div>
-            <span className="text-[10px] font-bold text-indigo-800 bg-indigo-100 px-2 py-0.5 rounded uppercase">
-              Texto en Hebreo (Muéstrale la pantalla al profesional):
-            </span>
-            <div className="mt-2 text-right font-hebrew text-lg font-bold text-indigo-950 bg-white p-4 rounded-xl border border-indigo-200 shadow-inner">
-              {activePhrase.hebrew}
-            </div>
-          </div>
+        {/* Roadmap de 4 pasos - Celular (Vertical con flechas) */}
+        <div className="flex flex-col lg:hidden gap-3 pt-1">
+          {steps.map((st, idx) => (
+            <React.Fragment key={st.num}>
+              {st.isFinal ? (
+                <div className="bg-[#6B4FA0] text-white rounded-2xl p-5 shadow-xs">
+                  <div className="w-7 h-7 rounded-full bg-white text-[#6B4FA0] flex items-center justify-center font-black text-sm mb-2.5">
+                    <Check className="w-4 h-4 stroke-[3]" />
+                  </div>
+                  <h3 className="text-base font-extrabold leading-snug">
+                    {st.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-white/90 mt-1.5 leading-relaxed">
+                    {st.desc}
+                  </p>
+                </div>
+              ) : (
+                <div className="bg-white border border-black/10 rounded-2xl p-5 shadow-2xs">
+                  <div className="w-7 h-7 rounded-full bg-[#6B4FA0] text-white flex items-center justify-center font-black text-xs mb-2.5">
+                    {st.num}
+                  </div>
+                  <h3 className="text-base font-extrabold text-[#0E2559] leading-snug">
+                    {st.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
+                    {st.desc}
+                  </p>
+                </div>
+              )}
 
-          <div className="text-xs text-gray-600">
-            <strong>Traducción:</strong> {activePhrase.spanish}
-          </div>
+              {idx < steps.length - 1 && (
+                <div className="flex justify-center py-0.5">
+                  <ChevronDown className="w-5 h-5 text-slate-400" />
+                </div>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
 
+        {/* Detalle desplegable */}
+        {isDetailOpen && (
+          <div className="mt-4 pt-4 border-t border-black/5 text-sm text-slate-700 space-y-2 bg-slate-50/80 p-5 rounded-2xl leading-relaxed">
+            <p className="font-bold text-[#0E2559]">Normativa de accidentes de trabajo (Dmei Pgiá):</p>
+            <ul className="list-disc pl-5 space-y-1 text-slate-600 text-xs sm:text-sm">
+              <li>El empleador abona el salario del día de la lesión. Bituaj Leumi cubre el 75% del salario bruto a partir del día siguiente y hasta un máximo de 91 días de incapacidad laboral certificada.</li>
+              <li>Aplica tanto a accidentes ocurridos en el puesto de trabajo como en el trayecto directo de ida o vuelta entre tu hogar y el lugar laboral.</li>
+              <li>Exige siempre que cada informe médico incluya la frase "be-avodá" (בעבודה) para evitar que la aseguradora estatal lo tramite como enfermedad común.</li>
+            </ul>
+          </div>
+        )}
+
+        {/* Pie Roadmap: SourceBadge + Ver detalle */}
+        <div className="pt-4 border-t border-black/5 flex items-center justify-between text-xs text-slate-600 font-medium flex-wrap gap-2">
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
+            <span>Fuente: Bituaj Leumi · btl.gov.il · revisado oct 2026</span>
+          </div>
           <button
-            onClick={handleCopyPhrase}
-            className="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-lg flex items-center justify-center gap-2 transition"
+            onClick={() => setIsDetailOpen(!isDetailOpen)}
+            className="min-h-[44px] text-[#6B4FA0] font-bold hover:underline flex items-center gap-1 cursor-pointer"
           >
-            {copiedPhrase ? (
-              <>
-                <Check className="w-4 h-4 text-emerald-300" />
-                <span>¡Copiado al portapapeles!</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-4 h-4" />
-                <span>Copiar texto en Hebreo para WhatsApp</span>
-              </>
-            )}
+            <span>{isDetailOpen ? 'Menos detalle' : 'Ver detalle'}</span>
+            {isDetailOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
         </div>
       </div>
 
-      {/* Interactive Verification Checklist */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs">
-        <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-          <FileCheck className="w-4 h-4 text-emerald-600" />
-          Checklist de Documentos para Presentar ante Bituaj Leumi
-        </h3>
+      {/* 3. Debajo en 2 columnas: Frase para el médico + Documentos para presentar */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        {/* Columna 1: Frase para el médico */}
+        <div className="bg-white rounded-3xl border border-black/10 p-6 sm:p-7 shadow-2xs flex flex-col justify-between space-y-5">
+          <div className="space-y-4">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#0E2559]">
+              Frase para el médico
+            </h3>
 
-        <div className="space-y-2.5">
-          {[
-            {
-              id: 'step1',
-              title: 'Formulario BL 250 (Tofes 250)',
-              desc: 'Completado, firmado y sellado por el empleador con los datos de tu puesto y descripción del siniestro.',
-            },
-            {
-              id: 'step2',
-              title: 'Primer Informe Médico (Sijum Majalí Inicial)',
-              desc: 'Donde consta expresamente que el dolor o lesión empezó en el trabajo ("be-avodá").',
-            },
-            {
-              id: 'step3',
-              title: 'Certificado de Incapacidad Ocupacional (Ishur Rofé Taasukatí)',
-              desc: 'Dictamen oficial del médico laboral que determina los días de reposo o adecuación de tareas.',
-            },
-            {
-              id: 'step4',
-              title: 'Últimos 3 Recibos de Sueldo (Tlush Sajar)',
-              desc: 'Para calcular el promedio de tu salario de los meses previos a la lesión.',
-            },
-          ].map((item) => (
-            <div
-              key={item.id}
-              onClick={() => toggleStep(item.id)}
-              className={`p-3.5 rounded-xl border cursor-pointer transition flex items-start gap-3 ${
-                checkedSteps[item.id]
-                  ? 'bg-emerald-50 border-emerald-300 text-emerald-950'
-                  : 'bg-gray-50 border-gray-200 text-gray-800 hover:bg-gray-100'
-              }`}
-            >
-              <div className="mt-0.5">
-                {checkedSteps[item.id] ? (
-                  <CheckSquare className="w-4 h-4 text-emerald-600" />
-                ) : (
-                  <div className="w-4 h-4 border-2 border-gray-400 rounded-sm"></div>
-                )}
-              </div>
-              <div className="text-xs">
-                <p className="font-bold">{item.title}</p>
-                <p className="text-gray-500 mt-0.5">{item.desc}</p>
-              </div>
+            {/* Selector: Tendinitis / esfuerzo vs Accidente / golpe */}
+            <div className="grid grid-cols-2 bg-slate-100/70 p-1 rounded-2xl border border-black/5 gap-1">
+              <button
+                type="button"
+                onClick={() => setSelectedInjuryType('repetitive')}
+                className={`min-h-[44px] py-2 px-3 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer text-center ${
+                  selectedInjuryType === 'repetitive'
+                    ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Tendinitis / esfuerzo
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedInjuryType('acute')}
+                className={`min-h-[44px] py-2 px-3 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer text-center ${
+                  selectedInjuryType === 'acute'
+                    ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Accidente / golpe
+              </button>
             </div>
-          ))}
+
+            {/* Caja hebreo */}
+            <div className="bg-[#FBF3E6] border border-[#E8A33D]/30 rounded-2xl p-5 text-right font-hebrew text-lg sm:text-xl font-bold text-[#0E2559] leading-relaxed shadow-inner" lang="he" dir="rtl">
+              {activePhrase.hebrew}
+            </div>
+
+            <p className="text-xs sm:text-sm text-slate-600 italic">
+              {activePhrase.spanish}
+            </p>
+          </div>
+
+          <button
+            onClick={handleCopyPhrase}
+            className="w-full min-h-[44px] bg-[#0E2559] hover:bg-[#1a3875] text-white font-bold rounded-xl flex items-center justify-center gap-2 transition shadow-2xs text-sm sm:text-[15px] cursor-pointer"
+          >
+            {copiedPhrase ? (
+              <>
+                <Check className="w-4 h-4 text-emerald-400" />
+                <span>¡Copiado en el portapapeles!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4" />
+                <span>Copiar en hebreo</span>
+              </>
+            )}
+          </button>
         </div>
+
+        {/* Columna 2: Documentos para presentar */}
+        <div className="bg-white rounded-3xl border border-black/10 p-6 sm:p-7 shadow-2xs flex flex-col justify-between space-y-5">
+          <div className="space-y-4">
+            <h3 className="text-lg sm:text-xl font-extrabold text-[#0E2559]">
+              Documentos para presentar
+            </h3>
+
+            {/* Lista de 4 documentos con casillas */}
+            <div className="space-y-2.5">
+              {documents.map((doc) => {
+                const isChecked = !!checkedDocs[doc.id];
+                return (
+                  <div
+                    key={doc.id}
+                    onClick={() => toggleDoc(doc.id)}
+                    className={`min-h-[44px] p-3.5 rounded-2xl border transition flex items-center gap-3 cursor-pointer ${
+                      isChecked
+                        ? 'bg-white border-black/10 text-[#2A7050]'
+                        : 'bg-white border-black/10 text-slate-800 hover:bg-slate-50'
+                    }`}
+                  >
+                    <div className="shrink-0">
+                      {isChecked ? (
+                        <CheckSquare className="w-5 h-5 text-[#2A7050]" />
+                      ) : (
+                        <div className="w-5 h-5 rounded-md border-2 border-slate-400" />
+                      )}
+                    </div>
+                    <span className={`text-sm sm:text-[15px] font-bold ${isChecked ? 'text-[#2A7050]' : 'text-slate-800'}`}>
+                      {doc.title}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Barra de progreso "X de 4 listos" */}
+          <div className="pt-2 flex items-center gap-3">
+            <div className="w-32 bg-amber-100/60 rounded-full h-3 overflow-hidden shrink-0">
+              <div 
+                className="bg-[#2A7050] h-full rounded-full transition-all duration-300"
+                style={{ width: `${(completedCount / 4) * 100}%` }}
+              />
+            </div>
+            <span className="text-xs sm:text-sm font-bold text-slate-700">
+              {completedCount} de 4 listos
+            </span>
+          </div>
+        </div>
+
       </div>
+
     </div>
   );
 };
+
+export default BituajLeumiGuide;

@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import { 
+  Music, 
+  Disc3, 
   PartyPopper, 
   MapPin, 
-  Clock, 
-  Music, 
-  Sparkles, 
-  Ticket, 
-  Search, 
-  ExternalLink, 
+  Calendar, 
   Instagram, 
-  Phone,
-  Flame,
-  CheckCircle2,
-  Filter,
-  Wine,
-  Radio,
-  Users
+  Info,
+  X,
+  ExternalLink
 } from 'lucide-react';
 import { NightlifeVenue } from '../types';
 
@@ -24,295 +17,217 @@ interface NightlifeGuideProps {
 }
 
 export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('Todas');
-  const [selectedCity, setSelectedCity] = useState<string>('Todas');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedStyle, setSelectedStyle] = useState<string>('Todas');
+  const [activeDateModal, setActiveDateModal] = useState<NightlifeVenue | null>(null);
 
-  const categories = [
+  const styleChips = [
     'Todas',
-    'Fiesta & Baile Latino',
-    'Boliche & Club Latino',
-    'Bar & After Office',
-    'Salsa & Bachata Social',
+    'Reggaetón',
+    'Salsa & Bachata',
+    'Fiestas variadas',
   ];
 
-  const cities = ['Todas', ...Array.from(new Set(venues.map((v) => v.city))).sort()];
+  // Helper metadata per venue to exactly match design in screenshot
+  const getVenueMeta = (venue: NightlifeVenue) => {
+    if (venue.name.includes('Pasión Latina')) {
+      return {
+        coverBg: 'bg-[#39182E]',
+        coverIcon: Music,
+        displayType: 'Boliche latino',
+        displayAddress: 'Ibn Gabirol 30, Tel Aviv',
+        tags: ['Reggaetón', 'Old school'],
+        styleCategory: 'Reggaetón',
+        instagramUrl: 'https://instagram.com/pasionlatina_backup',
+        nextDateInfo: 'Fiestas quincenales los fines de semana. Próxima edición: Jueves a medianoche. Entradas por lista o en puerta.',
+      };
+    }
+    if (venue.name.includes('Havana')) {
+      return {
+        coverBg: 'bg-[#7A3F1F]',
+        coverIcon: Disc3,
+        displayType: 'Salsa & bachata',
+        displayAddress: 'Tel Aviv-Yafo',
+        tags: ['Salsa', 'Bachata'],
+        styleCategory: 'Salsa & Bachata',
+        instagramUrl: 'https://instagram.com/havanaclubtlv',
+        nextDateInfo: 'Clases y social todos los martes, jueves y sábados desde las 21:00. Pista de salsa y pista de bachata en simultáneo.',
+      };
+    }
+    // Cachengue TLV
+    return {
+      coverBg: 'bg-[#183A64]',
+      coverIcon: PartyPopper,
+      displayType: 'Fiestas y after beach',
+      displayAddress: 'Tel Aviv-Yafo · sin lugar fijo',
+      tags: ['Variado'],
+      styleCategory: 'Fiestas variadas',
+      instagramUrl: 'https://instagram.com/cachengue.tlv',
+      nextDateInfo: 'Eventos temáticos periódicos (After Beach, fiestas patrias, cumbia y pop). Preventa oficial vía Go-Out.',
+    };
+  };
 
   const filteredVenues = venues.filter((venue) => {
-    const matchesCategory = selectedCategory === 'Todas' || venue.category === selectedCategory;
-    const matchesCity = selectedCity === 'Todas' || venue.city === selectedCity;
-    const matchesSearch =
-      venue.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      venue.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      venue.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      venue.musicStyles.some((m) => m.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      venue.highlights.some((h) => h.toLowerCase().includes(searchQuery.toLowerCase()));
-
-    return matchesCategory && matchesCity && matchesSearch;
+    if (selectedStyle === 'Todas') return true;
+    const meta = getVenueMeta(venue);
+    return meta.styleCategory === selectedStyle;
   });
 
   return (
     <div className="space-y-6">
-      {/* Hero Banner */}
-      <div className="bg-gradient-to-br from-fuchsia-700 via-purple-900 to-indigo-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="relative z-10 max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-pink-500/20 border border-pink-400/40 text-pink-200 text-xs px-3 py-1 rounded-full font-bold mb-3 tracking-wide uppercase">
-            <PartyPopper className="w-3.5 h-3.5 text-pink-300" />
-            <span>Vida Nocturna y Fiestas para Olim en Israel</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Vida Nocturna & Fiestas Latinas
-          </h1>
-          <p className="mt-2 text-sm sm:text-base text-purple-100 leading-relaxed">
-            Centralizamos los mejores lugares y eventos para salir a divertirte con música en español, fernet, cumbia, cuarteto, reggaetón y salsa. Desde opciones de fiestas masivas como <strong>Cachengue Tel Aviv</strong> y <strong>La Fiesta Argentina</strong>, hasta boliches, bares con música urbana en Florentin y clubes de salsa en Tel Aviv y Haifa.
-          </p>
-
-          <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-purple-200">
-            <span className="flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-md backdrop-blur-xs">
-              <Flame className="w-4 h-4 text-amber-400" />
-              Cumbia, Cuarteto & Reggaetón
-            </span>
-            <span className="flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-md backdrop-blur-xs">
-              <Wine className="w-4 h-4 text-pink-300" />
-              Fernet en jarra & ambiente latino
-            </span>
-            <span className="flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded-md backdrop-blur-xs">
-              <Radio className="w-4 h-4 text-blue-300" />
-              100% Música en Español
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Guide Tips for Olim */}
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 sm:p-5 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2 font-bold text-amber-900 text-sm">
-            <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
-            <span>Consejos clave de salida nocturna para Olim Jadashim</span>
-          </div>
-          <p className="text-xs text-amber-800 leading-relaxed max-w-2xl">
-            • <strong>Documento obligatorio:</strong> Llevá siempre tu Teudat Zehut física o pasaporte original (los boliches en Israel exigen 18+ o 21+ con DNI físico, no aceptan fotos en el celular).<br />
-            • <strong>Entradas con descuento:</strong> La mayoría de fiestas como <em>Cachengue</em> y <em>La Fiesta Argentina</em> lanzan preventas más baratas en plataformas como <strong>Go-Out</strong>. Conviene comprar antes de que se agoten.<br />
-            • <strong>Transporte:</strong> En fines de semana, verificá los buses nocturnos (Kavei Laila) o coordiná taxis / Gett para volver seguro.
-          </p>
-        </div>
-        <div className="shrink-0 bg-white px-3 py-2 rounded-lg border border-amber-300 text-center shadow-2xs">
-          <span className="text-[10px] text-gray-500 block uppercase font-bold tracking-wider">Música en Español</span>
-          <span className="text-sm font-extrabold text-amber-700">100% Ritmo Latino & Hits</span>
-        </div>
-      </div>
-
-      {/* Search and Filters */}
-      <div className="bg-white rounded-xl p-4 sm:p-5 border border-gray-200 shadow-xs space-y-4">
-        {/* Search */}
-        <div className="relative">
-          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Buscar por fiesta, cumbia, cuarteto, salsa, boliche o barrio (ej. Cachengue, Florentin)..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition"
-          />
-        </div>
-
-        {/* Filter Pills */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-gray-100">
-          {/* Categories */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
-            <Filter className="w-3.5 h-3.5 text-gray-400 shrink-0 mr-1" />
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`text-xs px-3 py-1.5 rounded-lg font-medium whitespace-nowrap transition ${
-                  selectedCategory === cat
-                    ? 'bg-purple-700 text-white font-bold shadow-xs'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Cities Filter */}
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="text-xs text-gray-500 font-medium">Ciudad:</span>
-            <select
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.target.value)}
-              className="text-xs bg-gray-50 border border-gray-300 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-purple-500 font-medium text-gray-700"
+      
+      {/* 1. Chips de estilo: Todas, Reggaetón, Salsa & Bachata, Fiestas variadas */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-sm">
+        {styleChips.map((style) => {
+          const isActive = selectedStyle === style;
+          return (
+            <button
+              key={style}
+              type="button"
+              onClick={() => setSelectedStyle(style)}
+              className={`min-h-[44px] px-5 py-2.5 rounded-full font-bold whitespace-nowrap transition ${
+                isActive
+                  ? 'bg-[#0E2559] text-white shadow-2xs'
+                  : 'bg-white text-neutral-800 border border-neutral-200/90 hover:bg-neutral-50 shadow-2xs'
+              }`}
             >
-              {cities.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+              {style}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Venues Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {filteredVenues.map((venue) => (
-          <div
-            key={venue.id}
-            className="bg-white rounded-2xl border border-gray-200/90 shadow-xs hover:shadow-md transition flex flex-col justify-between overflow-hidden group"
-          >
-            <div className="p-5 sm:p-6 space-y-4">
-              {/* Header Badge & Name */}
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700 bg-purple-50 border border-purple-200 px-2.5 py-0.5 rounded-full">
-                    {venue.category}
-                  </span>
-                  {venue.isPopularWithOlim && (
-                    <span className="text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md flex items-center gap-1">
-                      <Flame className="w-3 h-3 text-amber-500" /> Favorito Olim
-                    </span>
-                  )}
+      {/* 2. Fichas en 3 columnas (1 en celular) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {filteredVenues.map((venue) => {
+          const meta = getVenueMeta(venue);
+          const CoverIcon = meta.coverIcon;
+
+          return (
+            <div
+              key={venue.id}
+              className="bg-white rounded-3xl border border-black/10 overflow-hidden shadow-2xs flex flex-col justify-between hover:border-[#2A7050]/40 transition space-y-4 p-5"
+            >
+              <div className="space-y-4">
+                {/* Portada de color e ícono */}
+                <div className={`w-full h-36 rounded-2xl ${meta.coverBg} flex items-center justify-center text-white shadow-inner`}>
+                  <CoverIcon className="w-9 h-9 text-white/90" />
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-purple-700 transition">
-                  {venue.name}
-                </h3>
-                <p className="text-xs text-purple-950/70 font-medium mt-0.5">
-                  {venue.atmosphere}
-                </p>
-              </div>
+                {/* Nombre y Tipo */}
+                <div>
+                  <h3 className="font-extrabold text-[#0E2559] text-xl leading-tight">
+                    {venue.name}
+                  </h3>
+                  <p className="text-sm text-neutral-500 font-medium mt-0.5">
+                    {meta.displayType}
+                  </p>
+                </div>
 
-              {/* Music Styles Tags */}
-              <div className="space-y-1.5">
-                <span className="text-[11px] font-semibold text-gray-500 flex items-center gap-1">
-                  <Music className="w-3 h-3 text-purple-600" />
-                  Géneros musicales:
-                </span>
+                {/* Dirección */}
+                <div className="flex items-center gap-2 text-sm text-neutral-600">
+                  <MapPin className="w-4 h-4 text-neutral-400 shrink-0" />
+                  <span className="truncate">{meta.displayAddress}</span>
+                </div>
+
+                {/* Etiquetas */}
                 <div className="flex flex-wrap gap-1.5">
-                  {venue.musicStyles.map((style) => (
+                  {meta.tags.map((tag) => (
                     <span
-                      key={style}
-                      className="text-[11px] bg-slate-100 text-slate-800 font-medium px-2 py-0.5 rounded-md border border-slate-200/70"
+                      key={tag}
+                      className="bg-neutral-100 text-neutral-700 font-bold text-xs px-3 py-1 rounded-full"
                     >
-                      {style}
+                      {tag}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Description */}
-              <p className="text-xs text-gray-600 leading-relaxed">
-                {venue.description}
-              </p>
-
-              {/* Highlights */}
-              <div className="bg-purple-50/60 border border-purple-100 rounded-xl p-3 space-y-1.5">
-                <span className="text-[10px] font-bold text-purple-900 uppercase tracking-wide block">
-                  Puntos destacados:
-                </span>
-                <ul className="space-y-1">
-                  {venue.highlights.map((h, i) => (
-                    <li key={i} className="text-xs text-gray-700 flex items-start gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-purple-600 shrink-0 mt-0.5" />
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Practical Info: Address, Hours, Price */}
-              <div className="space-y-2 pt-2 border-t border-gray-100 text-xs text-gray-600">
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-purple-500 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Dirección:</strong> {venue.address} ({venue.city})
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Clock className="w-3.5 h-3.5 text-purple-500 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Horarios:</strong> {venue.schedule}
-                  </span>
-                </div>
-                {venue.priceRange && (
-                  <div className="flex items-start gap-2">
-                    <Ticket className="w-3.5 h-3.5 text-purple-500 shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Entrada / Consumo:</strong> {venue.priceRange}
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Bottom Actions */}
-            <div className="p-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                {venue.instagramOrWeb && (
-                  <a
-                    href={`https://instagram.com/${venue.instagramOrWeb.replace('@', '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs font-semibold text-pink-700 hover:text-pink-800 flex items-center gap-1.5 transition"
-                  >
-                    <Instagram className="w-3.5 h-3.5" />
-                    <span>{venue.instagramOrWeb}</span>
-                  </a>
-                )}
-                {venue.phoneOrTickets && (
-                  <a
-                    href={`tel:${venue.phoneOrTickets.replace(/[^0-9]/g, '')}`}
-                    className="text-xs font-semibold text-gray-600 hover:text-purple-700 flex items-center gap-1 transition"
-                  >
-                    <Phone className="w-3 h-3" />
-                    <span className="font-mono">{venue.phoneOrTickets}</span>
-                  </a>
-                )}
-              </div>
-
-              {venue.ticketLink ? (
+              {/* Botones: Próxima fecha e Instagram */}
+              <div className="flex items-center gap-2 pt-3 border-t border-black/5">
+                <button
+                  type="button"
+                  onClick={() => setActiveDateModal(venue)}
+                  className="flex-1 min-h-[44px] bg-[#2A7050] hover:bg-[#235e43] text-white font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition shadow-2xs"
+                >
+                  <Calendar className="w-4 h-4 text-white" />
+                  <span>Próxima fecha</span>
+                </button>
                 <a
-                  href={venue.ticketLink}
+                  href={meta.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-bold bg-purple-700 hover:bg-purple-800 text-white px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 shadow-2xs transition"
+                  className="flex-1 min-h-[44px] border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-800 font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition"
                 >
-                  <Ticket className="w-3.5 h-3.5" />
-                  <span>Comprar Entradas</span>
-                  <ExternalLink className="w-3 h-3 ml-0.5" />
+                  <Instagram className="w-4 h-4 text-neutral-800" />
+                  <span>Instagram</span>
                 </a>
-              ) : (
-                <span className="text-[11px] font-medium text-gray-500 italic">
-                  Ingreso en puerta o lista
-                </span>
-              )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
-      {filteredVenues.length === 0 && (
-        <div className="text-center py-12 bg-white rounded-2xl border border-gray-200 p-8 space-y-3">
-          <PartyPopper className="w-10 h-10 text-gray-300 mx-auto" />
-          <h3 className="text-base font-bold text-gray-700">No encontramos salidas con esos filtros</h3>
-          <p className="text-xs text-gray-500 max-w-sm mx-auto">
-            Intentá cambiar la categoría o limpiar el texto de búsqueda para ver todas las opciones disponibles.
-          </p>
-          <button
-            onClick={() => {
-              setSelectedCategory('Todas');
-              setSelectedCity('Todas');
-              setSearchQuery('');
-            }}
-            className="text-xs font-bold bg-purple-100 text-purple-800 px-4 py-2 rounded-lg hover:bg-purple-200 transition"
-          >
-            Restablecer Filtros
-          </button>
+      {/* 3. Franja al pie: Las fechas cambian seguido: confirma en Instagram antes de ir. */}
+      <div className="bg-[#FFF6E5] border border-[#E8A33D]/30 rounded-2xl p-4 flex items-center gap-3 text-sm text-[#8A5612] font-semibold shadow-2xs">
+        <Info className="w-5 h-5 text-[#E8A33D] shrink-0" />
+        <p className="leading-snug">
+          Las fechas cambian seguido: confirma en Instagram antes de ir.
+        </p>
+      </div>
+
+      {/* Modal informativa de próxima fecha */}
+      {activeDateModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-xl space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <Calendar className="w-5 h-5 text-[#2A7050]" />
+                <h3 className="font-extrabold text-[#0E2559] text-xl">
+                  {activeDateModal.name}
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActiveDateModal(null)}
+                className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-500 hover:bg-neutral-200"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="bg-[#F8F9FB] rounded-2xl p-4 text-sm text-neutral-700 leading-relaxed">
+              <p className="font-bold text-[#0E2559] mb-1">Cronograma de eventos:</p>
+              <p>{getVenueMeta(activeDateModal).nextDateInfo}</p>
+            </div>
+
+            <p className="text-xs text-neutral-500">
+              * Recuerda que los horarios y locaciones especiales se actualizan siempre en sus historias de Instagram.
+            </p>
+
+            <div className="flex gap-2.5 pt-2">
+              <button
+                type="button"
+                onClick={() => setActiveDateModal(null)}
+                className="flex-1 min-h-[44px] border border-neutral-300 rounded-xl font-bold text-neutral-700 hover:bg-neutral-50 text-sm"
+              >
+                Cerrar
+              </button>
+              <a
+                href={getVenueMeta(activeDateModal).instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 min-h-[44px] bg-[#2A7050] text-white rounded-xl font-bold hover:bg-[#235e43] text-sm flex items-center justify-center gap-2 shadow-2xs"
+              >
+                <Instagram className="w-4 h-4" />
+                <span>Ver Instagram</span>
+              </a>
+            </div>
+          </div>
         </div>
       )}
+
     </div>
   );
 };
+
+export default NightlifeGuide;

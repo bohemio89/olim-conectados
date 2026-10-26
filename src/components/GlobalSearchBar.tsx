@@ -30,7 +30,7 @@ const STATIC_SEARCH_INDEX: SearchResultItem[] = [
   // Guías y Artículos del sitio
   {
     id: 's-emergencia',
-    title: 'Guardia & Miún SOS: Evitar facturas de cientos de shékels',
+    title: 'Guardia & Miún SOS: Evitar facturas de hasta 1.233 ₪',
     type: 'guide',
     tabId: 'emergency',
     description: 'Protocolo de ambulancias MADA 101, centros Terem y cómo obtener la Hafniá médica.',
@@ -97,7 +97,7 @@ const STATIC_SEARCH_INDEX: SearchResultItem[] = [
     title: 'Trámites Clave: Tofes 101, MyVisit, Descuento Arnoná y Ulpán',
     type: 'guide',
     tabId: 'bureaucracy',
-    description: 'Voucher de 5.200 NIS para Ulpán privado y cómo no pagar de más en el sueldo.',
+    description: 'Voucher de 5.000 ₪ para Ulpán privado y cómo no pagar de más en el sueldo.',
     icon: FileText
   },
   {
@@ -265,8 +265,8 @@ export const GlobalSearchBar: React.FC<GlobalSearchBarProps> = ({
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          placeholder="Buscar trámites, salud, boliches..."
-          className="w-full pl-9 pr-8 py-2 bg-[#EFE9DF] hover:bg-[#eae3d7] focus:bg-white border border-transparent focus:border-[#0E2559]/25 rounded-full text-xs sm:text-sm text-[#0E2559] placeholder-[#0E2559]/50 focus:outline-none transition shadow-2xs"
+          placeholder="Busca un trámite, un médico, una palabra en hebreo..."
+          className="w-full min-h-[44px] pl-10 pr-8 py-2.5 bg-white hover:bg-slate-50 focus:bg-white border border-black/10 focus:border-[#0E2559]/30 rounded-full text-xs sm:text-sm text-[#0E2559] placeholder-[#0E2559]/50 focus:outline-none transition shadow-2xs"
         />
         {searchTerm && (
           <button

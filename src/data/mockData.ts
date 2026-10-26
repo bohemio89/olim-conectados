@@ -6679,6 +6679,30 @@ export const COMMUNITY_STORES: CommunityStore[] = [
     hours: 'Consultar por WhatsApp o Instagram',
     isIconic: false,
   },
+  {
+    id: 'store-4',
+    name: 'Mateando - Almacén Argentino',
+    category: 'Almacén Rioplatense / Latino',
+    city: 'Tel Aviv - Yafo',
+    address: 'Allenby 37, Tel Aviv',
+    phone: '+972 3-510-2345',
+    description: 'Local de productos argentinos en el centro de Tel Aviv: yerba mate, dulce de leche, alfajores y tapas de empanadas.',
+    specialties: ['Yerba mate', 'Dulce de leche', 'Alfajores', 'Tapas de empanadas'],
+    hours: 'Dom–Jue 9:00–20:00, Vie 9:00–15:00',
+    isIconic: true,
+  },
+  {
+    id: 'store-5',
+    name: 'La Tienda - Comida Latina',
+    category: 'Almacén Rioplatense / Latino',
+    city: 'Tel Aviv - Yafo',
+    address: 'Levanda 13, Tel Aviv',
+    phone: '+972 54-793-1818',
+    description: 'Comida y productos latinos: Harina P.A.N., frijoles, tortillas de maíz, pulpas de fruta, panela y quesos.',
+    specialties: ['Harina P.A.N.', 'Frijoles', 'Tortillas de maíz', 'Pulpas de fruta', 'Panela', 'Quesos'],
+    hours: 'Dom–Jue 10:00–19:00, Vie 9:30–15:00',
+    isIconic: false,
+  },
 ];
 
 export const COMMUNITY_GROUPS: CommunityGroup[] = [];

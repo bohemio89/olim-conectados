@@ -94,14 +94,14 @@ export const SECTIONS: SectionConfig[] = [
   // 1. Asistencia & Salud
   {
     id: 'assistant',
-    name: 'Asistente IA Olim',
+    name: 'Asistente IA',
     shortLabel: 'Asistente IA',
     icon: MessageCirclePlus,
     groupId: 'salud',
     groupName: 'Asistencia & Salud',
-    badge: 'Popular',
+    badge: '24/7',
     description: 'Consultas sobre salud, trámites y vida cotidiana en Israel con respuestas claras en español.',
-    contextPromptHint: 'Asistente integral de Olim Conectados. Escribí tu consulta en español rioplatense.',
+    contextPromptHint: 'Asistente integral de Olim Conectados. Escribe tu consulta en español.',
     path: '/asistente'
   },
   {
@@ -113,50 +113,27 @@ export const SECTIONS: SectionConfig[] = [
     groupName: 'Asistencia & Salud',
     badge: 'Top',
     isFeatured: true,
-    description: 'Directorio con 370 médicos y especialistas en Maccabi, Clalit, Meuhedet y Leumit.',
-    featuredDescription: 'Encontrá profesionales por kupa, ciudad y dirección física sin barreras de idioma.',
-    contextPromptHint: 'Estás en: Médicos en Español. Preguntame por cartillas, copagos o cómo pedir turno.',
+    description: 'Médicos que hablan español, verificados en la ficha oficial de su Kupá.',
+    featuredDescription: 'Encuentra profesionales por kupa, ciudad y dirección física sin barreras de idioma.',
+    contextPromptHint: 'Estás en: Médicos en Español. Pregúntame por cartillas, copagos o cómo pedir turno.',
     path: '/medicos-en-espanol'
   },
   {
     id: 'emergency',
-    name: 'Guardia & Miún SOS',
-    shortLabel: 'Guardia / Miún',
+    name: 'Guardia & Miún',
+    shortLabel: 'Guardia & Miún',
     icon: Siren,
     groupId: 'salud',
     groupName: 'Asistencia & Salud',
     badge: 'SOS',
     isFeatured: true,
-    description: 'Guía paso a paso para no pagar de más en salas de emergencia de hospitales y centros Terem.',
-    featuredDescription: 'Conocé las reglas de derivación previa (hafniá) y números telefónicos de guardia urgente.',
-    contextPromptHint: 'Estás en: Guardia & Miún SOS. Consultame sobre coberturas de guardia, Terem y derivaciones.',
+    description: 'A dónde ir según la urgencia, sin pagar de más.',
+    featuredDescription: 'Conoce las reglas de derivación previa (hafniá) y números telefónicos de guardia urgente.',
+    contextPromptHint: 'Estás en: Guardia & Miún. Consúltame sobre coberturas de guardia, Terem y derivaciones.',
     path: '/emergencias'
   },
 
   // 2. Derechos & Trámites
-  {
-    id: 'business-plan',
-    name: 'Plan de Negocio',
-    shortLabel: 'Plan de Negocio',
-    icon: Store,
-    groupId: 'tramites',
-    groupName: 'Derechos & Trámites',
-    badge: 'Oficial',
-    description: 'Asesoramiento gratuito del Ministerio de Aliyah y Centros Maalot para emprendedores.',
-    contextPromptHint: 'Estás en: Plan de Negocio. Preguntame sobre Maalot, apertura de Osek y beneficios del ministerio.',
-    path: '/plan-de-negocio'
-  },
-  {
-    id: 'crisis-civil',
-    name: 'Crisis, Economía & Vida Civil',
-    shortLabel: 'Crisis & Economía',
-    icon: Landmark,
-    groupId: 'tramites',
-    groupName: 'Derechos & Trámites',
-    description: 'Sal Klitá, subsidio de alquiler desde el mes 7, Teum Mas y pautas de Pikud HaOref.',
-    contextPromptHint: 'Estás en: Crisis, Economía & Vida Civil. Consultame sobre Sal Klitá, subsidio de alquiler y Teum Mas.',
-    path: '/crisis-civil'
-  },
   {
     id: 'checklist',
     name: 'Mi Checklist de Oleh',
@@ -168,41 +145,8 @@ export const SECTIONS: SectionConfig[] = [
     isFeatured: true,
     description: 'Paso a paso ordenado desde el aeropuerto hasta la inserción laboral y civil completa.',
     featuredDescription: 'Seguimiento visual interactivo con guardado automático de tu progreso en el dispositivo.',
-    contextPromptHint: 'Estás en: Mi Checklist de Oleh. Preguntame qué trámite hacer primero y qué papeles llevar.',
+    contextPromptHint: 'Estás en: Mi Checklist de Oleh. Pregúntame qué trámite hacer primero y qué papeles llevar.',
     path: '/checklist-aliyah'
-  },
-  {
-    id: 'bituaj',
-    name: 'Accidente & Bituaj Leumi',
-    shortLabel: 'Bituaj Leumi',
-    icon: HardHat,
-    groupId: 'tramites',
-    groupName: 'Derechos & Trámites',
-    description: 'Lesiones de trabajo, formulario BL 250, médico laboral y derechos de seguridad social.',
-    contextPromptHint: 'Estás en: Accidente & Bituaj Leumi. Preguntame por el formulario BL 250, ART y reclamos de invalidez.',
-    path: '/bituaj-leumi'
-  },
-  {
-    id: 'sick-leave',
-    name: 'Calculadora Días Majalá',
-    shortLabel: 'Días Majalá',
-    icon: Calculator,
-    groupId: 'tramites',
-    groupName: 'Derechos & Trámites',
-    description: 'Cálculo legal según Jok Dmei Majalá: porcentaje a cobrar en día 1, 2, 3 y acumulados.',
-    contextPromptHint: 'Estás en: Calculadora Días Majalá. Consultame sobre cálculo de días de enfermedad según la ley israelí.',
-    path: '/calculadora-dias-enfermedad'
-  },
-  {
-    id: 'license',
-    name: 'Licencia de Conducir',
-    shortLabel: 'Licencia',
-    icon: Car,
-    groupId: 'tramites',
-    groupName: 'Derechos & Trámites',
-    description: 'Conversión y reválida de carné extranjero en Misrad HaRishuí con Tofes Yarok digital.',
-    contextPromptHint: 'Estás en: Licencia de Conducir. Preguntame sobre el Tofes Yarok, test práctico y reválida de carné.',
-    path: '/licencia-de-conducir'
   },
   {
     id: 'bureaucracy',
@@ -212,23 +156,79 @@ export const SECTIONS: SectionConfig[] = [
     groupId: 'tramites',
     groupName: 'Derechos & Trámites',
     isFeatured: true,
-    description: 'Guías para Tofes 101, turnos con MyVisit, descuento de Arnoná y voucher de Ulpán.',
+    description: 'Tofes 101, voucher de Ulpán, Arnoná y turnos en MyVisit.',
     featuredDescription: 'Explicación de cada campo en español con capturas y pasos a seguir en oficinas públicas.',
-    contextPromptHint: 'Estás en: Trámites & Vouchers. Consultame sobre Tofes 101, MyVisit, descuento de Arnoná y Ulpán.',
+    contextPromptHint: 'Estás en: Trámites & Vouchers. Consúltame sobre Tofes 101, MyVisit, descuento de Arnoná y Ulpán.',
     path: '/tramites-y-burocracia'
+  },
+  {
+    id: 'crisis-civil',
+    name: 'Economía & Vida Civil',
+    shortLabel: 'Economía & Vida Civil',
+    icon: Landmark,
+    groupId: 'tramites',
+    groupName: 'Derechos & Trámites',
+    description: 'Sal Klitá, ayuda de alquiler, dos trabajos y Pikud HaOref.',
+    contextPromptHint: 'Estás en: Economía & Vida Civil. Consúltame sobre Sal Klitá, subsidio de alquiler y Teum Mas.',
+    path: '/crisis-civil'
+  },
+  {
+    id: 'bituaj',
+    name: 'Accidente & Bituaj Leumi',
+    shortLabel: 'Bituaj Leumi',
+    icon: HardHat,
+    groupId: 'tramites',
+    groupName: 'Derechos & Trámites',
+    description: 'Lesiones de trabajo, formulario BL 250, médico laboral y derechos de seguridad social.',
+    contextPromptHint: 'Estás en: Accidente & Bituaj Leumi. Pregúntame por el formulario BL 250 y reclamos de invalidez.',
+    path: '/bituaj-leumi'
+  },
+  {
+    id: 'sick-leave',
+    name: 'Calculadora de Majalá',
+    shortLabel: 'Calculadora de Majalá',
+    icon: Calculator,
+    groupId: 'tramites',
+    groupName: 'Derechos & Trámites',
+    description: 'Cálculo legal según Jok Dmei Majalá: porcentaje a cobrar en día 1, 2, 3 y acumulados.',
+    contextPromptHint: 'Estás en: Calculadora de Majalá. Consúltame sobre cálculo de días de enfermedad según la ley israelí.',
+    path: '/calculadora-dias-enfermedad'
+  },
+  {
+    id: 'license',
+    name: 'Licencia de Conducir',
+    shortLabel: 'Licencia',
+    icon: Car,
+    groupId: 'tramites',
+    groupName: 'Derechos & Trámites',
+    description: 'Responde 4 preguntas y mira tu camino para el carné israelí.',
+    contextPromptHint: 'Estás en: Licencia de Conducir. Pregúntame sobre el Tofes Yarok, test práctico y reválida de carné.',
+    path: '/licencia-de-conducir'
   },
 
   // 3. Comunidad & Emprendimientos
   {
     id: 'community',
-    name: 'Comunidad & Redes',
-    shortLabel: 'Comunidad',
+    name: 'Comunidad & Comercios',
+    shortLabel: 'Comunidad & Comercios',
     icon: Users,
     groupId: 'comunidad',
     groupName: 'Comunidad & Emprendimientos',
-    description: 'Almacenes con productos latinos, carnicerías, panaderías y grupos de WhatsApp por ciudad.',
-    contextPromptHint: 'Estás en: Comunidad & Redes. Preguntame sobre grupos de olim, almacenes latinos y vivienda.',
+    description: 'Comercios latinos y emprendimientos de olim.',
+    contextPromptHint: 'Estás en: Comunidad & Comercios. Pregúntame sobre grupos de olim, almacenes latinos y vivienda.',
     path: '/comunidad'
+  },
+  {
+    id: 'business-plan',
+    name: 'Plan de Negocio',
+    shortLabel: 'Plan de Negocio',
+    icon: Store,
+    groupId: 'comunidad',
+    groupName: 'Comunidad & Emprendimientos',
+    badge: 'Gratis',
+    description: 'Asesoría gratuita del Estado para emprender en Israel.',
+    contextPromptHint: 'Estás en: Plan de Negocio. Pregúntame sobre Maalot, apertura de Osek y beneficios del ministerio.',
+    path: '/plan-de-negocio'
   },
   {
     id: 'nightlife',
@@ -237,8 +237,8 @@ export const SECTIONS: SectionConfig[] = [
     icon: Martini,
     groupId: 'comunidad',
     groupName: 'Comunidad & Emprendimientos',
-    description: 'Boliches latinos, fiestas temáticas, bares y movida social hispanohablante en Israel.',
-    contextPromptHint: 'Estás en: Vida Nocturna. Consultame sobre fiestas latinas, boliches y movida cultural en Israel.',
+    description: 'Fiestas y salidas latinas en Israel.',
+    contextPromptHint: 'Estás en: Vida Nocturna. Consúltame sobre fiestas latinas, bares y movida cultural en Israel.',
     path: '/vida-nocturna'
   }
 ];

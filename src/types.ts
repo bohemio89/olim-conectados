@@ -54,6 +54,8 @@ export interface CommunityStore {
   isEntrepreneurship?: boolean; // Emprendimiento de Olim Jadashim
   orderMethod?: 'WhatsApp' | 'Instagram' | 'Local a la Calle' | 'Online';
   instagramOrWeb?: string;
+  wazeLink?: string;
+  orderUrl?: string;
 }
 
 export interface CommunityGroup {
@@ -80,8 +82,10 @@ export interface NightlifeVenue {
   highlights: string[];
   priceRange?: string; // e.g. "₪50 - ₪80" o "Entrada libre"
   instagramOrWeb?: string;
+  instagram?: string;
   phoneOrTickets?: string;
   ticketLink?: string;
+  ticketUrl?: string;
   isPopularWithOlim?: boolean;
 }
 

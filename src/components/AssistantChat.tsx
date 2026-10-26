@@ -143,7 +143,7 @@ const CATEGORIZED_PROMPTS: CategorizedPrompt[] = [
     id: 'p-10',
     category: 'tramites',
     stage: ['general', 'tramite'],
-    text: 'Terminé el Ulpán estatal: ¿Cómo funciona el voucher de 5.200 NIS para Ulpán privado?',
+    text: 'Terminé el Ulpán estatal: ¿Cómo funciona el voucher para Ulpán privado?',
     badge: 'Ulpán Privado'
   },
   {
@@ -181,12 +181,9 @@ export const AssistantChat: React.FC<AssistantChatProps> = ({ onNavigateToTab, i
     {
       id: 'welcome',
       role: 'assistant',
-      content: `¡Hola! Soy el Asistente Inteligente de **Olim Conectados**. Mi objetivo es protegerte de errores costosos y trámites burocráticos ("trampas del sistema") en Israel:
+      content: `¡Hola! Soy el **Asistente de Olim Conectados**. Pregúntame en español sobre trámites, salud o la vida en Israel. Te respondo corto y con la fuente oficial.
 
-⚠️ **Alerta Rápida:**
-Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o llamaste a **MADA** (101), recuerda que **sin derivación (hafniá) o internación te cobrarán cientos de shékels**.
-
-¿En qué puedo guiarte hoy? Puedes seleccionar tu momento arriba, tocar una de las consultas categorizadas abajo o escribirme tu caso con total libertad.`,
+Si es una urgencia médica, llama al **101**.`,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
   ]);
@@ -413,7 +410,7 @@ Si estás pensando en ir a la guardia de un hospital (**Miún** [מיון]) o ll
               </span>
             </div>
             <p className="text-xs sm:text-sm text-amber-950 font-medium leading-relaxed">
-              No vayas a la guardia hospitalaria (<strong>Miún</strong>) por fiebre o malestar espontáneo sin derivación previa (<strong>Hafniá</strong>). Podrías recibir una factura de cientos de shékels.
+              No vayas a la guardia hospitalaria (<strong>Miún</strong>) por fiebre o malestar espontáneo sin derivación previa (<strong>Hafniá</strong>). Podrías recibir una factura de hasta 1.233 ₪.
             </p>
           </div>
         </div>

@@ -2,498 +2,502 @@ import React, { useState } from 'react';
 import { 
   ShieldAlert, 
   Coins, 
-  FileSpreadsheet, 
-  Plane, 
-  Bus, 
-  Vote, 
   AlertTriangle, 
   CheckCircle2, 
-  Clock, 
-  HelpCircle, 
-  ExternalLink, 
-  Calendar,
-  Building2,
-  Percent,
-  Info
+  ChevronDown, 
+  ChevronUp, 
+  ShieldCheck, 
+  Wallet,
+  Briefcase,
+  Bell
 } from 'lucide-react';
 
 export const CrisisCivilGuide: React.FC = () => {
-  const [activeSubTab, setActiveSubTab] = useState<'salklita' | 'teummas' | 'pikud' | 'darkon' | 'transporte' | 'kneset'>('salklita');
+  const [activeChip, setActiveChip] = useState<'salklita' | 'teummas' | 'pikud'>('salklita');
 
-  // Interactive Calculator for Sal Klitá / Alquiler month check
-  const [aliyahMonthInput, setAliyahMonthInput] = useState<number>(14);
+  // Card 1: Sal Klitá & Alquiler Month & Status
+  const [aliyahMonth, setAliyahMonth] = useState<number>(14);
+  const [statusDate, setStatusDate] = useState<'desde' | 'antes'>('desde');
+  const [isDetailOpen1, setIsDetailOpen1] = useState(false);
 
-  // Interactive Calculator for Teum Mas
-  const [secondaryJobSalary, setSecondaryJobSalary] = useState<number>(3500);
+  // Card 2: Teum Mas
+  const [secondarySalary, setSecondarySalary] = useState<number>(3500);
+  const [isDetailOpen2, setIsDetailOpen2] = useState(false);
 
-  const taxWithoutTeumMas = Math.round(secondaryJobSalary * 0.47);
-  const estimatedTaxWithTeumMas = Math.round(secondaryJobSalary * 0.14); // Average progressive bracket for secondary modest job
-  const taxSaved = taxWithoutTeumMas - estimatedTaxWithTeumMas;
+  // Card 3: Pikud HaOref
+  const [isDetailOpen3, setIsDetailOpen3] = useState(false);
+
+  // Calculations for Teum Mas
+  const taxWithout = Math.round(secondarySalary * 0.47);
+  const taxWith = Math.round(secondarySalary * 0.14);
+  const taxSaved = Math.max(0, taxWithout - taxWith);
+
+  const scrollToCard = (id: 'salklita' | 'teummas' | 'pikud') => {
+    setActiveChip(id);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  // Timeline position calculation for notebook badge
+  const calculateMarkerLeft = () => {
+    if (statusDate === 'desde') {
+      if (aliyahMonth <= 6) {
+        return Math.max(4, Math.min(26, (aliyahMonth / 6) * 26));
+      }
+      if (aliyahMonth <= 30) {
+        return 27 + ((aliyahMonth - 6) / 24) * 58;
+      }
+      return Math.min(94, 86 + ((aliyahMonth - 30) / 10) * 8);
+    } else {
+      if (aliyahMonth <= 7) {
+        return Math.max(4, Math.min(24, (aliyahMonth / 7) * 24));
+      }
+      if (aliyahMonth <= 60) {
+        return 25 + ((aliyahMonth - 7) / 53) * 60;
+      }
+      return 92;
+    }
+  };
 
   return (
     <div className="space-y-6">
-      {/* Banner */}
-      <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-blue-500/30 border border-blue-400/40 text-blue-200 text-xs px-3 py-1 rounded-full font-bold mb-3 uppercase tracking-wider">
-            <ShieldAlert className="w-3.5 h-3.5 text-amber-300" />
-            <span>Módulo Oficial de Crisis, Economía y Vida Civil</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            Sal Klitá, Alquiler, Pluriempleo, Guerra y Pasaportes
-          </h1>
-          <p className="mt-2 text-sm sm:text-base text-blue-100/90 leading-relaxed">
-            Plazos reglamentarios exactos de subsidios (corte en el mes 30), cómo evitar que te retengan el <strong>47%</strong> en tu segundo empleo (**Teum Mas**), tus derechos laborales ante alertas de <strong>Pikud HaOref</strong> y advertencias con la <strong>Teudat Ma'avar</strong>.
-          </p>
-        </div>
+      
+      {/* Chips superiores que llevan a cada tarjeta */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+        <button
+          onClick={() => scrollToCard('salklita')}
+          className={`min-h-[44px] px-6 py-2.5 rounded-full font-bold text-sm sm:text-[15px] whitespace-nowrap transition-all cursor-pointer ${
+            activeChip === 'salklita'
+              ? 'bg-[#0E2559] text-white shadow-2xs'
+              : 'bg-white hover:bg-slate-50 text-slate-700 border border-black/10'
+          }`}
+        >
+          Sal Klitá y alquiler
+        </button>
+
+        <button
+          onClick={() => scrollToCard('teummas')}
+          className={`min-h-[44px] px-6 py-2.5 rounded-full font-bold text-sm sm:text-[15px] whitespace-nowrap transition-all cursor-pointer ${
+            activeChip === 'teummas'
+              ? 'bg-[#0E2559] text-white shadow-2xs'
+              : 'bg-white hover:bg-slate-50 text-slate-700 border border-black/10'
+          }`}
+        >
+          Dos trabajos
+        </button>
+
+        <button
+          onClick={() => scrollToCard('pikud')}
+          className={`min-h-[44px] px-6 py-2.5 rounded-full font-bold text-sm sm:text-[15px] whitespace-nowrap transition-all cursor-pointer ${
+            activeChip === 'pikud'
+              ? 'bg-[#0E2559] text-white shadow-2xs'
+              : 'bg-white hover:bg-slate-50 text-slate-700 border border-black/10'
+          }`}
+        >
+          Pikud HaOref
+        </button>
       </div>
 
-      {/* Sub-Navigation Switcher */}
-      <div className="flex space-x-2 border-b border-gray-200 overflow-x-auto pb-1">
-        {[
-          { id: 'salklita', label: 'Sal Klitá & Alquiler (Mes 30)', icon: Coins },
-          { id: 'teummas', label: 'Pluriempleo & Teum Mas (47%)', icon: Percent },
-          { id: 'pikud', label: 'Laboral en Guerra (Pikud HaOref)', icon: ShieldAlert },
-          { id: 'darkon', label: 'Darkón vs Teudat Ma\'avar', icon: Plane },
-          { id: 'transporte', label: 'Transporte en Jagim y Shabat', icon: Bus },
-          { id: 'kneset', label: 'Sistema Electoral (Knéset)', icon: Vote },
-        ].map((tab) => {
-          const Icon = tab.icon;
-          const isActive = activeSubTab === tab.id;
-          return (
+      {/* 1. Tarjeta: "¿Qué cobras según tu mes de Aliá?" */}
+      <div id="salklita" className="bg-white rounded-3xl border border-black/10 p-6 sm:p-8 shadow-2xs space-y-6">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#0E2559]">
+              ¿Qué cobras según tu mes de Aliá?
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 mt-0.5">
+              Los depósitos del Ministerio, mes por mes.
+            </p>
+          </div>
+
+          {/* Campo: Llevo en Israel [N] meses */}
+          <div className="w-full md:w-56 shrink-0">
+            <span className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+              Llevo en Israel
+            </span>
+            <div className="bg-white border border-black/10 rounded-2xl px-4 py-2 flex items-center justify-between min-h-[50px] shadow-2xs">
+              <input
+                type="number"
+                min={1}
+                max={72}
+                value={aliyahMonth}
+                onChange={(e) => setAliyahMonth(Math.max(1, Number(e.target.value) || 1))}
+                className="w-20 text-2xl font-black text-[#0E2559] bg-transparent focus:outline-none"
+              />
+              <span className="text-sm font-semibold text-slate-500">meses</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Selector: Mi estatus de olé es */}
+        <div>
+          <span className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+            Mi estatus de olé es
+          </span>
+          <div className="inline-flex flex-col sm:flex-row bg-slate-100/70 p-1 rounded-2xl border border-black/5 gap-1 w-full sm:w-auto">
             <button
-              key={tab.id}
-              onClick={() => setActiveSubTab(tab.id as any)}
-              className={`flex items-center gap-2 px-4 py-2.5 text-xs font-bold rounded-xl whitespace-nowrap transition-all ${
-                isActive
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-white hover:bg-gray-100 text-gray-700 border border-gray-200'
+              onClick={() => setStatusDate('desde')}
+              className={`min-h-[44px] px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer text-center ${
+                statusDate === 'desde'
+                  ? 'bg-white text-[#0E2559] shadow-2xs border border-black/10'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <Icon className="w-3.5 h-3.5" />
-              <span>{tab.label}</span>
+              Desde el 1-mar-2024
             </button>
-          );
-        })}
+            <button
+              onClick={() => setStatusDate('antes')}
+              className={`min-h-[44px] px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer text-center ${
+                statusDate === 'antes'
+                  ? 'bg-white text-[#0E2559] shadow-2xs border border-black/10'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Antes del 1-mar-2024
+            </button>
+          </div>
+        </div>
+
+        {/* Barra de tiempo de 3 tramos (Notebook) */}
+        <div className="hidden md:block pt-6 pb-2">
+          {/* Marcador "Tú: mes N" */}
+          <div className="relative w-full h-8 mb-1">
+            <div 
+              className="absolute -translate-x-1/2 flex flex-col items-center transition-all duration-300"
+              style={{ left: `${calculateMarkerLeft()}%` }}
+            >
+              <div className="bg-[#0E2559] text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap shadow-xs">
+                Tú: mes {aliyahMonth}
+              </div>
+              <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[5px] border-t-[#0E2559]" />
+            </div>
+          </div>
+
+          {/* Barra continua con 3 segmentos */}
+          <div className="w-full flex rounded-2xl overflow-hidden h-16 shadow-2xs">
+            {/* Tramo 1 */}
+            <div className="w-[28%] bg-[#6B4FA0] text-white px-4 py-2.5 flex flex-col justify-center">
+              <span className="font-extrabold text-sm sm:text-base leading-tight">Sal Klitá</span>
+              <span className="text-xs text-white/90">7 pagos en 6 meses</span>
+            </div>
+
+            {/* Tramo 2 */}
+            <div className="w-[58%] bg-[#6B4FA0]/20 text-[#0E2559] px-4 py-2.5 flex flex-col justify-center border-l border-white/20">
+              <span className="font-extrabold text-sm sm:text-base leading-tight">Ayuda de alquiler</span>
+              <span className="text-xs text-slate-700">
+                {statusDate === 'desde' ? 'Meses 7–30 · automática' : 'Mes 8 al final del año 5'}
+              </span>
+            </div>
+
+            {/* Tramo 3 */}
+            <div className="w-[14%] bg-amber-100/60 text-slate-700 px-3 py-2.5 flex flex-col justify-center border-l border-black/5">
+              <span className="font-bold text-sm leading-tight">Fin</span>
+              <span className="text-xs text-slate-500">
+                {statusDate === 'desde' ? 'Mes 31+' : 'Año 6+'}
+              </span>
+            </div>
+          </div>
+
+          {/* Escala numérica inferior */}
+          <div className="flex justify-between text-xs text-slate-500 font-semibold px-2 mt-2">
+            <span>Mes 1</span>
+            <span>{statusDate === 'desde' ? 'Mes 7' : 'Mes 8'}</span>
+            <span>{statusDate === 'desde' ? 'Mes 31' : 'Año 6'}</span>
+          </div>
+        </div>
+
+        {/* Barra de tiempo de 3 tramos (Celular - Vertical) */}
+        <div className="block md:hidden rounded-2xl overflow-hidden shadow-2xs divide-y divide-black/5">
+          <div className="bg-[#6B4FA0] text-white p-4">
+            <span className="font-extrabold text-base block leading-tight">Sal Klitá</span>
+            <span className="text-xs text-white/90">7 pagos en 6 meses</span>
+          </div>
+
+          <div className="bg-[#6B4FA0]/20 text-[#0E2559] p-4">
+            <span className="font-extrabold text-base block leading-tight">Ayuda de alquiler</span>
+            <span className="text-xs text-slate-700">
+              {statusDate === 'desde' ? 'Meses 7–30 · automática' : 'Mes 8 al final del año 5'}
+            </span>
+          </div>
+
+          <div className="bg-amber-100/60 text-slate-700 p-4">
+            <span className="font-bold text-base block leading-tight">Fin</span>
+            <span className="text-xs text-slate-500">
+              {statusDate === 'desde' ? 'Mes 31+' : 'Año 6+'}
+            </span>
+          </div>
+        </div>
+
+        {/* Mensaje verde según el caso */}
+        <div className="bg-[#E7F6EE] border border-[#2A7050]/20 rounded-2xl p-4 flex items-center gap-3 text-[#0E2559] text-sm sm:text-[15px] font-semibold">
+          <CheckCircle2 className="w-5 h-5 text-[#2A7050] shrink-0" />
+          <p>
+            {statusDate === 'desde' ? (
+              aliyahMonth <= 6 ? (
+                <>Mes {aliyahMonth}: estás cobrando el <strong>Sal Klitá</strong> (7 pagos en 6 meses: el 1.º en el aeropuerto y 6 mensuales).</>
+              ) : aliyahMonth <= 30 ? (
+                <>Mes {aliyahMonth}: estás cobrando la <strong>ayuda de alquiler</strong>. Termina en el mes 30.</>
+              ) : (
+                <>Mes {aliyahMonth}: has superado el mes 30. El Sal Klitá y la ayuda de alquiler finalizaron reglamentariamente.</>
+              )
+            ) : (
+              aliyahMonth <= 7 ? (
+                <>Mes {aliyahMonth}: cobro del <strong>Sal Klitá</strong> (7 pagos en 6 meses).</>
+              ) : aliyahMonth <= 60 ? (
+                <>Mes {aliyahMonth}: estás en el período de <strong>ayuda de alquiler</strong>. Se cobra hasta el final del año 5.</>
+              ) : (
+                <>Mes {aliyahMonth}: has superado el año 5. La ayuda de alquiler finalizó reglamentariamente.</>
+              )
+            )}
+          </p>
+        </div>
+
+        <p className="text-xs text-slate-500">
+          Con estatus anterior al 1-mar-2024, la ayuda va del mes 8 al final del año 5.
+        </p>
+
+        {/* Detalle desplegable Card 1 */}
+        {isDetailOpen1 && (
+          <div className="mt-4 pt-4 border-t border-black/5 text-sm text-slate-700 space-y-3 bg-slate-50/80 p-5 rounded-2xl leading-relaxed">
+            <p className="font-bold text-[#0E2559]">Detalle normativo del Sal Klitá y la Ayuda de Alquiler:</p>
+            <ul className="list-disc pl-5 space-y-1.5 text-slate-600 text-xs sm:text-sm">
+              <li>
+                <strong>Sal Klitá:</strong> Consiste en <strong>7 pagos</strong> (el primero en el aeropuerto Ben Gurion con entrega de efectivo inicial y transferencia bancaria, seguido de 6 pagos mensuales directos en tu cuenta israelí).
+              </li>
+              <li>
+                <strong>Ayuda de alquiler (Siyua bi'Sjirot):</strong>
+                {statusDate === 'desde'
+                  ? ' Para quienes recibieron el estatus de olé a partir del 1 de marzo de 2024, la ayuda se abona de los meses 7 a 30 de forma automática en la cuenta bancaria.'
+                  : ' Para quienes recibieron el estatus antes del 1 de marzo de 2024, la ayuda comienza en el mes 8 y se extiende hasta finalizar el año 5 desde la Aliá.'}
+              </li>
+              <li>
+                No requiere renovaciones presenciales periódicas siempre que mantengas la misma cuenta bancaria y datos actualizados ante el Ministerio.
+              </li>
+            </ul>
+          </div>
+        )}
+
+        {/* Pie Card 1 */}
+        <div className="pt-4 border-t border-black/5 flex items-center justify-between text-xs text-slate-600 font-medium flex-wrap gap-2">
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
+            <span>Fuente: Procedimiento 429 · Ministerio de Construcción · gov.il · revisado oct 2026</span>
+          </div>
+          <button
+            onClick={() => setIsDetailOpen1(!isDetailOpen1)}
+            className="min-h-[44px] text-[#6B4FA0] font-bold hover:underline flex items-center gap-1 cursor-pointer"
+          >
+            <span>{isDetailOpen1 ? 'Menos detalle' : 'Ver detalle'}</span>
+            {isDetailOpen1 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </button>
+        </div>
       </div>
 
-      {/* 11. Sal Klitá y Subsidio de Alquiler */}
-      {activeSubTab === 'salklita' && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs space-y-6">
-          <div className="border-b border-gray-100 pb-4">
-            <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-              Misrad HaAliyah ve-haKlitá
-            </span>
-            <h2 className="text-lg font-bold text-gray-900 mt-1">
-              Sal Klitá (סל קליטה) y Ayuda de Alquiler (סיוע בשכר דירה)
+      {/* 2. Tarjeta: "¿Tienes dos trabajos? Haz el Teum Mas" */}
+      <div id="teummas" className="bg-white rounded-3xl border border-black/10 p-6 sm:p-8 shadow-2xs space-y-6">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-[#0E2559]">
+              ¿Tienes dos trabajos? Haz el Teum Mas
             </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              Cronograma cronológico de depósitos bancarios y el porqué del cese al finalizar el mes 30.
+            <p className="text-sm sm:text-base text-slate-600 mt-0.5">
+              Sin él, el segundo empleador retiene el 47%.
             </p>
           </div>
 
-          {/* Visual Timeline Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-blue-50/70 border border-blue-200 rounded-xl p-4 flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-bold text-blue-800 bg-blue-200 px-2 py-0.5 rounded">
-                  ETAPA 1 · Meses 1 a 6
-                </span>
-                <h3 className="text-sm font-bold text-gray-900 mt-2">
-                  Sal Klitá (Canasta Básica)
-                </h3>
-                <p className="text-xs text-gray-600 mt-1">
-                  Se abona en <strong>6 cuotas</strong>: el primer pago en efectivo/depósito al arribar al aeropuerto Ben Gurion, seguido de <strong>5 cuotas mensuales directas a tu cuenta bancaria</strong>.
-                </p>
-              </div>
-              <div className="mt-3 text-[11px] text-blue-700 font-semibold bg-white p-2 rounded-lg border border-blue-100">
-                ✔️ Diseñado para sostenimiento durante el ulpán inicial.
-              </div>
-            </div>
-
-            <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-4 flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-bold text-emerald-800 bg-emerald-200 px-2 py-0.5 rounded">
-                  ETAPA 2 · Meses 7 a 30
-                </span>
-                <h3 className="text-sm font-bold text-gray-900 mt-2">
-                  Subsidio de Alquiler (Siyua bi'Sjirot)
-                </h3>
-                <p className="text-xs text-gray-600 mt-1">
-                  Inicia <strong>automáticamente en el mes 7</strong> (al terminar el Sal Klitá). Tiene una duración estricta de <strong>24 meses consecutivos</strong> (aprox. 200 a 400 NIS mensuales según estado civil y familia).
-                </p>
-              </div>
-              <div className="mt-3 text-[11px] text-emerald-800 font-semibold bg-white p-2 rounded-lg border border-emerald-100">
-                ✔️ No requiere trámite si no cambiaste de cuenta de banco.
-              </div>
-            </div>
-
-            <div className="bg-rose-50/70 border border-rose-200 rounded-xl p-4 flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-bold text-rose-800 bg-rose-200 px-2 py-0.5 rounded">
-                  ETAPA 3 · Mes 31 en Adelante
-                </span>
-                <h3 className="text-sm font-bold text-gray-900 mt-2">
-                  Fin Reglamentario Definitivo
-                </h3>
-                <p className="text-xs text-gray-600 mt-1">
-                  Al cumplir el <strong>mes 30 desde tu Aliá</strong>, el beneficio cesa de manera automática por ley reglamentaria del Ministerio de Vivienda y Aliá.
-                </p>
-              </div>
-              <div className="mt-3 text-[11px] text-rose-900 font-bold bg-white p-2 rounded-lg border border-rose-200">
-                ⚠️ Si dejaste de cobrar en el mes 30, no es un error bancario: es el vencimiento legal del beneficio.
-              </div>
-            </div>
-          </div>
-
-          {/* Interactive Aliyah Month Checker */}
-          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5 space-y-3">
-            <h3 className="text-xs font-bold text-gray-900 uppercase tracking-wider flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 text-blue-600" />
-              Comprobador de Beneficio por Mes de Aliá:
-            </h3>
-
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <label className="text-xs text-gray-700 font-medium">
-                ¿Cuántos meses llevas en Israel desde tu fecha de llegada?
-              </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range"
-                  min={1}
-                  max={36}
-                  value={aliyahMonthInput}
-                  onChange={(e) => setAliyahMonthInput(Number(e.target.value))}
-                  className="w-40 accent-blue-600"
-                />
-                <span className="font-mono font-bold text-xs bg-white px-2 py-1 rounded border border-gray-300">
-                  Mes {aliyahMonthInput}
-                </span>
-              </div>
-            </div>
-
-            <div className="p-3.5 rounded-xl border text-xs bg-white">
-              {aliyahMonthInput <= 6 && (
-                <div className="text-blue-900">
-                  <strong>Estado:</strong> Te encuentras en el período de <strong>Sal Klitá (סל קליטה)</strong>. Debes recibir la cuota {aliyahMonthInput} de 6 directamente de Misrad HaAliyah.
-                </div>
-              )}
-              {aliyahMonthInput >= 7 && aliyahMonthInput <= 30 && (
-                <div className="text-emerald-900">
-                  <strong>Estado:</strong> Te encuentras en el período de <strong>Ayuda de Alquiler (סיוע בשכר דירה)</strong>. Estás en el mes {aliyahMonthInput - 6} de los 24 meses totales de subsidio de vivienda. El cobro continuará hasta el mes 30.
-                </div>
-              )}
-              {aliyahMonthInput > 30 && (
-                <div className="text-rose-900">
-                  <strong>Estado:</strong> Has superado el <strong>mes 30</strong>. Por normativa de absorción, la ayuda financiera general y de alquiler finalizó definitivamente.
-                </div>
-              )}
+          {/* Campo: Sueldo bruto del 2º trabajo */}
+          <div className="w-full md:w-56 shrink-0">
+            <span className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+              Sueldo bruto del 2º trabajo
+            </span>
+            <div className="bg-white border border-black/10 rounded-2xl px-4 py-2 flex items-center gap-2 min-h-[50px] shadow-2xs">
+              <span className="text-xl font-black text-[#0E2559]">₪</span>
+              <input
+                type="number"
+                min={0}
+                step={100}
+                value={secondarySalary}
+                onChange={(e) => setSecondarySalary(Math.max(0, Number(e.target.value) || 0))}
+                className="w-full text-xl sm:text-2xl font-black text-[#0E2559] bg-transparent focus:outline-none"
+              />
             </div>
           </div>
         </div>
-      )}
 
-      {/* 12. Pluriempleo y Teum Mas */}
-      {activeSubTab === 'teummas' && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs space-y-6">
-          <div className="border-b border-gray-100 pb-4">
-            <span className="text-[11px] font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full">
-              Alerta Impositiva de Pluriempleo
-            </span>
-            <h2 className="text-lg font-bold text-gray-900 mt-1">
-              Dos o Más Empleos Simultáneos y el Trámite de Teum Mas (תיאום מס)
-            </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              Cómo evitar que el segundo empleador te retenga por ley el 47% de impuesto a las ganancias.
-            </p>
-          </div>
-
-          <div className="bg-rose-50 border border-rose-300 rounded-xl p-4 text-xs text-rose-950 space-y-1">
-            <strong className="block font-bold text-rose-900 flex items-center gap-1.5">
-              <AlertTriangle className="w-4 h-4 text-rose-600" />
-              ¡Peligro de retención confiscatoria del 47%!
-            </strong>
-            <p className="leading-relaxed">
-              En Israel, si comienzas a trabajar en un segundo empleo (o das clases particulares contratadas, limpieza, guardias o consultoría) y no presentas la coordinación fiscal (**Teum Mas**), el software contable del segundo empleador <strong>está forzado por ley a retener el 47%</strong> en concepto de Mas Hajnasá en tu recibo de sueldo (**tlush sajar**).
-            </p>
-          </div>
-
-          {/* Interactive Calculator Comparison */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 space-y-3">
-              <h3 className="text-xs font-bold text-gray-900 uppercase tracking-wider">
-                Simulador del Segundo Empleo:
-              </h3>
-              <div>
-                <label className="block text-xs text-gray-600 mb-1 font-medium">
-                  Sueldo Bruto Estimado en el 2º Trabajo:
-                </label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="number"
-                    value={secondaryJobSalary}
-                    onChange={(e) => setSecondaryJobSalary(Math.max(0, Number(e.target.value)))}
-                    className="w-full text-xs font-bold px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                  />
-                  <span className="text-xs font-bold text-gray-700">NIS</span>
-                </div>
-              </div>
-
-              <div className="space-y-2 pt-2 text-xs">
-                <div className="flex justify-between items-center text-rose-700 bg-rose-100/60 p-2 rounded-lg">
-                  <span>Retención SIN Teum Mas (47%):</span>
-                  <strong className="font-mono">-{taxWithoutTeumMas} NIS</strong>
-                </div>
-
-                <div className="flex justify-between items-center text-emerald-800 bg-emerald-100/60 p-2 rounded-lg">
-                  <span>Retención CON Teum Mas (~14%):</span>
-                  <strong className="font-mono">-{estimatedTaxWithTeumMas} NIS</strong>
-                </div>
-
-                <div className="p-2.5 bg-blue-600 text-white rounded-lg flex justify-between items-center font-bold">
-                  <span>Dinero que salvas en tu bolsillo:</span>
-                  <span className="font-mono text-sm">+{taxSaved} NIS / mes</span>
-                </div>
+        {/* 2 Barras Horizontales Comparativas */}
+        <div className="space-y-4 pt-1">
+          {/* Barra: Sin Teum Mas (47%) */}
+          <div>
+            <span className="block text-xs font-bold text-slate-700 mb-1">Sin Teum Mas</span>
+            <div className="w-full bg-amber-100/60 rounded-2xl h-12 overflow-hidden flex items-center p-1">
+              <div 
+                className="bg-[#C0392B] text-white font-extrabold h-full rounded-xl flex items-center justify-center px-4 transition-all duration-300 shadow-2xs text-sm sm:text-base"
+                style={{ width: '47%' }}
+              >
+                ₪ {taxWithout.toLocaleString('es-ES')}
               </div>
             </div>
-
-            <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 space-y-2 text-xs">
-              <h3 className="text-xs font-bold text-gray-900 uppercase tracking-wider flex items-center gap-1">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                Cómo hacer el Teum Mas Digital (Gratis):
-              </h3>
-              <ol className="list-decimal pl-4 space-y-1.5 text-gray-700">
-                <li>
-                  <strong>Pide los Tik Nikuyim:</strong> Solicita al departamento de RRHH de cada empresa su número de deducción patronal (**Tik Nikuyim** [תיק ניכויים] de 9 dígitos).
-                </li>
-                <li>
-                  <strong>Ingresa a gov.il:</strong> Entra al portal de **Rashut HaMisim** (Autoridad Tributaria) en la sección <em>"Teum Mas be-Internet"</em>.
-                </li>
-                <li>
-                  <strong>Define Empleador Principal:</strong> Indica dónde recibes tu ingreso principal (allí se aplican tus **Nekudot Zijui** de olé jadash).
-                </li>
-                <li>
-                  <strong>Descarga y Entrega:</strong> El sistema emite certificados automáticos en PDF con el porcentaje exacto de retención. <strong>Entrégalos de inmediato a RRHH del segundo trabajo</strong> antes del cierre de planilla.
-                </li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 13. Protocolo Laboral en Estado de Guerra */}
-      {activeSubTab === 'pikud' && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs space-y-6">
-          <div className="border-b border-gray-100 pb-4">
-            <span className="text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full">
-              Pikud HaOref (Comando del Frente Interno)
-            </span>
-            <h2 className="text-lg font-bold text-gray-900 mt-1">
-              Derechos Laborales en Estado de Guerra y Emergencia
-            </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              Protección legal frente a despidos, falta de refugio (Mamad/Miklat) y vacaciones forzadas.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div className="bg-red-50/70 border border-red-200 rounded-xl p-4 space-y-2">
-              <h3 className="font-bold text-red-950 flex items-center gap-1.5">
-                <AlertTriangle className="w-4 h-4 text-red-600" />
-                Prohibición Estricta de Despido
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                Si las directivas de **Pikud HaOref** prohíben la actividad presencial en tu zona o si tu lugar de trabajo **no cuenta con refugio protegido (Mamad [ממ"ד] o Miklat [מקלט])** alcanzable en el tiempo de alarma, <strong>la ley prohíbe que el empleador te despida</strong> por no concurrir.
-              </p>
-              <div className="bg-white p-2 rounded border border-red-200 text-red-900 font-semibold text-[11px]">
-                Aplica también si debes quedarte al cuidado de tus hijos menores por suspensión escolar oficial.
-              </div>
-            </div>
-
-            <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-4 space-y-2">
-              <h3 className="font-bold text-amber-950 flex items-center gap-1.5">
-                <Percent className="w-4 h-4 text-amber-600" />
-                Vacaciones Forzadas Ilegales
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                El empleador **NO puede descontar días de vacaciones de forma arbitraria** si no dispones de saldo positivo acumulado en tu haber.
-              </p>
-              <div className="bg-white p-2 rounded border border-amber-200 text-amber-950 font-semibold text-[11px]">
-                No es legal que el empleador te deje con días de vacaciones en "negativo" sin tu consentimiento explícito.
-              </div>
-            </div>
-
-            <div className="bg-blue-50/70 border border-blue-200 rounded-xl p-4 space-y-2">
-              <h3 className="font-bold text-blue-950 flex items-center gap-1.5">
-                <Coins className="w-4 h-4 text-blue-600" />
-                Sueldos y Compensación Bituaj Leumi
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                En emergencias declaradas (**Matzav Meiyujad ba-Oref**), el Estado suscribe acuerdos colectivos con **Bituaj Leumi** y la Histadrut para subsidiar los salarios de las empresas afectadas y resguardar el ingreso de los trabajadores.
-              </p>
-              <div className="bg-white p-2 rounded border border-blue-200 text-blue-900 font-semibold text-[11px]">
-                El empleador tramita el reembolso de salarios directamente ante Bituaj Leumi.
+          {/* Barra: Con Teum Mas (~14%) */}
+          <div>
+            <span className="block text-xs font-bold text-slate-700 mb-1">Con Teum Mas</span>
+            <div className="w-full bg-amber-100/60 rounded-2xl h-12 overflow-hidden flex items-center p-1">
+              <div 
+                className="bg-[#2A7050] text-white font-extrabold h-full rounded-xl flex items-center justify-center px-4 transition-all duration-300 shadow-2xs text-sm sm:text-base"
+                style={{ width: '25%' }}
+              >
+                ₪ {taxWith.toLocaleString('es-ES')}
               </div>
             </div>
           </div>
         </div>
-      )}
 
-      {/* 14. Darkón vs Teudat Ma'avar */}
-      {activeSubTab === 'darkon' && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs space-y-6">
-          <div className="border-b border-gray-100 pb-4">
-            <span className="text-[11px] font-bold text-purple-700 bg-purple-50 border border-purple-200 px-2.5 py-0.5 rounded-full">
-              Misrad HaPnim (Ministerio del Interior)
+        {/* Franja de Ahorro */}
+        <div className="bg-[#E7F6EE] border border-[#2A7050]/20 rounded-2xl p-4 flex items-center gap-2.5 text-[#0E2559] font-bold text-sm sm:text-base">
+          <Wallet className="w-5 h-5 text-[#2A7050] shrink-0" />
+          <span>Te ahorras ~₪{taxSaved.toLocaleString('es-ES')} por mes.</span>
+        </div>
+
+        {/* 3 Pasos */}
+        <div className="space-y-3 pt-2">
+          <div className="flex items-start sm:items-center justify-between gap-3 p-3.5 bg-slate-50/70 border border-black/5 rounded-2xl">
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-[#6B4FA0] text-white text-xs font-black flex items-center justify-center shrink-0">
+                1
+              </div>
+              <span className="text-sm sm:text-[15px] font-bold text-slate-800">
+                Pide a cada empleador su Tik Nikuyim
+              </span>
+            </div>
+            <span className="text-xs text-slate-500 font-medium shrink-0">
+              Número de deducciones de 9 dígitos
             </span>
-            <h2 className="text-lg font-bold text-gray-900 mt-1">
-              Pasaporte Israelí (Darkón) vs. Teudat Ma'avar (Documento Provisorio)
-            </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              La regla del primer año de residencia y la advertencia crítica sobre visados de viaje.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-gray-900 text-sm">
-                  Darkón Regular (דרכון ישראלי)
-                </h3>
-                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                  Pasaporte Estándar
-                </span>
+          <div className="flex items-start sm:items-center justify-between gap-3 p-3.5 bg-slate-50/70 border border-black/5 rounded-2xl">
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-[#6B4FA0] text-white text-xs font-black flex items-center justify-center shrink-0">
+                2
               </div>
-              <p className="text-gray-600 leading-relaxed">
-                Es el pasaporte biométrico azul oficial del Estado de Israel.
-              </p>
-              <ul className="list-disc pl-4 space-y-1 text-gray-700">
-                <li><strong>Requisito temporal:</strong> Como norma general, el olé debe acreditar <strong>al menos 1 año (12 meses)</strong> de residencia efectiva y centro de vida en Israel.</li>
-                <li><strong>Exenciones de visa:</strong> Cuenta con todos los convenios bilaterales internacionales de ingreso libre sin visa (Unión Europea, Reino Unido, etc.).</li>
-              </ul>
+              <span className="text-sm sm:text-[15px] font-bold text-slate-800">
+                Haz el Teum Mas en gov.il
+              </span>
             </div>
+            <span className="text-xs text-slate-500 font-medium shrink-0">
+              Autoridad Tributaria · gratis
+            </span>
+          </div>
 
-            <div className="bg-amber-50/80 p-5 rounded-xl border border-amber-300 space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="font-bold text-amber-950 text-sm">
-                  Teudat Ma'avar (תעודת מעבר)
-                </h3>
-                <span className="bg-amber-200 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                  Documento Provisorio
-                </span>
+          <div className="flex items-start sm:items-center justify-between gap-3 p-3.5 bg-slate-50/70 border border-black/5 rounded-2xl">
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-[#6B4FA0] text-white text-xs font-black flex items-center justify-center shrink-0">
+                3
               </div>
-              <p className="text-amber-900 leading-relaxed">
-                Documento de viaje oficial (Travel Document in Lieu of Passport) expedido si el olé necesita viajar al exterior <strong>antes de cumplir su primer año</strong>.
-              </p>
-              <div className="bg-white p-3 rounded-lg border border-amber-300 text-amber-950 space-y-1">
-                <strong className="block text-rose-700 font-bold flex items-center gap-1">
-                  <AlertTriangle className="w-3.5 h-3.5" /> ¡ADVERTENCIA CRÍTICA DE VISADOS!
-                </strong>
-                <p className="text-[11px] leading-relaxed">
-                  Muchos países que permiten la entrada libre a portadores de Darkón <strong>NO reconocen automáticamente la Teudat Ma'avar</strong>. Debes consultar siempre a la embajada de destino si requieres tramitar una <u>visa consular previa</u> antes de comprar tus pasajes.
-                </p>
-              </div>
+              <span className="text-sm sm:text-[15px] font-bold text-slate-800">
+                Entrega el certificado al 2º trabajo
+              </span>
             </div>
+            <span className="text-xs text-slate-500 font-medium shrink-0">
+              Antes del cierre del sueldo
+            </span>
           </div>
         </div>
-      )}
 
-      {/* 15. Transporte Público en Jagim y Shabat */}
-      {activeSubTab === 'transporte' && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs space-y-6">
-          <div className="border-b border-gray-100 pb-4">
-            <span className="text-[11px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full">
-              Israel Railways & Colectivos
-            </span>
-            <h2 className="text-lg font-bold text-gray-900 mt-1">
-              Transporte Público en Shabat y Festividades (Jagim)
-            </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              Cese anticipado en vísperas, paralización en Iom Kipur y frecuencias de Jol HaMoed.
+        {/* Detalle desplegable Card 2 */}
+        {isDetailOpen2 && (
+          <div className="mt-4 pt-4 border-t border-black/5 text-sm text-slate-700 space-y-2 bg-slate-50/80 p-5 rounded-2xl leading-relaxed">
+            <p className="font-bold text-[#0E2559]">¿Por qué se retiene el 47% y cómo evitarlo?</p>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Por ley fiscal en Israel, los sistemas contables aplican automáticamente la tasa marginal más alta (47%) al segundo empleador si no se presenta un certificado de coordinación impositiva (Teum Mas).
+            </p>
+            <p className="text-xs sm:text-sm text-slate-600">
+              El trámite es completamente gratuito y se completa en 5 minutos en el portal de la Autoridad Tributaria (Rashut HaMisim). Una vez obtenido el PDF, se envía al área de recursos humanos del segundo empleo antes del cierre mensual de nómina para que liquiden según tu escala real.
             </p>
           </div>
+        )}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-2">
-              <h3 className="font-bold text-gray-900 flex items-center gap-1.5">
-                <Clock className="w-4 h-4 text-blue-600" />
-                Vísperas de Fiesta (Erev Jag)
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                Tanto trenes como colectivos interurbanos dejan de funcionar <strong>varias horas antes del anochecer</strong> (generalmente entre las 14:00 y las 16:30 según la época del año).
-              </p>
-              <div className="text-[11px] text-blue-800 font-semibold bg-blue-50 p-2 rounded">
-                Planifica llegar a destino con al menos 2 horas de anticipación antes de la caída del sol.
-              </div>
-            </div>
-
-            <div className="bg-rose-50 p-4 rounded-xl border border-rose-200 space-y-2">
-              <h3 className="font-bold text-rose-950 flex items-center gap-1.5">
-                <AlertTriangle className="w-4 h-4 text-rose-600" />
-                Iom Kipur (Cese Absoluto)
-              </h3>
-              <p className="text-rose-900 leading-relaxed">
-                Durante Iom Kipur, la paralización del transporte terrestre, marítimo y aéreo en Israel es del <strong>100%</strong>. No circulan colectivos, trenes ni automóviles particulares (salvo ambulancias y seguridad).
-              </p>
-            </div>
-
-            <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-200 space-y-2">
-              <h3 className="font-bold text-emerald-950 flex items-center gap-1.5">
-                <Calendar className="w-4 h-4 text-emerald-600" />
-                Jol HaMoed (חול המועד)
-              </h3>
-              <p className="text-emerald-900 leading-relaxed">
-                En los días intermedios de Pésaj y Sucot, el transporte público <strong>SÍ opera</strong>, pero con esquemas especiales o de horario de vacaciones. Consulta siempre en Moovit o Rav-Kav Online.
-              </p>
-            </div>
+        {/* Pie Card 2 */}
+        <div className="pt-4 border-t border-black/5 flex items-center justify-between text-xs text-slate-600 font-medium flex-wrap gap-2">
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
+            <span>Fuente: Autoridad de Impuestos · gov.il · revisado oct 2026</span>
           </div>
+          <button
+            onClick={() => setIsDetailOpen2(!isDetailOpen2)}
+            className="min-h-[44px] text-[#6B4FA0] font-bold hover:underline flex items-center gap-1 cursor-pointer"
+          >
+            <span>{isDetailOpen2 ? 'Menos detalle' : 'Ver detalle'}</span>
+            {isDetailOpen2 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </button>
         </div>
-      )}
+      </div>
 
-      {/* 16. Sistema Político y Elecciones (Knéset) */}
-      {activeSubTab === 'kneset' && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs space-y-6">
-          <div className="border-b border-gray-100 pb-4">
-            <span className="text-[11px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-full">
-              Democracia Parlamentaria
-            </span>
-            <h2 className="text-lg font-bold text-gray-900 mt-1">
-              Sistema Electoral y Político: La Knéset (הכנסת)
-            </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              Voto optativo, listas partidarias y la regla de los 61 escaños para formar coalición.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-3">
-              <h3 className="font-bold text-gray-900 text-sm flex items-center gap-1.5">
-                <Vote className="w-4 h-4 text-indigo-600" />
-                El Sufragio es Optativo (No Obligatorio)
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                En Israel no existe obligación legal ni multa por no concurrir a votar. Todo ciudadano mayor de 18 años inscripto en el padrón electoral (**Pinkas Bojarim**) recibe una notificación con su centro de votación.
-              </p>
-              <div className="bg-white p-3 rounded-lg border border-gray-200 text-[11px] text-gray-600">
-                📌 <strong>Iom Shabaton:</strong> El día de elecciones generales nacionales es feriado no laborable pago en todo el país.
-              </div>
-            </div>
-
-            <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-3">
-              <h3 className="font-bold text-gray-900 text-sm flex items-center gap-1.5">
-                <Building2 className="w-4 h-4 text-blue-600" />
-                Los 120 Escaños y la Regla de los 61
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                No se vota directamente a un candidato individual para Primer Ministro, sino a una **lista cerrada de partido** para los **120 escaños de la Knéset**.
-              </p>
-              <div className="bg-white p-3 rounded-lg border border-gray-200 text-[11px] text-gray-700">
-                🤝 <strong>Coalición de Gobierno:</strong> Para gobernar, se debe tejer una alianza parlamentaria que alcance al menos <strong>61 votos de confianza</strong> en el parlamento.
-              </div>
-            </div>
-          </div>
+      {/* 3. Tarjeta: Pikud HaOref */}
+      <div id="pikud" className="bg-white rounded-3xl border border-black/10 p-6 sm:p-8 shadow-2xs space-y-6">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-extrabold text-[#0E2559]">
+            Pikud HaOref y seguridad civil
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 mt-0.5">
+            Alarmas, refugios y pautas de emergencia.
+          </p>
         </div>
-      )}
+
+        {/* Mensaje 1: App y refugio */}
+        <div className="bg-amber-50/90 border border-amber-200/80 rounded-2xl p-4 flex items-start gap-3 text-amber-950 text-sm sm:text-base font-semibold leading-relaxed">
+          <Bell className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+          <p>
+            Instala la app del Pikud HaOref. Cuando suena la alarma, el refugio de un edificio tiene que estar accesible.
+          </p>
+        </div>
+
+        {/* Mensaje 2: Derechos laborales */}
+        <div className="bg-slate-50 border border-black/10 rounded-2xl p-4 flex items-start gap-3 text-slate-800 text-sm sm:text-base font-medium leading-relaxed">
+          <Briefcase className="w-5 h-5 text-[#6B4FA0] shrink-0 mt-0.5" />
+          <p>
+            Para tus derechos laborales en una emergencia, consulta al Ministerio de Trabajo: las reglas cambian según la situación.
+          </p>
+        </div>
+
+        {/* Detalle desplegable Card 3 */}
+        {isDetailOpen3 && (
+          <div className="mt-4 pt-4 border-t border-black/5 text-sm text-slate-700 space-y-2 bg-slate-50/80 p-5 rounded-2xl leading-relaxed">
+            <p className="font-bold text-[#0E2559]">Pautas clave de seguridad civil:</p>
+            <ul className="list-disc pl-5 space-y-1.5 text-slate-600 text-xs sm:text-sm">
+              <li>
+                <strong>Tipos de refugio:</strong> Mamad (habitación segura dentro del departamento), Mamak (refugio protegido en el palier del piso) o Miklat (refugio comunal en el subsuelo del edificio o público en la calle).
+              </li>
+              <li>
+                <strong>Tiempos de alerta:</strong> Varían según la región del país (desde inmediatos/15 segundos en zonas fronterizas hasta 90 segundos en el centro del país). Conoce el tiempo de tu localidad.
+              </li>
+              <li>
+                <strong>Normativa laboral en emergencias:</strong> Las compensaciones salariales y la suspensión de actividades presenciales se rigen por directivas emitidas por el Comando del Frente Interno y acuerdos específicos del Ministerio de Trabajo con Bituaj Leumi.
+              </li>
+            </ul>
+          </div>
+        )}
+
+        {/* Pie Card 3 */}
+        <div className="pt-4 border-t border-black/5 flex items-center justify-between text-xs text-slate-600 font-medium flex-wrap gap-2">
+          <div className="flex items-center gap-1.5">
+            <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
+            <span>Fuente: Pikud HaOref y Ministerio de Trabajo · gov.il · revisado oct 2026</span>
+          </div>
+          <button
+            onClick={() => setIsDetailOpen3(!isDetailOpen3)}
+            className="min-h-[44px] text-[#6B4FA0] font-bold hover:underline flex items-center gap-1 cursor-pointer"
+          >
+            <span>{isDetailOpen3 ? 'Menos detalle' : 'Ver detalle'}</span>
+            {isDetailOpen3 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </button>
+        </div>
+      </div>
+
     </div>
   );
 };
+
+export default CrisisCivilGuide;
