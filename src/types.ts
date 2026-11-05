@@ -35,8 +35,20 @@ export interface Doctor {
   officialLink?: string;
 }
 
+export interface StoreContact {
+  type: 'whatsapp' | 'instagram' | 'web' | 'phone' | 'email';
+  url: string;
+  label: string;
+}
+
 export interface CommunityStore {
   id: string;
+  filterCategory?: 'Panaderías' | 'Comida casera' | 'Productos latinos' | 'Por encargo';
+  zone?: 'Tel Aviv' | 'Merkaz' | 'Jerusalén' | 'Haifa' | 'Todo Israel';
+  shortAddress?: string;
+  shortHours?: string;
+  tags?: string[];
+  contacts?: StoreContact[];
   name: string;
   category: 
     | 'Almacén Rioplatense / Latino' 
