@@ -332,7 +332,8 @@ Si es una urgencia médica, llama al **101**.`,
 
     if (responseData && responseData.text) {
       const assistantMessage: ChatMessage = {
-        id: `asst-${Date.now()}`,
+        // Los avisos de error no se envían como historial en la próxima pregunta.
+        id: `${(responseData as any).error ? 'err' : 'asst'}-${Date.now()}`,
         role: 'assistant',
         content: responseData.text,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),

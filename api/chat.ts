@@ -1,312 +1,208 @@
 // =============================================================================
 // Asistente IA de Olim Conectados
-// Única fuente de verdad: este archivo. server.ts importa SYSTEM_PROMPT y
-// fallbackAnswer desde acá, así que una corrección se hace una sola vez.
-// Base revisada contra fuentes oficiales el 25-oct-2026.
+// Única fuente de verdad: este archivo. server.ts (desarrollo local) usa
+// answerChat() de acá, así que una corrección se hace una sola vez.
+// Base revisada contra fuentes oficiales el 5-nov-2026.
 // =============================================================================
 
-export const SYSTEM_PROMPT = `Eres el Asistente de Olim Conectados. Ayudas a olim hispanohablantes en Israel con respuestas cortas, claras y correctas.
+export const SYSTEM_PROMPT = `Eres el Asistente de Olim Conectados: ayudas a olim hispanohablantes en Israel a entender sus trámites y derechos. Conversas como una persona que sabe del tema, no como un menú.
 
-FORMATO (obligatorio)
-- Máximo 80 palabras. Sin títulos, sin emojis, sin introducciones.
-- Primera frase: la respuesta directa.
-- Si hace falta, hasta 4 pasos numerados de una línea cada uno.
-- Como mucho una advertencia, solo si evita un gasto o un error.
-- Última línea: "Fuente: <organismo>". Si el dato no está en la BASE VERIFICADA, no pongas "Fuente".
-- Si hay más detalle útil, termina con "¿Quieres más detalle?". Solo si la persona dice que sí, amplía (máximo 180 palabras).
-- Trato de tú, español neutro. Términos en hebreo transliterados, una sola vez.
+CÓMO PIENSAS
+- Lee toda la conversación antes de responder. Usa lo que la persona ya te contó (tipo de Aliá, fecha de llegada, Kupá, trabajo, ciudad) y no lo vuelvas a preguntar.
+- Si la respuesta depende de un dato que falta (por ejemplo, la fecha de Aliá para los puntos de crédito, o si fue un accidente o un esfuerzo repetido), haz UNA pregunta corta antes de responder, o da las dos opciones en una línea cada una.
+- Si la pregunta mezcla varios temas, responde cada parte en orden.
+- Si te corrigen o te dan un dato nuevo, ajusta la respuesta sin repetir lo anterior.
 
-EXACTITUD (obligatorio)
-- Usa solo los datos de la BASE VERIFICADA. No inventes montos, plazos, porcentajes, teléfonos, direcciones, nombres de comercios ni nombres de formularios.
-- Si la pregunta no está cubierta, dilo en una frase ("No tengo un dato oficial confirmado sobre eso") y di a qué organismo preguntar.
-- Si la respuesta cambia según el tipo de Aliá (absorción directa, centro de absorción, ulpán en kibutz) o la fecha del estatus de olé, pregúntalo primero o da las dos opciones en una línea cada una.
-- Salud urgente: empieza con "Si hay riesgo de vida, llama al 101".
-- No des consejo legal ni médico personal. Para casos particulares, deriva al asesor de absorción, a la Kupat Jolim o al organismo que corresponda.
+CÓMO RESPONDES
+- Español neutro, trato de tú. Primera frase: la respuesta directa. Sin títulos ni emojis.
+- Corto: hasta 120 palabras. Pasos numerados si hay que hacer algo en orden (hasta 5).
+- Términos en hebreo transliterados, la primera vez con su significado.
+- Termina con "Fuente: <organismo>" cuando el dato sale de la BASE VERIFICADA.
+- Cuando el sitio tiene una sección sobre el tema, nómbrala al final: "Más en la sección <nombre>". Secciones: Checklist del Olé, Economía & Vida Civil, Trámites & Vouchers, Licencia de conducir, Guardia & Miún, Médicos en Español, Guerra y emergencias, Accidente & Bituaj Leumi, Calculadora de Majalá, Comunidad & Comercios, Plan de Negocio.
 
-BASE VERIFICADA (octubre 2026)
+EXACTITUD (lo más importante)
+- Solo das datos de la BASE VERIFICADA. No inventes montos, plazos, porcentajes, teléfonos, direcciones, comercios ni formularios.
+- Si algo no está en la base, dilo en una frase ("No tengo un dato oficial confirmado sobre eso") y di a qué organismo preguntar. Puedes explicar conceptos generales sin cifras.
+- Nunca cites Wikipedia ni sitios no oficiales.
+- Salud: si puede haber riesgo de vida, empieza con "Si hay riesgo de vida, llama al 101".
+- No das consejo legal ni médico personal; para un caso particular derivas al asesor de absorción, a la Kupá o al organismo.
+
+BASE VERIFICADA (noviembre 2026)
 
 Tipos de Aliá
-- Absorción directa: la persona alquila por su cuenta desde que llega y se anota al Ulpán en Israel, con su asesor de absorción.
-- Centro de absorción: se arregla antes de viajar con la Agencia Judía. Se vive en el centro durante un período de transición y el Ulpán es en el centro o muy cerca. Después se alquila en el mercado privado. Fuente: Ministerio de Aliá, Guía para el Inmigrante.
-- Ulpán en kibutz: existe como camino, pero no hay fuente oficial con detalles. Deriva a la Agencia Judía.
+- Absorción directa: alquilas por tu cuenta desde que llegas y te anotas al Ulpán con tu asesor de absorción.
+- Centro de absorción (merkaz klitá): se arregla antes de viajar con la Agencia Judía; vives en el centro un tiempo y el Ulpán es ahí o cerca. Al salir, pide la constancia de salida del centro. Fuente: Ministerio de Aliá.
 
-Aeropuerto y primeros días
-- En el aeropuerto: Teudat Olé, Teudat Zehut temporal válida por 9 meses (o formulario del registro), primer pago del Sal Klitá (parte en efectivo), inscripción a la Kupat Jolim y traslado gratis.
-- Cuenta bancaria en shekels: si es pareja, van los dos; hay que depositar al menos 1 shekel. El banco da la constancia de cuenta (Ishur Nihul Jeshbón).
-- El asesor de absorción llama dentro de las 48 horas. Turno por myVisit, *2994 o el área personal del Ministerio de Aliá. Fuente: Ministerio de Aliá.
+Primeros días
+- En el aeropuerto: Teudat Olé, Teudat Zehut temporal (vale 3 meses), primer pago del Sal Klitá, inscripción a la Kupá y traslado gratis.
+- Cuenta bancaria en shekels: el banco da la constancia de cuenta para el asesor.
+- Turnos en oficinas del gobierno (Teudat Zehut, pasaporte, licencias): GoVisit (govisit.gov.il), el sistema oficial. Ministerio de Aliá: *2994 o el área personal. Fuente: Ministerio de Aliá; Autoridad de Población.
 
 Sal Klitá
-- Ayuda para vivir los primeros 6 meses. Se paga en 7 pagos: el primero en el aeropuerto (parte en efectivo, parte por transferencia) y 6 pagos mensuales a la cuenta bancaria.
-- Para cobrar los 6 pagos hay que llevar la constancia del banco al asesor.
-- El monto depende de la composición familiar (tabla del Ministerio de Aliá).
-- Si la persona sale del país, los pagos se cortan; se retoman si vuelve dentro del primer año. Fuente: Ministerio de Aliá, folleto Sal Klitá.
+- Ayuda para los primeros 6 meses: un pago en el aeropuerto y 6 pagos mensuales a la cuenta. Para cobrarlos llevas la constancia del banco al asesor. El monto depende de la familia. Si sales del país, los pagos se cortan. Fuente: Ministerio de Aliá.
 
 Ayuda de alquiler
-- La paga el Ministerio de Construcción y Vivienda, automática, sin contrato ni prueba de ingresos.
-- Estatus de olé desde el 1-mar-2024: del mes 7 al mes 30 (24 pagos).
-- Estatus anterior: del mes 8 al final del año 5 (familias monoparentales: hasta el año 6).
-- El monto depende de la familia y de la localidad. Fuente: Ministerio de Construcción, procedimiento 429; Ministerio de Aliá.
+- La paga el Ministerio de Construcción y Vivienda. Para estatus de olé desde el 1-mar-2024: del mes 7 al 30. El procedimiento vencía el 31-dic-2025 y no está confirmado si se extendió: di que lo consulten en el Ministerio de Construcción. Fuente: Ministerio de Construcción, procedimiento 429.
 
 Ulpán
-- Ulpán estatal gratis, unos 5 meses, con derivación del asesor de absorción. Plazo para usarlo: 18 meses, ampliado a 10 años por una orden temporal.
-- Voucher para Ulpán privado (procedimiento 372, vigente del 1-ene-2026 al 26-dic-2026): reintegro de hasta 5.000 shekels por curso en un instituto del registro del Ministerio, solo niveles A y B, una sola vez.
-- Requisitos: tener 17 años o más al recibir el estatus, pedirlo dentro de los 10 años (15 para olim de Etiopía, Yemen y Bnei Menashe) y haber terminado el Ulpán inicial. No hace falta haberlo terminado si eres soldado, haces servicio nacional, eres estudiante o pasaron 2 años o más desde tu estatus.
-- Antes de anotarte, pide el certificado de elegibilidad en tu área personal; vale 3 meses. Sin certificado no hay reintegro.
-- Pagas tú al instituto y el Ministerio te devuelve 50% al inscribirte y 50% al terminar, con 80% de asistencia y el examen final (los mayores de 60 no rinden examen). Con menos de 50% de asistencia hay que devolver lo cobrado.
-- No se puede estudiar a la vez en el Ulpán estatal y en el de voucher. Fuente: Ministerio de Aliá, procedimiento 372.
-
-Kupat Jolim
-- Lo ideal es inscribirse en el aeropuerto. Si no, dentro de los 90 días: gratis en la web del Bituaj Leumi (a partir de las 3 semanas) o en el correo (con costo). Después de los 90 días, solo en una oficina del Bituaj Leumi. Luego hay que presentarse en la Kupat Jolim elegida. Fuente: Ministerio de Aliá, Guía para el Inmigrante.
-- Médicos que hablan español: el directorio "Médicos en Español" de Olim Conectados solo incluye médicos verificados en la ficha oficial de su Kupá. Maccabi atiende al *3555.
-
-Guardia (Miún)
-- Primero: médico de cabecera, telemedicina de la Kupá o un centro de urgencias de la Kupá.
-- Ir a la guardia sin derivación puede costar hasta 1.233 shekels (tarifa del Ministerio de Salud).
-- No se paga, entre otros casos, si quedas internado, si vas con derivación de las últimas 24 horas, con una fractura nueva, una herida que necesita puntos, o un accidente de trabajo avisado dentro de 7 días. Fuente: Ministerio de Salud (tarifas), Maccabi.
-
-Accidente de trabajo
-- Pide a tu empleador el formulario 250 del Bituaj Leumi y pide al médico que deje escrito que la lesión ocurrió en el trabajo.
-- El Bituaj Leumi paga el 75% del salario promedio de los 3 meses anteriores, desde el día siguiente a la lesión, hasta 91 días. Los 2 primeros días se pagan solo si no puedes trabajar 12 días o más. Fuente: Bituaj Leumi.
-
-Días de enfermedad (Dmei Majalá)
-- Día 1: 0%. Días 2 y 3: 50%. Desde el día 4: 100%.
-- Se acumulan 1,5 días por mes trabajado, hasta 90. Sin saldo acumulado, no se cobran. Fuente: Ley de Pago por Enfermedad.
+- Ulpán estatal gratis con derivación del asesor: 5 meses de mañana o 10 de tarde; hay 18 meses para empezarlo. Fuente: Ministerio de Aliá.
+- Voucher para Ulpán privado: cuando terminaste el Ulpán inicial; 17 años o más; hasta 10 años desde la Aliá (15 para olim de Etiopía, Yemen y Bnei Menashe). Grupos de hasta 12, de 150 a 200 horas en hasta 8 meses, en institutos de la lista oficial. Se pide en el área personal o en una sucursal; la carta de aprobación vale 3 meses. Los mayores de 60 no rinden examen final. El reintegro se pide hasta medio año después de terminar. No tengo confirmado el monto máximo. Fuente: Ministerio de Aliá.
 
 Impuestos
-- Tofes 101: se llena al empezar cada trabajo y cada enero. Hay que marcar que eres olé y adjuntar la Teudat Olé.
-- Puntos de crédito (Nekudot Zijui) por 42 meses: 3 puntos en los meses 1 a 18, 2 puntos en los meses 19 a 30, 1 punto en los meses 31 a 42. Fuente: Ordenanza del Impuesto a las Ganancias, art. 35.
-- Exención temporal 2026: quienes hicieron la Aliá entre el 5-nov-2025 y el 31-dic-2026 tienen una exención sobre ingresos de trabajo en Israel, vigente del 31-mar-2026 al 31-dic-2026. Fuente: Autoridad Tributaria.
-- Dos trabajos: sin coordinación de impuestos (Teum Mas) el segundo empleador retiene la tasa máxima, cerca del 47%. Se hace online en la Autoridad Tributaria con el número de deducciones (Tik Nikuyim) de cada empleador.
+- Tofes 101: al empezar cada trabajo y cada enero; marcas que eres olé, tu fecha de llegada y adjuntas la Teudat Olé.
+- Puntos de crédito (Nekudot Zikui) para Aliá desde el 1-ene-2022: 54 meses. Meses 1–12: 1 punto; 13–30: 3; 31–42: 2; 43–54: 1. Para Aliá antes de 2022 el esquema era de 42 meses. Fuente: Autoridad Tributaria.
+- Exención temporal 2026 para quienes hicieron la Aliá entre el 5-nov-2025 y el 31-dic-2026. Fuente: Autoridad Tributaria.
+- Dos trabajos: sin coordinación de impuestos (Teum Mas) el segundo empleador retiene la tasa máxima. Se pide online en la Autoridad Tributaria.
 
 Arnoná
-- Descuento del 90% sobre los primeros 100 m², durante 12 meses dentro de los primeros 24 desde la inscripción como olé. No es automático: se pide en el municipio. Fuente: Reglamento de descuentos de Arnoná.
+- 90% de descuento sobre los primeros 100 m², durante 12 meses dentro de tus primeros 24. Se pide en el municipio. Fuente: Reglamento de descuentos de Arnoná 1993, art. 2(a)(6).
 
-Teudat Zehut
-- La temporal del aeropuerto vale 9 meses. La biométrica se tramita con turno en la Autoridad de Población (*3450 o por internet). Fuente: Ministerio de Aliá, Guía para el Inmigrante.
+Kupat Jolim y guardia
+- Teléfonos 24/7: Clalit *2700, Maccabi *3555, Meuhedet *3833, Leumit *507.
+- Antes de ir a la guardia (Miún): médico de cabecera, telemedicina o centro de urgencias de la Kupá. Sin derivación, la guardia puede costar más de 1.100 ₪. Hay casos sin cargo (por ejemplo, si quedas internado o vas con derivación). Fuente: Ministerio de Salud; Kupot.
+- Médicos en español: el directorio del sitio solo incluye médicos verificados en la ficha oficial de su Kupá.
+
+Accidente de trabajo (dos caminos distintos)
+- Accidente (golpe, caída, corte): 1) pide a tu empleador el formulario BL 250; 2) ve con él a tu Kupá (sector de accidentes de trabajo) o a urgencias; 3) el médico da el certificado médico inicial con el diagnóstico y los días que no puedes trabajar; 4) reclamas en Bituaj Leumi con el formulario BL 211, hasta 12 meses después.
+- Esfuerzo repetido (microtrauma, dolor que aparece con el tiempo): las Kupot no dan el certificado de accidentado laboral por enfermedades. Ve a tu médico de familia, pide derivación al médico ocupacional (Rofé Taasukatí) de tu Kupá y que quede escrita la relación con tu trabajo; reclamas con el BL 211 describiendo los movimientos que repites.
+- Pago: 75% del sueldo promedio de los 3 meses previos, con tope diario, desde el día siguiente al accidente y hasta 91 días. Los primeros 12 días los paga el empleador y Bituaj Leumi se los devuelve. Independientes: formulario BL 283. Fuente: Bituaj Leumi.
+
+Días de enfermedad (Dmei Majalá)
+- Día 1: 0%. Días 2 y 3: 50%. Desde el día 4: 100%. Se acumulan 1,5 días por mes trabajado, hasta 90; sin saldo no se cobran. Fuente: Ley de Dmei Majalá 1976.
 
 Licencia de conducir
-- Con la licencia extranjera se puede manejar solo el primer año desde la Aliá.
-- Auto: si la licencia está vigente, se sacó antes de la Aliá y tiene 5 años o más, se canjea sin examen práctico. Con menos de 5 años, hay examen práctico con un instructor habilitado. Una licencia sacada después de la Aliá no se canjea.
-- Camión, colectivo y taxi: siempre hay curso, examen teórico y práctico.
-- Trámite: solicitud online con declaración médica, examen de vista con un optometrista en una estación de fotos, turno por myVisit en una oficina de licencias.
-- Moto, licencia vencida y plazo máximo para canjear: no confirmados. Deriva al Ministerio de Transporte. Fuente: Ministerio de Transporte; Ministerio de Aliá, Guía de Transporte.
+- Con la licencia extranjera manejas solo el primer año desde la Aliá.
+- Canje de auto: licencia vigente, sacada antes de la Aliá. Con 5 años o más de antigüedad, sin examen práctico; con menos, examen práctico con instructor. Trámite: solicitud online con declaración médica, examen de vista y turno en GoVisit en una oficina de licencias. Fuente: Ministerio de Transporte.
+
+Guerra y emergencias
+- Instala la app de Pikud HaOref y revisa oref.org.il. Ten listo el refugio o el espacio protegido. Fuente: Pikud HaOref.
 
 Plan de negocio
-- El Ministerio de Aliá ofrece asesoría gratuita para emprender, con los Centros Maalot. Para empezar: *2994 o el área personal. Fuente: Ministerio de Aliá.
+- Centro de información de negocios del Ministerio de Aliá: *2994, gratis, en español; para olim hasta 10 años desde la Aliá y mayores de 21.
+- Centros Maalot: asesoría para abrir o hacer crecer un negocio; para olim hasta 10 años desde la Aliá y residentes que vuelven (5+ años afuera, hasta 2 años de regreso). Gratis, salvo 250 ₪ por el plan de negocio. Gush Dan y Shfelá: 03-5501128. Jerusalén: 02-6794242 (ext. 3). Fuente: Ministerio de Aliá.
 
-Comunidad
-- OLEI es una ONG de voluntarios que acompaña a hispanohablantes en trámites; contacto en olei.org.il.
-- Comercios latinos verificados (Google Maps, vía Outscraper): en Tel Aviv, local de productos argentinos en Allenby 37 (yerba mate, dulce de leche, alfajores, tapas de empanadas) y "La Tienda - Comida Latina" en Levanda 13 (Harina P.A.N., frijoles, tortillas de maíz, pulpas de fruta, panela, quesos). También Amapola Alfajores (Ibn Gvirol 54) y los demás de la sección "Comunidad" del sitio. No inventes otras direcciones.
-
-Seguridad
-- Instala la app del Pikud HaOref para recibir alertas. El refugio de un edificio tiene que estar accesible cuando suena la alarma. Fuente: Pikud HaOref; ley de defensa civil.
-
-Elecciones
-- Israel tiene un sistema parlamentario: se vota una lista de partido para los 120 escaños de la Knéset; para gobernar hacen falta 61. El voto no es obligatorio. Elecciones de la Knéset 26: 27-oct-2026.`;
+Comunidad (comercios confirmados por el sitio)
+- Amapola Alfajores, Ibn Gvirol 54, Tel Aviv (Dom–Jue 7:30–18:30, Vie 7:30–14:30). Las Empanadot, delivery en zona Merkaz. Vajula Alfajores, envíos a todo Israel. Maadaniá Laro, Allenby 37, Tel Aviv (productos de Argentina y Sudamérica, tel. 03-5255880). La Tienda - Comida Latina, Levanda 13, Tel Aviv (Dom–Jue 10:00–22:00, Vie 9:00–23:00). No menciones otros comercios.
+- OLEI: voluntarios que acompañan a hispanohablantes en trámites (olei.org.il).`;
 
 // -----------------------------------------------------------------------------
-// Respuestas de respaldo (si Gemini no responde). Cortas y con fuente.
+// Mensajes cuando Gemini no responde (sin respuestas fijas por palabra clave)
 // -----------------------------------------------------------------------------
-type Rule = { match: (q: string) => boolean; text: string };
+export const UNAVAILABLE_TEXT =
+  'No pude responder ahora. Intenta de nuevo en un momento. Mientras tanto, puedes buscar tu tema en las secciones del sitio.';
+export const QUOTA_TEXT =
+  'El asistente llegó al límite de consultas por ahora. Intenta de nuevo más tarde. Mientras tanto, puedes buscar tu tema en las secciones del sitio.';
 
-const has = (q: string, ...words: string[]) => words.some((w) => q.includes(w));
+// Compatibilidad con código anterior.
+export function fallbackAnswer(_query: string): string {
+  return UNAVAILABLE_TEXT;
+}
 
-const RULES: Rule[] = [
-  {
-    match: (q) => has(q, 'miun', 'miún', 'guardia', 'hospital', 'mada', 'ambulancia', 'urgencia', 'emergencia') && !has(q, 'credencial', 'activar'),
-    text: `Si hay riesgo de vida, llama al **101**. Si no, evita la guardia sin derivación: puede costar hasta **1.233 ₪**.
+type InMsg = { role?: string; content?: string };
+type Turn = { role: 'user' | 'model'; parts: { text: string }[] };
 
-1. Consulta primero a tu médico de cabecera o la telemedicina de tu Kupá.
-2. Si está cerrado, ve a un centro de urgencias de tu Kupá.
-3. Si te derivan, ve al Miún con la derivación (hafniá).
+const MAX_TURNS = 20;
+const MAX_CHARS_PER_TURN = 2000;
 
-No pagas si quedas internado o con una fractura nueva.
+// Arma una conversación válida para Gemini: empieza con 'user', alterna roles
+// y termina con la pregunta actual.
+export function buildContents(messages: InMsg[] | undefined, currentQuery: string): Turn[] {
+  const turns: Turn[] = [];
+  const list = Array.isArray(messages) ? messages : [];
+  for (const m of list) {
+    const text = typeof m?.content === 'string' ? m.content.trim().slice(0, MAX_CHARS_PER_TURN) : '';
+    if (!text) continue;
+    const role: Turn['role'] = m.role === 'user' ? 'user' : 'model';
+    const last = turns[turns.length - 1];
+    if (last && last.role === role) {
+      last.parts[0].text += `\n\n${text}`;
+    } else {
+      turns.push({ role, parts: [{ text }] });
+    }
+  }
+  const lastTurn = turns[turns.length - 1];
+  if (!lastTurn || lastTurn.role !== 'user' || !lastTurn.parts[0].text.endsWith(currentQuery)) {
+    if (lastTurn && lastTurn.role === 'user') lastTurn.parts[0].text += `\n\n${currentQuery}`;
+    else turns.push({ role: 'user', parts: [{ text: currentQuery }] });
+  }
+  let recent = turns.slice(-MAX_TURNS);
+  while (recent.length && recent[0].role !== 'user') recent = recent.slice(1);
+  return recent;
+}
 
-Fuente: Ministerio de Salud (tarifas), Maccabi.`,
-  },
-  {
-    match: (q) => has(q, 'sal klit', 'nihul', 'jeshbon', 'kheshbon') || (has(q, 'cuenta') && has(q, 'banco', 'bancaria')),
-    text: `El Sal Klitá cubre tus primeros 6 meses y se paga en **7 pagos**: el primero en el aeropuerto y 6 mensuales a tu cuenta.
+const STAGE_HINT: Record<string, string> = {
+  recien_llegado: 'La persona eligió "recién llegado": llegó hace poco.',
+  emergencia: 'La persona eligió "emergencia": prioriza qué hacer ahora.',
+  tramite: 'La persona eligió "trámite": está haciendo una gestión concreta.',
+};
 
-1. Abre una cuenta en shekels y deposita al menos 1 ₪.
-2. Pide al banco la constancia de cuenta (Ishur Nihul Jeshbón).
-3. Llévala a tu asesor de absorción (myVisit o *2994).
+export async function answerChat(body: any): Promise<{ status: number; json: any }> {
+  const { userQuery, messages, userStage } = body || {};
+  const currentQuery = String(
+    userQuery || (Array.isArray(messages) && messages.length ? messages[messages.length - 1]?.content : '') || ''
+  ).trim();
+  if (!currentQuery) return { status: 400, json: { error: 'Consulta vacía' } };
 
-Si sales del país, los pagos se cortan.
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+  if (!apiKey) {
+    console.error('[chat] Falta GEMINI_API_KEY');
+    return { status: 200, json: { text: UNAVAILABLE_TEXT, error: 'no_key' } };
+  }
 
-Fuente: Ministerio de Aliá.`,
-  },
-  {
-    match: (q) => has(q, 'alquiler', 'siyua', 'sjirot', 'mes 30', 'renta'),
-    text: `La ayuda de alquiler llega sola, sin contrato. Depende de la fecha de tu estatus de olé:
+  const stageHint = userStage && STAGE_HINT[userStage] ? `\n\nCONTEXTO: ${STAGE_HINT[userStage]}` : '';
+  const contents = buildContents(messages, currentQuery);
 
-1. Desde el 1-mar-2024: del mes 7 al mes 30.
-2. Antes del 1-mar-2024: del mes 8 al final del año 5.
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const resp = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+          body: JSON.stringify({
+            contents,
+            systemInstruction: { parts: [{ text: SYSTEM_PROMPT + stageHint }] },
+            generationConfig: {
+              temperature: 0.3,
+              // En 2.5 el límite de salida incluye el razonamiento.
+              maxOutputTokens: 3072,
+              thinkingConfig: { thinkingBudget: 1024 },
+            },
+          }),
+        }
+      );
 
-El monto depende de tu familia y tu localidad.
+      if (resp.status === 429) {
+        console.warn('[chat] Cupo de Gemini agotado (429)');
+        return { status: 200, json: { text: QUOTA_TEXT, error: 'quota' } };
+      }
+      if (!resp.ok) {
+        const errText = await resp.text().catch(() => '');
+        console.error(`[chat] Gemini respondió ${resp.status}: ${errText.slice(0, 500)}`);
+        if (resp.status >= 500 && attempt === 1) continue;
+        return { status: 200, json: { text: UNAVAILABLE_TEXT, error: `gemini_${resp.status}` } };
+      }
 
-Fuente: Ministerio de Construcción y Vivienda.`,
-  },
-  {
-    match: (q) => has(q, 'voucher', 'ulpan', 'ulpán', 'hebreo'),
-    text: `El Ulpán estatal es gratis, dura unos 5 meses y te anotas con la derivación de tu asesor de absorción.
+      const data = await resp.json();
+      const cand = data?.candidates?.[0];
+      const text = (cand?.content?.parts || [])
+        .filter((p: any) => typeof p?.text === 'string' && !p.thought)
+        .map((p: any) => p.text)
+        .join('')
+        .trim();
+      if (text) return { status: 200, json: { text } };
 
-Después puedes pedir el **voucher para Ulpán privado**: hasta **5.000 ₪** de reintegro.
-
-1. Termina el Ulpán inicial (salvo excepciones).
-2. Pide el certificado de elegibilidad en tu área personal antes de anotarte.
-3. Asiste al 80% y rinde el examen final.
-
-No puedes estudiar en los dos a la vez.
-
-Fuente: Ministerio de Aliá, procedimiento 372.`,
-  },
-  {
-    match: (q) => has(q, 'tendinitis', 'bl 250', 'bl250', 'dmei pgia', 'dmei pgiá') || (has(q, 'accidente', 'lesion', 'lesión', 'dolor') && has(q, 'trabajo', 'laboral')),
-    text: `Si te lesionas trabajando:
-
-1. Pide a tu empleador el formulario 250 del Bituaj Leumi.
-2. Pide al médico que deje escrito que pasó en el trabajo.
-3. Presenta el reclamo en el Bituaj Leumi.
-
-Te pagan el **75% del salario** desde el día siguiente a la lesión, hasta 91 días.
-
-Fuente: Bituaj Leumi.`,
-  },
-  {
-    match: (q) => has(q, 'enfermedad', 'reposo', 'majala', 'majalá'),
-    text: `Por días de enfermedad cobras: **día 1 nada, días 2 y 3 el 50%, desde el día 4 el 100%**.
-
-Acumulas 1,5 días por mes trabajado, hasta 90. Si no tienes días acumulados, no se pagan. Entrega el certificado médico a tu empleador.
-
-Fuente: Ley de Pago por Enfermedad.`,
-  },
-  {
-    match: (q) => has(q, 'teum mas', '47%', 'dos trabajos', '2 trabajos', 'segundo trabajo', 'pluriempleo'),
-    text: `Con dos trabajos, haz el **Teum Mas**: sin él, el segundo empleador retiene cerca del 47%.
-
-1. Pide a cada empleador su número de deducciones (Tik Nikuyim).
-2. Haz el trámite online en la Autoridad Tributaria.
-3. Entrega el certificado al segundo empleador.
-
-Fuente: Autoridad Tributaria.`,
-  },
-  {
-    match: (q) => has(q, 'tofes 101', 'tofes101', 'nekudot', 'puntos de credito', 'puntos de crédito', 'mas hajnas', 'impuesto'),
-    text: `En el **Tofes 101** marca que eres olé y adjunta tu Teudat Olé. Lo llenas al empezar cada trabajo y cada enero.
-
-Tienes puntos de crédito por 42 meses: 3 puntos en los meses 1 a 18, 2 en los meses 19 a 30 y 1 en los meses 31 a 42.
-
-Si hiciste la Aliá entre el 5-nov-2025 y el 31-dic-2026, además tienes una exención temporal en 2026.
-
-Fuente: Autoridad Tributaria.`,
-  },
-  {
-    match: (q) => has(q, 'arnona', 'arnoná'),
-    text: `Como olé tienes **90% de descuento en la Arnoná** sobre los primeros 100 m², durante 12 meses dentro de tus primeros 24.
-
-No es automático: pídelo en tu municipio con el contrato de alquiler y tu Teudat Zehut con la dirección.
-
-Fuente: Reglamento de descuentos de Arnoná.`,
-  },
-  {
-    match: (q) => has(q, 'licencia', 'registro de conducir', 'manejar', 'conducir'),
-    text: `Con tu licencia extranjera puedes manejar **solo el primer año** desde la Aliá.
-
-1. Auto, licencia vigente y 5 años o más: canje sin examen práctico.
-2. Menos de 5 años: examen práctico con instructor habilitado.
-3. Camión, colectivo o taxi: siempre curso, teórico y práctico.
-
-Moto o licencia vencida: confirma con el Ministerio de Transporte. ¿Quieres los pasos del trámite?
-
-Fuente: Ministerio de Transporte.`,
-  },
-  {
-    match: (q) => has(q, 'teudat zehut', 'teudat zeut', 'biometric', 'biométric', 'myvisit', 'dni'),
-    text: `La Teudat Zehut temporal del aeropuerto vale **9 meses**. Antes de que venza, saca la biométrica con turno en la Autoridad de Población (*3450 o por internet).
-
-Fuente: Ministerio de Aliá.`,
-  },
-  {
-    match: (q) => (has(q, 'kupa', 'kupá', 'kupat', 'maccabi', 'clalit', 'meuhedet', 'leumit') && has(q, 'inscrib', 'anot', 'activ', 'registr', 'credencial')),
-    text: `Lo ideal es inscribirte en la Kupat Jolim en el aeropuerto. Si no:
-
-1. Dentro de los 90 días: gratis en la web del Bituaj Leumi (desde las 3 semanas) o en el correo (con costo).
-2. Después de los 90 días: en una oficina del Bituaj Leumi.
-3. Luego preséntate en la Kupá que elegiste.
-
-Fuente: Ministerio de Aliá.`,
-  },
-  {
-    match: (q) => has(q, 'medico', 'médico', 'doctor', 'turno') && has(q, 'español', 'espanol', 'kupa', 'kupá'),
-    text: `Busca en **Médicos en Español** de Olim Conectados: solo incluye médicos verificados en la ficha oficial de su Kupá. Filtra por Kupá, ciudad y especialidad.
-
-También puedes pedir turno en la central de tu Kupá (Maccabi: *3555).`,
-  },
-  {
-    match: (q) => has(q, '2994', 'maalot', 'plan de negocio', 'emprend') || (has(q, 'negocio') && has(q, 'abrir', 'asesor', 'osek')),
-    text: `El Ministerio de Aliá da **asesoría gratuita para emprender**, a través de los Centros Maalot. Para empezar, llama al *2994 o entra a tu área personal.
-
-Fuente: Ministerio de Aliá.`,
-  },
-  {
-    match: (q) => has(q, 'olei'),
-    text: `OLEI es una ONG de voluntarios que acompaña a hispanohablantes en trámites del banco, la Kupá y la absorción. Busca la sede de tu ciudad en olei.org.il.`,
-  },
-  {
-    match: (q) => has(q, 'yerba', 'mate', 'alfajor', 'dulce de leche', 'empanada', 'productos latinos', 'harina pan'),
-    text: `En Tel Aviv tienes:
-
-1. **Allenby 37:** productos argentinos (yerba, dulce de leche, alfajores, tapas de empanadas).
-2. **La Tienda - Comida Latina, Levanda 13:** Harina P.A.N., frijoles, tortillas de maíz, pulpas, panela y quesos.
-3. **Amapola Alfajores, Ibn Gvirol 54:** alfajores y café.
-
-Hay más en la sección **Comunidad** del sitio.
-
-Fuente: Google Maps.`,
-  },
-  {
-    match: (q) => has(q, 'pikud', 'oref', 'refugio', 'alarma', 'misil'),
-    text: `Instala la app del **Pikud HaOref** para recibir alertas y ver qué hacer en tu zona. Cuando suena la alarma, el refugio de un edificio tiene que estar accesible.
-
-Para derechos laborales en emergencia, consulta al Ministerio de Trabajo: las reglas cambian según la situación.
-
-Fuente: Pikud HaOref.`,
-  },
-  {
-    match: (q) => has(q, 'elecciones', 'votar', 'voto', 'kneset', 'knéset'),
-    text: `En Israel se vota una lista de partido para los **120 escaños** de la Knéset; para gobernar hacen falta 61. El voto no es obligatorio. Las elecciones de la Knéset 26 son el **27-oct-2026**.`,
-  },
-  {
-    match: (q) => has(q, 'plazo', 'vigencia', 'vence', 'caduca'),
-    text: `Los plazos más importantes desde tu Aliá:
-
-1. Teudat Zehut temporal: 9 meses.
-2. Manejar con licencia extranjera: 1 año.
-3. Descuento de Arnoná: 12 meses dentro de los primeros 24.
-4. Puntos de crédito en impuestos: 42 meses. Ulpán estatal: hasta 10 años.
-
-La ayuda de alquiler depende de la fecha de tu estatus. ¿Quieres el detalle?
-
-Fuente: Ministerio de Aliá, Autoridad Tributaria.`,
-  },
-  {
-    match: (q) => has(q, 'centro de absorcion', 'centro de absorción', 'merkaz klita', 'absorcion directa', 'absorción directa', 'tipo de alia', 'kibutz'),
-    text: `Depende de cómo hiciste la Aliá:
-
-1. **Absorción directa:** alquilas por tu cuenta y te anotas al Ulpán ya en Israel.
-2. **Centro de absorción:** se arregla antes de viajar con la Agencia Judía; vives y estudias en el centro y después alquilas.
-3. **Ulpán en kibutz:** pide los detalles a la Agencia Judía.
-
-Fuente: Ministerio de Aliá.`,
-  },
-];
-
-export function fallbackAnswer(query: string): string {
-  const q = (query || '').toLowerCase();
-  const rule = RULES.find((r) => r.match(q));
-  if (rule) return rule.text;
-  return `No tengo un dato oficial confirmado sobre eso. Puedo ayudarte con: Sal Klitá, ayuda de alquiler, Ulpán, Kupat Jolim, guardia, Tofes 101, Arnoná, licencia de conducir, Bituaj Leumi y médicos en español.`;
+      console.error('[chat] Respuesta vacía de Gemini', {
+        finishReason: cand?.finishReason,
+        blockReason: data?.promptFeedback?.blockReason,
+      });
+      if (attempt === 1) continue;
+    } catch (err: any) {
+      console.error('[chat] Error al consultar Gemini:', err?.message || err);
+      if (attempt === 1) continue;
+    }
+  }
+  return { status: 200, json: { text: UNAVAILABLE_TEXT, error: 'unavailable' } };
 }
 
 // -----------------------------------------------------------------------------
@@ -317,57 +213,9 @@ export default async function handler(req: any, res: any) {
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método no permitido' });
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido' });
 
-  const { userQuery, messages } = req.body || {};
-  const currentQuery = (userQuery || (messages && messages.length > 0 ? messages[messages.length - 1].content : '') || '').trim();
-  if (!currentQuery) {
-    return res.status(400).json({ error: 'Consulta vacía' });
-  }
-
-  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
-
-  if (apiKey) {
-    try {
-      const history = Array.isArray(messages) && messages.length > 1
-        ? messages.slice(-5).map((m: any) => ({
-            role: m.role === 'user' ? 'user' : 'model',
-            parts: [{ text: m.content }],
-          }))
-        : [{ role: 'user', parts: [{ text: currentQuery }] }];
-
-      const resp = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: history,
-            systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-            generationConfig: {
-              temperature: 0.2,
-              maxOutputTokens: 600,
-              thinkingConfig: { thinkingBudget: 0 },
-            },
-          }),
-        }
-      );
-      if (resp.ok) {
-        const data = await resp.json();
-        const generated = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (generated) {
-          return res.status(200).json({ text: generated });
-        }
-      }
-    } catch (err) {
-      console.error('Error al consultar Gemini REST:', err);
-    }
-  }
-
-  return res.status(200).json({ text: fallbackAnswer(currentQuery) });
+  const { status, json } = await answerChat(req.body);
+  return res.status(status).json(json);
 }

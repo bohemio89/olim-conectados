@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { SYSTEM_PROMPT, fallbackAnswer } from './api/chat';
+import { SYSTEM_PROMPT, answerChat } from './api/chat';
 
 dotenv.config();
 
@@ -143,155 +143,11 @@ app.post('/api/chat-feedback', (req: Request, res: Response) => {
   res.status(400).json({ error: 'Parámetros de feedback inválidos' });
 });
 
-// Chatbot endpoint
+// Chatbot endpoint: misma lógica que en Vercel (api/chat.ts)
 app.post('/api/chat', async (req: Request, res: Response) => {
-  const { messages, userQuery, userStage } = req.body;
-
-  const currentQuery = (userQuery || (messages && messages.length > 0 ? messages[messages.length - 1].content : '') || '').trim();
-
-  if (!currentQuery) {
-    res.status(400).json({ error: 'La consulta no puede estar vacía' });
-    return;
-  }
-
-  if (ai) {
-    try {
-      // Build clean alternating conversation history starting strictly with 'user'
-      const formattedContents: { role: 'user' | 'model'; parts: { text: string }[] }[] = [];
-
-      if (Array.isArray(messages)) {
-        for (const m of messages) {
-          if (!m || typeof m.content !== 'string') continue;
-          const trimmed = m.content.trim();
-          if (!trimmed) continue;
-          
-          // Filter out error messages or transient notices
-          if (m.id && typeof m.id === 'string' && m.id.startsWith('err-')) continue;
-
-          const role = m.role === 'assistant' || m.role === 'model' ? 'model' : 'user';
-
-          // In Gemini API, the first turn in contents MUST be 'user'
-          if (formattedContents.length === 0 && role === 'model') {
-            continue;
-          }
-
-          // If the last added message has the same role, combine them to maintain strict alternation
-          if (formattedContents.length > 0 && formattedContents[formattedContents.length - 1].role === role) {
-            formattedContents[formattedContents.length - 1].parts[0].text += `\n${trimmed}`;
-          } else {
-            formattedContents.push({
-              role,
-              parts: [{ text: trimmed }],
-            });
-          }
-        }
-      }
-
-      // Ensure the last message in history is the user's current query
-      if (formattedContents.length === 0 || formattedContents[formattedContents.length - 1].role !== 'user') {
-        formattedContents.push({
-          role: 'user',
-          parts: [{ text: currentQuery }],
-        });
-      } else {
-        formattedContents[formattedContents.length - 1].parts[0].text = currentQuery;
-      }
-
-      let replyText: string | null = null;
-      // Stable production models from @google/genai specification
-      const candidateModels = ['gemini-3.8-flash', 'gemini-3.1-pro-preview'];
-
-      for (const modelName of candidateModels) {
-        for (let attempt = 1; attempt <= 2; attempt++) {
-          try {
-            const apiPromise = ai.models.generateContent({
-              model: modelName,
-              contents: formattedContents,
-              config: {
-                systemInstruction: SYSTEM_INSTRUCTION,
-                temperature: 0.2,
-                maxOutputTokens: 600,
-                thinkingConfig: { thinkingBudget: 0 },
-                safetySettings: [
-                  {
-                    category: 'HARM_CATEGORY_HARASSMENT' as any,
-                    threshold: 'BLOCK_ONLY_HIGH' as any,
-                  },
-                  {
-                    category: 'HARM_CATEGORY_HATE_SPEECH' as any,
-                    threshold: 'BLOCK_ONLY_HIGH' as any,
-                  },
-                  {
-                    category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT' as any,
-                    threshold: 'BLOCK_ONLY_HIGH' as any,
-                  },
-                  {
-                    category: 'HARM_CATEGORY_DANGEROUS_CONTENT' as any,
-                    threshold: 'BLOCK_ONLY_HIGH' as any,
-                  },
-                  {
-                    category: 'HARM_CATEGORY_CIVIC_INTEGRITY' as any,
-                    threshold: 'BLOCK_ONLY_HIGH' as any,
-                  },
-                ],
-              },
-            });
-
-            // 25 seconds timeout for resilience against latency spikes
-            const timeoutPromise = new Promise<{ text?: string | null }>((_, reject) =>
-              setTimeout(() => reject(new Error(`Timeout de consulta Gemini (${modelName}) después de 25s`)), 25000)
-            );
-
-            const response = await Promise.race([apiPromise, timeoutPromise]) as any;
-            replyText = response?.text || null;
-            if (replyText) {
-              break;
-            }
-          } catch (apiErr: any) {
-            console.error('Gemini API Error Diagnostics:', {
-              model: modelName,
-              attempt,
-              statusCode: apiErr?.status || apiErr?.statusCode || 'N/A',
-              code: apiErr?.code || 'N/A',
-              message: apiErr?.message || String(apiErr),
-              queryPreview: currentQuery.slice(0, 120),
-              historyLength: formattedContents.length,
-              timestamp: new Date().toISOString(),
-            });
-
-            if (attempt === 1) {
-              // Exponential backoff before retry (1000ms)
-              await new Promise((r) => setTimeout(r, 1000));
-            }
-          }
-        }
-
-        if (replyText) {
-          break;
-        }
-      }
-
-      if (replyText) {
-        res.json({ text: replyText });
-        return;
-      }
-    } catch (error: any) {
-      console.error('General Error in Gemini chat processing:', {
-        error: error?.message || error,
-        stack: error?.stack,
-        query: currentQuery,
-      });
-    }
-  }
-
-  // Knowledge-guided rule-based fallback if Gemini is offline or rate limited
-  const fallbackText = generateRuleBasedResponse(currentQuery, messages);
-  res.json({ text: fallbackText });
+  const { status, json } = await answerChat(req.body);
+  res.status(status).json(json);
 });
-
-function generateRuleBasedResponse(query: string, history?: any[]): string {
-  return fallbackAnswer(query);
-}
 
 // Development vite setup vs production static
 async function startServer() {
