@@ -11,6 +11,7 @@ import { EmergencyGuide } from './components/EmergencyGuide';
 import { BituajLeumiGuide } from './components/BituajLeumiGuide';
 import { SickLeaveCalculator } from './components/SickLeaveCalculator';
 import { DriverLicenseWizard } from './components/DriverLicenseWizard';
+import { WarGuide } from './components/WarGuide';
 import { BureaucracyGuide } from './components/BureaucracyGuide';
 import { CrisisCivilGuide } from './components/CrisisCivilGuide';
 import { CommunityHub } from './components/CommunityHub';
@@ -33,6 +34,7 @@ const TAB_TO_PATH: Record<string, string> = {
   nightlife: '/vida-nocturna',
   'business-plan': '/plan-de-negocio',
   emergency: '/emergencias',
+  war: '/guerra-y-emergencias',
   'crisis-civil': '/crisis-civil',
   bituaj: '/bituaj-leumi',
   'sick-leave': '/calculadora-dias-enfermedad',
@@ -292,6 +294,7 @@ export default function App() {
                     />
                   )}
                   {activeTab === 'emergency' && <EmergencyGuide />}
+                  {activeTab === 'war' && <WarGuide />}
                   {activeTab === 'business-plan' && <BusinessPlanGuide />}
                   {activeTab === 'crisis-civil' && <CrisisCivilGuide />}
                   {activeTab === 'checklist' && (
