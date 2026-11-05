@@ -89,6 +89,9 @@ export const BituajLeumiGuide: React.FC = () => {
           Qué hacer si te lesionas trabajando
         </h2>
 
+        <p className="text-sm sm:text-[15px] font-bold text-[#0E2559]">
+          Los pasos son distintos según el tipo de lesión. Elige el tuyo:
+        </p>
         <div className="grid grid-cols-2 bg-slate-100/70 p-1 rounded-2xl border border-black/5 gap-1 max-w-xl">
           {([['accident', 'Accidente', 'Un golpe, caída o corte'], ['repetitive', 'Esfuerzo repetido', 'Dolor que aparece con el tiempo']] as const).map(([id, label, hint]) => (
             <button
