@@ -15,7 +15,8 @@ import {
   Globe,
   Phone,
   Mail,
-  Loader2
+  Loader2,
+  Facebook
 } from 'lucide-react';
 import { CommunityStore, CommunityGroup, StoreContact } from '../types';
 import { enviarPropuesta } from '../lib/propuestas';
@@ -61,6 +62,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
   const CONTACT_ICON: Record<StoreContact['type'], React.ElementType> = {
     whatsapp: MessageCircle,
     instagram: Instagram,
+    facebook: Facebook,
     web: Globe,
     phone: Phone,
     email: Mail,
@@ -223,8 +225,8 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                 </div>
 
                 {/* Botones de contacto */}
-                <div className="flex items-center gap-2 pt-3 border-t border-black/5">
-                  {meta.contacts.slice(0, 2).map((c, i) => {
+                <div className="grid grid-cols-1 gap-2 pt-3 border-t border-black/5">
+                  {meta.contacts.map((c, i) => {
                     const Icon = CONTACT_ICON[c.type];
                     return (
                       <a
@@ -233,11 +235,11 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                         target={c.type === 'phone' || c.type === 'email' ? undefined : '_blank'}
                         rel="noopener noreferrer"
                         className={i === 0
-                          ? 'flex-1 min-h-[44px] bg-[#2A7050] hover:bg-[#235e43] text-white font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition shadow-2xs'
-                          : 'flex-1 min-h-[44px] border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-800 font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition'}
+                          ? 'min-h-[44px] bg-[#2A7050] hover:bg-[#235e43] text-white font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition shadow-2xs'
+                          : `min-w-0 min-h-[44px] border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-800 font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition`}
                       >
-                        <Icon className="w-4 h-4" />
-                        <span>{c.label}</span>
+                        <Icon className="w-4 h-4 shrink-0" />
+                        <span className="truncate">{c.label}</span>
                       </a>
                     );
                   })}
