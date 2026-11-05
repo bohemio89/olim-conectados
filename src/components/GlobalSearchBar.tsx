@@ -70,10 +70,10 @@ const STATIC_SEARCH_INDEX: SearchResultItem[] = [
   },
   {
     id: 's-bituaj',
-    title: 'Accidente Laboral, Tendinitis y Formulario BL 250 ante Bituaj Leumi',
+    title: 'Accidente de trabajo: formularios BL 250 y BL 211 ante Bituaj Leumi',
     type: 'guide',
     tabId: 'bituaj',
-    description: 'Pasos urgentes para denunciar lesiones laborales y turno con Rofé Taasukatí.',
+    description: 'Qué hacer si te accidentas trabajando y cuánto paga Bituaj Leumi.',
     icon: Briefcase
   },
   {

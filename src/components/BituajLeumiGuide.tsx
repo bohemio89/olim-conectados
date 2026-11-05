@@ -12,14 +12,14 @@ import {
 import { SourceBadge } from './SourceBadge';
 
 export const BituajLeumiGuide: React.FC = () => {
-  const [selectedInjuryType, setSelectedInjuryType] = useState<'repetitive' | 'acute'>('acute');
+  const [selectedInjuryType, setSelectedInjuryType] = useState<'work' | 'commute'>('work');
   const [copiedPhrase, setCopiedPhrase] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   // 4 Documentos con casillas (2 de 4 marcados por defecto como en la captura)
   const [checkedDocs, setCheckedDocs] = useState<Record<string, boolean>>({
-    doc1: true,
-    doc2: true,
+    doc1: false,
+    doc2: false,
     doc3: false,
     doc4: false,
   });
@@ -31,13 +31,13 @@ export const BituajLeumiGuide: React.FC = () => {
   const completedCount = Object.values(checkedDocs).filter(Boolean).length;
 
   const hebrewPhrases = {
-    repetitive: {
-      hebrew: 'אני עובד בעבודה פיזית עם תנועות חוזרות. הכאב החל והחמיר עקב העבודה. אבקש לרשום בסיכום שהפגיעה נגרמה בעבודה.',
-      spanish: '"Trabajo en tareas físicas con movimientos repetitivos. El dolor comenzó y empeoró por el trabajo. Pido que conste en el informe médico que ocurrió en el trabajo."',
+    work: {
+      hebrew: 'נפגעתי בתאונה בעבודה. אבקש תעודה רפואית ראשונה לנפגע בעבודה.',
+      spanish: '"Me accidenté en el trabajo. Pido el certificado médico inicial para accidentado laboral."',
     },
-    acute: {
-      hebrew: 'נפגעתי בתאונה תוך כדי ועקב עבודתי. אבקש לרשום בסיכום שהאירוע התרחש בעבודה.',
-      spanish: '"Me accidenté trabajando. Pido que el informe diga que ocurrió en el trabajo."',
+    commute: {
+      hebrew: 'נפגעתי בתאונה בדרך הישירה לעבודה. אבקש תעודה רפואית ראשונה לנפגע בעבודה.',
+      spanish: '"Me accidenté en el camino directo al trabajo. Pido el certificado médico inicial para accidentado laboral."',
     },
   };
 
@@ -52,32 +52,32 @@ export const BituajLeumiGuide: React.FC = () => {
   const steps = [
     {
       num: 1,
-      title: 'Avisa y pide el BL 250',
-      desc: 'Tu empleador lo firma y sella con fecha, hora y tarea.',
+      title: 'Pide el BL 250 a tu empleador',
+      desc: 'Es la derivación para que te atiendan. Él la completa y firma.',
     },
     {
       num: 2,
-      title: 'Que el médico escriba "be-avodá"',
-      desc: 'En el primer resumen médico (sijum majalí).',
+      title: 'Ve a tu Kupá con el formulario',
+      desc: 'Al sector de accidentes de trabajo, o a urgencias.',
     },
     {
       num: 3,
-      title: 'Médico ocupacional',
-      desc: 'El Rofé Taasukatí de tu Kupá define los días de reposo.',
+      title: 'Recibe el certificado médico',
+      desc: 'El médico anota el diagnóstico y los días que no puedes trabajar.',
     },
     {
       num: 4,
       isFinal: true,
-      title: 'Presenta en Bituaj Leumi',
-      desc: 'Te pagan el 75% del salario desde el día siguiente a la lesión, hasta 91 días.',
+      title: 'Reclama con el formulario 211',
+      desc: 'En Bituaj Leumi, online o en tu sucursal. Tienes hasta 12 meses.',
     },
   ];
 
   const documents = [
-    { id: 'doc1', title: 'Formulario BL 250' },
-    { id: 'doc2', title: 'Primer informe médico con "be-avodá"' },
-    { id: 'doc3', title: 'Certificado del médico ocupacional' },
-    { id: 'doc4', title: 'Últimos 3 recibos de sueldo' },
+    { id: 'doc1', title: 'Formulario BL 211 firmado' },
+    { id: 'doc2', title: 'Certificado médico inicial o informe de urgencias' },
+    { id: 'doc3', title: 'Recibos de sueldo de los últimos 3 meses (si tuviste más de un trabajo)' },
+    { id: 'doc4', title: 'Si fue accidente de tránsito: informe policial y seguro' },
   ];
 
   return (
@@ -87,7 +87,7 @@ export const BituajLeumiGuide: React.FC = () => {
       <div className="bg-rose-50/90 border border-rose-200 text-rose-950 rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 shadow-2xs">
         <AlertTriangle className="w-5 h-5 text-rose-700 shrink-0" />
         <p className="font-bold text-sm sm:text-base leading-snug">
-          Si el médico no escribe "be-avodá" (בעבודה), Bituaj Leumi puede rechazar tu reclamo.
+          Sin el certificado médico, Bituaj Leumi te devuelve el reclamo sin tratarlo.
         </p>
       </div>
 
@@ -182,11 +182,13 @@ export const BituajLeumiGuide: React.FC = () => {
         {/* Detalle desplegable */}
         {isDetailOpen && (
           <div className="mt-4 pt-4 border-t border-black/5 text-sm text-slate-700 space-y-2 bg-slate-50/80 p-5 rounded-2xl leading-relaxed">
-            <p className="font-bold text-[#0E2559]">Normativa de accidentes de trabajo (Dmei Pgiá):</p>
+            <p className="font-bold text-[#0E2559]">Cuánto te pagan (Dmei Pgiá):</p>
             <ul className="list-disc pl-5 space-y-1 text-slate-600 text-xs sm:text-sm">
-              <li>El empleador abona el salario del día de la lesión. Bituaj Leumi cubre el 75% del salario bruto a partir del día siguiente y hasta un máximo de 91 días de incapacidad laboral certificada.</li>
-              <li>Aplica tanto a accidentes ocurridos en el puesto de trabajo como en el trayecto directo de ida o vuelta entre tu hogar y el lugar laboral.</li>
-              <li>Exige siempre que cada informe médico incluya la frase "be-avodá" (בעבודה) para evitar que la aseguradora estatal lo tramite como enfermedad común.</li>
+              <li>Bituaj Leumi paga el 75% de tu sueldo promedio de los 3 meses previos, con un tope diario.</li>
+              <li>Se paga desde el día siguiente al accidente, hasta 91 días (13 semanas).</li>
+              <li>Los primeros 12 días los paga tu empleador, y Bituaj Leumi se los devuelve.</li>
+              <li>También cubre el accidente en el camino directo entre tu casa y el trabajo.</li>
+              <li>Si eres independiente, usas el formulario BL 283 en lugar del BL 250.</li>
             </ul>
           </div>
         )}
@@ -195,7 +197,7 @@ export const BituajLeumiGuide: React.FC = () => {
         <div className="pt-4 border-t border-black/5 flex items-center justify-between text-xs text-slate-600 font-medium flex-wrap gap-2">
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
-            <span>Fuente: Bituaj Leumi · btl.gov.il · revisado oct 2026</span>
+            <span>Fuente: Bituaj Leumi · btl.gov.il · revisado nov 2026</span>
           </div>
           <button
             onClick={() => setIsDetailOpen(!isDetailOpen)}
@@ -217,30 +219,30 @@ export const BituajLeumiGuide: React.FC = () => {
               Frase para el médico
             </h3>
 
-            {/* Selector: Tendinitis / esfuerzo vs Accidente / golpe */}
+            {/* Selector: En el trabajo vs En el camino */}
             <div className="grid grid-cols-2 bg-slate-100/70 p-1 rounded-2xl border border-black/5 gap-1">
               <button
                 type="button"
-                onClick={() => setSelectedInjuryType('repetitive')}
+                onClick={() => setSelectedInjuryType('work')}
                 className={`min-h-[44px] py-2 px-3 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer text-center ${
-                  selectedInjuryType === 'repetitive'
+                  selectedInjuryType === 'work'
                     ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Tendinitis / esfuerzo
+                En el trabajo
               </button>
 
               <button
                 type="button"
-                onClick={() => setSelectedInjuryType('acute')}
+                onClick={() => setSelectedInjuryType('commute')}
                 className={`min-h-[44px] py-2 px-3 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer text-center ${
-                  selectedInjuryType === 'acute'
+                  selectedInjuryType === 'commute'
                     ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Accidente / golpe
+                En el camino
               </button>
             </div>
 
