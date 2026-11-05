@@ -12,7 +12,7 @@ import {
 import { SourceBadge } from './SourceBadge';
 
 export const BituajLeumiGuide: React.FC = () => {
-  const [selectedInjuryType, setSelectedInjuryType] = useState<'work' | 'commute'>('work');
+  const [selectedInjuryType, setSelectedInjuryType] = useState<'accident' | 'repetitive'>('accident');
   const [copiedPhrase, setCopiedPhrase] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
@@ -31,13 +31,13 @@ export const BituajLeumiGuide: React.FC = () => {
   const completedCount = Object.values(checkedDocs).filter(Boolean).length;
 
   const hebrewPhrases = {
-    work: {
+    accident: {
       hebrew: 'נפגעתי בתאונה בעבודה. אבקש תעודה רפואית ראשונה לנפגע בעבודה.',
       spanish: '"Me accidenté en el trabajo. Pido el certificado médico inicial para accidentado laboral."',
     },
-    commute: {
-      hebrew: 'נפגעתי בתאונה בדרך הישירה לעבודה. אבקש תעודה רפואית ראשונה לנפגע בעבודה.',
-      spanish: '"Me accidenté en el camino directo al trabajo. Pido el certificado médico inicial para accidentado laboral."',
+    repetitive: {
+      hebrew: 'הכאב נגרם מתנועות חוזרות בעבודה. אבקש הפניה לרופא תעסוקתי.',
+      spanish: '"El dolor viene de movimientos repetidos en el trabajo. Pido derivación al médico ocupacional."',
     },
   };
 
@@ -49,33 +49,25 @@ export const BituajLeumiGuide: React.FC = () => {
     setTimeout(() => setCopiedPhrase(false), 2000);
   };
 
-  const steps = [
-    {
-      num: 1,
-      title: 'Pide el BL 250 a tu empleador',
-      desc: 'Es la derivación para que te atiendan. Él la completa y firma.',
-    },
-    {
-      num: 2,
-      title: 'Ve a tu Kupá con el formulario',
-      desc: 'Al sector de accidentes de trabajo, o a urgencias.',
-    },
-    {
-      num: 3,
-      title: 'Recibe el certificado médico',
-      desc: 'El médico anota el diagnóstico y los días que no puedes trabajar.',
-    },
-    {
-      num: 4,
-      isFinal: true,
-      title: 'Reclama con el formulario 211',
-      desc: 'En Bituaj Leumi, online o en tu sucursal. Tienes hasta 12 meses.',
-    },
-  ];
+  const stepsByType = {
+    accident: [
+      { num: 1, title: 'Pide el BL 250 a tu empleador', desc: 'Es la derivación para que te atiendan. Él la completa y firma.' },
+      { num: 2, title: 'Ve a tu Kupá con el formulario', desc: 'Al sector de accidentes de trabajo, o a urgencias.' },
+      { num: 3, title: 'Recibe el certificado médico', desc: 'El médico anota el diagnóstico y los días que no puedes trabajar.' },
+      { num: 4, isFinal: true, title: 'Reclama con el formulario 211', desc: 'En Bituaj Leumi, online o en tu sucursal. Tienes hasta 12 meses.' },
+    ],
+    repetitive: [
+      { num: 1, title: 'Ve a tu médico de familia', desc: 'Cuéntale que el dolor viene de tu trabajo.' },
+      { num: 2, title: 'Pide ir al Rofé Taasukatí', desc: 'Es el médico ocupacional de tu Kupá.' },
+      { num: 3, title: 'Que quede escrita la relación con el trabajo', desc: 'Bituaj Leumi pide documentos que muestren que el problema viene de tu tarea.' },
+      { num: 4, isFinal: true, title: 'Reclama con el formulario 211', desc: 'Describe tu tarea y los movimientos que repites. Tienes hasta 12 meses.' },
+    ],
+  };
+  const steps = stepsByType[selectedInjuryType];
 
   const documents = [
     { id: 'doc1', title: 'Formulario BL 211 firmado' },
-    { id: 'doc2', title: 'Certificado médico inicial o informe de urgencias' },
+    { id: 'doc2', title: 'Certificado médico, informe de urgencias o informe del médico ocupacional' },
     { id: 'doc3', title: 'Recibos de sueldo de los últimos 3 meses (si tuviste más de un trabajo)' },
     { id: 'doc4', title: 'Si fue accidente de tránsito: informe policial y seguro' },
   ];
@@ -87,7 +79,7 @@ export const BituajLeumiGuide: React.FC = () => {
       <div className="bg-rose-50/90 border border-rose-200 text-rose-950 rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 shadow-2xs">
         <AlertTriangle className="w-5 h-5 text-rose-700 shrink-0" />
         <p className="font-bold text-sm sm:text-base leading-snug">
-          Sin el certificado médico, Bituaj Leumi te devuelve el reclamo sin tratarlo.
+          Sin documentos médicos, Bituaj Leumi te devuelve el reclamo sin tratarlo.
         </p>
       </div>
 
@@ -96,6 +88,24 @@ export const BituajLeumiGuide: React.FC = () => {
         <h2 className="text-xl sm:text-2xl font-extrabold text-[#0E2559]">
           Qué hacer si te lesionas trabajando
         </h2>
+
+        <div className="grid grid-cols-2 bg-slate-100/70 p-1 rounded-2xl border border-black/5 gap-1 max-w-xl">
+          {([['accident', 'Accidente', 'Un golpe, caída o corte'], ['repetitive', 'Esfuerzo repetido', 'Dolor que aparece con el tiempo']] as const).map(([id, label, hint]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setSelectedInjuryType(id)}
+              className={`min-h-[56px] py-2 px-3 rounded-xl transition cursor-pointer text-center ${
+                selectedInjuryType === id
+                  ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <span className="block text-sm sm:text-[15px] font-bold">{label}</span>
+              <span className="block text-[11px] sm:text-xs font-medium text-slate-500">{hint}</span>
+            </button>
+          ))}
+        </div>
 
         {/* Roadmap de 4 pasos - Notebook (Horizontal con flechas) */}
         <div className="hidden lg:grid grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-stretch gap-2.5 pt-2">
@@ -188,6 +198,7 @@ export const BituajLeumiGuide: React.FC = () => {
               <li>Se paga desde el día siguiente al accidente, hasta 91 días (13 semanas).</li>
               <li>Los primeros 12 días los paga tu empleador, y Bituaj Leumi se los devuelve.</li>
               <li>También cubre el accidente en el camino directo entre tu casa y el trabajo.</li>
+              <li>Esfuerzo repetido: las Kupot no dan el certificado de accidentado laboral por enfermedades. El reclamo se analiza con los documentos médicos que unen el problema con tu trabajo.</li>
               <li>Si eres independiente, usas el formulario BL 283 en lugar del BL 250.</li>
             </ul>
           </div>
@@ -216,35 +227,8 @@ export const BituajLeumiGuide: React.FC = () => {
         <div className="bg-white rounded-3xl border border-black/10 p-6 sm:p-7 shadow-2xs flex flex-col justify-between space-y-5">
           <div className="space-y-4">
             <h3 className="text-lg sm:text-xl font-extrabold text-[#0E2559]">
-              Frase para el médico
+              Frase para el médico{selectedInjuryType === 'repetitive' ? ' de familia' : ''}
             </h3>
-
-            {/* Selector: En el trabajo vs En el camino */}
-            <div className="grid grid-cols-2 bg-slate-100/70 p-1 rounded-2xl border border-black/5 gap-1">
-              <button
-                type="button"
-                onClick={() => setSelectedInjuryType('work')}
-                className={`min-h-[44px] py-2 px-3 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer text-center ${
-                  selectedInjuryType === 'work'
-                    ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                En el trabajo
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setSelectedInjuryType('commute')}
-                className={`min-h-[44px] py-2 px-3 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer text-center ${
-                  selectedInjuryType === 'commute'
-                    ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                En el camino
-              </button>
-            </div>
 
             {/* Caja hebreo */}
             <div className="bg-[#FBF3E6] border border-[#E8A33D]/30 rounded-2xl p-5 text-right font-hebrew text-lg sm:text-xl font-bold text-[#0E2559] leading-relaxed shadow-inner" lang="he" dir="rtl">
