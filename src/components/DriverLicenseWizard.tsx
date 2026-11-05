@@ -23,14 +23,38 @@ import {
   FolderCheck, 
   MessageCircle,
   Home,
-  ChevronRight
+  ChevronRight,
+  GraduationCap,
+  Repeat,
+  MonitorCheck,
+  ClipboardCheck,
+  BadgeCheck,
+  Wallet,
+  Languages,
+  UserCheck,
+  Moon,
+  Timer,
+  Smartphone,
+  Camera,
+  Users,
+  Phone,
+  ArrowRight
 } from 'lucide-react';
 
+// Fuentes: Kol Zchut (canje para olim, pedido de licencia, exámenes) y gov.il
+// (tasas abril 2026, guía de acompañamiento, estudio sobre la licencia por etapas).
 const LINKS = {
-  tofesYarok: '', // vacío por ahora, se completará cuando tengamos el link final
-  myVisit: 'https://govisit.gov.il',
-  oficinas: ''
+  pedidoLicencia: 'https://www.gov.il/he/service/apply_for_new_driver_drivers_license',
+  finAcompanamiento: 'https://www.gov.il/he/service/new_driver_accompaniment_period_statement',
+  myVisit: 'https://govisit.gov.il'
 };
+
+const OFICINAS = {
+  todas: 'Holón · Haifa (Mifratz) · Tiberíades · Afula · Netanya · Hadera · Ashkelon · Ashdod · Jerusalén (Beit Kalal y Talpiot)',
+  soloAuto: 'Rejovot · Petaj Tikva · Ramat Gan'
+};
+
+type TabType = 'cero' | 'canje';
 
 type VehicleType = 'auto' | 'moto' | 'camion';
 type ValidityType = 'si' | 'no';
@@ -46,94 +70,297 @@ interface StepItem {
   icon: React.ComponentType<{ className?: string }>;
 }
 
+// ───────────────────────── Pestaña "Desde cero" ─────────────────────────
+
+interface CeroStep {
+  title: string;
+  desc: string;
+  where: string;
+  link?: string;
+  cost?: { label: string; official: boolean };
+  spanish?: boolean;
+  goal?: boolean;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const CERO_STEPS: CeroStep[] = [
+  {
+    title: 'Pedido online y examen de vista',
+    desc: 'Formulario en gov.il con declaración de salud. Después, foto y examen de vista en una estación de fotos.',
+    where: 'gov.il · Pedido de licencia',
+    link: LINKS.pedidoLicencia,
+    cost: { label: 'Foto gratis · vista paga', official: false },
+    icon: FileText
+  },
+  {
+    title: 'Estudias la teoría',
+    desc: 'Señales, reglas y manejo seguro. El Ministerio recomienda rendir el teórico antes de empezar las clases.',
+    where: 'Sitio del Ministerio de Transporte',
+    icon: BookOpen
+  },
+  {
+    title: 'Examen teórico',
+    desc: '30 preguntas en computadora. Apruebas con 26. Vale 5 años.',
+    where: 'Te avisan por SMS para anotarte',
+    cost: { label: '57 ₪', official: true },
+    spanish: true,
+    icon: MonitorCheck
+  },
+  {
+    title: 'Clases de manejo',
+    desc: 'Mínimo 28 clases con un instructor habilitado, y su examen interno.',
+    where: 'Escuela o instructor habilitado',
+    cost: { label: 'Precio de cada escuela', official: false },
+    icon: Car
+  },
+  {
+    title: 'Test práctico',
+    desc: 'Tu instructor pide el turno: el primero sale en 3 a 5 días.',
+    where: 'Lo coordina tu instructor',
+    cost: { label: '165 ₪ + uso del auto', official: true },
+    icon: ClipboardCheck
+  },
+  {
+    title: '¡Licencia de conductor nuevo!',
+    desc: 'El resultado llega por SMS en 24 horas. El permiso para manejar sale en 72 horas.',
+    where: 'Tu área personal en gov.il',
+    goal: true,
+    icon: BadgeCheck
+  }
+];
+
+const COSTS: { icon: React.ComponentType<{ className?: string }>; name: string; value: string; official: boolean }[] = [
+  { icon: Camera, name: 'Foto', value: 'Gratis', official: true },
+  { icon: Eye, name: 'Examen de vista', value: 'Lo cobra la estación', official: false },
+  { icon: MonitorCheck, name: 'Examen teórico', value: '57 ₪', official: true },
+  { icon: Car, name: 'Clases (mín. 28) y examen interno', value: 'Precio de cada escuela', official: false },
+  { icon: ClipboardCheck, name: 'Test práctico', value: '165 ₪ + uso del auto', official: true }
+];
+
+const costChipClass = (official: boolean) =>
+  official ? 'bg-[#E5F3EB] text-[#2A7050]' : 'bg-[#FFF1D6] text-[#7A4E07]';
+
+const WhereChip: React.FC<{ where: string; link?: string }> = ({ where, link }) =>
+  link ? (
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F3EFF8] text-[#6B4FA0] border border-[#E4DCF0] hover:bg-[#EAE4F3] transition-colors"
+    >
+      <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+      <span>{where}</span>
+    </a>
+  ) : (
+    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F3EFF8] text-[#6B4FA0] border border-[#E4DCF0]">
+      <MapPin className="w-3.5 h-3.5 shrink-0" />
+      <span>{where}</span>
+    </span>
+  );
+
+const DesdeCero: React.FC = () => (
+  <div className="space-y-6">
+    <div className="grid grid-cols-1 lg:grid-cols-[1.7fr_1fr] gap-6 items-start">
+
+      {/* Camino paso a paso */}
+      <section className="bg-white rounded-3xl border border-slate-200/80 p-5 sm:p-7 shadow-xs">
+        <h2 className="text-xl font-black text-[#0E2559] tracking-tight">Tu camino, paso a paso</h2>
+        <ol className="relative mt-5 space-y-4">
+          <div
+            aria-hidden="true"
+            className="absolute left-[23px] sm:left-[29px] top-8 bottom-8 w-1.5 rounded-full"
+            style={{ background: 'repeating-linear-gradient(180deg,#6B4FA0 0 14px,#CDBFE6 14px 22px)' }}
+          />
+          {CERO_STEPS.map((step, idx) => {
+            const StepIcon = step.icon;
+            return (
+              <li key={step.title} className="relative flex items-start gap-3 sm:gap-4">
+                <div className="relative shrink-0 z-10">
+                  <div className={`w-12 h-12 sm:w-[60px] sm:h-[60px] rounded-full border-[3px] sm:border-4 flex items-center justify-center ${
+                    step.goal ? 'bg-[#2A7050] border-[#2A7050] text-white' : 'bg-white border-[#6B4FA0] text-[#6B4FA0]'
+                  }`}>
+                    <StepIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <span className="absolute -top-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#0E2559] text-white text-[11px] font-black flex items-center justify-center">
+                    {idx + 1}
+                  </span>
+                </div>
+                <div className="flex-1 min-w-0 bg-white border border-slate-200 rounded-2xl p-3.5 sm:p-4 space-y-2">
+                  <h3 className="text-base sm:text-[17px] font-black text-[#0E2559] leading-snug flex flex-wrap items-center gap-2">
+                    {step.title}
+                    {step.spanish && (
+                      <span className="text-[11px] font-black bg-[#2A7050] text-white rounded-full px-2.5 py-0.5">En español</span>
+                    )}
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-snug">{step.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <WhereChip where={step.where} link={step.link} />
+                    {step.cost && (
+                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black ${costChipClass(step.cost.official)}`}>
+                        <Wallet className="w-3.5 h-3.5 shrink-0" />
+                        {step.cost.label}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+
+      {/* Columna lateral */}
+      <aside className="space-y-6 lg:sticky lg:top-4">
+        <section className="bg-white rounded-3xl border border-slate-200/80 p-5 sm:p-6 shadow-xs">
+          <h2 className="text-xl font-black text-[#0E2559] tracking-tight flex items-center gap-2">
+            <Wallet className="w-5 h-5 text-[#6B4FA0]" />
+            ¿Cuánto sale?
+          </h2>
+          <p className="text-sm text-slate-600 mt-2">
+            Las tasas del Estado son bajas. Lo que más pesa son las clases: pide el precio antes de empezar.
+          </p>
+          <ul className="mt-3 divide-y divide-slate-100">
+            {COSTS.map(({ icon: CIcon, name, value, official }) => (
+              <li key={name} className="flex items-center justify-between gap-3 py-2.5">
+                <span className="flex items-center gap-2 text-sm font-bold text-[#0E2559]">
+                  <CIcon className="w-4 h-4 text-slate-400 shrink-0" />
+                  {name}
+                </span>
+                <span className={`text-xs font-black rounded-full px-2.5 py-1 text-right ${costChipClass(official)}`}>{value}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="flex flex-wrap gap-3 mt-3 text-xs font-bold text-slate-500">
+            <span className="flex items-center gap-1.5"><i className="w-2.5 h-2.5 rounded-sm bg-[#2A7050] inline-block" />Tasa oficial 2026</span>
+            <span className="flex items-center gap-1.5"><i className="w-2.5 h-2.5 rounded-sm bg-[#E8A33D] inline-block" />Varía según el lugar</span>
+          </div>
+        </section>
+
+        <section className="bg-[#E5F3EB] rounded-3xl p-5 sm:p-6">
+          <p className="flex items-center gap-2 text-base font-black text-[#0E2559]">
+            <Languages className="w-5 h-5 text-[#2A7050]" />
+            El teórico se rinde en español
+          </p>
+          <p className="text-sm text-slate-600 font-semibold mt-1">
+            También en hebreo, inglés, ruso, francés, árabe y amárico. Lo eliges al anotarte.
+          </p>
+        </section>
+      </aside>
+    </div>
+
+    {/* Primeros 2 años */}
+    <section className="bg-white rounded-3xl border border-slate-200/80 p-5 sm:p-7 shadow-xs space-y-4">
+      <h2 className="text-xl font-black text-[#0E2559] tracking-tight">Ya la tienes: tus primeros 2 años</h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_2fr] rounded-2xl overflow-hidden">
+        {[
+          { cls: 'bg-[#0E2559] text-white', icon: UserCheck, title: 'Con acompañante', sub: 'Día y noche', time: '0–3 meses' },
+          { cls: 'bg-[#3B3F8F] text-white', icon: Moon, title: 'De noche', sub: 'Con acompañante, de 21 a 6 h', time: '3–6 meses' },
+          { cls: 'bg-[#E8A33D] text-[#3D2703]', icon: AlertTriangle, title: 'Cartel', sub: 'En la luneta trasera, los 2 años', time: 'hasta 2 años', sign: true },
+        ].map(({ cls, icon: SIcon, title, sub, time, sign }) => (
+          <div key={time} className={`${cls} px-4 py-3 flex items-center justify-between gap-3`}>
+            <div>
+              <p className="flex items-center gap-1.5 text-sm sm:text-[15px] font-black">
+                <SIcon className="w-4 h-4 shrink-0" />
+                {title}
+                {sign && <span dir="rtl" className="bg-white text-[#3D2703] rounded-md px-1.5 font-black">נהג חדש</span>}
+              </p>
+              <p className="text-xs font-bold opacity-90">{sub}</p>
+            </div>
+            <span className="md:hidden text-xs font-black bg-white/20 rounded-full px-2.5 py-1 whitespace-nowrap">{time}</span>
+          </div>
+        ))}
+      </div>
+      <div className="hidden md:grid grid-cols-[1fr_1fr_2fr] text-xs font-black text-slate-500 -mt-2">
+        <span>0–3 meses</span><span>3–6 meses</span><span className="text-right">hasta 2 años</span>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        <span className="inline-flex items-center gap-1.5 text-sm font-bold bg-[#F1ECF9] text-[#6B4FA0] rounded-full px-3 py-1.5">
+          <UserCheck className="w-4 h-4 shrink-0" />
+          El acompañante es obligatorio si tienes menos de 24 años
+        </span>
+        <span className="inline-flex items-center gap-1.5 text-sm font-bold bg-[#F1ECF9] text-[#6B4FA0] rounded-full px-3 py-1.5">
+          <Users className="w-4 h-4 shrink-0" />
+          ¿Menos de 21? Máximo 2 pasajeros, salvo que vaya el acompañante
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+        {[
+          { icon: UserCheck, c: 'text-[#6B4FA0] bg-[#F1ECF9]', title: '¿Quién te acompaña?', text: 'Alguien de 24+ con 5 años de licencia, o de 30+ con 3 años.' },
+          { icon: Timer, c: 'text-[#6B4FA0] bg-[#F1ECF9]', title: '50 horas en total', text: '20 en ciudad, 15 en ruta y 15 de noche.' },
+          { icon: Smartphone, c: 'text-[#2A7050] bg-[#E5F3EB]', title: 'Al terminar, avisas', text: 'Firmas la declaración de fin del acompañamiento. Sin ella no recibes la licencia definitiva.', link: LINKS.finAcompanamiento },
+          { icon: AlertTriangle, c: 'text-[#C0392B] bg-[#FCE8E5]', title: 'Cuidado con las multas', text: 'Una infracción grave te obliga a repetir exámenes y suma 2 años más como conductor nuevo.' },
+        ].map(({ icon: RIcon, c, title, text, link }) => (
+          <div key={title} className="border border-slate-200 rounded-2xl p-4 flex md:flex-col gap-3">
+            <span className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${c}`}>
+              <RIcon className="w-5 h-5" />
+            </span>
+            <div className="space-y-1.5">
+              <p className="text-[15px] font-black text-[#0E2559] leading-snug">{title}</p>
+              <p className="text-sm text-slate-600 leading-snug">{text}</p>
+              {link && <WhereChip where="gov.il · Fin del acompañamiento" link={link} />}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 pt-3 border-t border-slate-200/60">
+        <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
+        <span>Fuente: Kol Zchut · Ministerio de Transporte (tasas abril 2026 y guía de acompañamiento)</span>
+      </div>
+    </section>
+  </div>
+);
+
+// ───────────────────────── Componente principal ─────────────────────────
+
 export const DriverLicenseWizard: React.FC = () => {
   // Estado del Wizard
   const [vehicle, setVehicle] = useState<VehicleType>('auto');
   const [isValid, setIsValid] = useState<ValidityType>('si');
   const [yearsExperience, setYearsExperience] = useState<ExperienceType>('5_o_mas');
   const [aliaYears, setAliaYears] = useState<AliyahTimeType>('menos_5');
+  const [tab, setTab] = useState<TabType>('cero');
 
-  // Pasos reutilizables
-  const stepA: StepItem = {
-    id: 'A',
-    title: 'Formulario de salud',
-    desc: 'Completa el Tofes Yarok online.',
-    where: 'gov.il · Tofes Yarok',
-    link: LINKS.tofesYarok,
-    icon: FileText
+  const goToCero = () => {
+    setTab('cero');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const stepB: StepItem = {
-    id: 'B',
-    title: 'Vista y foto',
-    desc: 'Examen de la vista y foto para la licencia.',
-    where: 'Óptica autorizada con estación de fotos',
-    icon: Eye
-  };
-
-  const stepC: StepItem = {
-    id: 'C',
-    title: 'Turno en la oficina',
-    desc: 'Vas en persona con los papeles.',
-    where: 'MyVisit · Ministerio de Transporte',
+  // Pasos del canje
+  const stepTurno: StepItem = {
+    id: 'turno',
+    title: 'Sacas turno',
+    desc: 'En la app My Visit, en una oficina de licencias.',
+    where: 'App My Visit · Ministerio de Transporte',
     link: LINKS.myVisit,
     icon: Calendar
   };
 
-  const stepD: StepItem = {
-    id: 'D',
-    title: 'Pagas y la recibes',
-    desc: 'Te dan una licencia temporal. La de plástico llega por correo.',
-    where: 'Online o en el correo',
-    icon: CreditCard
+  const stepOficina: StepItem = {
+    id: 'oficina',
+    title: 'Vas a la oficina',
+    desc: 'Con los papeles. Ahí pagas la tasa y te pueden pedir examen de vista.',
+    where: 'Oficina de licencias habilitada',
+    icon: FolderCheck
   };
 
-  const stepP: StepItem = {
-    id: 'P',
+  const stepPractico: StepItem = {
+    id: 'practico',
     title: 'Examen práctico',
-    desc: 'Lo coordinas con el instructor, que pone el auto.',
-    where: 'Un instructor de manejo habilitado',
+    desc: 'Tienes 2 intentos. No hay mínimo de clases.',
+    where: 'Te lo indican en la oficina',
     icon: Car
   };
 
-  const stepR: StepItem = {
-    id: 'R',
+  const stepRenovar: StepItem = {
+    id: 'renovar',
     title: 'Renuévala',
-    desc: 'Haz la renovación en tu país, antes del canje.',
+    desc: 'En tu país, antes del turno.',
     where: 'Quien emitió tu licencia, en tu país',
     icon: RotateCw
-  };
-
-  const stepCCurso: StepItem = {
-    id: 'C_curso',
-    title: 'Curso y teórico',
-    desc: 'Haces el curso del vehículo que quieres manejar.',
-    where: 'Escuela de manejo autorizada',
-    icon: BookOpen
-  };
-
-  const stepPCurso: StepItem = {
-    id: 'P_curso',
-    title: 'Examen práctico',
-    desc: 'Rindes el examen con la escuela.',
-    where: 'Un instructor de manejo habilitado',
-    icon: Car
-  };
-
-  const stepCTeorico: StepItem = {
-    id: 'C_teorico',
-    title: 'Examen teórico',
-    desc: 'Estudias y rindes el teórico oficial.',
-    where: 'Centro de exámenes teóricos',
-    icon: FileCheck2
-  };
-
-  const stepPClases: StepItem = {
-    id: 'P_clases',
-    title: 'Clases y práctico',
-    desc: 'Mínimo de clases prácticas con instructor y examen.',
-    where: 'Escuela e instructor habilitado',
-    icon: Car
   };
 
   // Función para abrir el asistente de Olim Conectados
@@ -157,69 +384,81 @@ export const DriverLicenseWizard: React.FC = () => {
     steps: StepItem[];
     showDocs: boolean;
     alertText: string;
-    showAssistantBtn?: boolean;
+    alertRed?: boolean;
+    oficinas?: 'todas' | 'all';
+    showCeroBtn?: boolean;
+    showHelpBtns?: boolean;
   };
 
+  const motoTxt = vehicle === 'moto' ? ' Vale igual para moto.' : '';
+
   if (vehicle === 'camion') {
-    // Caso a: Camión, colectivo o taxi
+    // a) Camión, colectivo o taxi
     resultCase = {
       color: 'orange',
       icon: Truck,
-      title: 'Siempre con curso y exámenes',
-      subtitle: 'Para vehículos comerciales y transporte público.',
-      badge: 'Curso + exámenes',
-      steps: [stepA, stepB, stepCCurso, stepPCurso],
-      showDocs: false,
-      alertText: 'Colectivo y taxi: desde los 21 años. El taxi pide además 2 años de licencia.'
+      title: 'Canje con examen práctico',
+      subtitle: 'El canje sin examen es solo para auto y moto.',
+      badge: 'Con examen práctico',
+      steps: [stepTurno, stepOficina, stepPractico],
+      showDocs: true,
+      alertText: 'En la oficina te dicen si te piden algo más para tu categoría.',
+      oficinas: 'todas'
     };
   } else if (aliaYears === '5_o_mas') {
-    // Caso b: Pasaron 5 años desde la Aliá
+    // b) Pasaron 5 años o más desde la Aliá
     resultCase = {
       color: 'red',
-      icon: AlertTriangle,
+      icon: GraduationCap,
       title: 'Ya no se puede canjear',
-      subtitle: 'Pasaron 5 años desde tu Aliá: sacas la licencia israelí desde cero.',
-      badge: 'Proceso completo',
-      steps: [stepA, stepB, stepCTeorico, stepPClases],
+      subtitle: 'El canje se hace solo en tus primeros 5 años en Israel.',
+      badge: 'Desde cero',
+      steps: [],
       showDocs: false,
-      alertText: 'Aunque tu licencia extranjera esté vigente, ya no te sirve para manejar en Israel.'
+      alertText: 'Pasado ese plazo, sacas la licencia israelí desde cero.',
+      alertRed: true,
+      showCeroBtn: true
     };
   } else if (isValid === 'no') {
-    // Caso c: Licencia vencida
+    // c) Licencia vencida
     resultCase = {
       color: 'red',
       icon: RotateCw,
       title: 'Primero, renueva tu licencia',
-      subtitle: 'El canje solo se hace con una licencia vigente.',
-      badge: 'Licencia vencida',
-      steps: [stepR, stepA, stepB, stepC, stepD],
+      subtitle: 'Para el canje hay que llevar la licencia original y vigente.',
+      badge: 'Primero renovar',
+      steps: [stepRenovar, stepTurno, stepOficina],
       showDocs: true,
-      alertText: '¿No puedes renovarla? Tienes que sacar la licencia israelí desde cero: clases, examen teórico y práctico.',
-      showAssistantBtn: true
+      alertText: '¿No puedes renovarla? Consulta tu caso en el Ministerio de Transporte: *5678.',
+      alertRed: true,
+      oficinas: 'all',
+      showHelpBtns: true
     };
   } else if (yearsExperience === 'menos_5') {
-    // Caso d: Menos de 5 años con licencia
+    // d) Menos de 5 años con licencia
     resultCase = {
       color: 'orange',
       icon: vehicle === 'moto' ? Bike : Car,
       title: 'Canje con examen práctico',
-      subtitle: `Tenías la licencia menos de 5 años al llegar.${vehicle === 'moto' ? ' Vale igual para moto.' : ''}`,
+      subtitle: `Tenías la licencia menos de 5 años al llegar.${motoTxt}`,
       badge: 'Con examen práctico',
-      steps: [stepA, stepB, stepC, stepP, stepD],
+      steps: [stepTurno, stepOficina, stepPractico],
       showDocs: true,
-      alertText: 'Si no lo apruebas 2 veces, también rindes el examen teórico.'
+      alertText: 'Si no apruebas el práctico 2 veces, rindes el teórico y otro práctico.',
+      oficinas: 'all'
     };
   } else {
-    // Caso e: Default (Auto o Moto, vigente, 5+ años experiencia, menos de 5 años Aliá)
+    // e) Auto o moto, vigente, 5+ años con licencia, menos de 5 años desde la Aliá
     resultCase = {
       color: 'green',
       icon: CheckCircle2,
       title: 'Canje sin examen',
-      subtitle: `Licencia vigente y con 5 años o más al llegar.${vehicle === 'moto' ? ' Vale igual para moto.' : ''}`,
+      subtitle: `Licencia vigente y con 5 años o más al llegar.${motoTxt}`,
       badge: 'Sin examen',
-      steps: [stepA, stepB, stepC, stepD],
+      steps: [stepTurno, stepOficina],
       showDocs: true,
-      alertText: ''
+      alertText: '',
+      oficinas: 'all'
     };
   }
 
@@ -274,10 +513,45 @@ export const DriverLicenseWizard: React.FC = () => {
         </div>
         <div>
           <h1 className="text-xl sm:text-2xl font-black text-[#0E2559] tracking-tight">Licencia de Conducir</h1>
-          <p className="text-xs sm:text-sm text-slate-600 mt-0.5">Responde 4 preguntas y mira tu camino al carné israelí.</p>
+          <p className="text-xs sm:text-sm text-slate-600 mt-0.5">Elige tu caso y sigue el camino.</p>
         </div>
       </div>
 
+      {/* Pestañas: Desde cero / Canje */}
+      <div role="tablist" aria-label="Tipo de trámite" className="grid grid-cols-2 gap-2 sm:gap-3">
+        {[
+          { id: 'cero' as TabType, title: 'Desde cero', sub: 'Nunca tuviste licencia', icon: GraduationCap },
+          { id: 'canje' as TabType, title: 'Canje', sub: 'Ya tienes licencia de otro país', icon: Repeat },
+        ].map(({ id, title, sub, icon: TabIcon }) => {
+          const active = tab === id;
+          return (
+            <button
+              key={id}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => setTab(id)}
+              className={`min-w-0 text-left rounded-3xl border-2 p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3.5 transition cursor-pointer ${
+                active
+                  ? 'border-[#6B4FA0] bg-[#F1ECF9] shadow-[0_0_0_3px_rgba(107,79,160,0.15)]'
+                  : 'border-slate-200 bg-white hover:border-slate-300'
+              }`}
+            >
+              <span className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shrink-0 ${active ? 'bg-[#6B4FA0] text-white' : 'bg-[#F1ECF9] text-[#6B4FA0]'}`}>
+                <TabIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-base sm:text-lg font-black text-[#0E2559] leading-tight">{title}</span>
+                <span className="block text-xs sm:text-sm text-slate-500 font-semibold leading-snug">{sub}</span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {tab === 'cero' && <DesdeCero />}
+
+      {tab === 'canje' && (<>
       {/* 2. TARJETA: Tus dos fechas clave (infografía) */}
       <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-7 shadow-xs space-y-6">
         <h2 className="text-xl font-black text-[#0E2559] tracking-tight">Tus dos fechas clave</h2>
@@ -575,6 +849,7 @@ export const DriverLicenseWizard: React.FC = () => {
           </div>
         </div>
 
+        {resultCase.steps.length > 0 && (<>
         {/* Roadmap: Versión Desktop (Horizontal) */}
         <div className="hidden md:block relative pt-4 pb-2">
           {/* Línea conectora horizontal de fondo */}
@@ -601,7 +876,7 @@ export const DriverLicenseWizard: React.FC = () => {
                   <h4 className="text-sm font-bold text-[#0E2559] mt-3">{step.title}</h4>
 
                   {/* Descripción corta de 1 línea */}
-                  <p className="text-xs text-slate-600 mt-1 line-clamp-1 leading-snug">
+                  <p className="text-xs text-slate-600 mt-1 leading-snug">
                     {step.desc}
                   </p>
 
@@ -683,7 +958,9 @@ export const DriverLicenseWizard: React.FC = () => {
           })}
         </div>
 
-        {/* Franja de Documentos requeridos (Casos c, d y e) */}
+        </>)}
+
+        {/* Franja de Documentos requeridos */}
         {resultCase.showDocs && (
           <div className="bg-[#FFF9EE] border border-amber-200/80 rounded-2xl p-4 flex flex-col md:flex-row md:items-center gap-3">
             <div className="flex items-center gap-2 text-[#0E2559] font-bold text-sm shrink-0">
@@ -695,9 +972,6 @@ export const DriverLicenseWizard: React.FC = () => {
                 Teudat Olé original
               </span>
               <span className="bg-white px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold text-slate-800 border border-slate-200/90 shadow-2xs">
-                Teudat Zehut
-              </span>
-              <span className="bg-white px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold text-slate-800 border border-slate-200/90 shadow-2xs">
                 Licencia extranjera original y vigente
               </span>
               <span className="bg-white px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold text-slate-800 border border-slate-200/90 shadow-2xs">
@@ -707,32 +981,64 @@ export const DriverLicenseWizard: React.FC = () => {
           </div>
         )}
 
+        {/* Oficinas que hacen el canje */}
+        {resultCase.oficinas && (
+          <div className="border border-slate-200 rounded-2xl p-4 space-y-1.5 text-sm text-slate-600">
+            <p className="flex items-center gap-2 font-black text-[#0E2559]">
+              <MapPin className="w-4 h-4 shrink-0" />
+              Oficinas que hacen el canje
+            </p>
+            <p><strong className="text-[#0E2559]">Todas las categorías:</strong> {OFICINAS.todas}</p>
+            {resultCase.oficinas === 'all' && (
+              <p><strong className="text-[#0E2559]">Solo auto:</strong> {OFICINAS.soloAuto}</p>
+            )}
+          </div>
+        )}
+
         {/* Alerta de advertencia del caso */}
         {resultCase.alertText && (
           <div 
             className={`rounded-2xl p-4 flex items-start sm:items-center gap-3 text-sm font-semibold ${
-              resultCase.color === 'red'
+              resultCase.alertRed
                 ? 'bg-[#FDECEA] border border-red-200/90 text-red-950'
                 : 'bg-[#FFF5DF] border border-amber-200/90 text-amber-950'
             }`}
           >
             <AlertTriangle className={`w-5 h-5 shrink-0 mt-0.5 sm:mt-0 ${
-              resultCase.color === 'red' ? 'text-[#C0392B]' : 'text-[#E8A33D]'
+              resultCase.alertRed ? 'text-[#C0392B]' : 'text-[#E8A33D]'
             }`} />
             <span>{resultCase.alertText}</span>
           </div>
         )}
 
-        {/* Bloque secundario en Caso c (Licencia vencida): Preguntar al asistente */}
-        {resultCase.showAssistantBtn && (
-          <div className="pt-2">
-            <p className="text-sm font-bold text-[#0E2559] mb-2">¿Dudas con tu caso?</p>
+        {/* Botón al camino desde cero (5+ años desde la Aliá) */}
+        {resultCase.showCeroBtn && (
+          <button
+            type="button"
+            onClick={goToCero}
+            className="min-h-[44px] px-5 py-2.5 rounded-full bg-[#0E2559] hover:bg-[#153477] text-white font-bold text-sm inline-flex items-center gap-2 shadow-2xs transition-colors cursor-pointer"
+          >
+            <ArrowRight className="w-4 h-4 text-[#E8A33D]" />
+            <span>Ver el camino desde cero</span>
+          </button>
+        )}
+
+        {/* Licencia vencida: llamar al Ministerio o preguntar al asistente */}
+        {resultCase.showHelpBtns && (
+          <div className="flex flex-wrap gap-2.5">
+            <a
+              href="tel:*5678"
+              className="min-h-[44px] px-5 py-2.5 rounded-full bg-[#0E2559] hover:bg-[#153477] text-white font-bold text-sm inline-flex items-center gap-2 shadow-2xs transition-colors"
+            >
+              <Phone className="w-4 h-4 text-[#E8A33D]" />
+              <span>Llamar al *5678</span>
+            </a>
             <button
               type="button"
               onClick={handleAskAssistant}
-              className="min-h-[44px] px-5 py-2.5 rounded-full bg-[#0E2559] hover:bg-[#153477] text-white font-bold text-sm inline-flex items-center gap-2 shadow-2xs transition-colors cursor-pointer"
+              className="min-h-[44px] px-5 py-2.5 rounded-full bg-white border border-slate-300 hover:bg-slate-50 text-[#0E2559] font-bold text-sm inline-flex items-center gap-2 transition-colors cursor-pointer"
             >
-              <MessageCircle className="w-4 h-4 text-[#E8A33D]" />
+              <MessageCircle className="w-4 h-4 text-[#6B4FA0]" />
               <span>Preguntar al asistente</span>
             </button>
           </div>
@@ -745,6 +1051,7 @@ export const DriverLicenseWizard: React.FC = () => {
         </div>
 
       </section>
+      </>)}
 
     </div>
   );

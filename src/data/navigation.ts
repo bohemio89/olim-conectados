@@ -201,8 +201,8 @@ export const SECTIONS: SectionConfig[] = [
     icon: Car,
     groupId: 'tramites',
     groupName: 'Derechos & Trámites',
-    description: 'Responde 4 preguntas y mira tu camino para el carné israelí.',
-    contextPromptHint: 'Estás en: Licencia de Conducir. Pregúntame sobre el Tofes Yarok, test práctico y reválida de carné.',
+    description: 'Saca tu licencia desde cero o canjea la de tu país, paso a paso.',
+    contextPromptHint: 'Estás en: Licencia de Conducir. Pregúntame sobre sacar la licencia desde cero, el examen teórico, el test práctico o el canje de tu licencia extranjera.',
     path: '/licencia-de-conducir'
   },
 
