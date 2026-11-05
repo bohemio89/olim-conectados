@@ -130,7 +130,7 @@ export const SECTIONS: SectionConfig[] = [
     isFeatured: true,
     description: 'A dónde ir según la urgencia, sin pagar de más.',
     featuredDescription: 'Conoce las reglas de derivación previa (hafniá) y números telefónicos de guardia urgente.',
-    contextPromptHint: 'Estás en: Guardia & Miún. Consúltame sobre coberturas de guardia, Terem y derivaciones.',
+    contextPromptHint: 'Estás en: Guardia & Miún. Consúltame a dónde ir, cuándo pagas la guardia y cómo pedir la derivación.',
     path: '/emergencias'
   },
   {
