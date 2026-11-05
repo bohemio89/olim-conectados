@@ -6697,6 +6697,7 @@ export const COMMUNITY_STORES: CommunityStore[] = [
     shortHours: 'Por encargo',
     tags: ['Alfajores', 'Kosher Mehadrin'],
     contacts: [
+      { type: 'whatsapp', url: 'https://wa.me/972548667893', label: 'WhatsApp' },
       { type: 'web', url: 'https://vajula.com', label: 'vajula.com' },
       { type: 'instagram', url: 'https://instagram.com/vajulaalfajores', label: '@vajulaalfajores' },
     ],
@@ -6704,7 +6705,7 @@ export const COMMUNITY_STORES: CommunityStore[] = [
     category: 'Emprendimiento de Olim (Sin Local / Por Encargo)',
     city: 'Israel (por encargo / envio)',
     address: 'Sin local fijo -- contacto por WhatsApp/Instagram',
-    phone: '',
+    phone: '+972 54-866-7893',
     description: 'Alfajores argentinos elaborados en Israel, con certificacion Kosher Mehadrin. Confirmado en Instagram (@vajulaalfajores) y sitio propio vajula.com.',
     specialties: ['Alfajores de chocolate', 'Alfajores surtidos'],
     hours: 'Consultar por WhatsApp o Instagram',
