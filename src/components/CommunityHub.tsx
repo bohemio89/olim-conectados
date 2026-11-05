@@ -194,7 +194,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4 text-neutral-400 shrink-0" />
-                      <span className="truncate">{meta.cleanHours}</span>
+                      <span>{meta.cleanHours}</span>
                     </div>
                   </div>
 
