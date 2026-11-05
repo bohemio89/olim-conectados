@@ -11,9 +11,14 @@ import {
   ShoppingBag,
   Sparkles,
   X,
-  Check
+  Check,
+  Globe,
+  Phone,
+  Mail,
+  Loader2
 } from 'lucide-react';
-import { CommunityStore, CommunityGroup } from '../types';
+import { CommunityStore, CommunityGroup, StoreContact } from '../types';
+import { enviarPropuesta } from '../lib/propuestas';
 
 interface CommunityHubProps {
   stores: CommunityStore[];
@@ -27,6 +32,8 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<'store' | 'group'>('store');
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
   const categories = [
     'Todos',
@@ -34,7 +41,6 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
     'Comida casera',
     'Productos latinos',
     'Por encargo',
-    'Grupos de WhatsApp',
   ];
 
   const cities = [
@@ -45,122 +51,46 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
     'Haifa',
   ];
 
-  // Helper to determine store rubro / icon
-  const getStoreMeta = (store: CommunityStore) => {
-    if (store.id === 'store-1') {
-      return {
-        rubro: 'Panadería y café',
-        icon: Croissant,
-        categoryTag: 'Panaderías',
-        cleanAddress: 'Tel Aviv · Ibn Gvirol 54',
-        cleanHours: 'Dom–Jue 7:30–18:30',
-        tags: ['Alfajores', 'Café', 'Kosher'],
-        whatsappUrl: `https://wa.me/972526801162`,
-        instagramUrl: 'https://instagram.com/amapolaalfajores',
-      };
-    }
-    if (store.id === 'store-2') {
-      return {
-        rubro: 'Empanadas caseras',
-        icon: Utensils,
-        categoryTag: 'Comida casera',
-        cleanAddress: "Merkaz · delivery desde Modi'in",
-        cleanHours: 'Pedidos por WhatsApp',
-        tags: ['Empanadas', 'Delivery'],
-        whatsappUrl: `https://wa.me/972536095976`,
-        instagramUrl: 'https://instagram.com/las.empanadot',
-      };
-    }
-    if (store.id === 'store-3') {
-      return {
-        rubro: 'Emprendimiento de olim',
-        icon: Gift,
-        categoryTag: 'Por encargo',
-        cleanAddress: 'Envíos a todo Israel',
-        cleanHours: 'Por encargo',
-        tags: ['Alfajores', 'Kosher Mehadrin'],
-        whatsappUrl: 'https://wa.me/972500000000',
-        instagramUrl: 'https://instagram.com/vajulaalfajores',
-      };
-    }
-    if (store.id === 'store-4') {
-      return {
-        rubro: 'Productos argentinos',
-        icon: ShoppingBag,
-        categoryTag: 'Productos latinos',
-        cleanAddress: 'Tel Aviv · Allenby 37',
-        cleanHours: 'Dom–Jue 9:00–20:00',
-        tags: ['Yerba mate', 'Dulce de leche', 'Tapas'],
-        whatsappUrl: 'https://wa.me/97235102345',
-        instagramUrl: 'https://instagram.com/mateando_israel',
-      };
-    }
-    if (store.id === 'store-5') {
-      return {
-        rubro: 'Comida latina',
-        icon: ShoppingBag,
-        categoryTag: 'Productos latinos',
-        cleanAddress: 'Tel Aviv · Levanda 13',
-        cleanHours: 'Dom–Jue 10:00–19:00',
-        tags: ['Harina P.A.N.', 'Tortillas', 'Quesos'],
-        whatsappUrl: 'https://wa.me/972547931818',
-        instagramUrl: 'https://instagram.com/latiendatlv',
-      };
-    }
+  const CATEGORY_ICON = {
+    'Panaderías': Croissant,
+    'Comida casera': Utensils,
+    'Por encargo': Gift,
+    'Productos latinos': ShoppingBag,
+  } as const;
 
+  const CONTACT_ICON: Record<StoreContact['type'], React.ElementType> = {
+    whatsapp: MessageCircle,
+    instagram: Instagram,
+    web: Globe,
+    phone: Phone,
+    email: Mail,
+  };
+
+  const getStoreMeta = (store: CommunityStore) => {
+    const cat = store.filterCategory ?? 'Productos latinos';
     return {
       rubro: store.category,
-      icon: ShoppingBag,
-      categoryTag: 'Productos latinos',
-      cleanAddress: store.address || store.city,
-      cleanHours: store.hours || 'Consultar',
-      tags: store.specialties.slice(0, 3),
-      whatsappUrl: `https://wa.me/${store.phone.replace(/[^0-9]/g, '')}`,
-      instagramUrl: store.instagramOrWeb || 'https://instagram.com',
+      icon: CATEGORY_ICON[cat],
+      categoryTag: cat,
+      zone: store.zone ?? 'Todo Israel',
+      cleanAddress: store.shortAddress ?? store.address ?? store.city,
+      cleanHours: store.shortHours ?? store.hours ?? 'Consultar',
+      tags: store.tags ?? store.specialties.slice(0, 3),
+      contacts: store.contacts ?? [],
     };
   };
 
-  // Filter stores
   const filteredStores = stores.filter((store) => {
     const meta = getStoreMeta(store);
-
-    // Filter by Category
-    if (selectedCategory === 'Grupos de WhatsApp') {
-      return false; // Groups shown separately
-    }
-    if (selectedCategory === 'Panaderías' && meta.categoryTag !== 'Panaderías') {
-      return false;
-    }
-    if (selectedCategory === 'Comida casera' && meta.categoryTag !== 'Comida casera') {
-      return false;
-    }
-    if (selectedCategory === 'Productos latinos' && meta.categoryTag !== 'Productos latinos') {
-      return false;
-    }
-    if (selectedCategory === 'Por encargo' && meta.categoryTag !== 'Por encargo' && store.id !== 'store-2') {
-      return false;
-    }
-
-    // Filter by City
-    if (selectedCity === 'Tel Aviv' && !meta.cleanAddress.includes('Tel Aviv')) {
-      return false;
-    }
-    if (selectedCity === 'Merkaz' && !meta.cleanAddress.includes('Merkaz') && !meta.cleanAddress.includes("Modi'in")) {
-      return false;
-    }
-    if (selectedCity === 'Jerusalén' && !meta.cleanAddress.includes('Jerusalén')) {
-      return false;
-    }
-    if (selectedCity === 'Haifa' && !meta.cleanAddress.includes('Haifa')) {
-      return false;
-    }
-
+    if (selectedCategory !== 'Todos' && meta.categoryTag !== selectedCategory) return false;
+    if (selectedCity !== 'Todo Israel' && meta.zone !== selectedCity && meta.zone !== 'Todo Israel') return false;
     return true;
   });
 
   const handleOpenAdd = (type: 'store' | 'group') => {
     setModalType(type);
     setSubmitted(false);
+    setSendError(false);
     setIsModalOpen(true);
   };
 
@@ -177,7 +107,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
       {/* 1. Dos filas de chips: Categoría y Ciudad */}
       <div className="space-y-3">
         {/* Fila 1: Categoría */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-sm">
+        <div className="flex flex-wrap items-center gap-2 text-sm">
           {categories.map((cat) => {
             const isActive = selectedCategory === cat;
             return (
@@ -185,7 +115,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`min-h-[44px] px-5 py-2.5 rounded-full font-bold whitespace-nowrap transition ${
+                className={`min-h-[44px] px-4 sm:px-5 py-2.5 rounded-full font-bold whitespace-nowrap transition ${
                   isActive
                     ? 'bg-[#0E2559] text-white shadow-2xs'
                     : 'bg-white text-neutral-800 border border-neutral-200/90 hover:bg-neutral-50 shadow-2xs'
@@ -198,7 +128,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
         </div>
 
         {/* Fila 2: Ciudad */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-sm">
+        <div className="flex flex-wrap items-center gap-2 text-sm">
           {cities.map((city) => {
             const isActive = selectedCity === city;
             return (
@@ -223,7 +153,13 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
       </div>
 
       {/* 2. Fichas en 3 columnas (1 en celular) */}
-      {selectedCategory !== 'Grupos de WhatsApp' && (
+      {filteredStores.length === 0 && (
+        <p className="text-sm text-neutral-600 bg-white border border-black/10 rounded-2xl p-5">
+          Todavía no hay comercios en esta zona. ¿Conoces uno? Súmalo con el botón de abajo.
+        </p>
+      )}
+
+      {filteredStores.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredStores.map((store) => {
             const meta = getStoreMeta(store);
@@ -258,7 +194,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4 text-neutral-400 shrink-0" />
-                      <span className="truncate">{meta.cleanHours}</span>
+                      <span>{meta.cleanHours}</span>
                     </div>
                   </div>
 
@@ -275,26 +211,25 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                   </div>
                 </div>
 
-                {/* Botones WhatsApp e Instagram */}
+                {/* Botones de contacto */}
                 <div className="flex items-center gap-2 pt-3 border-t border-black/5">
-                  <a
-                    href={meta.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 min-h-[44px] bg-[#2A7050] hover:bg-[#235e43] text-white font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition shadow-2xs"
-                  >
-                    <MessageCircle className="w-4 h-4 text-white fill-current" />
-                    <span>WhatsApp</span>
-                  </a>
-                  <a
-                    href={meta.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 min-h-[44px] border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-800 font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition"
-                  >
-                    <Instagram className="w-4 h-4 text-neutral-800" />
-                    <span>Instagram</span>
-                  </a>
+                  {meta.contacts.slice(0, 2).map((c, i) => {
+                    const Icon = CONTACT_ICON[c.type];
+                    return (
+                      <a
+                        key={c.url}
+                        href={c.url}
+                        target={c.type === 'phone' || c.type === 'email' ? undefined : '_blank'}
+                        rel="noopener noreferrer"
+                        className={i === 0
+                          ? 'flex-1 min-h-[44px] bg-[#2A7050] hover:bg-[#235e43] text-white font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition shadow-2xs'
+                          : 'flex-1 min-h-[44px] border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-800 font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition'}
+                      >
+                        <Icon className="w-4 h-4" />
+                        <span>{c.label}</span>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             );
@@ -313,7 +248,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
               Grupos de WhatsApp por ciudad
             </h4>
             <p className="text-neutral-600 text-sm mt-0.5">
-              Muy pronto. ¿Administras un grupo de olim? Súmalo.
+              ¿Administras un grupo de olim? Súmalo y lo publicamos.
             </p>
           </div>
         </div>
@@ -329,7 +264,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
 
       {/* Modal para sumar comercio o grupo */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-xl space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="font-extrabold text-[#0E2559] text-xl">
@@ -353,7 +288,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                   ¡Gracias por sumar a la comunidad!
                 </p>
                 <p className="text-sm text-neutral-600">
-                  Revisaremos los datos y lo agregaremos al directorio oficial en la próxima actualización.
+                  Recibimos tu propuesta. La revisamos antes de publicarla.
                 </p>
                 <button
                   type="button"
@@ -365,9 +300,25 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
               </div>
             ) : (
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  setSubmitted(true);
+                  const f = new FormData(e.currentTarget);
+                  setSending(true);
+                  setSendError(false);
+                  try {
+                    await enviarPropuesta({
+                      tipo: modalType === 'store' ? 'comercio' : 'grupo',
+                      nombre: String(f.get('nombre') || '').trim(),
+                      zona: String(f.get('zona') || '').trim(),
+                      contacto: String(f.get('contacto') || '').trim(),
+                      comentario: String(f.get('comentario') || ''),
+                    });
+                    setSubmitted(true);
+                  } catch {
+                    setSendError(true);
+                  } finally {
+                    setSending(false);
+                  }
                 }}
                 className="space-y-3 text-sm"
               >
@@ -378,7 +329,10 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                   <input
                     required
                     type="text"
-                    placeholder="Ej. Alfajores del Sur"
+                    name="nombre"
+                    minLength={2}
+                    maxLength={120}
+                    placeholder={modalType === 'store' ? 'Ej. Alfajores del Sur' : 'Ej. Olim de Haifa'}
                     className="w-full min-h-[44px] px-3.5 py-2 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-[#2A7050] outline-none"
                   />
                 </div>
@@ -389,6 +343,9 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                   <input
                     required
                     type="text"
+                    name="zona"
+                    minLength={2}
+                    maxLength={120}
                     placeholder="Ej. Tel Aviv / Merkaz"
                     className="w-full min-h-[44px] px-3.5 py-2 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-[#2A7050] outline-none"
                   />
@@ -400,10 +357,28 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                   <input
                     required
                     type="text"
+                    name="contacto"
+                    minLength={3}
+                    maxLength={300}
                     placeholder="https://..."
                     className="w-full min-h-[44px] px-3.5 py-2 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-[#2A7050] outline-none"
                   />
                 </div>
+                <div>
+                  <label className="block font-bold text-neutral-800 mb-1">
+                    Comentario (opcional)
+                  </label>
+                  <textarea
+                    name="comentario"
+                    maxLength={500}
+                    rows={2}
+                    placeholder="Qué venden, horarios, para quién es el grupo..."
+                    className="w-full px-3.5 py-2 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-[#2A7050] outline-none"
+                  />
+                </div>
+                {sendError && (
+                  <p className="text-[#C0392B] font-bold text-sm">No se pudo enviar. Revisa tu conexión e inténtalo de nuevo.</p>
+                )}
                 <div className="pt-2 flex gap-2">
                   <button
                     type="button"
@@ -414,8 +389,10 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 min-h-[44px] bg-[#2A7050] text-white rounded-xl font-bold hover:bg-[#235e43] shadow-2xs"
+                    disabled={sending}
+                    className="flex-1 min-h-[44px] bg-[#2A7050] text-white rounded-xl font-bold hover:bg-[#235e43] shadow-2xs disabled:opacity-60 flex items-center justify-center gap-2"
                   >
+                    {sending && <Loader2 className="w-4 h-4 animate-spin" />}
                     Enviar propuesta
                   </button>
                 </div>
