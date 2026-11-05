@@ -6645,6 +6645,7 @@ export const INITIAL_DOCTORS: Doctor[] = [
 export const COMMUNITY_STORES: CommunityStore[] = [
   {
     id: 'store-1',
+    logo: '/comunidad/amapola.png',
     filterCategory: 'Panaderías',
     zone: 'Tel Aviv',
     shortAddress: 'Tel Aviv · Ibn Gvirol 54',
@@ -6666,6 +6667,7 @@ export const COMMUNITY_STORES: CommunityStore[] = [
   },
   {
     id: 'store-2',
+    logo: '/comunidad/las-empanadot.png',
     filterCategory: 'Comida casera',
     zone: 'Merkaz',
     shortAddress: 'Delivery en zona Merkaz',
@@ -6729,6 +6731,7 @@ export const COMMUNITY_STORES: CommunityStore[] = [
   },
   {
     id: 'store-5',
+    logo: '/comunidad/la-tienda.png',
     filterCategory: 'Productos latinos',
     zone: 'Tel Aviv',
     shortAddress: 'Tel Aviv · Levanda 13',
