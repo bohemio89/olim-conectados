@@ -32,8 +32,8 @@ type Icon = React.ComponentType<{ className?: string }>;
 const KUPOT: { name: string; phone: string; color: string }[] = [
   { name: 'Clalit', phone: '*2700', color: 'bg-[#1F5F8B] hover:bg-[#194c70]' },
   { name: 'Maccabi', phone: '*3555', color: 'bg-[#2A7050] hover:bg-[#235e43]' },
-  { name: 'Meuhedet', phone: '*3833', color: 'bg-[#6B4FA0] hover:bg-[#5a4288]' },
-  { name: 'Leumit', phone: '*507', color: 'bg-[#B85D19] hover:bg-[#9c4d13]' }
+  { name: 'Meuhedet', phone: '*3833', color: 'bg-[#B85D19] hover:bg-[#9c4d13]' },
+  { name: 'Leumit', phone: '*507', color: 'bg-[#6B4FA0] hover:bg-[#5a4288]' }
 ];
 
 const PATH: { n: number; q: string; icon: Icon; title: string; text: string; tag: string; tone: string; dot: string }[] = [
