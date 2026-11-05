@@ -36,7 +36,7 @@ export interface Doctor {
 }
 
 export interface StoreContact {
-  type: 'whatsapp' | 'instagram' | 'web' | 'phone' | 'email';
+  type: 'whatsapp' | 'instagram' | 'facebook' | 'web' | 'phone' | 'email';
   url: string;
   label: string;
 }

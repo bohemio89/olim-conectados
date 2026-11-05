@@ -6653,7 +6653,7 @@ export const COMMUNITY_STORES: CommunityStore[] = [
     tags: ['Alfajores', 'Café', 'Kosher'],
     contacts: [
       { type: 'whatsapp', url: 'https://wa.me/message/JIY7CGHLNO4NI1', label: 'WhatsApp' },
-      { type: 'instagram', url: 'https://instagram.com/amapolaalfajores', label: 'Instagram' },
+      { type: 'instagram', url: 'https://instagram.com/amapolaalfajores', label: '@amapolaalfajores' },
     ],
     name: 'Amapola Alfajores',
     category: 'Panadería, Café y Facturas',
@@ -6675,7 +6675,8 @@ export const COMMUNITY_STORES: CommunityStore[] = [
     tags: ['Empanadas', 'Congeladas o listas', 'Desde 10 ₪'],
     contacts: [
       { type: 'whatsapp', url: 'https://wa.me/972536095976', label: 'WhatsApp' },
-      { type: 'instagram', url: 'https://instagram.com/las.empanadot', label: 'Instagram' },
+      { type: 'instagram', url: 'https://instagram.com/las.empanadot', label: '@las.empanadot' },
+      { type: 'facebook', url: 'https://facebook.com/las.empanadot', label: 'Facebook' },
     ],
     name: 'Las Empanadot',
     category: 'Empanadas y Comida Casera',
@@ -6689,14 +6690,15 @@ export const COMMUNITY_STORES: CommunityStore[] = [
   },
   {
     id: 'store-3',
+    logo: '/comunidad/vajula.png',
     filterCategory: 'Por encargo',
     zone: 'Todo Israel',
     shortAddress: 'Envíos a todo Israel',
     shortHours: 'Por encargo',
     tags: ['Alfajores', 'Kosher Mehadrin'],
     contacts: [
-      { type: 'instagram', url: 'https://instagram.com/vajulaalfajores', label: 'Instagram' },
-      { type: 'web', url: 'https://vajula.com', label: 'Web' },
+      { type: 'web', url: 'https://vajula.com', label: 'vajula.com' },
+      { type: 'instagram', url: 'https://instagram.com/vajulaalfajores', label: '@vajulaalfajores' },
     ],
     name: 'Vajula Alfajores',
     category: 'Emprendimiento de Olim (Sin Local / Por Encargo)',
@@ -6716,8 +6718,9 @@ export const COMMUNITY_STORES: CommunityStore[] = [
     shortHours: 'Consultar horarios',
     tags: ['Productos de Argentina', 'Quesos', 'Bebidas'],
     contacts: [
-      { type: 'phone', url: 'tel:+97235255880', label: 'Llamar' },
-      { type: 'email', url: 'mailto:laro.allenby@gmail.com', label: 'Email' },
+      { type: 'phone', url: 'tel:+97235255880', label: '03-525-5880' },
+      { type: 'phone', url: 'tel:+972542027989', label: '054-202-7989' },
+      { type: 'email', url: 'mailto:laro.allenby@gmail.com', label: 'laro.allenby@gmail.com' },
     ],
     name: 'Maadaniá Laro (מעדניה לארו)',
     category: 'Almacén Rioplatense / Latino',
@@ -6739,7 +6742,8 @@ export const COMMUNITY_STORES: CommunityStore[] = [
     tags: ['Harina P.A.N.', 'Pulpas de fruta', 'Congelados'],
     contacts: [
       { type: 'whatsapp', url: 'https://wa.me/972509269777', label: 'WhatsApp' },
-      { type: 'instagram', url: 'https://instagram.com/la_tienda_en_israel', label: 'Instagram' },
+      { type: 'instagram', url: 'https://instagram.com/la_tienda_en_israel', label: '@la_tienda_en_israel' },
+      { type: 'web', url: 'https://tap.bio/@la_tienda_en_israel', label: 'tap.bio' },
     ],
     name: 'La Tienda - Comida Latina',
     category: 'Almacén Rioplatense / Latino',
