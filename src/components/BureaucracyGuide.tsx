@@ -38,23 +38,23 @@ const PROCEDURES: ProcedureCard[] = [
     title: 'Tofes 101: paga menos impuesto',
     subtitle: 'Al entrar a un trabajo y cada enero',
     steps: [
-      'Marca "Ani Olé Jadash" (אני עולה חדש)',
+      'Marca que eres olé jadash (עולה חדש)',
       'Escribe tu fecha de llegada',
-      'Adjunta Teudat Olé y Teudat Zehut'
+      'Adjunta tu Teudat Olé'
     ],
     alertType: 'warning',
-    alertText: 'Si no lo marcas, te retienen impuesto de más.',
+    alertText: 'Si no lo marcas, te descuentan impuesto de más.',
     sourceType: 'official',
-    sourceText: 'Fuente: Autoridad de Impuestos · gov.il · revisado oct 2026',
+    sourceText: 'Fuente: Autoridad Tributaria · art. 35 de la Ordenanza (gov.il) · revisado nov 2026',
     details: {
-      explanation: 'El Tofes 101 es el formulario de deducciones impositivas que presentas a tu empleador al ingresar a un empleo y al comienzo de cada año fiscal (enero).',
+      explanation: 'Como olé tienes puntos de crédito: cada punto es un descuento directo en el impuesto de tu sueldo. Si hiciste la Aliá desde 2022, son 54 meses:',
       bulletPoints: [
-        'Puntos de crédito fiscal (Nekudot Zijui) por 42 meses desde tu Aliá:',
-        '• 3 puntos en los meses 1 a 18.',
-        '• 2 puntos en los meses 19 a 30.',
-        '• 1 punto en los meses 31 a 42.',
-        'Exención temporal 2026 para quienes hicieron la Aliá entre el 5-nov-2025 y el 31-dic-2026.',
-        'Cada punto de crédito representa un descuento directo sobre el impuesto a las ganancias retenido en tu recibo de sueldo.'
+        '• Meses 1 a 12: 1 punto por mes.',
+        '• Meses 13 a 30: 3 puntos por mes.',
+        '• Meses 31 a 42: 2 puntos por mes.',
+        '• Meses 43 a 54: 1 punto por mes.',
+        'Si hiciste la Aliá antes de 2022, el esquema era de 42 meses.',
+        'Además, quienes hicieron la Aliá entre el 5-nov-2025 y el 31-dic-2026 tienen una exención temporal en 2026.'
       ]
     }
   },
@@ -63,27 +63,24 @@ const PROCEDURES: ProcedureCard[] = [
     category: 'hebreo',
     icon: GraduationCap,
     title: 'Voucher para Ulpán privado',
-    subtitle: 'Hasta 5.000 ₪ de reintegro',
+    subtitle: 'Cuando terminaste el Ulpán inicial',
     steps: [
-      'Termina el Ulpán inicial',
-      'Pide el certificado en tu área personal',
-      'Asiste al 80% y rinde el examen'
+      'Termina el Ulpán inicial del Estado',
+      'Pide el voucher en tu área personal o en el Ministerio de Aliá',
+      'Estudia en un Ulpán privado de la lista oficial'
     ],
     alertType: 'warning',
-    alertText: 'Sin certificado previo no hay reintegro.',
+    alertText: 'La carta de aprobación vale 3 meses: inscríbete antes de que venza.',
     sourceType: 'official',
-    sourceText: 'Fuente: Procedimiento 372 · Ministerio de Aliá · gov.il · revisado oct 2026',
+    sourceText: 'Fuente: Ministerio de Aliá · Ulpanim privados (gov.il) · revisado nov 2026',
     details: {
-      explanation: 'El Ministerio de Aliá otorga un voucher de hasta 5.000 ₪ para cursar hebreo en instituciones privadas homologadas.',
+      explanation: 'El Ministerio de Aliá te ayuda a pagar un Ulpán privado en grupos chicos (hasta 12 alumnos) y con horarios flexibles.',
       bulletPoints: [
-        'Destinado a quien tenía 17 años o más al recibir el estatus de olé.',
-        'Se solicita dentro de los 10 años desde la Aliá (15 años para olim de Etiopía, Yemen y Bnei Menashe).',
-        'No hace falta terminar el Ulpán inicial si eres soldado, haces servicio nacional, eres estudiante o pasaron 2 años desde tu estatus.',
-        'El certificado de elegibilidad tiene una validez de 3 meses para inscribirse.',
-        'Pagas tú el curso y te devuelven el 50% al inscribirte y el 50% restante al terminar.',
-        'Válido únicamente para niveles A y B (Álef y Bet).',
-        'Los mayores de 60 años no rinden examen final para cobrar el reintegro.',
-        'No se puede estudiar a la vez en el Ulpán estatal.'
+        'Para quienes tenían 17 años o más al hacer la Aliá.',
+        'Hasta 10 años desde la Aliá (15 para olim de Etiopía, Yemen y Bnei Menashe).',
+        'El curso es de 150 a 200 horas, en hasta 8 meses.',
+        'Los mayores de 60 no rinden examen final.',
+        'El reintegro se pide hasta medio año después de terminar el curso.'
       ]
     }
   },
@@ -94,46 +91,43 @@ const PROCEDURES: ProcedureCard[] = [
     title: 'Descuento de Arnoná: 90%',
     subtitle: 'Sobre 100 m², 12 meses dentro de tus primeros 24',
     steps: [
-      'Contrato de alquiler a tu nombre',
-      'Teudat Zehut con la nueva dirección',
-      'Pídelo en la Iriyá o en su web'
+      'Pídelo en tu municipio (Iriyá)',
+      'Lleva tu Teudat Olé',
+      'Elige cuándo empezar: 12 meses seguidos'
     ],
     alertType: 'warning',
-    alertText: 'No es automático: tienes que pedirlo.',
+    alertText: 'Los 12 meses tienen que caer dentro de tus primeros 24 meses.',
     sourceType: 'official',
-    sourceText: 'Fuente: Reglamento de descuentos de Arnoná · municipio · revisado oct 2026',
+    sourceText: 'Fuente: Reglamento de descuentos de Arnoná 1993, art. 2(a)(6) · municipios · revisado nov 2026',
     details: {
-      explanation: 'Beneficio fiscal municipal que concede una bonificación del 90% sobre el impuesto de Arnoná.',
+      explanation: 'Los olim tienen 90% de descuento en el impuesto municipal (Arnoná).',
       bulletPoints: [
-        'Aplica sobre hasta 100 m² de la vivienda arrendada o propia.',
-        'Válido por 12 meses continuos a utilizar dentro de los primeros 24 meses desde la fecha de recepción de tu estatus de Olé.',
-        'Requisitos: contrato de alquiler firmado a tu nombre por al menos 12 meses y Teudat Zehut con anexo de dirección (séjaj) actualizado.',
-        'El descuento no es automático: debes solicitarlo de forma presencial o a través del portal de tu municipalidad (Iriyá).'
+        'Se aplica sobre los primeros 100 m² de la vivienda.',
+        'Dura 12 meses, dentro de los primeros 24 desde tu Aliá.',
+        'Cada municipio te dice qué documentos llevar.'
       ]
     }
   },
   {
-    id: 'myvisit',
+    id: 'govisit',
     category: 'turnos',
     icon: Calendar,
-    title: 'Turnos en MyVisit',
+    title: 'Turnos en GoVisit',
     subtitle: 'Teudat Zehut, pasaporte, licencia',
     steps: [
-      'Descarga la app MyVisit',
-      'Elige la oficina: Misrad HaPnim o HaRishuí',
-      'Elige día y hora'
+      'Entra a govisit.gov.il',
+      'Elige: Autoridad de Población o Ministerio de Transporte',
+      'Elige oficina, día y hora'
     ],
     alertType: 'tip',
-    alertText: 'Temprano a la mañana suelen aparecer turnos cancelados.',
-    sourceType: 'community',
-    sourceText: 'Tip de la comunidad · sin fuente oficial',
+    alertText: 'Es el sistema oficial del gobierno: no pagues por turnos en otros sitios.',
+    sourceType: 'official',
+    sourceText: 'Fuente: Autoridad de Población e Inmigración (gov.il) · revisado nov 2026',
     details: {
-      explanation: 'MyVisit es la plataforma oficial centralizada para reservar citas previas en oficinas públicas de Israel.',
+      explanation: 'GoVisit es el sistema oficial para sacar turno en oficinas del gobierno.',
       bulletPoints: [
-        'Gestiones habituales: Teudat Zehut biométrica y pasaporte en la Autoridad de Población (Misrad HaPnim); canje de licencia de conducir en la Oficina de Licencias (Misrad HaRishuí).',
-        'Temprano a la mañana (entre 7:00 y 8:30 AM) suelen liberarse en el sistema turnos cancelados para el mismo día o la misma semana.',
-        'Si no encuentras disponibilidad en tu ciudad, consulta sucursales en localidades cercanas.',
-        'Lleva siempre el mensaje SMS de confirmación con el código de turno el día de tu cita.'
+        'Sirve para la Autoridad de Población (Teudat Zehut, pasaporte) y para licencias de conducir.',
+        'En algunas oficinas hay puestos digitales de autoservicio para pedir la Teudat Zehut biométrica.'
       ]
     }
   }
@@ -163,14 +157,14 @@ export const BureaucracyGuide: React.FC = () => {
     <div className="space-y-6">
       
       {/* 1. Chips de Filtro (Todos, Impuestos, Hebreo, Vivienda, Turnos) */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+      <div className="flex flex-wrap items-center gap-2">
         {filterTabs.map(tab => {
           const isActive = activeFilter === tab.id;
           return (
             <button
               key={tab.id}
               onClick={() => setActiveFilter(tab.id)}
-              className={`min-h-[44px] px-6 py-2.5 rounded-full font-bold text-sm sm:text-[15px] whitespace-nowrap transition-all cursor-pointer ${
+              className={`min-h-[44px] px-4 sm:px-6 py-2.5 rounded-full font-bold text-sm sm:text-[15px] whitespace-nowrap transition-all cursor-pointer ${
                 isActive
                   ? 'bg-[#0E2559] text-white shadow-2xs'
                   : 'bg-white hover:bg-slate-50 text-slate-700 border border-black/10'

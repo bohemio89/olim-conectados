@@ -168,9 +168,9 @@ export const SECTIONS: SectionConfig[] = [
     groupId: 'tramites',
     groupName: 'Derechos & Trámites',
     isFeatured: true,
-    description: 'Tofes 101, voucher de Ulpán, Arnoná y turnos en MyVisit.',
+    description: 'Tofes 101, voucher de Ulpán, Arnoná y turnos en GoVisit.',
     featuredDescription: 'Explicación de cada campo en español con capturas y pasos a seguir en oficinas públicas.',
-    contextPromptHint: 'Estás en: Trámites & Vouchers. Consúltame sobre Tofes 101, MyVisit, descuento de Arnoná y Ulpán.',
+    contextPromptHint: 'Estás en: Trámites & Vouchers. Consúltame sobre Tofes 101, turnos en GoVisit, descuento de Arnoná y Ulpán.',
     path: '/tramites-y-burocracia'
   },
   {
