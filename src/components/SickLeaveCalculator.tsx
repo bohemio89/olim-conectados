@@ -66,6 +66,15 @@ export const SickLeaveCalculator: React.FC<SickLeaveCalculatorProps> = ({ onNavi
     });
   }
 
+  const coveredDays = dayBreakdown.filter((d) => d.isCovered);
+  const sum = (arr: typeof dayBreakdown) => arr.reduce((t, d) => t + d.amount, 0);
+  const groups = [
+    { label: 'Día 1', pct: 0, color: '#C0392B', days: coveredDays.filter((d) => d.day === 1).length, amount: 0 },
+    { label: 'Días 2 y 3', pct: 50, color: '#E8A33D', days: coveredDays.filter((d) => d.day === 2 || d.day === 3).length, amount: sum(coveredDays.filter((d) => d.day === 2 || d.day === 3)) },
+    { label: 'Desde el día 4', pct: 100, color: '#2A7050', days: coveredDays.filter((d) => d.day >= 4).length, amount: sum(coveredDays.filter((d) => d.day >= 4)) },
+    { label: 'Sin días acumulados', pct: 0, color: '#C0392B', days: dayBreakdown.length - coveredDays.length, amount: 0 },
+  ];
+
   const potentialFullIncome = absenceDays * baseDaily;
   const lostIncome = potentialFullIncome - totalPayable;
 
@@ -206,12 +215,12 @@ export const SickLeaveCalculator: React.FC<SickLeaveCalculatorProps> = ({ onNavi
         <div className="lg:col-span-7 bg-white rounded-3xl border border-black/10 p-6 sm:p-7 shadow-2xs space-y-6">
           
           {/* Header de Totales: Cobras por ley vs Pierdes */}
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between gap-3">
             <div>
               <span className="text-xs sm:text-sm font-medium text-neutral-500 block">
                 Cobras por ley
               </span>
-              <p className="text-3xl sm:text-4xl font-black text-[#2A7050] tracking-tight mt-0.5">
+              <p className="text-2xl sm:text-4xl font-black text-[#2A7050] tracking-tight mt-0.5">
                 ₪ {totalPayable.toLocaleString('es-AR')}
               </p>
             </div>
@@ -219,62 +228,38 @@ export const SickLeaveCalculator: React.FC<SickLeaveCalculatorProps> = ({ onNavi
               <span className="text-xs sm:text-sm font-medium text-neutral-500 block">
                 Pierdes
               </span>
-              <p className="text-3xl sm:text-4xl font-black text-[#C0392B] tracking-tight mt-0.5">
+              <p className="text-2xl sm:text-4xl font-black text-[#C0392B] tracking-tight mt-0.5">
                 ₪ {lostIncome.toLocaleString('es-AR')}
               </p>
             </div>
           </div>
 
-          {/* Gráfico de Barras por Día */}
-          <div className="pt-4 pb-2">
-            <div className="flex items-end justify-between gap-2 sm:gap-4 h-52 sm:h-56 px-1">
-              {dayBreakdown.map((item) => {
-                const isZero = item.percentage === 0;
-                const isFifty = item.percentage === 50;
-                const isHundred = item.percentage === 100;
-
-                return (
-                  <div 
-                    key={item.day}
-                    className="flex-1 flex flex-col items-center justify-end h-full min-w-0"
-                  >
-                    {/* Porcentaje arriba de la barra */}
-                    <span 
-                      className={`text-xs sm:text-sm font-bold mb-1.5 ${
-                        isZero ? 'text-[#C0392B]' : 'text-neutral-800'
-                      }`}
-                    >
-                      {item.percentage}%
-                    </span>
-
-                    {/* Contenedor de la barra vertical */}
-                    <div className="w-full flex items-end justify-center h-40 sm:h-44">
-                      {isZero && (
-                        <div className="w-full max-w-[56px] h-2 bg-[#C0392B] rounded-full" />
-                      )}
-                      {isFifty && (
-                        <div className="w-full max-w-[56px] h-20 sm:h-22 bg-[#E8A33D] rounded-2xl shadow-2xs" />
-                      )}
-                      {isHundred && (
-                        <div className="w-full max-w-[56px] h-40 sm:h-44 bg-[#2A7050] rounded-2xl shadow-2xs" />
-                      )}
-                    </div>
-
-                    {/* Etiqueta del día abajo */}
-                    <span className="text-xs sm:text-sm font-bold text-neutral-700 mt-2.5 truncate">
-                      Día {item.day}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+          {/* Resumen por tramos */}
+          <div className="space-y-2.5">
+            {groups.filter((g) => g.days > 0).map((g) => (
+              <div key={g.label} className="flex items-center gap-3">
+                <div className="w-24 sm:w-28 shrink-0">
+                  <p className="text-sm font-bold text-[#0E2559] leading-tight">{g.label}</p>
+                  <p className="text-xs text-neutral-500">{g.days} {g.days === 1 ? 'día' : 'días'} · {g.pct}%</p>
+                </div>
+                <div className="flex-1 h-7 bg-neutral-100 rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full"
+                    style={{ width: `${Math.max(g.pct, 4)}%`, background: g.color }}
+                  />
+                </div>
+                <p className={`w-20 text-right text-sm font-black shrink-0 ${g.pct === 0 ? 'text-[#C0392B]' : 'text-[#0E2559]'}`}>
+                  ₪ {g.amount.toLocaleString('es-AR')}
+                </p>
+              </div>
+            ))}
           </div>
 
           {/* Alerta de días acumulados */}
           <div className="bg-[#FEF6E9] border border-[#E8A33D]/30 rounded-2xl p-4 flex items-center gap-3">
             <AlertTriangle className="w-5 h-5 text-[#E8A33D] shrink-0" />
             <p className="font-bold text-[#8A5612] text-xs sm:text-sm leading-snug">
-              Solo cobras los días que tienes acumulados (1,5 por mes).
+              Solo cobras los días que tienes acumulados: 1,5 por mes, hasta 90.
             </p>
           </div>
 
@@ -298,9 +283,9 @@ export const SickLeaveCalculator: React.FC<SickLeaveCalculatorProps> = ({ onNavi
           {/* Fuente oficial */}
           <div className="pt-2 border-t border-black/5">
             <SourceBadge
-              organismo="Ley de pago por enfermedad · Ministerio de Trabajo"
-              sitio="gov.il"
-              fecha="revisado oct 2026"
+              organismo="Ley de Dmei Majalá 1976 · texto oficial"
+              sitio="btl.gov.il"
+              fecha="revisado nov 2026"
             />
           </div>
 
