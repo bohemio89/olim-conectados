@@ -18,27 +18,42 @@ export const BusinessPlanGuide: React.FC = () => {
   const steps = [
     {
       num: 1,
-      title: 'Pide turno',
-      desc: 'Llama al *2994 o completa el formulario en gov.il.',
+      title: 'Llama al *2994',
+      desc: 'Información de negocios e impuestos, en español. Gratis.',
       isHighlight: false,
     },
     {
       num: 2,
-      title: 'Centro Maalot',
-      desc: 'Primera reunión con un asesor de tu zona.',
+      title: 'Pide cita en un centro Maalot',
+      desc: 'Desde gov.il o llamando al centro de tu zona.',
       isHighlight: false,
     },
     {
       num: 3,
-      title: 'Plan de negocio',
-      desc: 'Viabilidad, modelo e impuestos.',
+      title: 'Diagnóstico y modelo',
+      desc: 'Evalúan tu idea y arman el modelo de negocio.',
       isHighlight: false,
     },
     {
       num: 4,
-      title: 'Financiamiento',
-      desc: 'Ayuda para tramitar préstamos y talleres.',
+      title: 'Plan de negocio y préstamo',
+      desc: 'Te ayudan con el plan (aporte de 250 ₪) y a pedir préstamos.',
       isHighlight: true,
+    },
+  ];
+
+  const centers = [
+    {
+      name: 'Gush Dan y Shfelá',
+      cities: 'Tel Aviv-Yafo, Holón, Bat Yam, Petaj Tikva, Bnei Brak, Modiín, Ariel, Ramla, Lod, Rishón LeTzión, Rejovot, Yavne',
+      phone: '03-5501128',
+      tel: 'tel:+97235501128',
+    },
+    {
+      name: 'Jerusalén',
+      cities: 'Jerusalén, Beit Shemesh, Maalé Adumim, Gush Etzión',
+      phone: '02-6794242 (ext. 3)',
+      tel: 'tel:+97226794242',
     },
   ];
 
@@ -63,7 +78,7 @@ export const BusinessPlanGuide: React.FC = () => {
             De la idea a tu negocio
           </h2>
           <p className="text-neutral-600 text-sm sm:text-base mt-1">
-            Servicio gratuito del Ministerio de Aliá, en español.
+            Asesoría del Ministerio de Aliá para abrir o hacer crecer tu negocio.
           </p>
         </div>
 
@@ -165,33 +180,59 @@ export const BusinessPlanGuide: React.FC = () => {
         {/* Footer con SourceBadge */}
         <div className="pt-3 border-t border-black/5">
           <SourceBadge
-            organismo="Ministerio de Aliá e Integración"
+            organismo="Ministerio de Aliá e Integración · centros Maalot"
             sitio="gov.il"
-            fecha="revisado oct 2026"
+            fecha="revisado nov 2026"
           />
         </div>
       </div>
 
+      {/* Centros Maalot por zona */}
+      <div className="bg-white rounded-3xl border border-black/10 p-6 sm:p-7 shadow-2xs space-y-4">
+        <h3 className="font-extrabold text-xl text-[#0E2559]">Centros Maalot</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+          {centers.map((c) => (
+            <div key={c.name} className="rounded-2xl border border-neutral-200 p-4 space-y-3">
+              <div>
+                <p className="font-extrabold text-[#0E2559]">{c.name}</p>
+                <p className="text-xs sm:text-sm text-neutral-600 mt-1 leading-snug">{c.cities}</p>
+              </div>
+              <a
+                href={c.tel}
+                className="min-h-[44px] w-full bg-[#2A7050] hover:bg-[#235e43] text-white font-bold text-sm rounded-full flex items-center justify-center gap-2 transition"
+              >
+                <Phone className="w-4 h-4" />
+                <span>{c.phone}</span>
+              </a>
+            </div>
+          ))}
+        </div>
+        <a
+          href="https://www.gov.il/he/service/business-centers-new-immigrants-and-returning-residents"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="min-h-[44px] w-full border border-neutral-300 hover:bg-neutral-50 text-[#0E2559] font-bold text-sm rounded-full flex items-center justify-center gap-2 transition"
+        >
+          <span>Otras zonas y solicitud online (gov.il)</span>
+          <ChevronRight className="w-4 h-4" />
+        </a>
+      </div>
+
       {/* Dos tarjetas: ¿Quién puede usarlo? y Qué incluye */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        {/* Tarjeta 1: ¿Quién puede usarlo? */}
-        <div className="bg-white rounded-3xl border border-black/10 p-6 sm:p-7 shadow-2xs space-y-4">
-          <h3 className="font-extrabold text-xl text-[#0E2559]">
-            ¿Quién puede usarlo?
-          </h3>
 
+        <div className="bg-white rounded-3xl border border-black/10 p-6 sm:p-7 shadow-2xs space-y-4">
+          <h3 className="font-extrabold text-xl text-[#0E2559]">¿Quién puede usarlo?</h3>
           <div className="space-y-3">
-            <div className="rounded-2xl border border-neutral-200 p-4 flex items-center gap-3.5 bg-white">
+            <div className="rounded-2xl border border-neutral-200 p-4 flex items-center gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-[#2A7050] shrink-0">
                 <CheckCircle2 className="w-5 h-5" />
               </div>
               <p className="font-bold text-sm sm:text-base text-[#0E2559]">
-                Olim · hasta 10 años desde la Aliá, mayores de 21
+                Olim · hasta 10 años desde la Aliá
               </p>
             </div>
-
-            <div className="rounded-2xl border border-neutral-200 p-4 flex items-center gap-3.5 bg-white">
+            <div className="rounded-2xl border border-neutral-200 p-4 flex items-center gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-[#2A7050] shrink-0">
                 <Repeat className="w-5 h-5" />
               </div>
@@ -200,51 +241,31 @@ export const BusinessPlanGuide: React.FC = () => {
               </p>
             </div>
           </div>
+          <p className="text-xs sm:text-sm text-neutral-600">
+            Para el *2994 además hay que tener más de 21 años.
+          </p>
         </div>
 
-        {/* Tarjeta 2: Qué incluye */}
         <div className="bg-white rounded-3xl border border-black/10 p-6 sm:p-7 shadow-2xs space-y-4">
-          <h3 className="font-extrabold text-xl text-[#0E2559]">
-            Qué incluye
-          </h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="rounded-2xl border border-neutral-200 p-4 flex items-center gap-3 bg-white">
-              <div className="w-9 h-9 rounded-xl bg-[#2A7050]/10 text-[#2A7050] flex items-center justify-center shrink-0">
-                <TrendingUp className="w-4 h-4" />
+          <h3 className="font-extrabold text-xl text-[#0E2559]">Qué incluye</h3>
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { icon: TrendingUp, label: 'Viabilidad' },
+              { icon: FileText, label: 'Impuestos' },
+              { icon: Landmark, label: 'Préstamos' },
+              { icon: Users, label: 'Talleres' },
+            ].map(({ icon: Icon, label }) => (
+              <div key={label} className="rounded-2xl border border-neutral-200 p-3 sm:p-4 flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#2A7050]/10 text-[#2A7050] flex items-center justify-center shrink-0">
+                  <Icon className="w-4 h-4" />
+                </div>
+                <span className="font-bold text-sm sm:text-base text-[#0E2559]">{label}</span>
               </div>
-              <span className="font-bold text-sm sm:text-base text-[#0E2559]">
-                Viabilidad
-              </span>
-            </div>
-
-            <div className="rounded-2xl border border-neutral-200 p-4 flex items-center gap-3 bg-white">
-              <div className="w-9 h-9 rounded-xl bg-[#2A7050]/10 text-[#2A7050] flex items-center justify-center shrink-0">
-                <FileText className="w-4 h-4" />
-              </div>
-              <span className="font-bold text-sm sm:text-base text-[#0E2559]">
-                Impuestos
-              </span>
-            </div>
-
-            <div className="rounded-2xl border border-neutral-200 p-4 flex items-center gap-3 bg-white">
-              <div className="w-9 h-9 rounded-xl bg-[#2A7050]/10 text-[#2A7050] flex items-center justify-center shrink-0">
-                <Landmark className="w-4 h-4" />
-              </div>
-              <span className="font-bold text-sm sm:text-base text-[#0E2559]">
-                Préstamos
-              </span>
-            </div>
-
-            <div className="rounded-2xl border border-neutral-200 p-4 flex items-center gap-3 bg-white">
-              <div className="w-9 h-9 rounded-xl bg-[#2A7050]/10 text-[#2A7050] flex items-center justify-center shrink-0">
-                <Users className="w-4 h-4" />
-              </div>
-              <span className="font-bold text-sm sm:text-base text-[#0E2559]">
-                Talleres
-              </span>
-            </div>
+            ))}
           </div>
+          <p className="text-xs sm:text-sm text-neutral-600">
+            Gratis. Solo el plan de negocio tiene un aporte de 250 ₪; talleres y cursos, un aporte simbólico.
+          </p>
         </div>
 
       </div>
