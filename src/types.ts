@@ -49,6 +49,7 @@ export interface CommunityStore {
   shortHours?: string;
   tags?: string[];
   contacts?: StoreContact[];
+  logo?: string;
   name: string;
   category: 
     | 'Almacén Rioplatense / Latino' 
