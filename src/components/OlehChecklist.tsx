@@ -61,25 +61,26 @@ const COMMON_STEPS: Record<string, ChecklistStep> = {
     when: 'Día 1 · Ministerio de Aliá',
     agency: 'Ministerio de Aliá e Integración',
     instructions: [
-      'Recibes tu Teudat Olé oficial en el aeropuerto.',
-      'Teudat Zehut temporal válida por 9 meses.',
-      'Cobras el primer pago del Sal Klitá en efectivo y te entregan el voucher de traslado gratuito a tu destino.'
+      'Recibes tu Teudat Olé con tu número de identidad.',
+      'Te dan una Teudat Zehut temporal que vale 3 meses.',
+      'Cobras el primer pago del Sal Klitá (una parte en efectivo) y tienes un traslado gratis a tu destino.'
     ],
-    source: 'Ministerio de Aliá e Integración · gov.il · revisado oct 2026',
+    source: 'Ministerio de Aliá · Autoridad de Población (gov.il) · revisado nov 2026',
     icon: Plane
   },
   'kupat-jolim': {
     id: 'kupat-jolim',
     shortTitle: 'Kupat Jolim',
     fullTitle: 'Inscripción en Kupat Jolim (Obra Social)',
-    when: 'Día 1 o dentro de 90 días',
+    when: 'Día 1 · aeropuerto',
     agency: 'Bituaj Leumi y Ministerio de Salud',
     instructions: [
-      'Inscríbete directamente en el puesto del aeropuerto si está disponible.',
-      'Si no, hazlo dentro de los 90 días en la web de Bituaj Leumi (gratis).',
-      'También puedes realizar la inscripción presencial en el correo.'
+      'Te inscribes en el aeropuerto. Si ya la elegiste antes de llegar, queda esa.',
+      '¿Quieres cambiarte? Puedes hacerlo hasta 2 veces en 12 meses, gratis, en la web del Bituaj Leumi o en el correo.',
+      'El cambio entra el 1 de enero, marzo, mayo, julio, septiembre o noviembre. La Kupá que dejas te da un resumen de tu historia clínica.'
     ],
-    source: 'Bituaj Leumi y Ministerio de Salud · gov.il · revisado oct 2026',
+    alert: 'El seguro complementario (Shaban) es de cada Kupá: si te cambias, anótate al de la nueva. Hay reglas para no perder tu antigüedad.',
+    source: 'Bituaj Leumi · Ministerio de Salud (gov.il) · revisado nov 2026',
     icon: HeartPulse,
     actionTabId: 'doctors',
     linkText: 'Ver directorio de médicos en español'
@@ -133,28 +134,29 @@ const COMMON_STEPS: Record<string, ChecklistStep> = {
     id: 'teudat-zehut-biometrica',
     shortTitle: 'Teudat Zehut biométrica',
     fullTitle: 'Teudat Zehut biométrica definitiva',
-    when: 'Primer año · Autoridad de Población',
+    when: 'Primeros 3 meses · Autoridad de Población',
     agency: 'Autoridad de Población e Inmigración',
     instructions: [
-      'Pide turno en la Autoridad de Población (Misrad HaPnim) a través de la app MyVisit.',
-      'Haz el trámite antes de que venza la tarjeta temporal de 9 meses.',
-      'Recibe tu Teudat Zehut inteligente permanente en tu domicilio.'
+      'Pide turno en una oficina de la Autoridad de Población (Misrad HaPnim).',
+      'Hazlo antes de que venza la Teudat Zehut temporal: dura solo 3 meses.',
+      'La primera es gratis. Te la llevan a tu dirección.'
     ],
-    source: 'Autoridad de Población e Inmigración · gov.il · revisado oct 2026',
+    alert: 'Lleva tu pasaporte extranjero y tu Teudat Olé.',
+    source: 'Autoridad de Población e Inmigración (gov.il) · revisado nov 2026',
     icon: Landmark
   },
   'licencia-conducir': {
     id: 'licencia-conducir',
     shortTitle: 'Licencia de conducir',
-    fullTitle: 'Conversión de licencia de conducir',
+    fullTitle: 'Canje de licencia de conducir',
     when: 'Primer año · Ministerio de Transporte',
     agency: 'Ministerio de Transporte',
     instructions: [
       'Con tu licencia extranjera puedes manejar solo durante el primer año.',
-      'Inicia la conversión oficial antes de cumplir los 12 meses de Aliá.',
-      'Revisa los pasos y requisitos en la sección de Licencia de Conducir.'
+      'Para seguir manejando, canjéala. El canje se puede hacer en tus primeros 5 años.',
+      'En la sección Licencia de Conducir ves tu caso paso a paso.'
     ],
-    source: 'Ministerio de Transporte · gov.il · revisado oct 2026',
+    source: 'Ministerio de Transporte · Kol Zchut · revisado nov 2026',
     icon: Car,
     actionTabId: 'license',
     linkText: 'Ir a Licencia de Conducir'
@@ -201,11 +203,12 @@ const DIRECT_STAGES: RoadmapStage[] = [
         when: 'Al instalarte · Ministerio de Aliá',
         agency: 'Ministerio de Aliá e Integración',
         instructions: [
-          'Inscríbete con la derivación oficial que te entregó tu asesor.',
-          'El curso estatal de hebreo es completamente gratuito.',
-          'Dura aproximadamente 5 meses en horario intensivo de mañana o tarde.'
+          'Inscríbete con la derivación que te da tu asesor. Es gratis.',
+          'Ulpán de mañana: unos 5 meses, 5 días por semana. De noche: hasta 10 meses.',
+          'Tienes 18 meses desde la Aliá para empezarlo. Después puedes seguir con vouchers para Ulpanim privados.'
         ],
-        source: 'Ministerio de Aliá e Integración · gov.il · revisado oct 2026',
+        alert: 'No dejes pasar los 18 meses: después pierdes el Ulpán gratis.',
+        source: 'Ministerio de Aliá · Ministerio de Educación (gov.il) · revisado nov 2026',
         icon: GraduationCap,
         actionTabId: 'bureaucracy',
         linkText: 'Ver información de vouchers de Ulpán'
@@ -225,11 +228,11 @@ const DIRECT_STAGES: RoadmapStage[] = [
         when: 'Dentro de los primeros 24 meses · Municipio',
         agency: 'Municipalidad (Iriyá)',
         instructions: [
-          'Pídelo formalmente en tu municipio; el descuento NO es automático.',
+          'Pídelo en tu municipio, con tu contrato de alquiler y tu Teudat Olé.',
           'Aplica un 90% de descuento sobre los primeros 100 m² de la propiedad.',
           'Es válido durante 12 meses dentro de tus primeros 24 meses desde la fecha de Aliá.'
         ],
-        source: 'Reglamento de descuentos de Arnoná · municipio · revisado oct 2026',
+        source: 'Reglamento de descuentos de Arnoná 1993 · municipios · revisado nov 2026',
         icon: Landmark
       }
     ]
@@ -295,7 +298,7 @@ const ABSORPTION_CENTER_STAGES: RoadmapStage[] = [
           'Al mudarte, actualiza tu dirección online y pide el descuento de Arnoná en el municipio.'
         ],
         alert: 'Los 12 meses de descuento de Arnoná tienen que caer dentro de tus primeros 24.',
-        source: 'Reglamento de descuentos de Arnoná · municipio · revisado oct 2026',
+        source: 'Reglamento de descuentos de Arnoná 1993 · municipios · revisado nov 2026',
         icon: Home
       },
       COMMON_STEPS['teudat-zehut-biometrica']
@@ -308,16 +311,16 @@ const ABSORPTION_CENTER_STAGES: RoadmapStage[] = [
     steps: [
       {
         id: 'direccion-arnona',
-        shortTitle: 'Dirección y Arnoná',
-        fullTitle: 'Actualización de dirección y solicitud de Arnoná',
+        shortTitle: 'Salida del centro',
+        fullTitle: 'Certificado de salida, dirección y Arnoná',
         when: 'Al mudarte · Municipio y gov.il',
         agency: 'Municipalidad (Iriyá) y gov.il',
         instructions: [
-          'Actualiza tu dirección de forma online y gratuita en el portal gov.il.',
-          'Pide el 90% de descuento de Arnoná en la oficina o web del municipio correspondiente.',
-          'Presenta el contrato de alquiler firmado y fotocopia de tu Teudat Olé y Teudat Zehut.'
+          'Pide el certificado de salida del centro (ishur azivat merkaz klitá): sin él no empieza la ayuda de alquiler.',
+          'Actualiza tu dirección online y gratis en gov.il.',
+          'Pide el 90% de descuento de Arnoná en tu municipio, con el contrato de alquiler.'
         ],
-        source: 'Reglamento de descuentos de Arnoná · municipio · revisado oct 2026',
+        source: 'Reglamento de descuentos de Arnoná 1993 · municipios · revisado nov 2026',
         icon: Landmark
       },
       COMMON_STEPS['licencia-conducir']
@@ -462,6 +465,14 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
     }
   })();
 
+  // En celular, al tocar un paso bajamos hasta su detalle
+  const selectStep = (id: string) => {
+    setSelectedStepId(id);
+    if (window.matchMedia('(max-width: 1023px)').matches) {
+      setTimeout(() => document.getElementById('step-detail')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    }
+  };
+
   const aliyahOptions: AliyahType[] = [
     'Absorción directa',
     'Centro de absorción',
@@ -479,7 +490,7 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
           <p className="text-sm font-semibold text-slate-800 mb-3">
             ¿Cómo hiciste la Aliá?
           </p>
-          <div className="bg-amber-50/50 sm:bg-amber-50/60 p-1.5 rounded-2xl flex flex-wrap gap-1.5 sm:gap-2 border border-amber-100/70">
+          <div className="bg-amber-50/50 sm:bg-amber-50/60 p-1.5 rounded-2xl grid grid-cols-2 sm:flex sm:flex-wrap gap-1.5 sm:gap-2 border border-amber-100/70">
             {aliyahOptions.map((option) => {
               const isSelected = aliyahType === option;
               return (
@@ -487,7 +498,7 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                   key={option}
                   type="button"
                   onClick={() => handleSelectAliyahType(option)}
-                  className={`min-h-[44px] px-4 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer flex-1 sm:flex-initial text-center ${
+                  className={`min-h-[44px] px-2 sm:px-4 py-2.5 rounded-xl text-[13px] sm:text-sm font-semibold transition-all cursor-pointer sm:flex-initial text-center whitespace-nowrap ${
                     isSelected
                       ? 'bg-white text-[#6B4FA0] border-2 border-[#6B4FA0] shadow-xs font-bold'
                       : 'text-slate-700 hover:text-slate-900 hover:bg-white/60'
@@ -598,7 +609,7 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                         <button
                           key={step.id}
                           type="button"
-                          onClick={() => setSelectedStepId(step.id)}
+                          onClick={() => selectStep(step.id)}
                           className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
                             isSelected
                               ? 'border-amber-400 bg-amber-50/25 ring-2 ring-amber-300/80 shadow-xs'
@@ -626,7 +637,7 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                             </button>
 
                             {/* Título corto del paso */}
-                            <span className={`text-sm truncate font-medium ${
+                            <span className={`text-[13px] leading-tight line-clamp-2 font-medium text-left ${
                               isChecked 
                                 ? 'line-through text-slate-400' 
                                 : 'text-slate-800'
@@ -709,7 +720,7 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                         <button
                           key={step.id}
                           type="button"
-                          onClick={() => setSelectedStepId(step.id)}
+                          onClick={() => selectStep(step.id)}
                           className={`w-full min-h-[44px] px-3.5 py-3 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
                             isSelected
                               ? 'border-amber-400 bg-amber-50/25 ring-2 ring-amber-300/80 shadow-xs'
@@ -783,7 +794,7 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
 
       {/* 5. TARJETA DE DETALLE DEL PASO SELECCIONADO */}
       {activeStep && (
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
+        <div id="step-detail" className="scroll-mt-20 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
           {/* Encabezado del detalle: Ícono violeta + Título + Subtítulo */}
           <div className="flex items-start gap-4 mb-6">
             <div className="w-12 h-12 rounded-2xl bg-[#6B4FA0] text-white flex items-center justify-center shrink-0 shadow-xs">
@@ -876,7 +887,7 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
         <div className="rounded-2xl bg-[#EAF5EE] border border-[#2A7050]/20 p-4 sm:p-5 flex items-center gap-3.5 text-sm sm:text-base font-semibold text-[#1B5238]">
           <Home className="w-6 h-6 text-[#2A7050] shrink-0" />
           <p className="leading-snug">
-            Ayuda de alquiler: llega sola desde el mes 7 si tu estatus de olé es desde el 1-mar-2024, o desde el mes 8 si es anterior.
+            Ayuda de alquiler: llega sola a tu cuenta del mes 7 al mes 30.
           </p>
         </div>
       )}
