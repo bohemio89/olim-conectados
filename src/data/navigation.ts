@@ -180,7 +180,7 @@ export const SECTIONS: SectionConfig[] = [
     icon: Landmark,
     groupId: 'tramites',
     groupName: 'Derechos & Trámites',
-    description: 'Sal Klitá, ayuda de alquiler, dos trabajos y Pikud HaOref.',
+    description: 'Sal Klitá, ayuda de alquiler y qué hacer si tienes dos trabajos.',
     contextPromptHint: 'Estás en: Economía & Vida Civil. Consúltame sobre Sal Klitá, subsidio de alquiler y Teum Mas.',
     path: '/crisis-civil'
   },
