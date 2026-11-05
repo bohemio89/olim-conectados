@@ -14,7 +14,8 @@ import {
   Martini,
   HeartPulse,
   FileText,
-  Home
+  Home,
+  ShieldAlert
 } from 'lucide-react';
 
 export type CategoryGroupId = 'salud' | 'tramites' | 'comunidad';
@@ -131,6 +132,17 @@ export const SECTIONS: SectionConfig[] = [
     featuredDescription: 'Conoce las reglas de derivación previa (hafniá) y números telefónicos de guardia urgente.',
     contextPromptHint: 'Estás en: Guardia & Miún. Consúltame sobre coberturas de guardia, Terem y derivaciones.',
     path: '/emergencias'
+  },
+  {
+    id: 'war',
+    name: 'Guerra y emergencias',
+    shortLabel: 'Guerra y emergencias',
+    icon: ShieldAlert,
+    groupId: 'salud',
+    groupName: 'Asistencia & Salud',
+    description: 'Qué hacer en una alarma, tus derechos en el trabajo y qué pasa con las clases.',
+    contextPromptHint: 'Estás en: Guerra y emergencias. Pregúntame sobre refugios, el Pikud HaOref, tu sueldo o las clases durante la guerra.',
+    path: '/guerra-y-emergencias'
   },
 
   // 2. Derechos & Trámites
