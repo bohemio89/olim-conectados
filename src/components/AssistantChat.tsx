@@ -101,7 +101,7 @@ const CATEGORIZED_PROMPTS: CategorizedPrompt[] = [
     id: 'p-teudat-zehut-myvisit',
     category: 'tramites',
     stage: ['general', 'recien_llegado'],
-    text: '¿Dónde y cómo saco turno en MyVisit para el Teudat Zehut biométrico?',
+    text: '¿Dónde y cómo saco turno en GoVisit para el Teudat Zehut biométrico?',
     badge: 'Teudat Zehut'
   },
   {

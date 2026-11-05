@@ -41,7 +41,7 @@ const STATIC_SEARCH_INDEX: SearchResultItem[] = [
     title: 'Mi Checklist de Oleh Jadash: Pasos secuenciales de absorción',
     type: 'guide',
     tabId: 'checklist',
-    description: 'Teudat Olé, banco, Kupat Jolim, MyVisit, Tofes 101 y ayuda de alquiler con progreso guardado.',
+    description: 'Teudat Olé, banco, Kupat Jolim, GoVisit, Tofes 101 y ayuda de alquiler con progreso guardado.',
     icon: CheckSquare
   },
   {
@@ -94,7 +94,7 @@ const STATIC_SEARCH_INDEX: SearchResultItem[] = [
   },
   {
     id: 's-bureaucracy',
-    title: 'Trámites Clave: Tofes 101, MyVisit, Descuento Arnoná y Ulpán',
+    title: 'Trámites Clave: Tofes 101, GoVisit, Descuento Arnoná y Ulpán',
     type: 'guide',
     tabId: 'bureaucracy',
     description: 'Voucher de 5.000 ₪ para Ulpán privado y cómo no pagar de más en el sueldo.',
@@ -144,10 +144,10 @@ const STATIC_SEARCH_INDEX: SearchResultItem[] = [
   },
   {
     id: 'q-teudat-zeut-myvisit',
-    title: '¿Dónde y cómo saco turno en MyVisit para el Teudat Zehut biométrico?',
+    title: '¿Dónde y cómo saco turno en GoVisit para el Teudat Zehut biométrico?',
     type: 'question',
     tabId: 'assistant',
-    queryToChat: '¿Dónde y cómo saco turno en MyVisit para tramitar el Teudat Zehut biométrico permanente?',
+    queryToChat: '¿Dónde y cómo saco turno en GoVisit para tramitar el Teudat Zehut biométrico permanente?',
     description: 'Paso a paso en Misrad HaPnim y truco de horarios de 7:00 AM para turnos rápidos.'
   },
   {

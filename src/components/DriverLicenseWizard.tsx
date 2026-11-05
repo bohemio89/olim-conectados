@@ -333,8 +333,8 @@ export const DriverLicenseWizard: React.FC = () => {
   const stepTurno: StepItem = {
     id: 'turno',
     title: 'Sacas turno',
-    desc: 'En la app My Visit, en una oficina de licencias.',
-    where: 'App My Visit · Ministerio de Transporte',
+    desc: 'En GoVisit, en una oficina de licencias.',
+    where: 'GoVisit · Ministerio de Transporte',
     link: LINKS.myVisit,
     icon: Calendar
   };

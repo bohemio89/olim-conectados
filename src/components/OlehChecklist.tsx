@@ -106,7 +106,7 @@ const COMMON_STEPS: Record<string, ChecklistStep> = {
     when: 'Primeros días · Ministerio de Aliá',
     agency: 'Ministerio de Aliá e Integración',
     instructions: [
-      'Pide turno por myVisit, llamando al *2994 o por tu área personal.',
+      'Pide turno llamando al *2994 o desde tu área personal en gov.il.',
       'Lleva la constancia del banco (Ishur Nihul Kheshbón) para cobrar los 6 pagos que faltan del Sal Klitá.',
       'Recibe la derivación oficial para inscribirte en el Ulpán de hebreo.'
     ],
@@ -137,7 +137,7 @@ const COMMON_STEPS: Record<string, ChecklistStep> = {
     when: 'Primeros 3 meses · Autoridad de Población',
     agency: 'Autoridad de Población e Inmigración',
     instructions: [
-      'Pide turno en una oficina de la Autoridad de Población (Misrad HaPnim).',
+      'Pide turno en GoVisit, en una oficina de la Autoridad de Población (Misrad HaPnim).',
       'Hazlo antes de que venza la Teudat Zehut temporal: dura solo 3 meses.',
       'La primera es gratis. Te la llevan a tu dirección.'
     ],
