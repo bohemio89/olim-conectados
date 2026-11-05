@@ -14,6 +14,42 @@ import {
 } from 'lucide-react';
 import { Doctor, KupaName, DoctorReview } from '../types';
 
+// Teléfonos de cada Kupá (Ministerio de Salud). Se usan si el médico no tiene teléfono propio.
+const KUPA_PHONE: Record<string, string> = {
+  Clalit: '*2700',
+  Maccabi: '*3555',
+  Meuhedet: '*3833',
+  Leumit: '*507'
+};
+
+// Logos oficiales: cuando estén los archivos en public/kupot/, agrégalos acá (ej. Clalit: '/kupot/clalit.svg').
+const KUPA_LOGO: Partial<Record<string, string>> = {};
+
+const KUPA_DOT: Record<string, string> = {
+  Clalit: 'bg-[#1F5F8B]',
+  Maccabi: 'bg-[#2A7050]',
+  Meuhedet: 'bg-[#B85D19]',
+  Leumit: 'bg-[#6B4FA0]'
+};
+
+const KupaMark: React.FC<{ kupa: string; size?: 'sm' | 'md'; light?: boolean }> = ({ kupa, size = 'sm', light = false }) => {
+  const dim = size === 'md' ? 'w-7 h-7 text-xs' : 'w-5 h-5 text-[10px]';
+  const logo = KUPA_LOGO[kupa];
+  if (logo) {
+    return <img src={logo} alt={kupa} className={`${dim} rounded-full bg-white object-contain shrink-0`} />;
+  }
+  return (
+    <span
+      aria-hidden="true"
+      className={`${dim} rounded-full font-black flex items-center justify-center shrink-0 ${
+        light ? 'bg-white text-[#0E2559]' : `${KUPA_DOT[kupa] || 'bg-slate-600'} text-white`
+      }`}
+    >
+      {kupa.charAt(0)}
+    </span>
+  );
+};
+
 interface DoctorsDirectoryProps {
   doctors: Doctor[];
   onAddReview: (doctorId: string, review: DoctorReview) => void;
@@ -397,11 +433,11 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3">
             TU KUPÁ
           </span>
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar flex-nowrap sm:flex-wrap">
+          <div className="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-2">
             {/* Todas */}
             <button
               onClick={() => setSelectedKupa('Todas')}
-              className={`min-h-[44px] px-4 py-2 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer ${
+              className={`min-h-[44px] px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition whitespace-nowrap cursor-pointer ${
                 selectedKupa === 'Todas'
                   ? 'bg-[#0E2559] text-white shadow-2xs'
                   : 'bg-white border border-black/10 text-slate-700 hover:bg-slate-50'
@@ -421,13 +457,17 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 <button
                   key={kupa}
                   onClick={() => setSelectedKupa(kupa)}
-                  className={`min-h-[44px] px-4 py-2 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 transition whitespace-nowrap cursor-pointer ${
+                  className={`min-h-[44px] px-2.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 sm:gap-2 transition whitespace-nowrap cursor-pointer ${
                     isSelected
                       ? 'bg-[#0E2559] text-white shadow-2xs'
                       : 'bg-white border border-black/10 text-slate-700 hover:bg-slate-50'
                   }`}
                 >
-                  <span className={`w-2 h-2 rounded-full shrink-0 ${isSelected ? 'bg-white' : getKupaDotColor(kupa)}`} />
+                  {kupa === 'Privado' ? (
+                    <span className={`w-2 h-2 rounded-full shrink-0 ${isSelected ? 'bg-white' : getKupaDotColor(kupa)}`} />
+                  ) : (
+                    <KupaMark kupa={kupa} light={isSelected} />
+                  )}
                   <span>{kupa}</span>
                   <span className={`text-[11px] sm:text-xs ${isSelected ? 'text-white/80' : 'text-slate-500'}`}>
                     {count}
@@ -528,7 +568,8 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 <div>
                   {/* Fila superior: Chip de la Kupá y "Verificado en [Kupá]" */}
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${getKupaBadgeColor(primaryKupa)}`}>
+                    <span className={`text-xs font-bold pl-1 pr-3 py-1 rounded-full inline-flex items-center gap-1.5 ${getKupaBadgeColor(primaryKupa)}`}>
+                      <KupaMark kupa={primaryKupa} light />
                       {primaryKupa}
                     </span>
                     <span className="inline-flex items-center gap-1 text-xs font-bold text-[#2A7050]">
@@ -554,25 +595,28 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                   </div>
                 </div>
 
-                {/* Dos botones de 44 px: "Llamar" (tel:) y "Ficha oficial" (officialLink) */}
-                <div className="grid grid-cols-2 gap-2.5 mt-5 pt-2">
-                  <a
-                    href={cleanPhone ? `tel:${cleanPhone}` : `tel:*3555`}
-                    className="min-h-[44px] bg-[#0E2559] hover:bg-[#1a3875] text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 transition shadow-2xs"
-                  >
-                    <Phone className="w-4 h-4 fill-current" />
-                    <span>Llamar</span>
-                  </a>
-
-                  <a
-                    href={doc.officialLink || `https://www.google.com/search?q=${encodeURIComponent(`${doc.name} ${primaryKupa} Israel`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="min-h-[44px] bg-white border border-black/10 hover:bg-slate-50 text-slate-800 font-bold text-sm rounded-xl flex items-center justify-center gap-2 transition shadow-2xs"
-                  >
-                    <ExternalLink className="w-4 h-4 text-slate-500" />
-                    <span>Ficha oficial</span>
-                  </a>
+                {/* Botones: Llamar (al médico o a su Kupá) y Ficha oficial (solo si existe) */}
+                <div className={`grid gap-2.5 mt-5 pt-2 ${doc.officialLink ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                  {(cleanPhone || KUPA_PHONE[primaryKupa]) && (
+                    <a
+                      href={`tel:${cleanPhone || KUPA_PHONE[primaryKupa]}`}
+                      className="min-h-[44px] bg-[#0E2559] hover:bg-[#1a3875] text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 transition shadow-2xs"
+                    >
+                      <Phone className="w-4 h-4 fill-current" />
+                      <span>{cleanPhone ? 'Llamar' : `Llamar a ${primaryKupa}`}</span>
+                    </a>
+                  )}
+                  {doc.officialLink && (
+                    <a
+                      href={doc.officialLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-h-[44px] bg-white border border-black/10 hover:bg-slate-50 text-slate-800 font-bold text-sm rounded-xl flex items-center justify-center gap-2 transition"
+                    >
+                      <ExternalLink className="w-4 h-4 text-slate-500" />
+                      <span>Ficha oficial</span>
+                    </a>
+                  )}
                 </div>
               </div>
             );
