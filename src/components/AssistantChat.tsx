@@ -57,7 +57,7 @@ const CATEGORIZED_PROMPTS: CategorizedPrompt[] = [
     id: 'p-2',
     category: 'salud',
     stage: ['general', 'emergencia', 'tramite'],
-    text: 'Tengo tendinitis o dolor por mi trabajo: ¿Qué hago con Bituaj Leumi y el BL 250?',
+    text: 'Me accidenté en el trabajo: ¿qué hago con el BL 250 y Bituaj Leumi?',
     badge: 'Accidente Laboral'
   },
   {

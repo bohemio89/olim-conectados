@@ -12,14 +12,14 @@ import {
 import { SourceBadge } from './SourceBadge';
 
 export const BituajLeumiGuide: React.FC = () => {
-  const [selectedInjuryType, setSelectedInjuryType] = useState<'repetitive' | 'acute'>('acute');
+  const [selectedInjuryType, setSelectedInjuryType] = useState<'accident' | 'repetitive'>('accident');
   const [copiedPhrase, setCopiedPhrase] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   // 4 Documentos con casillas (2 de 4 marcados por defecto como en la captura)
   const [checkedDocs, setCheckedDocs] = useState<Record<string, boolean>>({
-    doc1: true,
-    doc2: true,
+    doc1: false,
+    doc2: false,
     doc3: false,
     doc4: false,
   });
@@ -31,13 +31,13 @@ export const BituajLeumiGuide: React.FC = () => {
   const completedCount = Object.values(checkedDocs).filter(Boolean).length;
 
   const hebrewPhrases = {
-    repetitive: {
-      hebrew: 'אני עובד בעבודה פיזית עם תנועות חוזרות. הכאב החל והחמיר עקב העבודה. אבקש לרשום בסיכום שהפגיעה נגרמה בעבודה.',
-      spanish: '"Trabajo en tareas físicas con movimientos repetitivos. El dolor comenzó y empeoró por el trabajo. Pido que conste en el informe médico que ocurrió en el trabajo."',
+    accident: {
+      hebrew: 'נפגעתי בתאונה בעבודה. אבקש תעודה רפואית ראשונה לנפגע בעבודה.',
+      spanish: '"Me accidenté en el trabajo. Pido el certificado médico inicial para accidentado laboral."',
     },
-    acute: {
-      hebrew: 'נפגעתי בתאונה תוך כדי ועקב עבודתי. אבקש לרשום בסיכום שהאירוע התרחש בעבודה.',
-      spanish: '"Me accidenté trabajando. Pido que el informe diga que ocurrió en el trabajo."',
+    repetitive: {
+      hebrew: 'הכאב נגרם מתנועות חוזרות בעבודה. אבקש הפניה לרופא תעסוקתי.',
+      spanish: '"El dolor viene de movimientos repetidos en el trabajo. Pido derivación al médico ocupacional."',
     },
   };
 
@@ -49,35 +49,27 @@ export const BituajLeumiGuide: React.FC = () => {
     setTimeout(() => setCopiedPhrase(false), 2000);
   };
 
-  const steps = [
-    {
-      num: 1,
-      title: 'Avisa y pide el BL 250',
-      desc: 'Tu empleador lo firma y sella con fecha, hora y tarea.',
-    },
-    {
-      num: 2,
-      title: 'Que el médico escriba "be-avodá"',
-      desc: 'En el primer resumen médico (sijum majalí).',
-    },
-    {
-      num: 3,
-      title: 'Médico ocupacional',
-      desc: 'El Rofé Taasukatí de tu Kupá define los días de reposo.',
-    },
-    {
-      num: 4,
-      isFinal: true,
-      title: 'Presenta en Bituaj Leumi',
-      desc: 'Te pagan el 75% del salario desde el día siguiente a la lesión, hasta 91 días.',
-    },
-  ];
+  const stepsByType = {
+    accident: [
+      { num: 1, title: 'Pide el BL 250 a tu empleador', desc: 'Es la derivación para que te atiendan. Él la completa y firma.' },
+      { num: 2, title: 'Ve a tu Kupá con el formulario', desc: 'Al sector de accidentes de trabajo, o a urgencias.' },
+      { num: 3, title: 'Recibe el certificado médico', desc: 'El médico anota el diagnóstico y los días que no puedes trabajar.' },
+      { num: 4, isFinal: true, title: 'Reclama con el formulario 211', desc: 'En Bituaj Leumi, online o en tu sucursal. Tienes hasta 12 meses.' },
+    ],
+    repetitive: [
+      { num: 1, title: 'Ve a tu médico de familia', desc: 'Cuéntale que el dolor viene de tu trabajo.' },
+      { num: 2, title: 'Pide ir al Rofé Taasukatí', desc: 'Es el médico ocupacional de tu Kupá.' },
+      { num: 3, title: 'Que quede escrita la relación con el trabajo', desc: 'Bituaj Leumi pide documentos que muestren que el problema viene de tu tarea.' },
+      { num: 4, isFinal: true, title: 'Reclama con el formulario 211', desc: 'Describe tu tarea y los movimientos que repites. Tienes hasta 12 meses.' },
+    ],
+  };
+  const steps = stepsByType[selectedInjuryType];
 
   const documents = [
-    { id: 'doc1', title: 'Formulario BL 250' },
-    { id: 'doc2', title: 'Primer informe médico con "be-avodá"' },
-    { id: 'doc3', title: 'Certificado del médico ocupacional' },
-    { id: 'doc4', title: 'Últimos 3 recibos de sueldo' },
+    { id: 'doc1', title: 'Formulario BL 211 firmado' },
+    { id: 'doc2', title: 'Certificado médico, informe de urgencias o informe del médico ocupacional' },
+    { id: 'doc3', title: 'Recibos de sueldo de los últimos 3 meses (si tuviste más de un trabajo)' },
+    { id: 'doc4', title: 'Si fue accidente de tránsito: informe policial y seguro' },
   ];
 
   return (
@@ -87,7 +79,7 @@ export const BituajLeumiGuide: React.FC = () => {
       <div className="bg-rose-50/90 border border-rose-200 text-rose-950 rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 shadow-2xs">
         <AlertTriangle className="w-5 h-5 text-rose-700 shrink-0" />
         <p className="font-bold text-sm sm:text-base leading-snug">
-          Si el médico no escribe "be-avodá" (בעבודה), Bituaj Leumi puede rechazar tu reclamo.
+          Sin documentos médicos, Bituaj Leumi te devuelve el reclamo sin tratarlo.
         </p>
       </div>
 
@@ -96,6 +88,27 @@ export const BituajLeumiGuide: React.FC = () => {
         <h2 className="text-xl sm:text-2xl font-extrabold text-[#0E2559]">
           Qué hacer si te lesionas trabajando
         </h2>
+
+        <p className="text-sm sm:text-[15px] font-bold text-[#0E2559]">
+          Los pasos son distintos según el tipo de lesión. Elige el tuyo:
+        </p>
+        <div className="grid grid-cols-2 bg-slate-100/70 p-1 rounded-2xl border border-black/5 gap-1 max-w-xl">
+          {([['accident', 'Accidente', 'Un golpe, caída o corte'], ['repetitive', 'Esfuerzo repetido', 'Dolor que aparece con el tiempo']] as const).map(([id, label, hint]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setSelectedInjuryType(id)}
+              className={`min-h-[56px] py-2 px-3 rounded-xl transition cursor-pointer text-center ${
+                selectedInjuryType === id
+                  ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <span className="block text-sm sm:text-[15px] font-bold">{label}</span>
+              <span className="block text-[11px] sm:text-xs font-medium text-slate-500">{hint}</span>
+            </button>
+          ))}
+        </div>
 
         {/* Roadmap de 4 pasos - Notebook (Horizontal con flechas) */}
         <div className="hidden lg:grid grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-stretch gap-2.5 pt-2">
@@ -182,11 +195,14 @@ export const BituajLeumiGuide: React.FC = () => {
         {/* Detalle desplegable */}
         {isDetailOpen && (
           <div className="mt-4 pt-4 border-t border-black/5 text-sm text-slate-700 space-y-2 bg-slate-50/80 p-5 rounded-2xl leading-relaxed">
-            <p className="font-bold text-[#0E2559]">Normativa de accidentes de trabajo (Dmei Pgiá):</p>
+            <p className="font-bold text-[#0E2559]">Cuánto te pagan (Dmei Pgiá):</p>
             <ul className="list-disc pl-5 space-y-1 text-slate-600 text-xs sm:text-sm">
-              <li>El empleador abona el salario del día de la lesión. Bituaj Leumi cubre el 75% del salario bruto a partir del día siguiente y hasta un máximo de 91 días de incapacidad laboral certificada.</li>
-              <li>Aplica tanto a accidentes ocurridos en el puesto de trabajo como en el trayecto directo de ida o vuelta entre tu hogar y el lugar laboral.</li>
-              <li>Exige siempre que cada informe médico incluya la frase "be-avodá" (בעבודה) para evitar que la aseguradora estatal lo tramite como enfermedad común.</li>
+              <li>Bituaj Leumi paga el 75% de tu sueldo promedio de los 3 meses previos, con un tope diario.</li>
+              <li>Se paga desde el día siguiente al accidente, hasta 91 días (13 semanas).</li>
+              <li>Los primeros 12 días los paga tu empleador, y Bituaj Leumi se los devuelve.</li>
+              <li>También cubre el accidente en el camino directo entre tu casa y el trabajo.</li>
+              <li>Esfuerzo repetido: las Kupot no dan el certificado de accidentado laboral por enfermedades. El reclamo se analiza con los documentos médicos que unen el problema con tu trabajo.</li>
+              <li>Si eres independiente, usas el formulario BL 283 en lugar del BL 250.</li>
             </ul>
           </div>
         )}
@@ -195,7 +211,7 @@ export const BituajLeumiGuide: React.FC = () => {
         <div className="pt-4 border-t border-black/5 flex items-center justify-between text-xs text-slate-600 font-medium flex-wrap gap-2">
           <div className="flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
-            <span>Fuente: Bituaj Leumi · btl.gov.il · revisado oct 2026</span>
+            <span>Fuente: Bituaj Leumi · btl.gov.il · revisado nov 2026</span>
           </div>
           <button
             onClick={() => setIsDetailOpen(!isDetailOpen)}
@@ -214,35 +230,8 @@ export const BituajLeumiGuide: React.FC = () => {
         <div className="bg-white rounded-3xl border border-black/10 p-6 sm:p-7 shadow-2xs flex flex-col justify-between space-y-5">
           <div className="space-y-4">
             <h3 className="text-lg sm:text-xl font-extrabold text-[#0E2559]">
-              Frase para el médico
+              Frase para el médico{selectedInjuryType === 'repetitive' ? ' de familia' : ''}
             </h3>
-
-            {/* Selector: Tendinitis / esfuerzo vs Accidente / golpe */}
-            <div className="grid grid-cols-2 bg-slate-100/70 p-1 rounded-2xl border border-black/5 gap-1">
-              <button
-                type="button"
-                onClick={() => setSelectedInjuryType('repetitive')}
-                className={`min-h-[44px] py-2 px-3 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer text-center ${
-                  selectedInjuryType === 'repetitive'
-                    ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Tendinitis / esfuerzo
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setSelectedInjuryType('acute')}
-                className={`min-h-[44px] py-2 px-3 text-xs sm:text-sm font-bold rounded-xl transition cursor-pointer text-center ${
-                  selectedInjuryType === 'acute'
-                    ? 'bg-white text-[#0E2559] border border-[#6B4FA0] shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                Accidente / golpe
-              </button>
-            </div>
 
             {/* Caja hebreo */}
             <div className="bg-[#FBF3E6] border border-[#E8A33D]/30 rounded-2xl p-5 text-right font-hebrew text-lg sm:text-xl font-bold text-[#0E2559] leading-relaxed shadow-inner" lang="he" dir="rtl">

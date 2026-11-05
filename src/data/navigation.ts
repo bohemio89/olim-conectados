@@ -191,8 +191,8 @@ export const SECTIONS: SectionConfig[] = [
     icon: HardHat,
     groupId: 'tramites',
     groupName: 'Derechos & Trámites',
-    description: 'Lesiones de trabajo, formulario BL 250, médico laboral y derechos de seguridad social.',
-    contextPromptHint: 'Estás en: Accidente & Bituaj Leumi. Pregúntame por el formulario BL 250 y reclamos de invalidez.',
+    description: 'Accidentes de trabajo: formularios BL 250 y BL 211, y cuánto paga Bituaj Leumi.',
+    contextPromptHint: 'Estás en: Accidente & Bituaj Leumi. Pregúntame por los formularios BL 250 y BL 211.',
     path: '/bituaj-leumi'
   },
   {
