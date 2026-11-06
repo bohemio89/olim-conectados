@@ -34,11 +34,10 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
         coverBg: 'bg-[#39182E]',
         coverIcon: Music,
         displayType: 'Boliche latino',
-        displayAddress: 'Ibn Gabirol 30, Tel Aviv',
+        displayAddress: 'Morfium Club, Ibn Gabirol 30, Tel Aviv',
         tags: ['Reggaetón', 'Old school'],
         styleCategory: 'Reggaetón',
-        instagramUrl: 'https://instagram.com/pasionlatina_backup',
-        nextDateInfo: 'Fiestas quincenales los fines de semana. Próxima edición: Jueves a medianoche. Entradas por lista o en puerta.',
+        instagramUrl: 'https://linktr.ee/PasionLatinatlv',
       };
     }
     if (venue.name.includes('Havana')) {
@@ -46,23 +45,21 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
         coverBg: 'bg-[#7A3F1F]',
         coverIcon: Disc3,
         displayType: 'Salsa & bachata',
-        displayAddress: 'Tel Aviv-Yafo',
-        tags: ['Salsa', 'Bachata'],
+        displayAddress: 'Yigal Alon 126, Tel Aviv',
+        tags: ['Salsa', 'Bachata', 'Kizomba'],
         styleCategory: 'Salsa & Bachata',
         instagramUrl: 'https://instagram.com/havanaclubtlv',
-        nextDateInfo: 'Clases y social todos los martes, jueves y sábados desde las 21:00. Pista de salsa y pista de bachata en simultáneo.',
       };
     }
     // Cachengue TLV
     return {
       coverBg: 'bg-[#183A64]',
       coverIcon: PartyPopper,
-      displayType: 'Fiestas y after beach',
+      displayType: 'Productora de eventos (no es fiesta latina)',
       displayAddress: 'Tel Aviv-Yafo · sin lugar fijo',
       tags: ['Variado'],
       styleCategory: 'Fiestas variadas',
       instagramUrl: 'https://instagram.com/cachengue.tlv',
-      nextDateInfo: 'Eventos temáticos periódicos (After Beach, fiestas patrias, cumbia y pop). Preventa oficial vía Go-Out.',
     };
   };
 
@@ -76,7 +73,7 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
     <div className="space-y-6">
       
       {/* 1. Chips de estilo: Todas, Reggaetón, Salsa & Bachata, Fiestas variadas */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-sm">
+      <div className="flex flex-wrap items-center gap-2 text-sm">
         {styleChips.map((style) => {
           const isActive = selectedStyle === style;
           return (
@@ -84,7 +81,7 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
               key={style}
               type="button"
               onClick={() => setSelectedStyle(style)}
-              className={`min-h-[44px] px-5 py-2.5 rounded-full font-bold whitespace-nowrap transition ${
+              className={`min-h-[44px] px-4 sm:px-5 py-2.5 rounded-full font-bold whitespace-nowrap transition ${
                 isActive
                   ? 'bg-[#0E2559] text-white shadow-2xs'
                   : 'bg-white text-neutral-800 border border-neutral-200/90 hover:bg-neutral-50 shadow-2xs'
@@ -126,7 +123,7 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
                 {/* Dirección */}
                 <div className="flex items-center gap-2 text-sm text-neutral-600">
                   <MapPin className="w-4 h-4 text-neutral-400 shrink-0" />
-                  <span className="truncate">{meta.displayAddress}</span>
+                  <span>{meta.displayAddress}</span>
                 </div>
 
                 {/* Etiquetas */}
@@ -150,7 +147,7 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
                   className="flex-1 min-h-[44px] bg-[#2A7050] hover:bg-[#235e43] text-white font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition shadow-2xs"
                 >
                   <Calendar className="w-4 h-4 text-white" />
-                  <span>Próxima fecha</span>
+                  <span>Días y horarios</span>
                 </button>
                 <a
                   href={meta.instagramUrl}
@@ -159,7 +156,7 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
                   className="flex-1 min-h-[44px] border border-neutral-300 hover:border-neutral-400 bg-white hover:bg-neutral-50 text-neutral-800 font-bold text-sm py-2.5 px-3 rounded-full flex items-center justify-center gap-2 transition"
                 >
                   <Instagram className="w-4 h-4 text-neutral-800" />
-                  <span>Instagram</span>
+                  <span>{meta.instagramUrl.includes('linktr.ee') ? 'Enlaces' : 'Instagram'}</span>
                 </a>
               </div>
             </div>
@@ -171,7 +168,7 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
       <div className="bg-[#FFF6E5] border border-[#E8A33D]/30 rounded-2xl p-4 flex items-center gap-3 text-sm text-[#8A5612] font-semibold shadow-2xs">
         <Info className="w-5 h-5 text-[#E8A33D] shrink-0" />
         <p className="leading-snug">
-          Las fechas cambian seguido: confirma en Instagram antes de ir.
+          Datos de Google Maps y de las cuentas de cada lugar, todavía sin confirmar. Las fechas cambian seguido: confirma en su cuenta antes de ir.
         </p>
       </div>
 
@@ -189,19 +186,20 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
               <button
                 type="button"
                 onClick={() => setActiveDateModal(null)}
-                className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-500 hover:bg-neutral-200"
+                aria-label="Cerrar"
+                className="w-11 h-11 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-500 hover:bg-neutral-200"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="bg-[#F8F9FB] rounded-2xl p-4 text-sm text-neutral-700 leading-relaxed">
-              <p className="font-bold text-[#0E2559] mb-1">Cronograma de eventos:</p>
-              <p>{getVenueMeta(activeDateModal).nextDateInfo}</p>
+              <p className="font-bold text-[#0E2559] mb-1">Días y horarios:</p>
+              <p>{activeDateModal.schedule}</p>
             </div>
 
             <p className="text-xs text-neutral-500">
-              * Recuerda que los horarios y locaciones especiales se actualizan siempre en sus historias de Instagram.
+              Según Google Maps y la cuenta del lugar al momento de la carga. Confírmalo en su cuenta antes de ir.
             </p>
 
             <div className="flex gap-2.5 pt-2">
@@ -219,7 +217,7 @@ export const NightlifeGuide: React.FC<NightlifeGuideProps> = ({ venues }) => {
                 className="flex-1 min-h-[44px] bg-[#2A7050] text-white rounded-xl font-bold hover:bg-[#235e43] text-sm flex items-center justify-center gap-2 shadow-2xs"
               >
                 <Instagram className="w-4 h-4" />
-                <span>Ver Instagram</span>
+                <span>Ver su cuenta</span>
               </a>
             </div>
           </div>
