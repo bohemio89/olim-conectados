@@ -13,19 +13,27 @@ CÓMO PIENSAS
 - Si la pregunta mezcla varios temas, responde cada parte en orden.
 - Si te corrigen o te dan un dato nuevo, ajusta la respuesta sin repetir lo anterior.
 
+QUÉ PUEDES HACER (tienes libertad)
+- Conversar con naturalidad, explicar conceptos (qué es una Kupat Jolim, cómo funciona un contrato de alquiler en Israel), orientar a la persona en su situación, ayudar a redactar un mensaje o una carta, traducir del hebreo y dar consejos prácticos de la vida en Israel.
+- Para eso puedes usar tu conocimiento general, siempre que no des datos concretos sin fuente.
+
+DATOS CONCRETOS (montos, plazos, porcentajes, requisitos, teléfonos, direcciones, nombres de formularios)
+- Solo de la BASE VERIFICADA o de una página oficial que encontraste en la búsqueda web.
+- La búsqueda está limitada a sitios oficiales (gov.il y sus ministerios, btl.gov.il, las cuatro Kupot, oref.org.il, la Agencia Judía y Kol Zchut como respaldo). Si das un dato de la búsqueda, cita la página con su enlace.
+- Si la BASE y una página oficial no coinciden, di las dos cosas y sugiere confirmar con el organismo.
+- Si no encuentras el dato, dilo con honestidad ("No encontré un dato oficial sobre eso") y di a qué organismo preguntar. Nunca inventes.
+- Nunca uses ni cites Wikipedia, foros, blogs ni sitios no oficiales.
+
 CÓMO RESPONDES
 - Español neutro, trato de tú. Primera frase: la respuesta directa. Sin títulos ni emojis.
-- Corto: hasta 120 palabras. Pasos numerados si hay que hacer algo en orden (hasta 5).
+- Hasta 150 palabras, salvo que la persona pida más detalle. Pasos numerados si hay que hacer algo en orden.
 - Términos en hebreo transliterados, la primera vez con su significado.
-- Termina con "Fuente: <organismo>" cuando el dato sale de la BASE VERIFICADA.
+- Termina con la fuente: "Fuente: <organismo>" (BASE VERIFICADA) o el enlace de la página oficial que usaste.
 - Cuando el sitio tiene una sección sobre el tema, nómbrala al final: "Más en la sección <nombre>". Secciones: Checklist del Olé, Economía & Vida Civil, Trámites & Vouchers, Licencia de conducir, Guardia & Miún, Médicos en Español, Guerra y emergencias, Accidente & Bituaj Leumi, Calculadora de Majalá, Comunidad & Comercios, Plan de Negocio.
 
-EXACTITUD (lo más importante)
-- Solo das datos de la BASE VERIFICADA. No inventes montos, plazos, porcentajes, teléfonos, direcciones, comercios ni formularios.
-- Si algo no está en la base, dilo en una frase ("No tengo un dato oficial confirmado sobre eso") y di a qué organismo preguntar. Puedes explicar conceptos generales sin cifras.
-- Nunca cites Wikipedia ni sitios no oficiales.
+SEGURIDAD
 - Salud: si puede haber riesgo de vida, empieza con "Si hay riesgo de vida, llama al 101".
-- No das consejo legal ni médico personal; para un caso particular derivas al asesor de absorción, a la Kupá o al organismo.
+- No das consejo legal ni médico personal definitivo; para un caso particular derivas al asesor de absorción, a la Kupá o al organismo.
 
 BASE VERIFICADA (noviembre 2026)
 
@@ -136,56 +144,110 @@ const STAGE_HINT: Record<string, string> = {
   tramite: 'La persona eligió "trámite": está haciendo una gestión concreta.',
 };
 
-export async function answerChat(body: any): Promise<{ status: number; json: any }> {
-  const { userQuery, messages, userStage } = body || {};
-  const currentQuery = String(
-    userQuery || (Array.isArray(messages) && messages.length ? messages[messages.length - 1]?.content : '') || ''
-  ).trim();
-  if (!currentQuery) return { status: 400, json: { error: 'Consulta vacía' } };
+// Sitios oficiales en los que el asistente puede buscar.
+export const OFFICIAL_DOMAINS = [
+  'gov.il', '*.gov.il',
+  'kolzchut.org.il', '*.kolzchut.org.il',
+  'clalit.co.il', '*.clalit.co.il',
+  'maccabi4u.co.il', '*.maccabi4u.co.il',
+  'meuhedet.co.il', '*.meuhedet.co.il',
+  'leumit.co.il', '*.leumit.co.il',
+  'oref.org.il', '*.oref.org.il',
+  'jewishagency.org', '*.jewishagency.org',
+];
 
-  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
-  if (!apiKey) {
-    console.error('[chat] Falta GEMINI_API_KEY');
-    return { status: 200, json: { text: UNAVAILABLE_TEXT, error: 'no_key' } };
+const OFFICIAL_RE = /(^|\.)(gov\.il|kolzchut\.org\.il|clalit\.co\.il|maccabi4u\.co\.il|meuhedet\.co\.il|leumit\.co\.il|oref\.org\.il|jewishagency\.org)$/i;
+
+export function isOfficialUrl(url: string): boolean {
+  try {
+    return OFFICIAL_RE.test(new URL(url).hostname);
+  } catch {
+    return false;
   }
+}
 
-  const stageHint = userStage && STAGE_HINT[userStage] ? `\n\nCONTEXTO: ${STAGE_HINT[userStage]}` : '';
-  const contents = buildContents(messages, currentQuery);
+type Result = { text: string } | { error: 'quota' | 'unavailable'; detail: string };
 
-  // gemini-2.5-flash ya no está disponible para cuentas nuevas (404, nov 2026).
+// Groq Compound: modelo + búsqueda web limitada a sitios oficiales.
+async function askGroq(system: string, contents: Turn[], apiKey: string): Promise<Result> {
+  const model = process.env.GROQ_MODEL || 'groq/compound-mini';
+  const messages = [
+    { role: 'system', content: system },
+    ...contents.map((t) => ({ role: t.role === 'user' ? 'user' : 'assistant', content: t.parts[0].text })),
+  ];
+  const base: any = {
+    model,
+    messages,
+    temperature: 0.3,
+    max_completion_tokens: 2048,
+    search_settings: { include_domains: OFFICIAL_DOMAINS },
+  };
+  // Solo búsqueda web (sin visitar sitios arbitrarios ni ejecutar código).
+  const bodies = [{ ...base, compound_custom: { tools: { enabled_tools: ['web_search'] } } }, base];
+  for (const body of bodies) {
+    const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify(body),
+    });
+    if (resp.status === 429) return { error: 'quota', detail: 'groq 429' };
+    if (resp.status === 400 && body.compound_custom) {
+      console.warn('[chat] Groq rechazó compound_custom, reintento sin esa opción:', (await resp.text().catch(() => '')).slice(0, 300));
+      continue;
+    }
+    if (!resp.ok) {
+      const t = await resp.text().catch(() => '');
+      console.error(`[chat] Groq respondió ${resp.status}: ${t.slice(0, 500)}`);
+      return { error: 'unavailable', detail: `groq ${resp.status}` };
+    }
+    const data = await resp.json();
+    const msg = data?.choices?.[0]?.message;
+    let text = String(msg?.content || '').trim();
+    if (!text) return { error: 'unavailable', detail: 'groq vacío' };
+
+    // Fuentes oficiales que la búsqueda consultó y que el texto no cita.
+    const urls: string[] = [];
+    for (const tool of msg?.executed_tools || []) {
+      const sr = tool?.search_results;
+      const list = Array.isArray(sr) ? sr : sr?.results || [];
+      for (const r of list) {
+        const u = r?.url;
+        if (typeof u === 'string' && isOfficialUrl(u) && !urls.includes(u) && !text.includes(u)) urls.push(u);
+      }
+    }
+    // Quita enlaces no oficiales que el modelo haya escrito igual.
+    text = text.replace(/https?:\/\/[^\s)\]]+/g, (u) => (isOfficialUrl(u) ? u : ''));
+    if (urls.length && !/https?:\/\//.test(text)) {
+      text += `\n\nPáginas oficiales consultadas:\n${urls.slice(0, 3).map((u) => `- ${u}`).join('\n')}`;
+    }
+    return { text };
+  }
+  return { error: 'unavailable', detail: 'groq sin respuesta' };
+}
+
+// Gemini: respaldo sin búsqueda web.
+async function askGemini(system: string, contents: Turn[], apiKey: string): Promise<Result> {
   const model = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
-
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
-      const resp = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-          body: JSON.stringify({
-            contents,
-            systemInstruction: { parts: [{ text: SYSTEM_PROMPT + stageHint }] },
-            generationConfig: {
-              temperature: 0.3,
-              // El límite de salida incluye el razonamiento.
-              maxOutputTokens: 4096,
-              thinkingConfig: { thinkingLevel: 'medium' },
-            },
-          }),
-        }
-      );
-
-      if (resp.status === 429) {
-        console.warn('[chat] Cupo de Gemini agotado (429)');
-        return { status: 200, json: { text: QUOTA_TEXT, error: 'quota' } };
-      }
+      const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+        body: JSON.stringify({
+          contents,
+          systemInstruction: {
+            parts: [{ text: `${system}\n\nAVISO: en este momento NO tienes búsqueda web. Para datos concretos usa solo la BASE VERIFICADA.` }],
+          },
+          generationConfig: { temperature: 0.3, maxOutputTokens: 4096, thinkingConfig: { thinkingLevel: 'medium' } },
+        }),
+      });
+      if (resp.status === 429) return { error: 'quota', detail: 'gemini 429' };
       if (!resp.ok) {
-        const errText = await resp.text().catch(() => '');
-        console.error(`[chat] Gemini respondió ${resp.status}: ${errText.slice(0, 500)}`);
+        const t = await resp.text().catch(() => '');
+        console.error(`[chat] Gemini respondió ${resp.status}: ${t.slice(0, 300)}`);
         if (resp.status >= 500 && attempt === 1) continue;
-        return { status: 200, json: { text: UNAVAILABLE_TEXT, error: `gemini_${resp.status}` } };
+        return { error: 'unavailable', detail: `gemini ${resp.status}` };
       }
-
       const data = await resp.json();
       const cand = data?.candidates?.[0];
       const text = (cand?.content?.parts || [])
@@ -193,19 +255,52 @@ export async function answerChat(body: any): Promise<{ status: number; json: any
         .map((p: any) => p.text)
         .join('')
         .trim();
-      if (text) return { status: 200, json: { text } };
-
-      console.error('[chat] Respuesta vacía de Gemini', {
-        finishReason: cand?.finishReason,
-        blockReason: data?.promptFeedback?.blockReason,
-      });
-      if (attempt === 1) continue;
+      if (text) return { text };
+      console.error('[chat] Gemini vacío', { finishReason: cand?.finishReason });
     } catch (err: any) {
-      console.error('[chat] Error al consultar Gemini:', err?.message || err);
-      if (attempt === 1) continue;
+      console.error('[chat] Error Gemini:', err?.message || err);
     }
   }
-  return { status: 200, json: { text: UNAVAILABLE_TEXT, error: 'unavailable' } };
+  return { error: 'unavailable', detail: 'gemini sin respuesta' };
+}
+
+export async function answerChat(body: any): Promise<{ status: number; json: any }> {
+  const { userQuery, messages, userStage } = body || {};
+  const currentQuery = String(
+    userQuery || (Array.isArray(messages) && messages.length ? messages[messages.length - 1]?.content : '') || ''
+  ).trim();
+  if (!currentQuery) return { status: 400, json: { error: 'Consulta vacía' } };
+
+  const stageHint = userStage && STAGE_HINT[userStage] ? `\n\nCONTEXTO: ${STAGE_HINT[userStage]}` : '';
+  const system = SYSTEM_PROMPT + stageHint;
+  const contents = buildContents(messages, currentQuery);
+
+  // Orden: Groq (con búsqueda oficial) y, si falla, Gemini.
+  const providers: Array<() => Promise<Result>> = [];
+  const groqKey = process.env.GROQ_API_KEY;
+  const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+  if (groqKey) providers.push(() => askGroq(system, contents, groqKey));
+  if (geminiKey) providers.push(() => askGemini(system, contents, geminiKey));
+  if (!providers.length) {
+    console.error('[chat] No hay claves de IA configuradas');
+    return { status: 200, json: { text: UNAVAILABLE_TEXT, error: 'no_key' } };
+  }
+
+  let sawQuota = false;
+  for (const ask of providers) {
+    try {
+      const r = await ask();
+      if ('text' in r) return { status: 200, json: { text: r.text } };
+      if (r.error === 'quota') sawQuota = true;
+      console.warn('[chat] Proveedor sin respuesta:', r.detail);
+    } catch (err: any) {
+      console.error('[chat] Error de proveedor:', err?.message || err);
+    }
+  }
+  return {
+    status: 200,
+    json: sawQuota ? { text: QUOTA_TEXT, error: 'quota' } : { text: UNAVAILABLE_TEXT, error: 'unavailable' },
+  };
 }
 
 // -----------------------------------------------------------------------------
