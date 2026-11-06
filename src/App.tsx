@@ -21,6 +21,7 @@ import { BusinessPlanGuide } from './components/BusinessPlanGuide';
 import { INITIAL_DOCTORS, COMMUNITY_STORES, COMMUNITY_GROUPS, NIGHTLIFE_VENUES } from './data/mockData';
 import { Doctor, DoctorReview } from './types';
 import { SECTIONS, SECTION_MAP } from './data/navigation';
+import { ASSISTANT_ENABLED } from './config';
 import { BottomNav } from './components/BottomNav';
 import { LogoSymbol } from './components/LogoSymbol';
 import { Plus, Phone } from 'lucide-react';
@@ -53,10 +54,18 @@ const PATH_TO_TAB: Record<string, string> = Object.entries(TAB_TO_PATH).reduce(
 
 const getTabFromPath = (pathname: string): string => {
   const cleanPath = pathname.replace(/\/$/, '') || '/';
-  return PATH_TO_TAB[cleanPath] || 'home';
+  const tab = PATH_TO_TAB[cleanPath] || 'home';
+  return tab === 'assistant' && !ASSISTANT_ENABLED ? 'home' : tab;
 };
 
 export default function App() {
+  // Si el asistente está oculto, /asistente vuelve a la portada.
+  useEffect(() => {
+    if (!ASSISTANT_ENABLED && window.location.pathname.replace(/\/$/, '') === '/asistente') {
+      window.history.replaceState({ tabId: 'home' }, '', '/');
+    }
+  }, []);
+
   // Pestaña activa sincronizada con la URL
   const [activeTab, setActiveTabState] = useState<string>(() => {
     if (typeof window !== 'undefined') {
@@ -122,17 +131,12 @@ export default function App() {
   const [floatingAssistantQuery, setFloatingAssistantQuery] = useState<string>('');
 
   // Lista de médicos con reviews y persistencia
-  const [doctorsList, setDoctorsList] = useState<Doctor[]>(() => {
-    try {
-      const saved = localStorage.getItem('olim_community_doctors');
-      return saved ? JSON.parse(saved) : INITIAL_DOCTORS;
-    } catch {
-      return INITIAL_DOCTORS;
-    }
-  });
+  // Siempre se parte de la lista verificada; no se reutiliza una copia vieja guardada en el navegador.
+  const [doctorsList, setDoctorsList] = useState<Doctor[]>(INITIAL_DOCTORS);
 
   // Navegación con pushState
-  const navigateToTab = (tabId: string) => {
+  const navigateToTab = (requestedTab: string) => {
+    const tabId = requestedTab === 'assistant' && !ASSISTANT_ENABLED ? 'home' : requestedTab;
     setActiveTabState(tabId);
     const targetPath = TAB_TO_PATH[tabId] || '/';
     if (window.location.pathname !== targetPath) {
@@ -280,7 +284,7 @@ export default function App() {
 
                 {/* Contenido propio de cada sección (intacto) */}
                 <div>
-                  {activeTab === 'assistant' && (
+                  {ASSISTANT_ENABLED && activeTab === 'assistant' && (
                     <AssistantChat 
                       initialQuery={floatingAssistantQuery} 
                       onNavigateToTab={navigateToTab}
@@ -373,14 +377,14 @@ export default function App() {
       </div>
 
       {/* 4 & 5. Asistente IA Olim (Burbuja Flotante y Panel/Drawer) */}
-      <FloatingAssistant
+      {ASSISTANT_ENABLED && <FloatingAssistant
         activeTab={activeTab}
         isOpen={isFloatingAssistantOpen}
         onToggle={() => setIsFloatingAssistantOpen((prev) => !prev)}
         onClose={() => setIsFloatingAssistantOpen(false)}
         presetQuery={floatingAssistantQuery}
         onNavigateToTab={navigateToTab}
-      />
+      />}
 
       {/* 3. Barra de Navegación Inferior en Celular (lg:hidden) */}
       <BottomNav
