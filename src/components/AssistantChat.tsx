@@ -295,7 +295,7 @@ Si es una urgencia médica, llama al **101**.`,
     for (let attempt = 1; attempt <= 2; attempt++) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 25000);
+        const timeoutId = setTimeout(() => controller.abort(), 45000);
 
         const response = await fetch('/api/chat', {
           method: 'POST',
@@ -332,7 +332,8 @@ Si es una urgencia médica, llama al **101**.`,
 
     if (responseData && responseData.text) {
       const assistantMessage: ChatMessage = {
-        id: `asst-${Date.now()}`,
+        // Los avisos de error no se envían como historial en la próxima pregunta.
+        id: `${(responseData as any).error ? 'err' : 'asst'}-${Date.now()}`,
         role: 'assistant',
         content: responseData.text,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
