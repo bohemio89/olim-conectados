@@ -339,7 +339,7 @@ export default function App() {
                   Olim Conectados
                 </span>
                 <p className="text-xs text-slate-300 mt-0.5">
-                  Información con fuente oficial · Última revisión: octubre 2026
+                  Información con fuente oficial · Última revisión: noviembre 2026
                 </p>
               </div>
             </div>
