@@ -18,14 +18,15 @@ QUÉ PUEDES HACER (tienes libertad)
 - Para eso puedes usar tu conocimiento general, siempre que no des datos concretos sin fuente.
 
 DATOS CONCRETOS (montos, plazos, porcentajes, requisitos, teléfonos, direcciones, nombres de formularios)
-- Solo de la BASE VERIFICADA o de una página oficial que encontraste en la búsqueda web.
+- Solo de la BASE VERIFICADA o de una página oficial que encontraste con la herramienta buscar_fuentes_oficiales. Si la base no tiene el dato, BUSCA antes de responder.
+- Nunca escribas un teléfono, monto, plazo o enlace que no esté textualmente en la BASE o en los resultados de la búsqueda: un sistema automático borra los datos sin fuente.
 - La búsqueda está limitada a sitios oficiales (gov.il y sus ministerios, btl.gov.il, las cuatro Kupot, oref.org.il, la Agencia Judía y Kol Zchut como respaldo). Si das un dato de la búsqueda, cita la página con su enlace.
 - Si la BASE y una página oficial no coinciden, di las dos cosas y sugiere confirmar con el organismo.
 - Si no encuentras el dato, dilo con honestidad ("No encontré un dato oficial sobre eso") y di a qué organismo preguntar. Nunca inventes.
 - Nunca uses ni cites Wikipedia, foros, blogs ni sitios no oficiales.
 
 CÓMO RESPONDES
-- Español neutro, trato de tú. Primera frase: la respuesta directa. Sin títulos ni emojis.
+- Español neutro, trato de tú. Primera frase: la respuesta directa. Sin títulos, sin emojis y sin markdown (nada de ** ni #).
 - Hasta 150 palabras, salvo que la persona pida más detalle. Pasos numerados si hay que hacer algo en orden.
 - Términos en hebreo transliterados, la primera vez con su significado.
 - Termina con la fuente: "Fuente: <organismo>" (BASE VERIFICADA) o el enlace de la página oficial que usaste.
@@ -89,8 +90,13 @@ Plan de negocio
 - Centro de información de negocios del Ministerio de Aliá: *2994, gratis, en español; para olim hasta 10 años desde la Aliá y mayores de 21.
 - Centros Maalot: asesoría para abrir o hacer crecer un negocio; para olim hasta 10 años desde la Aliá y residentes que vuelven (5+ años afuera, hasta 2 años de regreso). Gratis, salvo 250 ₪ por el plan de negocio. Gush Dan y Shfelá: 03-5501128. Jerusalén: 02-6794242 (ext. 3). Fuente: Ministerio de Aliá.
 
-Comunidad (comercios confirmados por el sitio)
-- Amapola Alfajores, Ibn Gvirol 54, Tel Aviv (Dom–Jue 7:30–18:30, Vie 7:30–14:30). Las Empanadot, delivery en zona Merkaz. Vajula Alfajores, envíos a todo Israel. Maadaniá Laro, Allenby 37, Tel Aviv (productos de Argentina y Sudamérica, tel. 03-5255880). La Tienda - Comida Latina, Levanda 13, Tel Aviv (Dom–Jue 10:00–22:00, Vie 9:00–23:00). No menciones otros comercios.
+Comunidad (comercios confirmados por el sitio; productos según sus propios canales)
+- Amapola Alfajores: panadería y café en Ibn Gvirol 54, Tel Aviv. Alfajores, facturas, sándwiches, café. Kosher. Dom–Jue 7:30–18:30, Vie 7:30–14:30.
+- Las Empanadot: empanadas argentinas caseras, congeladas o listas para comer, con delivery en zona Merkaz. Pedidos por WhatsApp 053-609-5976.
+- Vajula Alfajores: alfajores argentinos, Kosher Mehadrin, envíos a todo Israel. WhatsApp 054-866-7893. Web vajula.com.
+- Maadaniá Laro: delicatessen en Allenby 37, Tel Aviv. Bebidas, quesos, dulces, conservas y productos de Argentina y Sudamérica. Tel. 03-5255880, cel. 054-2027989.
+- La Tienda - Comida Latina: almacén latino en Levanda 13, Tel Aviv. Harina P.A.N., pulpas de fruta, congelados y productos de Argentina. Dom–Jue 10:00–22:00, Vie 9:00–23:00. WhatsApp 050-926-9777.
+- Regla: recomienda un comercio para un producto SOLO si el producto figura en su lista. Si nadie lo tiene en la lista (por ejemplo, yerba mate), di que no está confirmado qué local lo vende y sugiere llamar a los almacenes con productos de Argentina (Maadaniá Laro y La Tienda) para consultar. No menciones otros comercios.
 - OLEI: voluntarios que acompañan a hispanohablantes en trámites (olei.org.il).`;
 
 // -----------------------------------------------------------------------------
@@ -146,14 +152,14 @@ const STAGE_HINT: Record<string, string> = {
 
 // Sitios oficiales en los que el asistente puede buscar.
 export const OFFICIAL_DOMAINS = [
-  'gov.il', '*.gov.il',
-  'kolzchut.org.il', '*.kolzchut.org.il',
-  'clalit.co.il', '*.clalit.co.il',
-  'maccabi4u.co.il', '*.maccabi4u.co.il',
-  'meuhedet.co.il', '*.meuhedet.co.il',
-  'leumit.co.il', '*.leumit.co.il',
-  'oref.org.il', '*.oref.org.il',
-  'jewishagency.org', '*.jewishagency.org',
+  'gov.il',
+  'kolzchut.org.il',
+  'clalit.co.il',
+  'maccabi4u.co.il',
+  'meuhedet.co.il',
+  'leumit.co.il',
+  'oref.org.il',
+  'jewishagency.org',
 ];
 
 const OFFICIAL_RE = /(^|\.)(gov\.il|kolzchut\.org\.il|clalit\.co\.il|maccabi4u\.co\.il|meuhedet\.co\.il|leumit\.co\.il|oref\.org\.il|jewishagency\.org)$/i;
@@ -166,163 +172,260 @@ export function isOfficialUrl(url: string): boolean {
   }
 }
 
-type Result = { text: string } | { error: 'quota' | 'unavailable'; detail: string };
+// -----------------------------------------------------------------------------
+// Control de datos: cada número, teléfono o enlace de la respuesta tiene que
+// aparecer en la BASE VERIFICADA, en las páginas oficiales consultadas o en lo
+// que escribió la persona. Si no, se quita.
+// -----------------------------------------------------------------------------
+const PHONE_RE = /(?:\+972[\s-]?|\*)?\d[\d\s-]{2,}\d/g;
+const NUM_RE = /\d+(?:[.,]\d+)*/g;
+const URL_RE = /https?:\/\/[^\s)\]>"']+|(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:gov\.il|org\.il|co\.il|com|org|il)(?:\/[^\s)\]>"']*)?/gi;
 
-// Groq: modelos con búsqueda web integrada (Compound) y, si no hay, un modelo de texto.
-const GROQ_SEARCH_CANDIDATES = ['groq/compound', 'groq/compound-mini', 'compound-beta', 'compound-beta-mini'];
-const GROQ_TEXT_PREFERENCE = ['openai/gpt-oss-120b', 'qwen', 'llama-3.3-70b', 'openai/gpt-oss-20b', 'llama'];
-let groqModelsCache: string[] | null = null;
+const digitsOnly = (s: string) => {
+  let d = s.replace(/\D/g, '');
+  if (s.trim().startsWith('+972') || d.startsWith('972')) d = '0' + d.replace(/^972/, '');
+  return d;
+};
+const normNum = (s: string) => s.replace(/[.,](?=\d{3}\b)/g, '').replace(',', '.');
 
-async function listGroqModels(apiKey: string): Promise<string[]> {
-  if (groqModelsCache) return groqModelsCache;
+export function buildCorpus(texts: string[]) {
+  const all = texts.join('\n');
+  const digits = new Set<string>();
+  for (const m of all.match(PHONE_RE) || []) digits.add(digitsOnly(m));
+  const nums = new Set<string>();
+  for (const m of all.match(NUM_RE) || []) nums.add(normNum(m));
+  const lower = all.toLowerCase();
+  return { digits, nums, lower };
+}
+
+function sentenceProblems(sentence: string, corpus: ReturnType<typeof buildCorpus>): string[] {
+  const bad: string[] = [];
+  // Enlaces: oficiales o presentes en la base.
+  for (const u of sentence.match(URL_RE) || []) {
+    const clean = u.replace(/[.,;:]+$/, '');
+    const full = clean.startsWith('http') ? clean : `https://${clean}`;
+    if (!isOfficialUrl(full) && !corpus.lower.includes(clean.toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, ''))) bad.push(clean);
+  }
+  const noUrls = sentence.replace(URL_RE, ' ');
+  // Teléfonos y códigos (7+ dígitos o *NNNN).
+  for (const p of noUrls.match(PHONE_RE) || []) {
+    const d = digitsOnly(p);
+    const isPhone = d.length >= 7 || p.trim().startsWith('*');
+    if (isPhone && ![...corpus.digits].some((c) => c === d || c.endsWith(d) || d.endsWith(c) && c.length >= 7)) bad.push(p.trim());
+  }
+  // Montos, plazos, porcentajes y otras cifras.
+  for (const m of noUrls.matchAll(NUM_RE)) {
+    const raw = m[0];
+    const n = normNum(raw);
+    const after = noUrls.slice((m.index || 0) + raw.length, (m.index || 0) + raw.length + 3);
+    const meaningful = /[%₪]/.test(after) || Number(n) > 10;
+    if (meaningful && !corpus.nums.has(n)) {
+      const d = raw.replace(/\D/g, '');
+      if (d.length >= 7 && [...corpus.digits].some((c) => c.includes(d))) continue;
+      bad.push(raw);
+    }
+  }
+  return bad;
+}
+
+export function verifyAnswer(text: string, corpus: ReturnType<typeof buildCorpus>) {
+  // Sin markdown: el chat lo muestra tal cual.
+  let clean = text.replace(/\*\*(.+?)\*\*/g, '$1').replace(/^#+\s*/gm, '');
+  const removed: string[] = [];
+  const lines = clean.split('\n').map((line) => {
+    // Los marcadores de lista ("1." al inicio) no son datos.
+    const marker = line.match(/^\s*(\d+[.)]|[-•])\s+/)?.[0] || '';
+    const body = line.slice(marker.length);
+    const parts = body.split(/(?<=[.!?])\s+/);
+    const kept = parts.filter((s) => {
+      const bad = sentenceProblems(s, corpus);
+      if (bad.length) removed.push(...bad);
+      return bad.length === 0;
+    });
+    if (!kept.length && body.trim()) return null;
+    return marker + kept.join(' ');
+  });
+  clean = lines.filter((l) => l !== null).join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  return { text: clean, removed };
+}
+
+// -----------------------------------------------------------------------------
+// Búsqueda en sitios oficiales (Tavily, plan gratis)
+// -----------------------------------------------------------------------------
+type Hit = { title: string; url: string; content: string };
+
+async function searchOfficial(query: string, apiKey: string): Promise<Hit[]> {
   try {
-    const r = await fetch('https://api.groq.com/openai/v1/models', { headers: { Authorization: `Bearer ${apiKey}` } });
+    const r = await fetch('https://api.tavily.com/search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify({
+        query,
+        search_depth: 'basic',
+        max_results: 5,
+        include_domains: OFFICIAL_DOMAINS,
+      }),
+    });
     if (!r.ok) {
-      console.error(`[chat] No pude listar modelos de Groq: ${r.status}`);
+      console.error(`[chat] Tavily respondió ${r.status}: ${(await r.text().catch(() => '')).slice(0, 300)}`);
       return [];
     }
     const j = await r.json();
-    const ids: string[] = (j?.data || []).filter((m: any) => m?.active !== false).map((m: any) => String(m.id));
-    groqModelsCache = ids;
-    console.log('[chat] Modelos de Groq disponibles:', ids.join(', '));
-    return ids;
+    return (j?.results || [])
+      .filter((x: any) => typeof x?.url === 'string' && isOfficialUrl(x.url))
+      .map((x: any) => ({ title: String(x.title || ''), url: x.url, content: String(x.content || '').slice(0, 1500) }));
   } catch (e: any) {
-    console.error('[chat] Error listando modelos de Groq:', e?.message || e);
+    console.error('[chat] Error Tavily:', e?.message || e);
     return [];
   }
 }
 
-async function pickGroqModels(apiKey: string): Promise<{ id: string; search: boolean }[]> {
-  if (process.env.GROQ_MODEL) return [{ id: process.env.GROQ_MODEL, search: /compound/.test(process.env.GROQ_MODEL) }];
-  const ids = await listGroqModels(apiKey);
-  const out: { id: string; search: boolean }[] = [];
-  const searchIds = ids.length ? ids.filter((id) => /compound/i.test(id)) : GROQ_SEARCH_CANDIDATES.slice(0, 1);
-  // Preferir el sistema completo, después el mini.
-  searchIds.sort((x, y) => Number(/mini/.test(x)) - Number(/mini/.test(y)));
-  for (const id of searchIds.slice(0, 2)) out.push({ id, search: true });
-  const textIds = ids.filter((id) => !/compound|whisper|tts|guard|orpheus|playai|vision/i.test(id));
+const SEARCH_TOOL = {
+  type: 'function',
+  function: {
+    name: 'buscar_fuentes_oficiales',
+    description:
+      'Busca en sitios oficiales de Israel (gov.il, Bituaj Leumi, Kupot, Pikud HaOref, Agencia Judía, Kol Zchut). Úsala cuando la BASE VERIFICADA no tiene el dato concreto que la persona pide. Escribe la consulta en hebreo o inglés para mejores resultados.',
+    parameters: {
+      type: 'object',
+      properties: { consulta: { type: 'string', description: 'Qué buscar, en hebreo o inglés.' } },
+      required: ['consulta'],
+    },
+  },
+};
+
+type Result = { text: string; sources?: string[] } | { error: 'quota' | 'unavailable'; detail: string };
+
+// -----------------------------------------------------------------------------
+// Groq: redacta y decide cuándo buscar
+// -----------------------------------------------------------------------------
+const GROQ_TEXT_PREFERENCE = ['openai/gpt-oss-120b', 'qwen/qwen3', 'llama-3.3-70b', 'openai/gpt-oss-20b'];
+let groqModelsCache: string[] | null = null;
+
+async function pickGroqModel(apiKey: string): Promise<string | null> {
+  if (process.env.GROQ_MODEL) return process.env.GROQ_MODEL;
+  if (!groqModelsCache) {
+    try {
+      const r = await fetch('https://api.groq.com/openai/v1/models', { headers: { Authorization: `Bearer ${apiKey}` } });
+      if (r.ok) {
+        const j = await r.json();
+        const ids: string[] = (j?.data || []).filter((m: any) => m?.active !== false).map((m: any) => String(m.id));
+        groqModelsCache = ids;
+      } else console.error(`[chat] No pude listar modelos de Groq: ${r.status}`);
+    } catch (e: any) {
+      console.error('[chat] Error listando modelos de Groq:', e?.message || e);
+    }
+  }
+  const ids = groqModelsCache || [];
   for (const pref of GROQ_TEXT_PREFERENCE) {
-    const hit = textIds.find((id) => id.includes(pref));
-    if (hit) {
-      out.push({ id: hit, search: false });
-      break;
-    }
+    const hit = ids.find((id) => id.startsWith(pref));
+    if (hit) return hit;
   }
-  return out;
+  return ids.length ? null : GROQ_TEXT_PREFERENCE[0];
 }
 
-function officialSources(msg: any, text: string): string[] {
-  const urls: string[] = [];
-  for (const tool of msg?.executed_tools || []) {
-    const sr = tool?.search_results;
-    const list = Array.isArray(sr) ? sr : sr?.results || [];
-    for (const r of list) {
-      const u = r?.url;
-      if (typeof u === 'string' && isOfficialUrl(u) && !urls.includes(u) && !text.includes(u)) urls.push(u);
-    }
-  }
-  return urls;
+async function groqCall(apiKey: string, body: any) {
+  return fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+    body: JSON.stringify(body),
+  });
 }
 
-async function askGroq(system: string, contents: Turn[], apiKey: string): Promise<Result> {
-  const messages = [
-    { role: 'system', content: system },
+async function askGroq(system: string, contents: Turn[], apiKey: string, tavilyKey: string | undefined, hits: Hit[]): Promise<Result> {
+  const model = await pickGroqModel(apiKey);
+  if (!model) return { error: 'unavailable', detail: 'groq sin modelo de texto' };
+  const sys = tavilyKey
+    ? system
+    : `${system}\n\nAVISO: en este momento NO tienes búsqueda web. Para datos concretos usa solo la BASE VERIFICADA.`;
+  const messages: any[] = [
+    { role: 'system', content: sys },
     ...contents.map((t) => ({ role: t.role === 'user' ? 'user' : 'assistant', content: t.parts[0].text })),
   ];
-  const models = await pickGroqModels(apiKey);
-  if (!models.length) return { error: 'unavailable', detail: 'groq sin modelos' };
 
-  let sawQuota = false;
-  for (const m of models) {
-    const sys = m.search
-      ? system
-      : `${system}\n\nAVISO: en este momento NO tienes búsqueda web. Para datos concretos usa solo la BASE VERIFICADA.`;
-    const base: any = {
-      model: m.id,
-      messages: [{ role: 'system', content: sys }, ...messages.slice(1)],
-      temperature: 0.3,
-      max_completion_tokens: 2048,
-    };
-    if (m.search) base.search_settings = { include_domains: OFFICIAL_DOMAINS };
-    const bodies = m.search ? [{ ...base, compound_custom: { tools: { enabled_tools: ['web_search'] } } }, base] : [base];
-
-    for (const body of bodies) {
-      const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-        body: JSON.stringify(body),
-      });
-      if (resp.status === 429) {
-        sawQuota = true;
-        console.warn(`[chat] Groq ${m.id}: cupo agotado (429)`);
-        break;
-      }
-      if (resp.status === 400 && body.compound_custom) {
-        console.warn(`[chat] Groq ${m.id} rechazó compound_custom:`, (await resp.text().catch(() => '')).slice(0, 300));
-        continue;
-      }
-      if (!resp.ok) {
-        console.error(`[chat] Groq ${m.id} respondió ${resp.status}: ${(await resp.text().catch(() => '')).slice(0, 400)}`);
-        break;
-      }
-      const data = await resp.json();
-      const msg = data?.choices?.[0]?.message;
-      let text = String(msg?.content || '').trim();
-      if (!text) {
-        console.error(`[chat] Groq ${m.id}: respuesta vacía`);
-        break;
-      }
-      const urls = officialSources(msg, text);
-      // Quita enlaces no oficiales que el modelo haya escrito igual.
-      text = text.replace(/https?:\/\/[^\s)\]]+/g, (u) => (isOfficialUrl(u) ? u : ''));
-      if (urls.length && !/https?:\/\//.test(text)) {
-        text += `\n\nPáginas oficiales consultadas:\n${urls.slice(0, 3).map((u) => `- ${u}`).join('\n')}`;
-      }
-      return { text };
+  for (let round = 0; round < 3; round++) {
+    const body: any = { model, messages, temperature: 0.2, max_completion_tokens: 2048 };
+    if (/gpt-oss/.test(model)) body.reasoning_effort = 'medium';
+    if (tavilyKey && round < 2) {
+      body.tools = [SEARCH_TOOL];
+      body.tool_choice = 'auto';
     }
+    const resp = await groqCall(apiKey, body);
+    if (resp.status === 429) return { error: 'quota', detail: 'groq 429' };
+    if (!resp.ok) {
+      console.error(`[chat] Groq ${model} respondió ${resp.status}: ${(await resp.text().catch(() => '')).slice(0, 400)}`);
+      return { error: 'unavailable', detail: `groq ${resp.status}` };
+    }
+    const data = await resp.json();
+    const msg = data?.choices?.[0]?.message;
+    const calls = msg?.tool_calls || [];
+    if (calls.length && tavilyKey) {
+      messages.push({ role: 'assistant', content: msg.content || '', tool_calls: calls });
+      for (const c of calls) {
+        let q = '';
+        try {
+          q = JSON.parse(c?.function?.arguments || '{}').consulta || '';
+        } catch {}
+        const found = q ? await searchOfficial(q, tavilyKey) : [];
+        hits.push(...found);
+        console.log(`[chat] Búsqueda oficial: "${q}" → ${found.length} resultados`);
+        messages.push({
+          role: 'tool',
+          tool_call_id: c.id,
+          content: found.length
+            ? found.map((h, i) => `[${i + 1}] ${h.title}\n${h.url}\n${h.content}`).join('\n\n')
+            : 'Sin resultados en sitios oficiales.',
+        });
+      }
+      continue;
+    }
+    const text = String(msg?.content || '').trim();
+    if (text) return { text };
+    console.error(`[chat] Groq ${model}: respuesta vacía`);
+    return { error: 'unavailable', detail: 'groq vacío' };
   }
-  return sawQuota ? { error: 'quota', detail: 'groq 429' } : { error: 'unavailable', detail: 'groq sin respuesta' };
+  return { error: 'unavailable', detail: 'groq sin respuesta final' };
 }
 
-// Gemini: respaldo sin búsqueda web.
+// -----------------------------------------------------------------------------
+// Gemini: respaldo sin búsqueda
+// -----------------------------------------------------------------------------
 async function askGemini(system: string, contents: Turn[], apiKey: string): Promise<Result> {
   const model = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-        body: JSON.stringify({
-          contents,
-          systemInstruction: {
-            parts: [{ text: `${system}\n\nAVISO: en este momento NO tienes búsqueda web. Para datos concretos usa solo la BASE VERIFICADA.` }],
-          },
-          generationConfig: { temperature: 0.3, maxOutputTokens: 4096, thinkingConfig: { thinkingLevel: 'medium' } },
-        }),
-      });
-      if (resp.status === 429) return { error: 'quota', detail: 'gemini 429' };
-      if (!resp.ok) {
-        const t = await resp.text().catch(() => '');
-        console.error(`[chat] Gemini respondió ${resp.status}: ${t.slice(0, 300)}`);
-        // 503 = saturado: no reintentar, para que el aviso llegue rápido.
-        if (resp.status >= 500 && resp.status !== 503 && attempt === 1) continue;
-        return { error: 'unavailable', detail: `gemini ${resp.status}` };
-      }
-      const data = await resp.json();
-      const cand = data?.candidates?.[0];
-      const text = (cand?.content?.parts || [])
-        .filter((p: any) => typeof p?.text === 'string' && !p.thought)
-        .map((p: any) => p.text)
-        .join('')
-        .trim();
-      if (text) return { text };
-      console.error('[chat] Gemini vacío', { finishReason: cand?.finishReason });
-    } catch (err: any) {
-      console.error('[chat] Error Gemini:', err?.message || err);
+  try {
+    const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      body: JSON.stringify({
+        contents,
+        systemInstruction: {
+          parts: [{ text: `${system}\n\nAVISO: en este momento NO tienes búsqueda web. Para datos concretos usa solo la BASE VERIFICADA.` }],
+        },
+        generationConfig: { temperature: 0.2, maxOutputTokens: 4096, thinkingConfig: { thinkingLevel: 'medium' } },
+      }),
+    });
+    if (resp.status === 429) return { error: 'quota', detail: 'gemini 429' };
+    if (!resp.ok) {
+      console.error(`[chat] Gemini respondió ${resp.status}: ${(await resp.text().catch(() => '')).slice(0, 300)}`);
+      return { error: 'unavailable', detail: `gemini ${resp.status}` };
     }
+    const data = await resp.json();
+    const cand = data?.candidates?.[0];
+    const text = (cand?.content?.parts || [])
+      .filter((p: any) => typeof p?.text === 'string' && !p.thought)
+      .map((p: any) => p.text)
+      .join('')
+      .trim();
+    if (text) return { text };
+    console.error('[chat] Gemini vacío', { finishReason: cand?.finishReason });
+  } catch (err: any) {
+    console.error('[chat] Error Gemini:', err?.message || err);
   }
   return { error: 'unavailable', detail: 'gemini sin respuesta' };
 }
+
+const NO_DATA_TEXT =
+  'No encontré un dato oficial confirmado para responder eso con precisión. Te recomiendo consultarlo directamente con el organismo que corresponde (por ejemplo, el Ministerio de Aliá al *2994). También puedes buscar tu tema en las secciones del sitio.';
 
 export async function answerChat(body: any): Promise<{ status: number; json: any }> {
   const { userQuery, messages, userStage } = body || {};
@@ -334,12 +437,15 @@ export async function answerChat(body: any): Promise<{ status: number; json: any
   const stageHint = userStage && STAGE_HINT[userStage] ? `\n\nCONTEXTO: ${STAGE_HINT[userStage]}` : '';
   const system = SYSTEM_PROMPT + stageHint;
   const contents = buildContents(messages, currentQuery);
+  const userTexts = contents.filter((t) => t.role === 'user').map((t) => t.parts[0].text);
 
-  // Orden: Groq (con búsqueda oficial) y, si falla, Gemini.
-  const providers: Array<() => Promise<Result>> = [];
   const groqKey = process.env.GROQ_API_KEY;
   const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
-  if (groqKey) providers.push(() => askGroq(system, contents, groqKey));
+  const tavilyKey = process.env.TAVILY_API_KEY;
+
+  const hits: Hit[] = [];
+  const providers: Array<() => Promise<Result>> = [];
+  if (groqKey) providers.push(() => askGroq(system, contents, groqKey, tavilyKey, hits));
   if (geminiKey) providers.push(() => askGemini(system, contents, geminiKey));
   if (!providers.length) {
     console.error('[chat] No hay claves de IA configuradas');
@@ -350,7 +456,18 @@ export async function answerChat(body: any): Promise<{ status: number; json: any
   for (const ask of providers) {
     try {
       const r = await ask();
-      if ('text' in r) return { status: 200, json: { text: r.text } };
+      if ('text' in r) {
+        const corpus = buildCorpus([SYSTEM_PROMPT, ...userTexts, ...hits.map((h) => `${h.url}\n${h.content}`)]);
+        const checked = verifyAnswer(r.text, corpus);
+        if (checked.removed.length) console.warn('[chat] Datos sin fuente quitados:', checked.removed.join(' | '));
+        let text = checked.text.length >= 40 ? checked.text : NO_DATA_TEXT;
+        // Páginas oficiales consultadas, si la respuesta no las cita.
+        const cited = [...new Set(hits.map((h) => h.url))].filter((u) => !text.includes(u)).slice(0, 3);
+        if (hits.length && cited.length && text !== NO_DATA_TEXT) {
+          text += `\n\nPáginas oficiales consultadas:\n${cited.map((u) => `- ${u}`).join('\n')}`;
+        }
+        return { status: 200, json: { text } };
+      }
       if (r.error === 'quota') sawQuota = true;
       console.warn('[chat] Proveedor sin respuesta:', r.detail);
     } catch (err: any) {
