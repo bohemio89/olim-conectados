@@ -245,7 +245,8 @@ async function askGemini(system: string, contents: Turn[], apiKey: string): Prom
       if (!resp.ok) {
         const t = await resp.text().catch(() => '');
         console.error(`[chat] Gemini respondió ${resp.status}: ${t.slice(0, 300)}`);
-        if (resp.status >= 500 && attempt === 1) continue;
+        // 503 = saturado: no reintentar, para que el aviso llegue rápido.
+        if (resp.status >= 500 && resp.status !== 503 && attempt === 1) continue;
         return { error: 'unavailable', detail: `gemini ${resp.status}` };
       }
       const data = await resp.json();
