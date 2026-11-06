@@ -295,7 +295,7 @@ Si es una urgencia médica, llama al **101**.`,
     for (let attempt = 1; attempt <= 2; attempt++) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 25000);
+        const timeoutId = setTimeout(() => controller.abort(), 45000);
 
         const response = await fetch('/api/chat', {
           method: 'POST',

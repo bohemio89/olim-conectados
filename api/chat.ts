@@ -152,10 +152,13 @@ export async function answerChat(body: any): Promise<{ status: number; json: any
   const stageHint = userStage && STAGE_HINT[userStage] ? `\n\nCONTEXTO: ${STAGE_HINT[userStage]}` : '';
   const contents = buildContents(messages, currentQuery);
 
+  // gemini-2.5-flash ya no está disponible para cuentas nuevas (404, nov 2026).
+  const model = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const resp = await fetch(
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
@@ -164,9 +167,9 @@ export async function answerChat(body: any): Promise<{ status: number; json: any
             systemInstruction: { parts: [{ text: SYSTEM_PROMPT + stageHint }] },
             generationConfig: {
               temperature: 0.3,
-              // En 2.5 el límite de salida incluye el razonamiento.
-              maxOutputTokens: 3072,
-              thinkingConfig: { thinkingBudget: 1024 },
+              // El límite de salida incluye el razonamiento.
+              maxOutputTokens: 4096,
+              thinkingConfig: { thinkingLevel: 'medium' },
             },
           }),
         }
