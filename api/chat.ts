@@ -206,7 +206,7 @@ const SOCIAL_RE = /\b(facebook|telegram|tiktok|reddit|foros?|grupos? de (whatsap
 function sentenceProblems(sentence: string, corpus: ReturnType<typeof buildCorpus>): string[] {
   const bad: string[] = [];
   const social = sentence.match(SOCIAL_RE);
-  if (social && !corpus.lower.includes(social[0].toLowerCase())) bad.push(social[0]);
+  if (social) bad.push(social[0]);
   // Enlaces: oficiales o presentes en la base.
   for (const u of sentence.match(URL_RE) || []) {
     const clean = u.replace(/[.,;:]+$/, '');
