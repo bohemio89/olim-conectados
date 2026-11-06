@@ -73,6 +73,9 @@ export const normalizeCity = (city: string): string => {
   return trimmed;
 };
 
+// Marca que solo reciben los médicos de la comunidad aprobados a mano en Supabase.
+const APPROVED_MARK = 'VERIFICADO por Olim Conectados en la ficha oficial de su Kupá';
+
 export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({ 
   doctors: initialDoctors, 
   onAddReview,
@@ -102,14 +105,15 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               address: item.address || undefined,
               phone: item.phone || 'No especificado',
               kupot: item.kupa ? [item.kupa] : [],
-              consultationFocus: item.verified ? 'VERIFICADO en la cartilla oficial' : item.consultationFocus,
+              // Solo se publica lo que un administrador aprobó a mano (columna approved).
+              consultationFocus: item.approved === true ? APPROVED_MARK : 'PENDIENTE de revisión',
               reviews: Array.isArray(item.comments)
                 ? item.comments.map((c: any, idx: number) => ({
                     id: c.id || `rev-${idx}-${Date.now()}`,
                     author: c.author || 'Olé de la comunidad',
                     date: c.date || 'Reciente',
                     comment: c.comment || c.text || '',
-                    isVerifiedOle: c.isVerifiedOle ?? true,
+                    isVerifiedOle: c.isVerifiedOle === true,
                   }))
                 : [],
               reviewsCount: Array.isArray(item.comments) ? item.comments.length : 0,
@@ -138,6 +142,8 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
   const verifiedDoctors: Doctor[] = useMemo(() => {
     return allDoctors.filter((doc) => {
       const focus = doc.consultationFocus || '';
+      // Los médicos sumados por la comunidad no se muestran hasta que se revisan.
+      if (doc.isCommunityAdded && focus !== APPROVED_MARK) return false;
       return focus.includes('VERIFICADO');
     });
   }, [allDoctors]);
@@ -322,7 +328,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         author: authorName.trim() || 'Olé de la comunidad',
         date: todayStr,
         comment: text.trim(),
-        isVerifiedOle: true,
+        isVerifiedOle: false,
       };
 
       const newDoctorEntry: Doctor = {
@@ -333,7 +339,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         address: doctorAddress.trim(),
         phone: doctorPhone.trim() || 'No especificado',
         kupot: selectedKupot,
-        consultationFocus: 'VERIFICADO en la cartilla oficial',
+        consultationFocus: 'PENDIENTE de revisión en la ficha oficial de su Kupá',
         reviews: [newReview],
         reviewsCount: 1,
         isCommunityAdded: true,
@@ -354,7 +360,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
             address: newDoctorEntry.address,
             phone: newDoctorEntry.phone,
             source: 'Comunidad',
-            verified: true,
+            verified: false,
             officialLink: newDoctorEntry.officialLink,
             comments: [
               {
@@ -370,8 +376,6 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         console.error('Error persistiendo en Supabase:', err);
       }
 
-      setCloudDoctors((prev) => [newDoctorEntry, ...prev]);
-      onAddDoctor(newDoctorEntry);
       setSubmissionSuccess(true);
     }
 
@@ -892,7 +896,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 <div className="p-3.5 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-2xl text-xs font-semibold flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
                   <span>
-                    ¡Médico recomendado con éxito! Ha sido enviado para su revisión oficial.
+                    ¡Gracias! Lo vamos a revisar en la ficha oficial de su Kupá antes de publicarlo.
                   </span>
                 </div>
               )}

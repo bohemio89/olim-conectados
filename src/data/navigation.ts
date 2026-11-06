@@ -1,3 +1,4 @@
+import { ASSISTANT_ENABLED } from '../config';
 import React from 'react';
 import { 
   MessageCirclePlus, 
@@ -91,7 +92,7 @@ export interface SectionConfig {
   path: string;
 }
 
-export const SECTIONS: SectionConfig[] = [
+const ALL_SECTIONS: SectionConfig[] = [
   // 1. Asistencia & Salud
   {
     id: 'assistant',
@@ -254,6 +255,8 @@ export const SECTIONS: SectionConfig[] = [
     path: '/vida-nocturna'
   }
 ];
+
+export const SECTIONS: SectionConfig[] = ALL_SECTIONS.filter((s) => ASSISTANT_ENABLED || s.id !== 'assistant');
 
 export const SECTION_MAP = SECTIONS.reduce((acc, sec) => {
   acc[sec.id] = sec;

@@ -1,3 +1,4 @@
+import { ASSISTANT_ENABLED } from '../config';
 import React, { useState } from 'react';
 import { 
   Car, 
@@ -1033,14 +1034,14 @@ export const DriverLicenseWizard: React.FC = () => {
               <Phone className="w-4 h-4 text-[#E8A33D]" />
               <span>Llamar al *5678</span>
             </a>
-            <button
+            {ASSISTANT_ENABLED && <button
               type="button"
               onClick={handleAskAssistant}
               className="min-h-[44px] px-5 py-2.5 rounded-full bg-white border border-slate-300 hover:bg-slate-50 text-[#0E2559] font-bold text-sm inline-flex items-center gap-2 transition-colors cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 text-[#6B4FA0]" />
               <span>Preguntar al asistente</span>
-            </button>
+            </button>}
           </div>
         )}
 

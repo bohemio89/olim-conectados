@@ -13,6 +13,7 @@ import {
   Route
 } from 'lucide-react';
 import { LogoSymbol } from './LogoSymbol';
+import { ASSISTANT_ENABLED } from '../config';
 
 interface IndexViewProps {
   onNavigateToTab: (tabId: string) => void;
@@ -292,31 +293,37 @@ export const IndexView: React.FC<IndexViewProps> = ({
       topic: 'SALUD',
       topicBg: 'bg-[#1F5F8B]',
       question: '¿Hay médicos que hablen español en mi Kupá?',
+      tabId: 'doctors',
     },
     {
       topic: 'URGENTE',
       topicBg: 'bg-[#C0392B]',
       question: '¿Puedo ir al Miún sin derivación?',
+      tabId: 'emergency',
     },
     {
       topic: 'TRÁMITES',
       topicBg: 'bg-[#6B4FA0]',
       question: '¿Mi licencia vencida se canjea o empiezo de cero?',
+      tabId: 'license',
     },
     {
       topic: 'COMUNIDAD',
       topicBg: 'bg-[#2A7050]',
-      question: '¿Dónde compro yerba y alfajores?',
+      question: '¿Dónde compro alfajores y productos latinos?',
+      tabId: 'community',
     },
     {
       topic: 'SALUD',
       topicBg: 'bg-[#1F5F8B]',
-      question: '¿Cómo activo mi cobertura en la Kupá?',
+      question: '¿Cómo elijo o cambio de Kupat Jolim?',
+      tabId: 'checklist',
     },
     {
       topic: 'TRÁMITES',
       topicBg: 'bg-[#6B4FA0]',
       question: 'Me lesioné trabajando: ¿qué hago con Bituaj Leumi?',
+      tabId: 'bituaj',
     },
   ];
 
@@ -464,7 +471,7 @@ export const IndexView: React.FC<IndexViewProps> = ({
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-5 h-5 text-amber-700 shrink-0" />
             <p className="text-xs sm:text-sm font-semibold text-amber-950">
-              Antes de ir a la guardia: sin hafniá te pueden cobrar hasta 1.233 ₪.
+              Antes de ir a la guardia: sin hafniá te pueden cobrar más de 1.100 ₪.
             </p>
           </div>
 
@@ -702,7 +709,7 @@ export const IndexView: React.FC<IndexViewProps> = ({
             <button
               key={idx}
               type="button"
-              onClick={() => onOpenAssistantWithQuery(item.question)}
+              onClick={() => (ASSISTANT_ENABLED ? onOpenAssistantWithQuery(item.question) : onNavigateToTab(item.tabId))}
               className="text-left bg-white hover:bg-slate-50/80 rounded-2xl p-5 border border-slate-200/80 hover:border-slate-300 transition-all shadow-xs flex flex-col justify-between min-h-[140px] cursor-pointer group"
             >
               <div>

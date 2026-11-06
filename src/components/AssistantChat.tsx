@@ -410,7 +410,7 @@ Si es una urgencia médica, llama al **101**.`,
               </span>
             </div>
             <p className="text-xs sm:text-sm text-amber-950 font-medium leading-relaxed">
-              No vayas a la guardia hospitalaria (<strong>Miún</strong>) por fiebre o malestar espontáneo sin derivación previa (<strong>Hafniá</strong>). Podrías recibir una factura de hasta 1.233 ₪.
+              No vayas a la guardia hospitalaria (<strong>Miún</strong>) por fiebre o malestar espontáneo sin derivación previa (<strong>Hafniá</strong>). Podrías recibir una factura de más de 1.100 ₪.
             </p>
           </div>
         </div>
@@ -452,7 +452,7 @@ Si es una urgencia médica, llama al **101**.`,
                 ¡Bienvenido al Asistente Inteligente para Olim!
               </h2>
               <p className="text-xs sm:text-sm text-blue-900/90 leading-relaxed">
-                Podés preguntarle sobre trámites (Teudat Olé, Tofes 101, Bituaj Leumi), cómo no pagar de más en guardias médicas o dónde encontrar vida nocturna y productos latinos. La información se revisa con fuentes oficiales de Israel periódicamente.
+                Puedes preguntarle sobre trámites (Teudat Olé, Tofes 101, Bituaj Leumi), cómo no pagar de más en guardias médicas o dónde encontrar vida nocturna y productos latinos. La información se revisa con fuentes oficiales de Israel periódicamente.
               </p>
               <div className="pt-1.5 flex items-center gap-3 text-[11px] font-semibold text-blue-700">
                 <span className="flex items-center gap-1">
@@ -532,7 +532,7 @@ Si es una urgencia médica, llama al **101**.`,
         <div className="flex items-center justify-between border-b border-gray-100 pb-2">
           <span className="text-xs sm:text-sm font-extrabold text-gray-900 flex items-center gap-1.5">
             <Sparkles className="w-4 h-4 text-blue-600" />
-            Consultas críticas frecuentes (tocá una para enviar):
+            Consultas críticas frecuentes (toca una para enviar):
           </span>
           <span className="text-[11px] text-gray-400 hidden sm:inline">
             Filtro: {userStage === 'general' ? 'Todas' : userStage}
@@ -767,7 +767,7 @@ Si es una urgencia médica, llama al **101**.`,
           <div className="flex items-center justify-center gap-1.5 text-[11px] text-gray-500 text-center pt-0.5">
             <Info className="w-3.5 h-3.5 text-gray-400 shrink-0" />
             <span>
-              Esta información es orientativa y no reemplaza asesoramiento profesional, legal o médico. Verificá siempre con la fuente oficial correspondiente.
+              Esta información es orientativa y no reemplaza asesoramiento profesional, legal o médico. Verifica siempre con la fuente oficial correspondiente.
             </span>
           </div>
         </div>

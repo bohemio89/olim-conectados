@@ -1,3 +1,4 @@
+import { ASSISTANT_ENABLED } from '../config';
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   Search, 
@@ -27,168 +28,99 @@ export interface SearchResultItem {
 }
 
 const STATIC_SEARCH_INDEX: SearchResultItem[] = [
-  // Guías y Artículos del sitio
+  // Secciones del sitio (descripciones alineadas con el contenido verificado)
   {
     id: 's-emergencia',
-    title: 'Guardia & Miún SOS: Evitar facturas de hasta 1.233 ₪',
+    title: 'Guardia & Miún: a dónde ir y cuánto se paga',
     type: 'guide',
     tabId: 'emergency',
-    description: 'Protocolo de ambulancias MADA 101, centros Terem y cómo obtener la Hafniá médica.',
-    icon: AlertTriangle
+    description: 'Teléfonos 24/7 de las Kupot, cuándo ir al Miún y cuándo no se paga. Sin derivación puede costar más de 1.100 ₪.',
+  },
+  {
+    id: 's-guerra',
+    title: 'Guerra y emergencias: alarmas, trabajo y clases',
+    type: 'guide',
+    tabId: 'war',
+    description: 'App de Pikud HaOref, qué hacer con la alarma, sueldo y vacaciones en emergencia, y clases.',
   },
   {
     id: 's-checklist',
-    title: 'Mi Checklist de Oleh Jadash: Pasos secuenciales de absorción',
+    title: 'Checklist del Olé: tus pasos desde la llegada',
     type: 'guide',
     tabId: 'checklist',
-    description: 'Teudat Olé, banco, Kupat Jolim, GoVisit, Tofes 101 y ayuda de alquiler con progreso guardado.',
-    icon: CheckSquare
-  },
-  {
-    id: 's-business-plan',
-    title: 'Plan de Negocio y Asesoramiento Empresarial (*2994 y Centros Maalot)',
-    type: 'guide',
-    tabId: 'business-plan',
-    description: 'Servicio oficial y gratuito de Misrad HaAliyah (Agaf Yazamut Iskit) y centros Maalot para nuevos olim y residentes retornados.',
-    icon: Briefcase
-  },
-  {
-    id: 's-doctores',
-    title: 'Médicos que hablan español en Israel (Directorio Colaborativo)',
-    type: 'guide',
-    tabId: 'doctors',
-    description: 'Directorio comunitario de profesionales de la salud con atención en español.',
-    icon: Stethoscope
+    description: 'Teudat Olé, banco, Kupat Jolim, Teudat Zehut, Ulpán, Tofes 101 y Arnoná, con tu progreso guardado.',
   },
   {
     id: 's-crisis',
-    title: 'Crisis, Economía & Vida Civil (Sal Klitá, Alquiler meses 7-30, Pikud HaOref)',
+    title: 'Economía & Vida Civil: Sal Klitá, alquiler y Teum Mas',
     type: 'guide',
     tabId: 'crisis-civil',
-    description: 'Guía legal sobre subsidios, despidos en guerra y plazos de ayuda del Ministerio de Aliá.',
-    icon: ShieldAlert
-  },
-  {
-    id: 's-bituaj',
-    title: 'Accidente de trabajo: formularios BL 250 y BL 211 ante Bituaj Leumi',
-    type: 'guide',
-    tabId: 'bituaj',
-    description: 'Qué hacer si te accidentas trabajando y cuánto paga Bituaj Leumi.',
-    icon: Briefcase
-  },
-  {
-    id: 's-licencia',
-    title: 'Canjear Licencia de Conducir con Tofes Yarok (Misrad HaRishuí)',
-    type: 'guide',
-    tabId: 'license',
-    description: 'Conversión directa para licencias con +5 años y qué hacer si tu carné está vencido.',
-    icon: Car
-  },
-  {
-    id: 's-sick-leave',
-    title: 'Calculadora de Días de Enfermedad (Jok Dmei Majalá)',
-    type: 'guide',
-    tabId: 'sick-leave',
-    description: 'Cálculo de pago día 1 (0%), días 2-3 (50%) y día 4+ (100%) según saldo acumulado.',
-    icon: Calculator
+    description: 'Pagos del Sal Klitá, ayuda de alquiler y cómo evitar que el segundo trabajo te descuente el 47%.',
   },
   {
     id: 's-bureaucracy',
-    title: 'Trámites Clave: Tofes 101, GoVisit, Descuento Arnoná y Ulpán',
+    title: 'Trámites & Vouchers: Tofes 101, Ulpán, Arnoná y GoVisit',
     type: 'guide',
     tabId: 'bureaucracy',
-    description: 'Voucher de 5.000 ₪ para Ulpán privado y cómo no pagar de más en el sueldo.',
-    icon: FileText
+    description: 'Puntos de crédito de olé, voucher para Ulpán privado, 90% de descuento de Arnoná y turnos en GoVisit.',
+  },
+  {
+    id: 's-licencia',
+    title: 'Licencia de conducir: canje o desde cero',
+    type: 'guide',
+    tabId: 'license',
+    description: 'Si tu licencia extranjera se canjea, qué exámenes rindes y cómo sacarla desde cero.',
+  },
+  {
+    id: 's-bituaj',
+    title: 'Accidente de trabajo y Bituaj Leumi',
+    type: 'guide',
+    tabId: 'bituaj',
+    description: 'Formularios BL 250 y BL 211, dos caminos (accidente o esfuerzo repetido) y cuánto paga Bituaj Leumi.',
+  },
+  {
+    id: 's-sick-leave',
+    title: 'Calculadora de días de enfermedad (Dmei Majalá)',
+    type: 'guide',
+    tabId: 'sick-leave',
+    description: 'Día 1 sin pago, días 2 y 3 al 50% y desde el día 4 al 100%, según tus días acumulados.',
+  },
+  {
+    id: 's-doctores',
+    title: 'Médicos que hablan español',
+    type: 'guide',
+    tabId: 'doctors',
+    description: 'Médicos verificados en la ficha oficial de su Kupá: Clalit, Maccabi, Meuhedet y Leumit.',
   },
   {
     id: 's-comunidad',
-    title: 'Comercio Latino, Yerbas, Cortes Criollos y Amapola Café',
+    title: 'Comunidad & Comercios latinos',
     type: 'guide',
     tabId: 'community',
-    description: 'Calle Allenby 94, carnicerías con vacío/entraña, empanadas caseras y grupos de WhatsApp.',
-    icon: ShoppingBag
+    description: 'Alfajores, empanadas y almacenes con productos latinos y de Argentina, con sus datos de contacto.',
+  },
+  {
+    id: 's-business-plan',
+    title: 'Plan de Negocio: *2994 y centros Maalot',
+    type: 'guide',
+    tabId: 'business-plan',
+    description: 'Asesoría del Ministerio de Aliá para abrir o hacer crecer tu negocio.',
   },
   {
     id: 's-nightlife',
-    title: 'Vida Nocturna: Fiestas Latinas, La Fiesta Argentina, Cachengue y Salsa',
+    title: 'Vida Nocturna',
     type: 'guide',
     tabId: 'nightlife',
-    description: 'Boliches, eventos con música en español, salsa en Havana Club y salidas para Olim.',
-    icon: PartyPopper
+    description: 'Salidas y lugares de baile en Tel Aviv.',
   },
-
-  // Preguntas para el Asistente IA (consultas en lenguaje natural)
-  {
-    id: 'q-banco-abrir',
-    title: '¿Cómo hago para abrir mi cuenta bancaria con la Teudat Olé provisoria?',
-    type: 'question',
-    tabId: 'assistant',
-    queryToChat: '¿Cómo hago para abrir mi cuenta bancaria con la Teudat Olé provisoria?',
-    description: 'Documentos requeridos, Ishur Nihul Jeshbón y exención de comisiones para Olim.'
-  },
-  {
-    id: 'q-teudat-ole-vence',
-    title: '¿Cuándo caduca mi Teudat Olé y qué derechos tengo durante el primer año?',
-    type: 'question',
-    tabId: 'assistant',
-    queryToChat: '¿Cuándo caduca mi Teudat Olé y qué derechos tengo durante el primer año?',
-    description: 'Cronograma oficial de Sal Klitá, subsidio de alquiler, licencia y Arnoná.'
-  },
-  {
-    id: 'q-kupa-activar',
-    title: 'Elegí Maccabi (o Clalit) en el trámite de Aliá: ¿Cómo activo mi cobertura?',
-    type: 'question',
-    tabId: 'assistant',
-    queryToChat: 'Elegí Maccabi en el trámite de Aliá, ¿ya puedo usarla y cómo activo mi tarjeta magnética?',
-    description: 'Activación en Snif, credencial magnética y seguro complementario sin carencia (primeros 90 días).'
-  },
-  {
-    id: 'q-teudat-zeut-myvisit',
-    title: '¿Dónde y cómo saco turno en GoVisit para el Teudat Zehut biométrico?',
-    type: 'question',
-    tabId: 'assistant',
-    queryToChat: '¿Dónde y cómo saco turno en GoVisit para tramitar el Teudat Zehut biométrico permanente?',
-    description: 'Paso a paso en Misrad HaPnim y truco de horarios de 7:00 AM para turnos rápidos.'
-  },
-  {
-    id: 'q-miun-fiebre',
-    title: '¿Puedo ir al Miún si tengo fiebre de noche sin pagar multa?',
-    type: 'question',
-    tabId: 'assistant',
-    queryToChat: '¿Puedo ir directo al Miún si tengo fiebre de noche?',
-    description: 'Consulta al Asistente IA sobre cómo evitar cobros de la guardia hospitalaria.'
-  },
-  {
-    id: 'q-alquiler-30',
-    title: '¿Por qué se corta la ayuda de alquiler en el mes 30 de Aliá?',
-    type: 'question',
-    tabId: 'assistant',
-    queryToChat: '¿Por qué dejé de cobrar la ayuda de alquiler en el mes 30?',
-    description: 'Consulta al Asistente IA sobre los plazos legales del subsidio Siyua biSjirot.'
-  },
-  {
-    id: 'q-teum-mas',
-    title: 'Tengo dos trabajos: ¿Cómo hago el Teum Mas para que no me retengan 47%?',
-    type: 'question',
-    tabId: 'assistant',
-    queryToChat: 'Tengo 2 trabajos: ¿Cómo hago el Teum Mas para que no me retengan el 47%?',
-    description: 'Consulta al Asistente IA sobre coordinación de impuestos en Rashut HaMisim.'
-  },
-  {
-    id: 'q-tofes-101',
-    title: '¿Cómo completar el Tofes 101 para que apliquen los puntos de Olé?',
-    type: 'question',
-    tabId: 'assistant',
-    queryToChat: '¿Cómo lleno el Tofes 101 para que no me retengan Mas Hajnasá?',
-    description: 'Consulta al Asistente IA sobre Nekudot Zijui en tu recibo de sueldo (tlush sajar).'
-  },
-  {
-    id: 'q-armando-brandt',
-    title: 'Dr. Armando Brandt (Shaul HaMelech 8, Tel Aviv - Maccabi / Meuhedet)',
-    type: 'doctor',
-    tabId: 'doctors',
-    description: 'Ficha médica verificada de medicina familiar y geriatría en Tel Aviv.'
-  }
+  // Preguntas frecuentes que llevan a su sección
+  { id: 'q-banco', title: '¿Cómo abro mi cuenta bancaria?', type: 'guide', tabId: 'checklist', description: 'Paso del Checklist del Olé.' },
+  { id: 'q-kupa', title: '¿Cómo elijo o cambio de Kupat Jolim?', type: 'guide', tabId: 'checklist', description: 'Paso del Checklist del Olé.' },
+  { id: 'q-teudat-zehut', title: '¿Cómo saco turno para la Teudat Zehut?', type: 'guide', tabId: 'bureaucracy', description: 'Turnos en GoVisit, el sistema oficial.' },
+  { id: 'q-miun', title: '¿Puedo ir al Miún sin derivación?', type: 'guide', tabId: 'emergency', description: 'Cuándo no se paga y a dónde ir primero.' },
+  { id: 'q-alquiler', title: '¿Hasta qué mes cobro la ayuda de alquiler?', type: 'guide', tabId: 'crisis-civil', description: 'Ayuda de alquiler del Ministerio de Construcción.' },
+  { id: 'q-teum-mas', title: 'Tengo dos trabajos: ¿cómo hago el Teum Mas?', type: 'guide', tabId: 'crisis-civil', description: 'Coordinación de impuestos en la Autoridad Tributaria.' },
+  { id: 'q-tofes-101', title: '¿Cómo lleno el Tofes 101 como olé?', type: 'guide', tabId: 'bureaucracy', description: 'Puntos de crédito para olim.' },
 ];
 
 interface GlobalSearchBarProps {
@@ -245,11 +177,11 @@ export const GlobalSearchBar: React.FC<GlobalSearchBarProps> = ({
     setIsOpen(false);
     const query = searchTerm.trim();
     setSearchTerm('');
-    if (onSendToChat) {
+    if (ASSISTANT_ENABLED && onSendToChat) {
       onNavigateToTab('assistant');
       onSendToChat(query);
-    } else {
-      onNavigateToTab('assistant');
+    } else if (results.length) {
+      onNavigateToTab(results[0].tabId);
     }
   };
 
@@ -265,7 +197,7 @@ export const GlobalSearchBar: React.FC<GlobalSearchBarProps> = ({
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          placeholder="Busca un trámite, un médico, una palabra en hebreo..."
+          placeholder="Busca un trámite o un tema: Kupá, Arnoná, Bituaj..."
           className="w-full min-h-[44px] pl-10 pr-8 py-2.5 bg-white hover:bg-slate-50 focus:bg-white border border-black/10 focus:border-[#0E2559]/30 rounded-full text-xs sm:text-sm text-[#0E2559] placeholder-[#0E2559]/50 focus:outline-none transition shadow-2xs"
         />
         {searchTerm && (
@@ -286,7 +218,7 @@ export const GlobalSearchBar: React.FC<GlobalSearchBarProps> = ({
       {isOpen && searchTerm.trim().length >= 2 && (
         <div className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden divide-y divide-gray-100 max-h-96 overflow-y-auto">
           {/* Ask AI direct natural language action */}
-          <div
+          {ASSISTANT_ENABLED && (<div
             onClick={handleAskNaturalLanguage}
             className="p-3 bg-blue-50/70 hover:bg-blue-100/80 cursor-pointer flex items-center justify-between transition text-xs group"
           >
@@ -302,7 +234,7 @@ export const GlobalSearchBar: React.FC<GlobalSearchBarProps> = ({
               </div>
             </div>
             <ArrowRight className="w-3.5 h-3.5 text-blue-600 group-hover:translate-x-0.5 transition" />
-          </div>
+          </div>)}
 
           {/* Matched static and query results */}
           {results.length > 0 ? (
@@ -338,7 +270,9 @@ export const GlobalSearchBar: React.FC<GlobalSearchBarProps> = ({
             </div>
           ) : (
             <div className="p-3 text-center text-xs text-gray-500">
-              Presioná Enter para enviar tu consulta "{searchTerm}" al Asistente IA.
+              {ASSISTANT_ENABLED
+                ? `Presiona Enter para enviar tu consulta "${searchTerm}" al Asistente IA.`
+                : `No encontramos "${searchTerm}". Prueba con otra palabra, por ejemplo: Kupá, Arnoná o Bituaj Leumi.`}
             </div>
           )}
         </div>
