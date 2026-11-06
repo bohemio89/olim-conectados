@@ -24,6 +24,9 @@ DATOS CONCRETOS (montos, plazos, porcentajes, requisitos, teléfonos, direccione
 - Si la BASE y una página oficial no coinciden, di las dos cosas y sugiere confirmar con el organismo.
 - Si no encuentras el dato, dilo con honestidad ("No encontré un dato oficial sobre eso") y di a qué organismo preguntar. Nunca inventes.
 - Nunca uses ni cites Wikipedia, foros, blogs ni sitios no oficiales.
+- Nunca recomiendes grupos de Facebook, WhatsApp o Telegram, páginas de redes sociales, foros ni organizaciones que no estén en la BASE VERIFICADA.
+- Nunca atribuyas a un comercio u organización actividades que la BASE no dice (por ejemplo, "suelen anunciar eventos").
+- Si no tienes el dato, dilo en una frase y, como mucho, nombra UN organismo oficial que corresponda al tema (por ejemplo, el municipio para actividades culturales). No rellenes con sugerencias supuestas.
 
 CÓMO RESPONDES
 - Español neutro, trato de tú. Primera frase: la respuesta directa. Sin títulos, sin emojis y sin markdown (nada de ** ni #).
@@ -97,7 +100,7 @@ Comunidad (comercios confirmados por el sitio; productos según sus propios cana
 - Maadaniá Laro: delicatessen en Allenby 37, Tel Aviv. Bebidas, quesos, dulces, conservas y productos de Argentina y Sudamérica. Tel. 03-5255880, cel. 054-2027989.
 - La Tienda - Comida Latina: almacén latino en Levanda 13, Tel Aviv. Harina P.A.N., pulpas de fruta, congelados y productos de Argentina. Dom–Jue 10:00–22:00, Vie 9:00–23:00. WhatsApp 050-926-9777.
 - Regla: recomienda un comercio para un producto SOLO si el producto figura en su lista. Si nadie lo tiene en la lista (por ejemplo, yerba mate), di que no está confirmado qué local lo vende y sugiere llamar a los almacenes con productos de Argentina (Maadaniá Laro y La Tienda) para consultar. No menciones otros comercios.
-- OLEI: voluntarios que acompañan a hispanohablantes en trámites (olei.org.il).`;
+- OLEI: voluntarios que acompañan a hispanohablantes recién llegados en trámites (olei.org.il). Menciónala SOLO cuando la persona necesita ayuda con un trámite; nunca para eventos, compras, trabajo ni vida social.`;
 
 // -----------------------------------------------------------------------------
 // Mensajes cuando Gemini no responde (sin respuestas fijas por palabra clave)
@@ -198,8 +201,12 @@ export function buildCorpus(texts: string[]) {
   return { digits, nums, lower };
 }
 
+const SOCIAL_RE = /\b(facebook|telegram|tiktok|reddit|foros?|grupos? de (whatsapp|facebook|telegram))\b/i;
+
 function sentenceProblems(sentence: string, corpus: ReturnType<typeof buildCorpus>): string[] {
   const bad: string[] = [];
+  const social = sentence.match(SOCIAL_RE);
+  if (social && !corpus.lower.includes(social[0].toLowerCase())) bad.push(social[0]);
   // Enlaces: oficiales o presentes en la base.
   for (const u of sentence.match(URL_RE) || []) {
     const clean = u.replace(/[.,;:]+$/, '');
