@@ -1,3 +1,4 @@
+import { ASSISTANT_ENABLED } from '../config';
 import React, { useState } from 'react';
 import {
   Siren,
@@ -338,14 +339,14 @@ const TrabajoTab: React.FC<{ sit: SitId; setSit: (s: SitId) => void; onAsk: () =
         </Card>
 
         <Card title="¿Tu caso es distinto?" icon={MessageCircle}>
-          <p className="text-sm text-slate-600 mt-1 mb-4">Las reglas cambian con cada guerra. Revisa siempre la página del Bituaj Leumi o pregúntale al asistente.</p>
+          <p className="text-sm text-slate-600 mt-1 mb-4">Las reglas cambian con cada guerra. Revisa siempre la página del Bituaj Leumi.</p>
           <div className="flex flex-wrap gap-2.5">
             <a href={LINKS.btlGuerra} target="_blank" rel="noopener noreferrer" className="min-h-[44px] px-5 rounded-full bg-[#0E2559] hover:bg-[#153477] text-white font-bold text-sm inline-flex items-center gap-2 transition-colors">
               <ExternalLink className="w-4 h-4 text-[#E8A33D]" />Bituaj Leumi: guerra
             </a>
-            <button type="button" onClick={onAsk} className="min-h-[44px] px-5 rounded-full bg-white border border-slate-300 hover:bg-slate-50 text-[#0E2559] font-bold text-sm inline-flex items-center gap-2 transition-colors cursor-pointer">
+            {ASSISTANT_ENABLED && <button type="button" onClick={onAsk} className="min-h-[44px] px-5 rounded-full bg-white border border-slate-300 hover:bg-slate-50 text-[#0E2559] font-bold text-sm inline-flex items-center gap-2 transition-colors cursor-pointer">
               <MessageCircle className="w-4 h-4 text-[#6B4FA0]" />Preguntar al asistente
-            </button>
+            </button>}
           </div>
         </Card>
       </div>
