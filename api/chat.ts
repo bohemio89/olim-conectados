@@ -168,61 +168,120 @@ export function isOfficialUrl(url: string): boolean {
 
 type Result = { text: string } | { error: 'quota' | 'unavailable'; detail: string };
 
-// Groq Compound: modelo + búsqueda web limitada a sitios oficiales.
+// Groq: modelos con búsqueda web integrada (Compound) y, si no hay, un modelo de texto.
+const GROQ_SEARCH_CANDIDATES = ['groq/compound', 'groq/compound-mini', 'compound-beta', 'compound-beta-mini'];
+const GROQ_TEXT_PREFERENCE = ['openai/gpt-oss-120b', 'qwen', 'llama-3.3-70b', 'openai/gpt-oss-20b', 'llama'];
+let groqModelsCache: string[] | null = null;
+
+async function listGroqModels(apiKey: string): Promise<string[]> {
+  if (groqModelsCache) return groqModelsCache;
+  try {
+    const r = await fetch('https://api.groq.com/openai/v1/models', { headers: { Authorization: `Bearer ${apiKey}` } });
+    if (!r.ok) {
+      console.error(`[chat] No pude listar modelos de Groq: ${r.status}`);
+      return [];
+    }
+    const j = await r.json();
+    const ids: string[] = (j?.data || []).filter((m: any) => m?.active !== false).map((m: any) => String(m.id));
+    groqModelsCache = ids;
+    console.log('[chat] Modelos de Groq disponibles:', ids.join(', '));
+    return ids;
+  } catch (e: any) {
+    console.error('[chat] Error listando modelos de Groq:', e?.message || e);
+    return [];
+  }
+}
+
+async function pickGroqModels(apiKey: string): Promise<{ id: string; search: boolean }[]> {
+  if (process.env.GROQ_MODEL) return [{ id: process.env.GROQ_MODEL, search: /compound/.test(process.env.GROQ_MODEL) }];
+  const ids = await listGroqModels(apiKey);
+  const out: { id: string; search: boolean }[] = [];
+  const searchIds = ids.length ? ids.filter((id) => /compound/i.test(id)) : GROQ_SEARCH_CANDIDATES.slice(0, 1);
+  // Preferir el sistema completo, después el mini.
+  searchIds.sort((x, y) => Number(/mini/.test(x)) - Number(/mini/.test(y)));
+  for (const id of searchIds.slice(0, 2)) out.push({ id, search: true });
+  const textIds = ids.filter((id) => !/compound|whisper|tts|guard|orpheus|playai|vision/i.test(id));
+  for (const pref of GROQ_TEXT_PREFERENCE) {
+    const hit = textIds.find((id) => id.includes(pref));
+    if (hit) {
+      out.push({ id: hit, search: false });
+      break;
+    }
+  }
+  return out;
+}
+
+function officialSources(msg: any, text: string): string[] {
+  const urls: string[] = [];
+  for (const tool of msg?.executed_tools || []) {
+    const sr = tool?.search_results;
+    const list = Array.isArray(sr) ? sr : sr?.results || [];
+    for (const r of list) {
+      const u = r?.url;
+      if (typeof u === 'string' && isOfficialUrl(u) && !urls.includes(u) && !text.includes(u)) urls.push(u);
+    }
+  }
+  return urls;
+}
+
 async function askGroq(system: string, contents: Turn[], apiKey: string): Promise<Result> {
-  const model = process.env.GROQ_MODEL || 'groq/compound-mini';
   const messages = [
     { role: 'system', content: system },
     ...contents.map((t) => ({ role: t.role === 'user' ? 'user' : 'assistant', content: t.parts[0].text })),
   ];
-  const base: any = {
-    model,
-    messages,
-    temperature: 0.3,
-    max_completion_tokens: 2048,
-    search_settings: { include_domains: OFFICIAL_DOMAINS },
-  };
-  // Solo búsqueda web (sin visitar sitios arbitrarios ni ejecutar código).
-  const bodies = [{ ...base, compound_custom: { tools: { enabled_tools: ['web_search'] } } }, base];
-  for (const body of bodies) {
-    const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-      body: JSON.stringify(body),
-    });
-    if (resp.status === 429) return { error: 'quota', detail: 'groq 429' };
-    if (resp.status === 400 && body.compound_custom) {
-      console.warn('[chat] Groq rechazó compound_custom, reintento sin esa opción:', (await resp.text().catch(() => '')).slice(0, 300));
-      continue;
-    }
-    if (!resp.ok) {
-      const t = await resp.text().catch(() => '');
-      console.error(`[chat] Groq respondió ${resp.status}: ${t.slice(0, 500)}`);
-      return { error: 'unavailable', detail: `groq ${resp.status}` };
-    }
-    const data = await resp.json();
-    const msg = data?.choices?.[0]?.message;
-    let text = String(msg?.content || '').trim();
-    if (!text) return { error: 'unavailable', detail: 'groq vacío' };
+  const models = await pickGroqModels(apiKey);
+  if (!models.length) return { error: 'unavailable', detail: 'groq sin modelos' };
 
-    // Fuentes oficiales que la búsqueda consultó y que el texto no cita.
-    const urls: string[] = [];
-    for (const tool of msg?.executed_tools || []) {
-      const sr = tool?.search_results;
-      const list = Array.isArray(sr) ? sr : sr?.results || [];
-      for (const r of list) {
-        const u = r?.url;
-        if (typeof u === 'string' && isOfficialUrl(u) && !urls.includes(u) && !text.includes(u)) urls.push(u);
+  let sawQuota = false;
+  for (const m of models) {
+    const sys = m.search
+      ? system
+      : `${system}\n\nAVISO: en este momento NO tienes búsqueda web. Para datos concretos usa solo la BASE VERIFICADA.`;
+    const base: any = {
+      model: m.id,
+      messages: [{ role: 'system', content: sys }, ...messages.slice(1)],
+      temperature: 0.3,
+      max_completion_tokens: 2048,
+    };
+    if (m.search) base.search_settings = { include_domains: OFFICIAL_DOMAINS };
+    const bodies = m.search ? [{ ...base, compound_custom: { tools: { enabled_tools: ['web_search'] } } }, base] : [base];
+
+    for (const body of bodies) {
+      const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+        body: JSON.stringify(body),
+      });
+      if (resp.status === 429) {
+        sawQuota = true;
+        console.warn(`[chat] Groq ${m.id}: cupo agotado (429)`);
+        break;
       }
+      if (resp.status === 400 && body.compound_custom) {
+        console.warn(`[chat] Groq ${m.id} rechazó compound_custom:`, (await resp.text().catch(() => '')).slice(0, 300));
+        continue;
+      }
+      if (!resp.ok) {
+        console.error(`[chat] Groq ${m.id} respondió ${resp.status}: ${(await resp.text().catch(() => '')).slice(0, 400)}`);
+        break;
+      }
+      const data = await resp.json();
+      const msg = data?.choices?.[0]?.message;
+      let text = String(msg?.content || '').trim();
+      if (!text) {
+        console.error(`[chat] Groq ${m.id}: respuesta vacía`);
+        break;
+      }
+      const urls = officialSources(msg, text);
+      // Quita enlaces no oficiales que el modelo haya escrito igual.
+      text = text.replace(/https?:\/\/[^\s)\]]+/g, (u) => (isOfficialUrl(u) ? u : ''));
+      if (urls.length && !/https?:\/\//.test(text)) {
+        text += `\n\nPáginas oficiales consultadas:\n${urls.slice(0, 3).map((u) => `- ${u}`).join('\n')}`;
+      }
+      return { text };
     }
-    // Quita enlaces no oficiales que el modelo haya escrito igual.
-    text = text.replace(/https?:\/\/[^\s)\]]+/g, (u) => (isOfficialUrl(u) ? u : ''));
-    if (urls.length && !/https?:\/\//.test(text)) {
-      text += `\n\nPáginas oficiales consultadas:\n${urls.slice(0, 3).map((u) => `- ${u}`).join('\n')}`;
-    }
-    return { text };
   }
-  return { error: 'unavailable', detail: 'groq sin respuesta' };
+  return sawQuota ? { error: 'quota', detail: 'groq 429' } : { error: 'unavailable', detail: 'groq sin respuesta' };
 }
 
 // Gemini: respaldo sin búsqueda web.
