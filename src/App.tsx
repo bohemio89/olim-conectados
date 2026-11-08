@@ -24,6 +24,7 @@ import { SECTIONS, SECTION_MAP } from './data/navigation';
 import { ASSISTANT_ENABLED, SUBMISSIONS_ENABLED } from './config';
 import { BottomNav } from './components/BottomNav';
 import { LogoSymbol } from './components/LogoSymbol';
+import { LegalPages, LegalPageId } from './components/LegalPages';
 import { Plus, Phone } from 'lucide-react';
 
 // Mapeo entre identificador interno de pestaña y ruta de la URL
@@ -42,6 +43,9 @@ const TAB_TO_PATH: Record<string, string> = {
   license: '/licencia-de-conducir',
   bureaucracy: '/tramites-y-burocracia',
   checklist: '/checklist-aliyah',
+  terms: '/terminos-y-condiciones',
+  privacy: '/politica-de-privacidad',
+  about: '/quienes-somos',
 };
 
 const PATH_TO_TAB: Record<string, string> = Object.entries(TAB_TO_PATH).reduce(
@@ -242,6 +246,11 @@ export default function App() {
               />
             )}
 
+            {/* Páginas legales e institucionales */}
+            {(activeTab === 'terms' || activeTab === 'privacy' || activeTab === 'about') && (
+              <LegalPages page={activeTab as LegalPageId} onNavigateToTab={navigateToTab} />
+            )}
+
             {/* Secciones Internas: Encabezado Universal + Contenido Original */}
             {activeTab !== 'home' && currentSection && (
               <div>
@@ -328,7 +337,8 @@ export default function App() {
           </div>
 
           {/* 6. Pie de Página Universal (Visible en todas las páginas) */}
-          <footer className="mt-14 rounded-2xl bg-[#0E2559] text-white p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+          <footer className="mt-14 rounded-2xl bg-[#0E2559] text-white p-6 sm:p-8 shadow-sm">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Left: Logo Badge + Title + Verification */}
             <div className="flex items-center gap-3.5 text-center sm:text-left">
               <div className="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shrink-0">
@@ -371,6 +381,21 @@ export default function App() {
                 Emergencia 101
               </a>
             </nav>
+          </div>
+
+          {/* Descargo y enlaces legales */}
+          <div className="mt-6 pt-5 border-t border-white/15 text-center md:text-left">
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Orientación práctica para la comunidad. No reemplaza una consulta médica, asesoramiento legal ni las decisiones del Bituaj Leumi o tu Kupá. Proyecto personal, independiente y sin fines de lucro, sin relación con el Ministerio de Aliá e Integración, la Agencia Judía ni ninguna entidad gubernamental de Israel.
+            </p>
+            <nav aria-label="Enlaces legales" className="mt-3 flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-1 text-xs font-semibold">
+              {[['about', 'Quiénes somos'], ['terms', 'Términos y Condiciones'], ['privacy', 'Política de Privacidad']].map(([id, label]) => (
+                <button key={id} onClick={() => navigateToTab(id)} className="min-h-[44px] text-white/90 hover:text-[#E8A33D] underline underline-offset-2">
+                  {label}
+                </button>
+              ))}
+            </nav>
+          </div>
           </footer>
 
         </main>
