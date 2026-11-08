@@ -313,6 +313,13 @@ export function fallbackAnswer(query: string): string {
 // Endpoint (Vercel)
 // -----------------------------------------------------------------------------
 export default async function handler(req: any, res: any) {
+  // El asistente está apagado en el sitio: la API tampoco responde,
+  // para que nadie pueda usarla desde afuera.
+  // Mantener en sintonía con ASSISTANT_ENABLED de src/config.ts.
+  const ASSISTANT_API_ENABLED = false;
+  if (!ASSISTANT_API_ENABLED) {
+    return res.status(404).json({ error: 'No disponible' });
+  }
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');

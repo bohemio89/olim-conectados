@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { SUBMISSIONS_ENABLED } from '../config';
 import { 
   MapPin, 
   Clock, 
@@ -250,7 +251,8 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
         </div>
       )}
 
-      {/* 4. Tarjeta con borde punteado: Grupos de WhatsApp por ciudad */}
+      {/* 4. Tarjeta con borde punteado: Grupos de WhatsApp por ciudad (solo con aportes activos) */}
+      {SUBMISSIONS_ENABLED && (
       <div className="border-2 border-dashed border-[#E8A33D]/60 bg-[#FFFDF9] rounded-3xl p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
         <div className="flex items-center gap-3.5">
           <div className="w-12 h-12 rounded-2xl bg-[#2A7050]/10 text-[#2A7050] flex items-center justify-center shrink-0">
@@ -274,9 +276,10 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ stores }) => {
           Sumar mi grupo
         </button>
       </div>
+      )}
 
       {/* Modal para sumar comercio o grupo */}
-      {isModalOpen && (
+      {SUBMISSIONS_ENABLED && isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-xl space-y-4">
             <div className="flex items-center justify-between">

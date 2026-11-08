@@ -13,6 +13,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { Doctor, KupaName, DoctorReview } from '../types';
+import { SUBMISSIONS_ENABLED } from '../config';
 
 // Teléfonos de cada Kupá (Ministerio de Salud). Se usan si el médico no tiene teléfono propio.
 const KUPA_PHONE: Record<string, string> = {
@@ -666,18 +667,23 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
       <div className="bg-[#1F5F8B]/10 border border-[#1F5F8B]/20 rounded-2xl p-4 sm:p-5 flex items-center gap-3 text-slate-800 text-sm sm:text-base font-medium mt-6">
         <CheckCircle2 className="w-5 h-5 text-[#1F5F8B] shrink-0" />
         <p className="flex-1">
-          Cada médico está verificado en la ficha oficial de su Kupá. ¿Te atendió otro que habla español?{' '}
-          <button
-            onClick={openAddDoctorModal}
-            className="text-[#1F5F8B] font-bold underline hover:text-[#0E2559] cursor-pointer"
-          >
-            Recomiéndalo.
-          </button>
+          Cada médico está verificado en la ficha oficial de su Kupá.
+          {SUBMISSIONS_ENABLED && (
+            <>
+              {' '}¿Te atendió otro que habla español?{' '}
+              <button
+                onClick={openAddDoctorModal}
+                className="text-[#1F5F8B] font-bold underline hover:text-[#0E2559] cursor-pointer"
+              >
+                Recomiéndalo.
+              </button>
+            </>
+          )}
         </p>
       </div>
 
       {/* Modal para Recomendar Médico */}
-      {modalMode && (
+      {SUBMISSIONS_ENABLED && modalMode && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-black/10 my-8">
             <div className="flex items-start justify-between border-b border-black/5 pb-3">
