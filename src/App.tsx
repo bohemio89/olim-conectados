@@ -21,7 +21,7 @@ import { BusinessPlanGuide } from './components/BusinessPlanGuide';
 import { INITIAL_DOCTORS, COMMUNITY_STORES, COMMUNITY_GROUPS, NIGHTLIFE_VENUES } from './data/mockData';
 import { Doctor, DoctorReview } from './types';
 import { SECTIONS, SECTION_MAP } from './data/navigation';
-import { ASSISTANT_ENABLED } from './config';
+import { ASSISTANT_ENABLED, SUBMISSIONS_ENABLED } from './config';
 import { BottomNav } from './components/BottomNav';
 import { LogoSymbol } from './components/LogoSymbol';
 import { Plus, Phone } from 'lucide-react';
@@ -250,7 +250,7 @@ export default function App() {
                   currentSection={currentSection}
                   onNavigateToTab={navigateToTab}
                   action={
-                    activeTab === 'doctors' ? (
+                    SUBMISSIONS_ENABLED && activeTab === 'doctors' ? (
                       <button
                         onClick={() => {
                           window.dispatchEvent(new CustomEvent('open-recommend-doctor'));
@@ -260,7 +260,7 @@ export default function App() {
                         <Plus className="w-4 h-4 text-white" />
                         <span>Recomendar un médico</span>
                       </button>
-                    ) : activeTab === 'community' ? (
+                    ) : SUBMISSIONS_ENABLED && activeTab === 'community' ? (
                       <button
                         onClick={() => {
                           window.dispatchEvent(new CustomEvent('open-add-store'));
