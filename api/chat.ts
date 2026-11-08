@@ -1,4 +1,3 @@
-import { ASSISTANT_ENABLED } from '../src/config';
 // =============================================================================
 // Asistente IA de Olim Conectados
 // Única fuente de verdad: este archivo. server.ts importa SYSTEM_PROMPT y
@@ -316,7 +315,9 @@ export function fallbackAnswer(query: string): string {
 export default async function handler(req: any, res: any) {
   // El asistente está apagado en el sitio: la API tampoco responde,
   // para que nadie pueda usarla desde afuera.
-  if (!ASSISTANT_ENABLED) {
+  // Mantener en sintonía con ASSISTANT_ENABLED de src/config.ts.
+  const ASSISTANT_API_ENABLED = false;
+  if (!ASSISTANT_API_ENABLED) {
     return res.status(404).json({ error: 'No disponible' });
   }
   res.setHeader('Access-Control-Allow-Origin', '*');
