@@ -48,7 +48,7 @@ type PointKind = 'ok' | 'no' | 'warn';
 
 const LINKS = {
   oref: 'https://www.oref.org.il',
-  btlGuerra: 'https://www.btl.gov.il/StateOfEmergency/ShaagatHari/Pages/halat-shaagatHari1.aspx'
+  btlGuerra: 'https://www.btl.gov.il/'
 };
 
 const POINT_STYLE: Record<PointKind, { icon: Icon; cls: string }> = {
@@ -342,7 +342,7 @@ const TrabajoTab: React.FC<{ sit: SitId; setSit: (s: SitId) => void; onAsk: () =
           <p className="text-sm text-slate-600 mt-1 mb-4">Las reglas cambian con cada guerra. Revisa siempre la página del Bituaj Leumi.</p>
           <div className="flex flex-wrap gap-2.5">
             <a href={LINKS.btlGuerra} target="_blank" rel="noopener noreferrer" className="min-h-[44px] px-5 rounded-full bg-[#0E2559] hover:bg-[#153477] text-white font-bold text-sm inline-flex items-center gap-2 transition-colors">
-              <ExternalLink className="w-4 h-4 text-[#E8A33D]" />Bituaj Leumi: guerra
+              <ExternalLink className="w-4 h-4 text-[#E8A33D]" />Sitio del Bituaj Leumi
             </a>
             {ASSISTANT_ENABLED && <button type="button" onClick={onAsk} className="min-h-[44px] px-5 rounded-full bg-white border border-slate-300 hover:bg-slate-50 text-[#0E2559] font-bold text-sm inline-flex items-center gap-2 transition-colors cursor-pointer">
               <MessageCircle className="w-4 h-4 text-[#6B4FA0]" />Preguntar al asistente
