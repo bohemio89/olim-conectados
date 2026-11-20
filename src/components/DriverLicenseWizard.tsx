@@ -147,7 +147,7 @@ const WhereChip: React.FC<{ where: string; link?: string }> = ({ where, link }) 
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F3EFF8] text-[#6B4FA0] border border-[#E4DCF0] hover:bg-[#EAE4F3] transition-colors"
+      className="inline-flex items-center gap-1.5 px-3 py-1 min-h-[44px] rounded-full text-xs font-semibold bg-[#F3EFF8] text-[#6B4FA0] border border-[#E4DCF0] hover:bg-[#EAE4F3] transition-colors"
     >
       <ExternalLink className="w-3.5 h-3.5 shrink-0" />
       <span>{where}</span>
@@ -224,14 +224,14 @@ const DesdeCero: React.FC = () => (
             {COSTS.map(({ icon: CIcon, name, value, official }) => (
               <li key={name} className="flex items-center justify-between gap-3 py-2.5">
                 <span className="flex items-center gap-2 text-sm font-bold text-[#0E2559]">
-                  <CIcon className="w-4 h-4 text-slate-400 shrink-0" />
+                  <CIcon className="w-4 h-4 text-slate-500 shrink-0" />
                   {name}
                 </span>
                 <span className={`text-xs font-black rounded-full px-2.5 py-1 text-right ${costChipClass(official)}`}>{value}</span>
               </li>
             ))}
           </ul>
-          <div className="flex flex-wrap gap-3 mt-3 text-xs font-bold text-slate-500">
+          <div className="flex flex-wrap gap-3 mt-3 text-xs font-bold text-slate-600">
             <span className="flex items-center gap-1.5"><i className="w-2.5 h-2.5 rounded-sm bg-[#2A7050] inline-block" />Tasa oficial 2026</span>
             <span className="flex items-center gap-1.5"><i className="w-2.5 h-2.5 rounded-sm bg-[#E8A33D] inline-block" />Varía según el lugar</span>
           </div>
@@ -272,7 +272,7 @@ const DesdeCero: React.FC = () => (
           </div>
         ))}
       </div>
-      <div className="hidden md:grid grid-cols-[1fr_1fr_2fr] text-xs font-black text-slate-500 -mt-2">
+      <div className="hidden md:grid grid-cols-[1fr_1fr_2fr] text-xs font-black text-slate-600 -mt-2">
         <span>0–3 meses</span><span>3–6 meses</span><span className="text-right">hasta 2 años</span>
       </div>
 
@@ -307,7 +307,7 @@ const DesdeCero: React.FC = () => (
         ))}
       </div>
 
-      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 pt-3 border-t border-slate-200/60">
+      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 pt-3 border-t border-slate-200/60">
         <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
         <span>Fuente: Kol Zchut · Ministerio de Transporte (tasas abril 2026 y guía de acompañamiento)</span>
       </div>
@@ -498,12 +498,12 @@ export const DriverLicenseWizard: React.FC = () => {
     <div className="space-y-6">
       
       {/* Breadcrumb de navegación */}
-      <nav aria-label="Ruta de navegación" className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium">
-        <Home className="w-4 h-4 shrink-0 text-slate-400" />
+      <nav aria-label="Ruta de navegación" className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 font-medium">
+        <Home className="w-4 h-4 shrink-0 text-slate-500" />
         <span>Inicio</span>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+        <ChevronRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
         <span>Derechos &amp; Trámites</span>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+        <ChevronRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
         <span className="font-bold text-[#0E2559]">Licencia de Conducir</span>
       </nav>
 
@@ -513,7 +513,7 @@ export const DriverLicenseWizard: React.FC = () => {
           <Car className="w-6 h-6" />
         </div>
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-[#0E2559] tracking-tight">Licencia de Conducir</h1>
+          <h2 className="text-xl sm:text-2xl font-black text-[#0E2559] tracking-tight">Licencia de Conducir</h2>
           <p className="text-xs sm:text-sm text-slate-600 mt-0.5">Elige tu caso y sigue el camino.</p>
         </div>
       </div>
@@ -543,7 +543,7 @@ export const DriverLicenseWizard: React.FC = () => {
               </span>
               <span className="min-w-0">
                 <span className="block text-base sm:text-lg font-black text-[#0E2559] leading-tight">{title}</span>
-                <span className="block text-xs sm:text-sm text-slate-500 font-semibold leading-snug">{sub}</span>
+                <span className="block text-xs sm:text-sm text-slate-600 font-semibold leading-snug">{sub}</span>
               </span>
             </button>
           );
@@ -566,7 +566,7 @@ export const DriverLicenseWizard: React.FC = () => {
               <Plane className="w-6 h-6" />
             </div>
             <span className="text-base font-bold text-[#0E2559] mt-3">Aliá</span>
-            <span className="text-xs text-slate-500 mt-0.5">Empieza a contar</span>
+            <span className="text-xs text-slate-600 mt-0.5">Empieza a contar</span>
           </div>
 
           {/* Tramo 1: Verde sólido */}
@@ -578,7 +578,7 @@ export const DriverLicenseWizard: React.FC = () => {
               <Car className="w-6 h-6" />
             </div>
             <span className="text-base font-bold text-[#0E2559] mt-3">1 año</span>
-            <span className="text-xs text-slate-500 mt-0.5 max-w-[150px]">Manejas con tu licencia extranjera</span>
+            <span className="text-xs text-slate-600 mt-0.5 max-w-[150px]">Manejas con tu licencia extranjera</span>
           </div>
 
           {/* Tramo 2: Naranja punteado */}
@@ -590,7 +590,7 @@ export const DriverLicenseWizard: React.FC = () => {
               <Flag className="w-6 h-6" />
             </div>
             <span className="text-base font-bold text-[#0E2559] mt-3">5 años</span>
-            <span className="text-xs text-slate-500 mt-0.5 max-w-[150px]">Último plazo para canjearla</span>
+            <span className="text-xs text-slate-600 mt-0.5 max-w-[150px]">Último plazo para canjearla</span>
           </div>
         </div>
 
@@ -607,7 +607,7 @@ export const DriverLicenseWizard: React.FC = () => {
             </div>
             <div>
               <span className="text-base font-bold text-[#0E2559] block">Aliá</span>
-              <span className="text-xs text-slate-500">Empieza a contar</span>
+              <span className="text-xs text-slate-600">Empieza a contar</span>
             </div>
           </div>
 
@@ -618,7 +618,7 @@ export const DriverLicenseWizard: React.FC = () => {
             </div>
             <div>
               <span className="text-base font-bold text-[#0E2559] block">1 año</span>
-              <span className="text-xs text-slate-500">Manejas con tu licencia extranjera</span>
+              <span className="text-xs text-slate-600">Manejas con tu licencia extranjera</span>
             </div>
           </div>
 
@@ -629,7 +629,7 @@ export const DriverLicenseWizard: React.FC = () => {
             </div>
             <div>
               <span className="text-base font-bold text-[#0E2559] block">5 años</span>
-              <span className="text-xs text-slate-500">Último plazo para canjearla</span>
+              <span className="text-xs text-slate-600">Último plazo para canjearla</span>
             </div>
           </div>
         </div>
@@ -721,7 +721,7 @@ export const DriverLicenseWizard: React.FC = () => {
                     : 'bg-white text-[#0E2559] border-slate-300 hover:border-slate-400 hover:bg-slate-50'
                 }`}
               >
-                <CheckCircle2 className={`w-4 h-4 shrink-0 ${isValid === 'si' ? 'text-white' : 'text-slate-500'}`} />
+                <CheckCircle2 className={`w-4 h-4 shrink-0 ${isValid === 'si' ? 'text-white' : 'text-slate-600'}`} />
                 <span>Sí, vigente</span>
               </button>
 
@@ -736,7 +736,7 @@ export const DriverLicenseWizard: React.FC = () => {
                     : 'bg-white text-[#0E2559] border-slate-300 hover:border-slate-400 hover:bg-slate-50'
                 }`}
               >
-                <XCircle className={`w-4 h-4 shrink-0 ${isValid === 'no' ? 'text-white' : 'text-slate-500'}`} />
+                <XCircle className={`w-4 h-4 shrink-0 ${isValid === 'no' ? 'text-white' : 'text-slate-600'}`} />
                 <span>No, está vencida</span>
               </button>
             </div>
@@ -759,7 +759,7 @@ export const DriverLicenseWizard: React.FC = () => {
                     : 'bg-white text-[#0E2559] border-slate-300 hover:border-slate-400 hover:bg-slate-50'
                 }`}
               >
-                <Check className={`w-4 h-4 shrink-0 ${yearsExperience === '5_o_mas' ? 'text-white' : 'text-slate-500'}`} />
+                <Check className={`w-4 h-4 shrink-0 ${yearsExperience === '5_o_mas' ? 'text-white' : 'text-slate-600'}`} />
                 <span>5 años o más</span>
               </button>
 
@@ -774,7 +774,7 @@ export const DriverLicenseWizard: React.FC = () => {
                     : 'bg-white text-[#0E2559] border-slate-300 hover:border-slate-400 hover:bg-slate-50'
                 }`}
               >
-                <Clock className={`w-4 h-4 shrink-0 ${yearsExperience === 'menos_5' ? 'text-white' : 'text-slate-500'}`} />
+                <Clock className={`w-4 h-4 shrink-0 ${yearsExperience === 'menos_5' ? 'text-white' : 'text-slate-600'}`} />
                 <span>Menos de 5</span>
               </button>
             </div>
@@ -797,7 +797,7 @@ export const DriverLicenseWizard: React.FC = () => {
                     : 'bg-white text-[#0E2559] border-slate-300 hover:border-slate-400 hover:bg-slate-50'
                 }`}
               >
-                <Plane className={`w-4 h-4 shrink-0 ${aliaYears === 'menos_5' ? 'text-white' : 'text-slate-500'}`} />
+                <Plane className={`w-4 h-4 shrink-0 ${aliaYears === 'menos_5' ? 'text-white' : 'text-slate-600'}`} />
                 <span className="text-center md:text-left">Hace menos de 5 años</span>
               </button>
 
@@ -812,7 +812,7 @@ export const DriverLicenseWizard: React.FC = () => {
                     : 'bg-white text-[#0E2559] border-slate-300 hover:border-slate-400 hover:bg-slate-50'
                 }`}
               >
-                <Flag className={`w-4 h-4 shrink-0 ${aliaYears === '5_o_mas' ? 'text-white' : 'text-slate-500'}`} />
+                <Flag className={`w-4 h-4 shrink-0 ${aliaYears === '5_o_mas' ? 'text-white' : 'text-slate-600'}`} />
                 <span className="text-center md:text-left">Hace 5 años o más</span>
               </button>
             </div>
@@ -821,7 +821,7 @@ export const DriverLicenseWizard: React.FC = () => {
         </div>
 
         {/* Línea aclaratoria debajo de las preguntas */}
-        <p className="text-xs sm:text-sm text-slate-500 font-medium pt-1">
+        <p className="text-xs sm:text-sm text-slate-600 font-medium pt-1">
           La licencia tiene que ser de antes de tu Aliá.
         </p>
       </div>
@@ -1046,7 +1046,7 @@ export const DriverLicenseWizard: React.FC = () => {
         )}
 
         {/* Pie del Resultado */}
-        <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 pt-2 border-t border-slate-200/60">
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 pt-2 border-t border-slate-200/60">
           <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
           <span>Fuente: Ministerio de Transporte · Kol Zchut · revisado oct 2026</span>
         </div>

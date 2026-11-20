@@ -58,7 +58,7 @@ const PATH_TO_TAB: Record<string, string> = Object.entries(TAB_TO_PATH).reduce(
 
 const getTabFromPath = (pathname: string): string => {
   const cleanPath = pathname.replace(/\/$/, '') || '/';
-  const tab = PATH_TO_TAB[cleanPath] || 'home';
+  const tab = PATH_TO_TAB[cleanPath] || 'notfound';
   return tab === 'assistant' && !ASSISTANT_ENABLED ? 'home' : tab;
 };
 
@@ -203,6 +203,20 @@ export default function App() {
 
   const currentSection = SECTION_MAP[activeTab];
 
+  // Título de la pestaña del navegador según la sección
+  useEffect(() => {
+    const LEGAL_TITLES: Record<string, string> = {
+      terms: 'Términos y Condiciones',
+      privacy: 'Política de Privacidad',
+      about: 'Quiénes somos',
+      notfound: 'Página no encontrada',
+    };
+    const name = currentSection?.name || LEGAL_TITLES[activeTab];
+    document.title = name
+      ? `${name} · Olim Conectados`
+      : 'Olim Conectados | Toda la información de tu Aliyah en español';
+  }, [activeTab, currentSection]);
+
   return (
     <div className="min-h-screen bg-[#FBF3E6] text-[#0E2559] flex font-sans selection:bg-[#E8A33D] selection:text-[#0E2559]">
       
@@ -244,6 +258,25 @@ export default function App() {
                 onNavigateToTab={navigateToTab}
                 onOpenAssistantWithQuery={handleOpenAssistantWithQuery}
               />
+            )}
+
+            {/* Dirección que no existe */}
+            {activeTab === 'notfound' && (
+              <div className="max-w-xl mx-auto text-center bg-white rounded-3xl border border-black/5 p-8 shadow-2xs">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0E2559]">No encontramos esta página</h1>
+                <p className="mt-2 text-slate-600">Puede que el enlace esté mal escrito o que la sección haya cambiado de lugar.</p>
+                <div className="mt-6 flex flex-wrap justify-center gap-3">
+                  {[['home', 'Ir al inicio'], ['doctors', 'Médicos en Español'], ['bureaucracy', 'Trámites'], ['emergency', 'Guardia & Miún']].map(([id, label]) => (
+                    <button
+                      key={id}
+                      onClick={() => navigateToTab(id)}
+                      className={`min-h-[44px] px-5 rounded-full font-bold text-sm ${id === 'home' ? 'bg-[#0E2559] text-white' : 'bg-[#0E2559]/5 text-[#0E2559] border border-[#0E2559]/15'}`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
 
             {/* Páginas legales e institucionales */}
@@ -358,25 +391,25 @@ export default function App() {
             <nav aria-label="Enlaces rápidos del pie" className="flex items-center gap-5 sm:gap-7 text-xs sm:text-sm font-semibold text-white/90">
               <button 
                 onClick={() => navigateToTab('doctors')}
-                className="hover:text-[#E8A33D] transition focus:outline-none"
+                className="inline-flex items-center min-h-[44px] hover:text-[#E8A33D] transition focus:outline-none focus-visible:underline"
               >
                 Salud
               </button>
               <button 
                 onClick={() => navigateToTab('bureaucracy')}
-                className="hover:text-[#E8A33D] transition focus:outline-none"
+                className="inline-flex items-center min-h-[44px] hover:text-[#E8A33D] transition focus:outline-none focus-visible:underline"
               >
                 Trámites
               </button>
               <button 
                 onClick={() => navigateToTab('community')}
-                className="hover:text-[#E8A33D] transition focus:outline-none"
+                className="inline-flex items-center min-h-[44px] hover:text-[#E8A33D] transition focus:outline-none focus-visible:underline"
               >
                 Comunidad
               </button>
               <a 
                 href="tel:101"
-                className="hover:text-[#E8A33D] transition focus:outline-none text-[#E8A33D]"
+                className="inline-flex items-center min-h-[44px] hover:text-[#E8A33D] transition focus:outline-none focus-visible:underline text-[#E8A33D]"
               >
                 Emergencia 101
               </a>

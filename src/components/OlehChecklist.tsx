@@ -585,10 +585,10 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                       </p>
                       <p className={`text-xs mt-0.5 ${
                         isComplete 
-                          ? 'text-slate-500 font-medium' 
+                          ? 'text-slate-600 font-medium' 
                           : isCurrent 
-                          ? 'text-[#E8A33D] font-bold' 
-                          : 'text-slate-500'
+                          ? 'text-[#9A5B13] font-bold' 
+                          : 'text-slate-600'
                       }`}>
                         {isComplete 
                           ? 'Completo' 
@@ -606,27 +606,22 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                       const isSelected = activeStep?.id === step.id;
 
                       return (
-                        <button
+                        <div
                           key={step.id}
-                          type="button"
-                          onClick={() => selectStep(step.id)}
-                          className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                          className={`w-full min-h-[44px] px-3.5 py-2.5 rounded-2xl border flex items-center justify-between gap-2 transition-all ${
                             isSelected
                               ? 'border-amber-400 bg-amber-50/25 ring-2 ring-amber-300/80 shadow-xs'
                               : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/60'
                           }`}
                         >
-                          <div className="flex items-center gap-2.5 min-w-0">
-                            {/* Checkbox circular interactivo */}
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleStepCompleted(step.id);
-                              }}
-                              aria-label={`Marcar ${step.shortTitle}`}
-                              className="w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-colors cursor-pointer"
-                            >
+                          <button
+                            type="button"
+                            role="checkbox"
+                            aria-checked={isChecked}
+                            onClick={() => toggleStepCompleted(step.id)}
+                            aria-label={`Marcar ${step.shortTitle}`}
+                            className="w-11 h-11 -my-2 -ml-3 rounded-xl flex items-center justify-center shrink-0 cursor-pointer"
+                          >
                               {isChecked ? (
                                 <div className="w-5 h-5 rounded-md bg-[#2A7050] text-white flex items-center justify-center">
                                   <Check className="w-3.5 h-3.5 stroke-[3]" />
@@ -634,22 +629,29 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                               ) : (
                                 <div className="w-5 h-5 rounded-md border-2 border-slate-300 bg-white hover:border-slate-400" />
                               )}
-                            </button>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => selectStep(step.id)}
+                            aria-expanded={isSelected}
+                            className="flex-1 min-w-0 min-h-[44px] -my-2 flex items-center justify-between gap-2.5 text-left cursor-pointer"
+                          >
+                            <div className="flex items-center gap-2.5 min-w-0">
 
                             {/* Título corto del paso */}
                             <span className={`text-[13px] leading-tight line-clamp-2 font-medium text-left ${
                               isChecked 
-                                ? 'line-through text-slate-400' 
+                                ? 'line-through text-slate-500' 
                                 : 'text-slate-800'
                             }`}>
                               {step.shortTitle}
                             </span>
-                          </div>
-
-                          <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${
-                            isSelected ? 'text-amber-600 rotate-180' : 'text-slate-400'
+                            </div>
+                            <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${
+                            isSelected ? 'text-amber-600 rotate-180' : 'text-slate-500'
                           }`} />
-                        </button>
+                          </button>
+                        </div>
                       );
                     })}
                   </div>
@@ -701,10 +703,10 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                     </h3>
                     <span className={`text-xs font-semibold ${
                       isComplete 
-                        ? 'text-slate-500' 
+                        ? 'text-slate-600' 
                         : isCurrent 
-                        ? 'text-[#E8A33D]' 
-                        : 'text-slate-500'
+                        ? 'text-[#9A5B13]' 
+                        : 'text-slate-600'
                     }`}>
                       {isComplete ? 'Completo' : isCurrent ? 'Estás acá' : `${stage.steps.length} pasos`}
                     </span>
@@ -717,27 +719,22 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                       const isSelected = activeStep?.id === step.id;
 
                       return (
-                        <button
+                        <div
                           key={step.id}
-                          type="button"
-                          onClick={() => selectStep(step.id)}
-                          className={`w-full min-h-[44px] px-3.5 py-3 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
+                          className={`w-full min-h-[44px] px-3.5 py-3 rounded-2xl border flex items-center justify-between gap-3 transition-all ${
                             isSelected
                               ? 'border-amber-400 bg-amber-50/25 ring-2 ring-amber-300/80 shadow-xs'
                               : 'border-slate-200 bg-white hover:border-slate-300'
                           }`}
                         >
-                          <div className="flex items-center gap-3 min-w-0">
-                            {/* Checkbox */}
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleStepCompleted(step.id);
-                              }}
-                              aria-label={`Marcar ${step.shortTitle}`}
-                              className="w-5 h-5 rounded-md flex items-center justify-center shrink-0 cursor-pointer"
-                            >
+                          <button
+                            type="button"
+                            role="checkbox"
+                            aria-checked={isChecked}
+                            onClick={() => toggleStepCompleted(step.id)}
+                            aria-label={`Marcar ${step.shortTitle}`}
+                            className="w-11 h-11 -my-2 -ml-3 rounded-xl flex items-center justify-center shrink-0 cursor-pointer"
+                          >
                               {isChecked ? (
                                 <div className="w-5 h-5 rounded-md bg-[#2A7050] text-white flex items-center justify-center">
                                   <Check className="w-3.5 h-3.5 stroke-[3]" />
@@ -745,19 +742,26 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
                               ) : (
                                 <div className="w-5 h-5 rounded-md border-2 border-slate-300 bg-white" />
                               )}
-                            </button>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => selectStep(step.id)}
+                            aria-expanded={isSelected}
+                            className="flex-1 min-w-0 min-h-[44px] -my-2 flex items-center justify-between gap-3 text-left cursor-pointer"
+                          >
+                            <div className="flex items-center gap-3 min-w-0">
 
                             <span className={`text-sm truncate font-medium ${
-                              isChecked ? 'line-through text-slate-400' : 'text-slate-800'
+                              isChecked ? 'line-through text-slate-500' : 'text-slate-800'
                             }`}>
                               {step.shortTitle}
                             </span>
-                          </div>
-
-                          <ChevronRight className={`w-4 h-4 shrink-0 ${
-                            isSelected ? 'text-amber-600' : 'text-slate-400'
+                            </div>
+                            <ChevronRight className={`w-4 h-4 shrink-0 ${
+                            isSelected ? 'text-amber-600' : 'text-slate-500'
                           }`} />
-                        </button>
+                          </button>
+                        </div>
                       );
                     })}
                   </div>
@@ -804,7 +808,7 @@ export const OlehChecklist: React.FC<OlehChecklistProps> = ({ onNavigateToTab })
               <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
                 {activeStep.fullTitle}
               </h3>
-              <p className="text-sm sm:text-base text-slate-500 font-medium mt-0.5">
+              <p className="text-sm sm:text-base text-slate-600 font-medium mt-0.5">
                 {activeStep.when}
               </p>
             </div>

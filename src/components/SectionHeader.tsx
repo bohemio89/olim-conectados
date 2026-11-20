@@ -48,14 +48,14 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       <nav aria-label="Migas de pan" className="flex items-center gap-1.5 text-xs sm:text-[13.5px] text-slate-600 font-medium mb-4 flex-wrap">
         <button
           onClick={() => onNavigateToTab('home')}
-          className="hover:text-[#0E2559] flex items-center gap-1 transition focus:outline-none min-h-[32px]"
+          className="hover:text-[#0E2559] flex items-center gap-1 transition focus:outline-none min-h-[44px]"
         >
           <Home className="w-3.5 h-3.5" />
           <span>Inicio</span>
         </button>
-        <ChevronRight className="w-3 h-3 text-slate-400 shrink-0" />
+        <ChevronRight className="w-3 h-3 text-slate-500 shrink-0" />
         <span className="text-slate-600">{group.name}</span>
-        <ChevronRight className="w-3 h-3 text-slate-400 shrink-0" />
+        <ChevronRight className="w-3 h-3 text-slate-500 shrink-0" />
         <span className="text-[#0E2559] font-bold">{currentSection.name}</span>
       </nav>
 
@@ -95,7 +95,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       {siblingSections.length > 1 && (
         <div className="hidden sm:block pt-4 mt-4 border-t border-black/5">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-xs sm:text-sm">
-            <span className="text-slate-500 text-xs font-bold uppercase tracking-wider shrink-0 mr-1">
+            <span className="text-slate-600 text-xs font-bold uppercase tracking-wider shrink-0 mr-1">
               Secciones de {group.name}:
             </span>
             {siblingSections.map((sec) => {

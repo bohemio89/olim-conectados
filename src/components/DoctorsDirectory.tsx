@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { Doctor, KupaName, DoctorReview } from '../types';
 import { SUBMISSIONS_ENABLED } from '../config';
+import { specialtyGroup } from '../lib/specialtyGroups';
 
 // Teléfonos de cada Kupá (Ministerio de Salud). Se usan si el médico no tiene teléfono propio.
 const KUPA_PHONE: Record<string, string> = {
@@ -90,8 +91,10 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
   const [selectedCity, setSelectedCity] = useState<string>('Tel Aviv-Yafo');
   const [visibleCount, setVisibleCount] = useState<number>(12);
 
-  // Sincronización inicial desde la base de datos en la nube (Supabase)
+  // Sincronización desde la base en la nube: solo cuando los aportes están activos.
+  // Hoy la lista completa está en el sitio y la base vieja está pausada.
   useEffect(() => {
+    if (!SUBMISSIONS_ENABLED) return;
     const fetchCloudDoctors = async () => {
       try {
         const res = await fetch('/api/doctors');
@@ -169,7 +172,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
 
   const specialties = useMemo(() => [
     'Todas',
-    ...Array.from(new Set(verifiedDoctors.map((d) => d.specialty).filter(Boolean))).sort((a, b) => a.localeCompare(b, 'es'))
+    ...Array.from(new Set(verifiedDoctors.map((d) => specialtyGroup(d.specialty)))).sort((a, b) => a.localeCompare(b, 'es'))
   ], [verifiedDoctors]);
 
   // 4. Al cambiar un filtro, vuelve a 12
@@ -193,7 +196,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         selectedKupa === 'Todas' || doc.kupot.includes(selectedKupa as KupaName);
 
       const matchesSpecialty =
-        selectedSpecialty === 'Todas' || doc.specialty === selectedSpecialty;
+        selectedSpecialty === 'Todas' || specialtyGroup(doc.specialty) === selectedSpecialty;
 
       const matchesCity = selectedCity === 'Todas' || docCity === selectedCity;
 
@@ -435,7 +438,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         
         {/* Chips de Kupá */}
         <div>
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3">
+          <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block mb-3">
             TU KUPÁ
           </span>
           <div className="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-2">
@@ -449,7 +452,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
               }`}
             >
               <span>Todas</span>
-              <span className={`text-[11px] sm:text-xs px-1.5 py-0.5 rounded-full ${selectedKupa === 'Todas' ? 'bg-white/20 text-white' : 'text-slate-500'}`}>
+              <span className={`text-[11px] sm:text-xs px-1.5 py-0.5 rounded-full ${selectedKupa === 'Todas' ? 'bg-white/20 text-white' : 'text-slate-600'}`}>
                 {kupaCounts.Todas}
               </span>
             </button>
@@ -474,7 +477,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                     <KupaMark kupa={kupa} light={isSelected} />
                   )}
                   <span>{kupa}</span>
-                  <span className={`text-[11px] sm:text-xs ${isSelected ? 'text-white/80' : 'text-slate-500'}`}>
+                  <span className={`text-[11px] sm:text-xs ${isSelected ? 'text-white/80' : 'text-slate-600'}`}>
                     {count}
                   </span>
                 </button>
@@ -487,14 +490,14 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
           {/* Campo Ciudad */}
           <div className="relative flex items-center bg-white border border-black/10 rounded-2xl px-3.5 py-2 min-h-[52px] hover:border-black/20 transition shadow-2xs">
-            <MapPin className="w-4 h-4 text-slate-500 shrink-0 mr-2.5" />
+            <MapPin className="w-4 h-4 text-slate-600 shrink-0 mr-2.5" />
             <div className="flex-1 min-w-0">
-              <span className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider leading-none">Ciudad</span>
+              <span className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider leading-none">Ciudad</span>
               <span className="block text-sm font-bold text-slate-900 truncate leading-tight mt-0.5">
                 {selectedCity === 'Todas' ? 'Todas' : selectedCity}
               </span>
             </div>
-            <ChevronDown className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
+            <ChevronDown className="w-4 h-4 text-slate-500 shrink-0 ml-2" />
             <select
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
@@ -511,14 +514,14 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
 
           {/* Campo Especialidad */}
           <div className="relative flex items-center bg-white border border-black/10 rounded-2xl px-3.5 py-2 min-h-[52px] hover:border-black/20 transition shadow-2xs">
-            <Stethoscope className="w-4 h-4 text-slate-500 shrink-0 mr-2.5" />
+            <Stethoscope className="w-4 h-4 text-slate-600 shrink-0 mr-2.5" />
             <div className="flex-1 min-w-0">
-              <span className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider leading-none">Especialidad</span>
+              <span className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider leading-none">Especialidad</span>
               <span className="block text-sm font-bold text-slate-900 truncate leading-tight mt-0.5">
                 {selectedSpecialty === 'Todas' ? 'Todas' : selectedSpecialty}
               </span>
             </div>
-            <ChevronDown className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
+            <ChevronDown className="w-4 h-4 text-slate-500 shrink-0 ml-2" />
             <select
               value={selectedSpecialty}
               onChange={(e) => setSelectedSpecialty(e.target.value)}
@@ -535,13 +538,13 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
 
           {/* Campo Buscar por nombre */}
           <div className="relative flex items-center bg-white border border-black/10 rounded-2xl px-3.5 py-2 min-h-[52px] hover:border-black/20 transition shadow-2xs">
-            <Search className="w-4 h-4 text-slate-500 shrink-0 mr-2.5" />
+            <Search className="w-4 h-4 text-slate-600 shrink-0 mr-2.5" />
             <input
               type="text"
               placeholder="Buscar por nombre"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full text-sm font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal bg-transparent focus:outline-none"
+              className="w-full h-10 text-sm font-bold text-slate-900 placeholder:text-slate-500 placeholder:font-normal bg-transparent focus:outline-none"
             />
           </div>
         </div>
@@ -553,7 +556,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
         <h2 className="text-xl sm:text-2xl font-extrabold text-[#0E2559]">
           {selectedCity === 'Todas' ? 'Médicos en Español' : `Médicos en ${selectedCity}`}
         </h2>
-        <p className="text-sm font-medium text-slate-500">
+        <p className="text-sm font-medium text-slate-600">
           Mostrando {Math.min(visibleCount, filteredDoctors.length)} de {filteredDoctors.length}
         </p>
       </div>
@@ -594,8 +597,8 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                   </p>
 
                   {/* Ciudad */}
-                  <div className="flex items-center gap-1.5 text-xs sm:text-[13px] text-slate-500 mt-2.5">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  <div className="flex items-center gap-1.5 text-xs sm:text-[13px] text-slate-600 mt-2.5">
+                    <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
                     <span>{normalizeCity(doc.city)}</span>
                   </div>
                 </div>
@@ -618,7 +621,7 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                       rel="noopener noreferrer"
                       className="min-h-[44px] bg-white border border-black/10 hover:bg-slate-50 text-slate-800 font-bold text-sm rounded-xl flex items-center justify-center gap-2 transition"
                     >
-                      <ExternalLink className="w-4 h-4 text-slate-500" />
+                      <ExternalLink className="w-4 h-4 text-slate-600" />
                       <span>Ficha oficial</span>
                     </a>
                   )}
@@ -694,13 +697,13 @@ export const DoctorsDirectory: React.FC<DoctorsDirectoryProps> = ({
                 <h3 className="text-xl font-extrabold text-[#0E2559] mt-1.5">
                   Recomendar un Médico que Habla Español
                 </h3>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-slate-600 mt-0.5">
                   Completá los datos reales del profesional para que otros Olim puedan encontrarlo.
                 </p>
               </div>
               <button
                 onClick={closeModal}
-                className="text-slate-400 hover:text-slate-700 text-lg font-bold p-1 cursor-pointer"
+                className="text-slate-500 hover:text-slate-700 text-lg font-bold p-1 cursor-pointer"
               >
                 ✕
               </button>
