@@ -151,7 +151,7 @@ const AlarmaTab: React.FC = () => (
             ))}
           </div>
           <p className="text-sm text-slate-600 mt-3">Tu zona de alerta es el nombre de tu ciudad. Las ciudades grandes tienen varias zonas.</p>
-          <p className="text-sm text-slate-600 mt-2">¿Dudas sobre refugios públicos? Llama a tu municipio: <strong className="text-[#0E2559]">106</strong>.</p>
+          <p className="text-sm text-slate-600 mt-2">¿Dudas sobre refugios públicos? Consulta en el centro de atención de tu municipio (moked ironi).</p>
         </div>
         <div>
           <p className="text-[15px] font-black text-[#0E2559] flex items-center gap-2 mb-3">
