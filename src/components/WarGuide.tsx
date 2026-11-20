@@ -420,8 +420,7 @@ const ClasesTab: React.FC<{ goToHijos: () => void }> = ({ goToHijos }) => (
 const QUICK: { icon: Icon; title: string; sub: string; href?: string; cls: string }[] = [
   { icon: Smartphone, title: 'App del Pikud HaOref', sub: 'Alertas en tu celular', cls: 'bg-[#FCE8E5] text-[#C0392B]' },
   { icon: MapPin, title: 'oref.org.il', sub: 'Tu zona y tu tiempo', href: LINKS.oref, cls: 'bg-[#F1ECF9] text-[#6B4FA0]' },
-  { icon: Phone, title: '104', sub: 'Pikud HaOref', href: 'tel:104', cls: 'bg-[#E6E9F2] text-[#0E2559]' },
-  { icon: Phone, title: '106', sub: 'Tu municipio', href: 'tel:106', cls: 'bg-[#E5F3EB] text-[#2A7050]' }
+  { icon: Phone, title: '104', sub: 'Pikud HaOref', href: 'tel:104', cls: 'bg-[#E6E9F2] text-[#0E2559]' }
 ];
 
 const TABS: { id: TabId; icon: Icon; title: string; sub: string }[] = [
@@ -453,7 +452,7 @@ export const WarGuide: React.FC = () => {
   return (
     <div className="space-y-5">
       {/* Accesos rápidos */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
         {QUICK.map(({ icon: QIcon, title, sub, href, cls }) => {
           const inner = (
             <>
