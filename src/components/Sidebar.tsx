@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   PanelLeftClose, 
   PanelLeftOpen, 
@@ -45,6 +45,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const groupsOrder: CategoryGroupId[] = ['salud', 'tramites', 'comunidad'];
 
+  // En celular el menú cerrado queda fuera de pantalla: lo marcamos inactivo para que
+  // el teclado y los lectores de pantalla no lo recorran. En escritorio siempre está visible.
+  const [isDesktop, setIsDesktop] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches
+  );
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const onChange = () => setIsDesktop(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  useEffect(() => {
+    if (!isOpenMobile) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setIsOpenMobile(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpenMobile, setIsOpenMobile]);
+  const isHiddenOffscreen = !isDesktop && !isOpenMobile;
+
   const handleItemClick = (id: string) => {
     onSelectTab(id);
     setIsOpenMobile(false);
@@ -80,6 +99,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar Aside */}
       <aside 
+        inert={isHiddenOffscreen}
+        aria-hidden={isHiddenOffscreen || undefined}
         className={`fixed top-0 bottom-0 left-0 z-50 bg-white border-r border-[#0E2559]/10 flex flex-col shadow-xs transition-all duration-300 ease-in-out ${
           isCollapsed ? 'lg:w-[72px]' : 'lg:w-[290px]'
         } ${
@@ -219,7 +240,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                 {/* Expanded Mode (Always visible on mobile, and on desktop when NOT collapsed) */}
                 <div className={`${isCollapsed ? 'lg:hidden' : ''} space-y-1`}>
-                  <div className="px-3 pb-1 flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-[#0E2559]/60">
+                  <div className="px-3 pb-1 flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-[#0E2559]/80">
                     <span>{group.name}</span>
                   </div>
 

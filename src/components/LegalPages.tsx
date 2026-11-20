@@ -215,7 +215,7 @@ export const LegalPages: React.FC<LegalPagesProps> = ({ page, onNavigateToTab })
       {page === 'terms' && <Terms />}
       {page === 'privacy' && <Privacy />}
       {page === 'about' && <About onNavigateToTab={onNavigateToTab} />}
-      <p className="text-xs text-slate-500 text-center pt-2">Última actualización: {LEGAL_LAST_UPDATED}</p>
+      <p className="text-xs text-slate-600 text-center pt-2">Última actualización: {LEGAL_LAST_UPDATED}</p>
     </article>
   );
 };

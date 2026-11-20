@@ -135,7 +135,7 @@ export const CrisisCivilGuide: React.FC = () => {
 
           {/* Campo: Llevo en Israel [N] meses */}
           <div className="w-full md:w-56 shrink-0">
-            <span className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+            <span className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
               Llevo en Israel
             </span>
             <div className="bg-white border border-black/10 rounded-2xl px-4 py-2 flex items-center justify-between min-h-[50px] shadow-2xs">
@@ -145,9 +145,10 @@ export const CrisisCivilGuide: React.FC = () => {
                 max={72}
                 value={aliyahMonth}
                 onChange={(e) => setAliyahMonth(Math.max(1, Number(e.target.value) || 1))}
-                className="w-20 text-2xl font-black text-[#0E2559] bg-transparent focus:outline-none"
+                aria-label="Meses en Israel"
+                className="w-20 h-10 text-2xl font-black text-[#0E2559] bg-transparent focus:outline-none"
               />
-              <span className="text-sm font-semibold text-slate-500">meses</span>
+              <span className="text-sm font-semibold text-slate-600">meses</span>
             </div>
           </div>
         </div>
@@ -186,14 +187,14 @@ export const CrisisCivilGuide: React.FC = () => {
             {/* Tramo 3 */}
             <div className="w-[14%] bg-amber-100/60 text-slate-700 px-3 py-2.5 flex flex-col justify-center border-l border-black/5">
               <span className="font-bold text-sm leading-tight">Fin</span>
-              <span className="text-xs text-slate-500">
+              <span className="text-xs text-slate-600">
                 Mes 31+
               </span>
             </div>
           </div>
 
           {/* Escala numérica inferior */}
-          <div className="flex justify-between text-xs text-slate-500 font-semibold px-2 mt-2">
+          <div className="flex justify-between text-xs text-slate-600 font-semibold px-2 mt-2">
             <span>Mes 1</span>
             <span>Mes 7</span>
             <span>Mes 31</span>
@@ -216,7 +217,7 @@ export const CrisisCivilGuide: React.FC = () => {
 
           <div className="bg-amber-100/60 text-slate-700 p-4">
             <span className="font-bold text-base block leading-tight">Fin</span>
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-slate-600">
               Mes 31+
             </span>
           </div>
@@ -298,7 +299,7 @@ export const CrisisCivilGuide: React.FC = () => {
               { label: '2º sueldo', value: secondarySalary, set: setSecondarySalary },
             ].map(({ label, value, set }) => (
               <label key={label} className="block min-w-0">
-                <span className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                <span className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
                   {label}
                 </span>
                 <span className="bg-white border border-black/10 rounded-2xl px-3 py-2 flex items-center gap-1.5 min-h-[50px] shadow-2xs">
@@ -309,7 +310,7 @@ export const CrisisCivilGuide: React.FC = () => {
                     step={100}
                     value={value}
                     onChange={(e) => set(Math.max(0, Number(e.target.value) || 0))}
-                    className="w-full min-w-0 text-lg sm:text-xl font-black text-[#0E2559] bg-transparent focus:outline-none"
+                    className="w-full min-w-0 h-10 text-lg sm:text-xl font-black text-[#0E2559] bg-transparent focus:outline-none"
                   />
                 </span>
               </label>
@@ -350,7 +351,7 @@ export const CrisisCivilGuide: React.FC = () => {
         <div className="bg-[#E7F6EE] border border-[#2A7050]/20 rounded-2xl p-4 flex items-center gap-2.5 text-[#0E2559] font-bold text-sm sm:text-base">
           <Wallet className="w-5 h-5 text-[#2A7050] shrink-0" />
           <span>Te ahorras ~₪{taxSaved.toLocaleString('es-ES')} por mes.</span>
-          <span className="ml-auto text-xs font-semibold text-slate-500 hidden sm:inline">Estimado con los tramos 2026, sin puntos de crédito</span>
+          <span className="ml-auto text-xs font-semibold text-slate-600 hidden sm:inline">Estimado con los tramos 2026, sin puntos de crédito</span>
         </div>
 
         {/* 3 Pasos */}
@@ -364,7 +365,7 @@ export const CrisisCivilGuide: React.FC = () => {
                 Pide a cada empleador su Tik Nikuyim
               </span>
             </div>
-            <span className="text-xs text-slate-500 font-medium sm:shrink-0 pl-9 sm:pl-0">
+            <span className="text-xs text-slate-600 font-medium sm:shrink-0 pl-9 sm:pl-0">
               Número de deducciones de 9 dígitos
             </span>
           </div>
@@ -378,7 +379,7 @@ export const CrisisCivilGuide: React.FC = () => {
                 Haz el Teum Mas en gov.il
               </span>
             </div>
-            <span className="text-xs text-slate-500 font-medium sm:shrink-0 pl-9 sm:pl-0">
+            <span className="text-xs text-slate-600 font-medium sm:shrink-0 pl-9 sm:pl-0">
               Autoridad Tributaria · gratis
             </span>
           </div>
@@ -392,7 +393,7 @@ export const CrisisCivilGuide: React.FC = () => {
                 Entrega el certificado al 2º trabajo
               </span>
             </div>
-            <span className="text-xs text-slate-500 font-medium sm:shrink-0 pl-9 sm:pl-0">
+            <span className="text-xs text-slate-600 font-medium sm:shrink-0 pl-9 sm:pl-0">
               Vale por un año fiscal
             </span>
           </div>

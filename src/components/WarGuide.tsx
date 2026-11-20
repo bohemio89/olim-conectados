@@ -70,7 +70,7 @@ const Point: React.FC<{ kind: PointKind; children: React.ReactNode }> = ({ kind,
 };
 
 const Source: React.FC<{ children: React.ReactNode; border?: boolean }> = ({ children, border = true }) => (
-  <div className={`flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-semibold ${border ? 'pt-3 mt-4 border-t border-slate-200/70' : ''}`}>
+  <div className={`flex items-center gap-2 text-xs sm:text-sm text-slate-600 font-semibold ${border ? 'pt-3 mt-4 border-t border-slate-200/70' : ''}`}>
     <ShieldCheck className="w-4 h-4 text-[#2A7050] shrink-0" />
     <span>Fuente: {children}</span>
   </div>
@@ -146,7 +146,7 @@ const AlarmaTab: React.FC = () => (
             {['Entra a oref.org.il', 'Escribe tu dirección', 'Ves tu zona y tus segundos'].map((t, i) => (
               <div key={t} className="flex items-center gap-3 bg-[#FBF3E6] rounded-xl px-3 py-2.5 text-sm font-extrabold text-[#0E2559]">
                 <span className="w-7 h-7 rounded-full bg-[#6B4FA0] text-white text-sm font-black flex items-center justify-center shrink-0">{i + 1}</span>
-                {i === 0 ? <a href={LINKS.oref} target="_blank" rel="noopener noreferrer" className="underline decoration-[#6B4FA0]/40">{t}</a> : t}
+                {i === 0 ? <a href={LINKS.oref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] -my-2.5 underline decoration-[#6B4FA0]/40">{t}</a> : t}
               </div>
             ))}
           </div>
@@ -165,7 +165,7 @@ const AlarmaTab: React.FC = () => (
                 </span>
                 <span className="min-w-0">
                   <span className="block text-sm font-black text-[#0E2559] leading-tight">{title}</span>
-                  <span className="block text-xs font-semibold text-slate-500 leading-tight">{sub}</span>
+                  <span className="block text-xs font-semibold text-slate-600 leading-tight">{sub}</span>
                 </span>
               </div>
             ))}
@@ -274,7 +274,7 @@ const TrabajoTab: React.FC<{ sit: SitId; setSit: (s: SitId) => void; onAsk: () =
                   on ? 'bg-[#0E2559] border-[#0E2559] text-white' : 'bg-white border-slate-300 text-[#0E2559] hover:bg-slate-50'
                 }`}
               >
-                <SIcon className={`w-4 h-4 shrink-0 ${on ? 'text-white' : 'text-slate-500'}`} />
+                <SIcon className={`w-4 h-4 shrink-0 ${on ? 'text-white' : 'text-slate-600'}`} />
                 {label}
               </button>
             );
@@ -317,7 +317,7 @@ const TrabajoTab: React.FC<{ sit: SitId; setSit: (s: SitId) => void; onAsk: () =
             {PAY.map(([salary, benefit, pct]) => (
               <div key={salary} className="grid grid-cols-[84px_1fr_52px] sm:grid-cols-[110px_1fr_62px] gap-2 sm:gap-3 items-center">
                 <p className="text-sm font-extrabold text-[#0E2559] leading-tight">
-                  {fmt(salary)} ₪<span className="block text-[11px] font-bold text-slate-500">tu sueldo</span>
+                  {fmt(salary)} ₪<span className="block text-[11px] font-bold text-slate-600">tu sueldo</span>
                 </p>
                 <div className="space-y-1">
                   <div className="h-3.5 rounded-full bg-[#F1E8D6] overflow-hidden"><div className="h-full rounded-full bg-[#CFC6B5]" style={{ width: `${salary / 200}%` }} /></div>
@@ -327,7 +327,7 @@ const TrabajoTab: React.FC<{ sit: SitId; setSit: (s: SitId) => void; onAsk: () =
               </div>
             ))}
           </div>
-          <div className="flex flex-wrap gap-4 mt-3 text-xs font-bold text-slate-500">
+          <div className="flex flex-wrap gap-4 mt-3 text-xs font-bold text-slate-600">
             <span className="flex items-center gap-1.5"><i className="w-3 h-3 rounded bg-[#CFC6B5] inline-block" />Sueldo bruto</span>
             <span className="flex items-center gap-1.5"><i className="w-3 h-3 rounded bg-[#2A7050] inline-block" />Lo que paga el Bituaj Leumi</span>
           </div>
@@ -462,7 +462,7 @@ export const WarGuide: React.FC = () => {
               </span>
               <span className="min-w-0">
                 <span className="block text-sm sm:text-base font-black text-[#0E2559] leading-tight">{title}</span>
-                <span className="block text-xs font-bold text-slate-500 leading-tight">{sub}</span>
+                <span className="block text-xs font-bold text-slate-600 leading-tight">{sub}</span>
               </span>
             </>
           );
@@ -497,7 +497,7 @@ export const WarGuide: React.FC = () => {
               </span>
               <span className="min-w-0">
                 <span className="block text-sm sm:text-lg font-black text-[#0E2559] leading-tight">{title}</span>
-                <span className="hidden sm:block text-xs sm:text-sm font-semibold text-slate-500 leading-snug">{sub}</span>
+                <span className="hidden sm:block text-xs sm:text-sm font-semibold text-slate-600 leading-snug">{sub}</span>
               </span>
             </button>
           );

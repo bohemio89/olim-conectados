@@ -105,7 +105,7 @@ export const BituajLeumiGuide: React.FC = () => {
               }`}
             >
               <span className="block text-sm sm:text-[15px] font-bold">{label}</span>
-              <span className="block text-[11px] sm:text-xs font-medium text-slate-500">{hint}</span>
+              <span className="block text-[11px] sm:text-xs font-medium text-slate-600">{hint}</span>
             </button>
           ))}
         </div>
@@ -146,7 +146,7 @@ export const BituajLeumiGuide: React.FC = () => {
 
               {idx < steps.length - 1 && (
                 <div className="flex items-center justify-center">
-                  <ChevronRight className="w-5 h-5 text-slate-400" />
+                  <ChevronRight className="w-5 h-5 text-slate-500" />
                 </div>
               )}
             </React.Fragment>
@@ -185,7 +185,7 @@ export const BituajLeumiGuide: React.FC = () => {
 
               {idx < steps.length - 1 && (
                 <div className="flex justify-center py-0.5">
-                  <ChevronDown className="w-5 h-5 text-slate-400" />
+                  <ChevronDown className="w-5 h-5 text-slate-500" />
                 </div>
               )}
             </React.Fragment>

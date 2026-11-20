@@ -199,7 +199,7 @@ export const EmergencyGuide: React.FC = () => {
                   <span className={`w-9 h-9 rounded-full text-white font-black flex items-center justify-center shrink-0 ${dot}`}>{n}</span>
                   <p className="font-extrabold text-[#0E2559] text-[15px] sm:text-base leading-snug">{q}</p>
                 </div>
-                <div className="hidden md:flex items-center text-slate-400 font-black text-sm">
+                <div className="hidden md:flex items-center text-slate-500 font-black text-sm">
                   Sí <ChevronRight className="w-4 h-4" />
                 </div>
                 {/* Respuesta */}
@@ -213,7 +213,7 @@ export const EmergencyGuide: React.FC = () => {
                 </div>
               </div>
               {i < PATH.length - 1 && (
-                <div className="flex items-center gap-2 pl-[11px] my-1 text-xs font-extrabold text-slate-400">
+                <div className="flex items-center gap-2 pl-[11px] my-1 text-xs font-extrabold text-slate-500">
                   <ArrowDown className="w-4 h-4" /> No
                 </div>
               )}
@@ -296,7 +296,7 @@ export const EmergencyGuide: React.FC = () => {
                     }`}
                   >
                     <span>{item.title}</span>
-                    {isOpen ? <ChevronDown className="w-4 h-4 shrink-0" /> : <ChevronRight className="w-4 h-4 shrink-0 text-slate-400" />}
+                    {isOpen ? <ChevronDown className="w-4 h-4 shrink-0" /> : <ChevronRight className="w-4 h-4 shrink-0 text-slate-500" />}
                   </button>
                   {isOpen && (
                     <div className="p-4 bg-slate-50/70 border-t border-black/5 space-y-3 text-[14px] leading-relaxed">

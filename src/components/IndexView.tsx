@@ -523,7 +523,7 @@ export const IndexView: React.FC<IndexViewProps> = ({
           <button
             type="button"
             onClick={cycleAliyahType}
-            className="text-[#6B4FA0] hover:text-[#523A7E] font-bold hover:underline cursor-pointer"
+            className="inline-flex items-center min-h-[44px] px-2 -mx-2 text-[#6B4FA0] hover:text-[#523A7E] font-bold hover:underline cursor-pointer"
           >
             Cambiar
           </button>
@@ -576,10 +576,10 @@ export const IndexView: React.FC<IndexViewProps> = ({
                       </p>
                       <p className={`text-xs mt-0.5 ${
                         isComplete 
-                          ? 'text-slate-500 font-medium' 
+                          ? 'text-slate-600 font-medium' 
                           : isCurrent 
-                          ? 'text-[#E8A33D] font-bold' 
-                          : 'text-slate-500'
+                          ? 'text-[#9A5B13] font-bold' 
+                          : 'text-slate-600'
                       }`}>
                         {isComplete 
                           ? 'Completo' 
@@ -612,7 +612,7 @@ export const IndexView: React.FC<IndexViewProps> = ({
                             )}
                           </div>
                           <span className={`text-sm truncate font-medium ${
-                            isChecked ? 'line-through text-slate-400' : 'text-slate-800'
+                            isChecked ? 'line-through text-slate-500' : 'text-slate-800'
                           }`}>
                             {step.shortTitle}
                           </span>
@@ -665,10 +665,10 @@ export const IndexView: React.FC<IndexViewProps> = ({
                   </h3>
                   <p className={`text-xs mt-0.5 ${
                     isComplete 
-                      ? 'text-slate-500' 
+                      ? 'text-slate-600' 
                       : isCurrent 
-                      ? 'text-[#E8A33D] font-bold' 
-                      : 'text-slate-500'
+                      ? 'text-[#9A5B13] font-bold' 
+                      : 'text-slate-600'
                   }`}>
                     {isComplete ? 'Completo' : isCurrent ? 'Estás acá' : `${stage.steps.length} pasos`}
                   </p>
@@ -699,7 +699,7 @@ export const IndexView: React.FC<IndexViewProps> = ({
           <h2 className="text-2xl font-black text-[#0E2559] tracking-tight">
             Las preguntas de siempre
           </h2>
-          <span className="hidden sm:inline text-xs sm:text-sm text-slate-500 font-medium">
+          <span className="hidden sm:inline text-xs sm:text-sm text-slate-600 font-medium">
             Respondidas con fuente oficial
           </span>
         </div>

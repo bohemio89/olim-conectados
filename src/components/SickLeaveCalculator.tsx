@@ -127,9 +127,10 @@ export const SickLeaveCalculator: React.FC<SickLeaveCalculatorProps> = ({ onNavi
                   <span className="text-xl font-black text-[#0E2559] mr-2 select-none">₪</span>
                   <input
                     type="number"
+                    aria-label="Sueldo bruto mensual"
                     value={monthlySalary || ''}
                     onChange={(e) => setMonthlySalary(Math.max(0, Number(e.target.value)))}
-                    className="w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
+                    className="h-10 w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
                     placeholder="8500"
                   />
                 </div>
@@ -142,9 +143,10 @@ export const SickLeaveCalculator: React.FC<SickLeaveCalculatorProps> = ({ onNavi
                 <div className="flex items-center bg-white border border-neutral-300 rounded-2xl px-4 py-2.5 focus-within:ring-2 focus-within:ring-[#5B4594] focus-within:border-[#5B4594] transition">
                   <input
                     type="number"
+                    aria-label="Días laborales por mes"
                     value={workingDaysPerMonth || ''}
                     onChange={(e) => setWorkingDaysPerMonth(Math.max(1, Number(e.target.value)))}
-                    className="w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
+                    className="h-10 w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
                     placeholder="22"
                   />
                 </div>
@@ -159,9 +161,10 @@ export const SickLeaveCalculator: React.FC<SickLeaveCalculatorProps> = ({ onNavi
                 <span className="text-xl font-black text-[#0E2559] mr-2 select-none">₪</span>
                 <input
                   type="number"
+                    aria-label="Jornal diario bruto"
                   value={dailyRate || ''}
                   onChange={(e) => setDailyRate(Math.max(0, Number(e.target.value)))}
-                  className="w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
+                  className="h-10 w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
                   placeholder="386"
                 />
               </div>
@@ -176,11 +179,12 @@ export const SickLeaveCalculator: React.FC<SickLeaveCalculatorProps> = ({ onNavi
             <div className="flex items-center justify-between bg-white border border-neutral-300 rounded-2xl px-4 py-2.5 focus-within:ring-2 focus-within:ring-[#5B4594] focus-within:border-[#5B4594] transition">
               <input
                 type="number"
+                    aria-label="Días de reposo (ishur majalá)"
                 min="1"
                 max="30"
                 value={absenceDays || ''}
                 onChange={(e) => setAbsenceDays(Math.max(1, Math.min(30, Number(e.target.value))))}
-                className="w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
+                className="h-10 w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
                 placeholder="5"
               />
               <span className="text-neutral-600 font-semibold text-sm ml-2 shrink-0 select-none">
@@ -197,11 +201,12 @@ export const SickLeaveCalculator: React.FC<SickLeaveCalculatorProps> = ({ onNavi
             <div className="flex items-center justify-between bg-white border border-neutral-300 rounded-2xl px-4 py-2.5 focus-within:ring-2 focus-within:ring-[#5B4594] focus-within:border-[#5B4594] transition">
               <input
                 type="number"
+                    aria-label="Meses trabajando en la empresa"
                 min="0"
                 max="60"
                 value={monthsWorked || ''}
                 onChange={(e) => setMonthsWorked(Math.max(0, Number(e.target.value)))}
-                className="w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
+                className="h-10 w-full font-black text-xl text-[#0E2559] outline-none bg-transparent"
                 placeholder="4"
               />
               <span className="text-neutral-600 font-semibold text-sm ml-2 shrink-0 select-none">
